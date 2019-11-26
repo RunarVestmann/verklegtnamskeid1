@@ -9,4 +9,4 @@ Planið í upphaf dags er að klára notkunartilvikin, notendahópagreiningu og 
 í lok dags erum við búnir með notkunartilvikin, búnir að bæta við c kröfu í kröfulistann og gerðum öll stöðuritin en eigum eftir að fínpússa þessi atriði.
 
 27.11.2019
-Planið í upphaf dags er að fínpússa og breyta örlítið stöðuritunum, hanna útlit og jafnvel byrja á klasaritinu ef vel gengur.
+Við eigum eftir að klára nytsemis- og notendaupplifunarkröfur, útlitshönnun og klasaritið. Planið í upphaf dags er að hanna útlit og jafnvel byrja á klasaritinu ef vel gengur.
