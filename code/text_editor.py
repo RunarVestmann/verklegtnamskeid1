@@ -36,16 +36,32 @@ class TextEditor:
     RESET_TEXT = "\033[0m"
 
     @staticmethod
-    def color_text(text, desired_color):
-        '''Returns a string in the desired color'''
-        return desired_color + text + TextEditor.RESET_TEXT
+    def color_text(text, color):
+        '''Returns a new string with the given font color'''
+        return color + text + TextEditor.RESET_TEXT
 
     @staticmethod
-    def format_text(text, desired_format):
-        '''Returns a string in the desired format'''
-        return desired_format + text + TextEditor.RESET_TEXT
+    def color_text_background(text, background_color):
+        '''Returns a new string with the given background color'''
+        return background_color + text + TextEditor.RESET_TEXT
 
     @staticmethod
-    def color_and_format_text(text, desired_color, desired_format):
-        '''Returns a string in the desired color and format'''
-        return desired_color + desired_format + text + TextEditor.RESET_TEXT
+    def format_text(text, text_format):
+        '''Returns a new string in the given format'''
+        return text_format + text + TextEditor.RESET_TEXT
+
+    @staticmethod
+    def color_and_format_text(text, color, text_format):
+        '''Returns a new string in the given color and format'''
+        return color + text_format + text + TextEditor.RESET_TEXT
+
+    @staticmethod
+    def edit_text(text, color="", background_color="", text_format=""):
+        '''Returns a new string in the given font color, background color and text format,
+           if no argument is passed returns the unedited text'''
+
+        #No arguments passed
+        if not color and not background_color and not text_format:
+            return text
+
+        return background_color + color + text_format + text + TextEditor.RESET_TEXT
