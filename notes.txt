@@ -1,1 +1,3 @@
-varðandi voyage listanna. Stak númer 0 inniheldur yfirmenn.
+https://trello.com/b/6zNtiHkD/verklegt-n%C3%A1mskei%C3%B0-1
+
+Pilot og FlightAttendant listarnir í Voyage klasanum: Stak númer 0 inniheldur yfirmenn.
