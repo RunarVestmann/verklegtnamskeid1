@@ -2,17 +2,23 @@
 Planið í upphaf dags er að vinna saman við gerð kröfulistans. Ef það gengur vel þá jafnvel förum við í það að gera
 notkunartilvikin.
 
-Í lok dags erum við búnir að lista upp í kröfulistann A og B kröfurnar. Okkur tókst að byrja á notendahópagreiningunni og notkunartilvikin eru vel á veg komnar.
+Í lok dags erum við búnir að lista upp í kröfulistann A og B kröfurnar. Okkur tókst að byrja á notendahópagreiningunni og
+notkunartilvikin eru vel á veg komnar.
 
 26.11.2019
-Planið í upphaf dags er að klára notkunartilvikin, notendahópagreiningu og bæta við einni c kröfu í kröfulistann. Ef það gengur vel byrjum við á stöðuritum.
+Planið í upphaf dags er að klára notkunartilvikin, notendahópagreiningu og bæta við einni c kröfu í kröfulistann. Ef það
+gengur vel byrjum við á stöðuritum.
 
-í lok dags erum við búnir með notkunartilvikin, búnir að bæta við c kröfu í kröfulistann og gerðum öll stöðuritin en eigum eftir að fínpússa þessi atriði.
+í lok dags erum við búnir með notkunartilvikin, búnir að bæta við c kröfu í kröfulistann og gerðum öll stöðuritin en eigum
+eftir að fínpússa þessi atriði.
 
 27.11.2019
-Við eigum eftir að klára nytsemis- og notendaupplifunarkröfur, útlitshönnun og klasaritið. Planið í upphaf dags er að hanna útlit og jafnvel byrja á klasaritinu ef vel gengur.
+Við eigum eftir að klára nytsemis- og notendaupplifunarkröfur, útlitshönnun og klasaritið. Planið í upphaf dags er að hanna
+útlit og jafnvel byrja á klasaritinu ef vel gengur.
 
 Í lok dags vorum við búnir að íhuga útlitið mikið ásamt því að hanna það, einnig byrjuðum við á klasaritunum.
 
 28.11.2019
-Planið í upphaf dags er að klára slatta svo við lendum ekki í vandræðum einn dag fyrir skil á morgun. Ætlum að reyna að klára klasaritið, útlitshönnun og "happy path". Vera með flest tilbúið svo að við getum eytt föstudeginum í að gera virkniskröfur og nytsemis- og notendaupplifunarkröfur ásamt því að fínpússa verkefnið og setja saman hönnunarskýrsluna fyrir skil. 
+Planið í upphaf dags er að klára slatta svo við lendum ekki í vandræðum einn dag fyrir skil á morgun. Ætlum að reyna að klára
+klasaritið, útlitshönnun og "happy path". Vera með flest tilbúið svo að við getum eytt föstudeginum í að gera virkniskröfur og
+nytsemis- og notendaupplifunarkröfur ásamt því að fínpússa verkefnið og setja saman hönnunarskýrsluna fyrir skil. 
