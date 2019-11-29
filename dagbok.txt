@@ -8,16 +8,16 @@ Hörður, Rúnar: Byrjuðu á notkunartilvikum.
 
 26.11.2019
 Planið í upphaf dags er að klára notkunartilvikin, notendahópagreiningu og bæta við einni c kröfu í kröfulistann. Ef það
-gengur vel byrjum við á stöðuritum.
+gengur vel förum við að gera stöðurit.
 í lok dags erum við búnir með notkunartilvikin, búnir að bæta við c kröfu í kröfulistann og gerðum öll stöðuritin en eigum
 eftir að fínpússa þessi atriði.
 Fannar: Kynntist verkefninu vel fyrst að hann missti af fyrsta tíma.
-Patrik, Guðmundur: Kláruðu kröfulistann og byrjuðu á stöðuritunum.
+Patrik, Guðmundur, Rúnar: Kláruðu kröfulistann og unnu á stöðuritunum.
 Hörður, Rúnar: Kláruðu notkunartilvikin.
 
 27.11.2019
 Við eigum eftir að klára nytsemis- og notendaupplifunarkröfur, viðmótshönnun og klasaritið. Planið í upphaf dags er að hanna
-útlit og jafnvel byrja á klasaritinu ef vel gengur.
+viðmótið og jafnvel byrja á klasaritinu ef vel gengur.
 Í lok dags vorum við búnir að draga upp megin línur í viðmótinu, einnig byrjuðum við á klasaritinu.
 Unnum þétt saman þennan dag.
 Rúnar: Byrjaði að gera klasaritið
@@ -25,10 +25,14 @@ Rúnar: Byrjaði að gera klasaritið
 28.11.2019
 Planið í upphaf dags er að klára slatta svo við lendum ekki í vandræðum einn dag fyrir skil á morgun. Ætlum að reyna að klára
 klasaritið, frumgerð á viðmótshönnun, byrja á að gera "happy path" og nytsemiskröfur. Vera með flest tilbúið svo að við getum
-eytt föstudeginum í að gera virkniskröfur og nytsemis- og notendaupplifunarkröfur ásamt því að fínpússa verkefnið og setja
+eytt föstudeginum í að gera virkniskröfur og notendaupplifunarkröfur ásamt því að fínpússa verkefnið og setja
 saman hönnunarskýrsluna fyrir skil. 
 Í lok dags vorum við búnir að klára klasaritið, komnir með frumgerð á útlitshönnun, komnir langt með nytsemiskröfurnar og
 gerðum eitt stórt "happy path" case. 
-Fannar, Hörður, Rúnar: Unnu í að gera nytsemiskröfurnar.
+Fannar, Hörður, Rúnar: Unnu með að gera nytsemiskröfurnar.
 Rúnar, Hörður: Kláruðu klasaritið.
 Patrik, Guðmundur: Gerðu frumgerð á útlitshönnun og gerðu stórt "happy path" case.
+
+29.11.2019
+Planið í upphaf dags er að fínpússa verkefnin vel og setja þetta allt saman í hönnunarskýrslu. Ásamt þessu þurfum við að gera
+virkniskröfur og notendaupplifunarkröfur. 
