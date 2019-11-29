@@ -1,4 +1,4 @@
-https://trello.com/b/6zNtiHkD/verklegt-n%C3%A1mskei%C3%B0-1
+﻿https://trello.com/b/6zNtiHkD/verklegt-n%C3%A1mskei%C3%B0-1
 
 Pilot og FlightAttendant listarnir í Voyage klasanum: Stak númer 0 inniheldur yfirmenn.
 
@@ -7,3 +7,5 @@ Pilot og FlightAttendant listarnir í Voyage klasanum: Stak númer 0 inniheldur 
 Það er sennilega sniðugt að fella niður eða ljúka við vinnuferð ef hún er ekki fullmönnuð(vantar starfsmann/starfsmenn).
 
 Listun vinnuferða skal sýna flugnúmer beggja flugferða, sætaupplýsingar, (skv. verkefnalýsingu: fjöldi lausra sæta og hve mörg sæti seldust)? , staða vinnuferðar. 
+
+x
