@@ -34,4 +34,6 @@ Patrik, Guðmundur: Gerðu frumgerð á útlitshönnun og gerðu stórt "happy p
 
 29.11.2019
 Planið í upphaf dags er að fínpússa verkefnin vel og setja þetta allt saman í hönnunarskýrslu. Ásamt þessu þurfum við að gera
-virkniskröfur og notendaupplifunarkröfur. 
+virkniskröfur og notendaupplifunarkröfur.
+Í lok dags gerðum við það sem við ætluðum okkur að gera, kláruðum hönnunarskýrsluna og skiluðum henni. 
+Unnum þétt saman þennan dag.
