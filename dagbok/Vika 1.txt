@@ -1,14 +1,14 @@
 25.11.2019
 Planið í upphaf dags er að rifja upp hvernig á að nota git og github og fara vel yfir verkefnið, eftir það ætlum við að vinna
 saman við gerð kröfulistans. Ef það gengur vel þá jafnvel förum við í það að gera notkunartilvikin.
-Í lok dags erum við búnir að lista upp í kröfulistann A og B kröfurnar. Okkur tókst að byrja á notendahópagreiningunni og
+Í lok dags erum við búnir að lista upp A og B kröfurnar í kröfulistann, okkur tókst að klára notendahópagreiningunna og
 notkunartilvikin eru vel á veg komnar.
-Patrik, Guðmundur, Rúnar: Unnu í kröfulistanum.
+Patrik, Guðmundur, Rúnar: Unnu í kröfulistanum og notendahópagreiningunni.
 Hörður, Rúnar: Byrjuðu á notkunartilvikum.
 
 26.11.2019
-Planið í upphaf dags er að klára notkunartilvikin, notendahópagreiningu og bæta við einni c kröfu í kröfulistann. Ef það
-gengur vel förum við að gera stöðurit.
+Planið í upphaf dags er að klára notkunartilvikin og bæta við einni c kröfu í kröfulistann. Ef það gengur vel förum við að
+gera stöðuritin.
 í lok dags erum við búnir með notkunartilvikin, búnir að bæta við c kröfu í kröfulistann og gerðum öll stöðuritin en eigum
 eftir að fínpússa þessi atriði.
 Fannar: Kynntist verkefninu vel fyrst að hann missti af fyrsta tíma.
@@ -16,8 +16,7 @@ Patrik, Guðmundur, Rúnar: Kláruðu kröfulistann og unnu á stöðuritunum.
 Hörður, Rúnar: Kláruðu notkunartilvikin.
 
 27.11.2019
-Við eigum eftir að klára nytsemis- og notendaupplifunarkröfur, viðmótshönnun og klasaritið. Planið í upphaf dags er að hanna
-viðmótið og jafnvel byrja á klasaritinu ef vel gengur.
+Planið í upphaf dags er að hanna viðmótið og jafnvel byrja á klasaritinu ef vel gengur.
 Í lok dags vorum við búnir að draga upp megin línur í viðmótinu, einnig byrjuðum við á klasaritinu.
 Unnum þétt saman þennan dag.
 Rúnar: Byrjaði að gera klasaritið
