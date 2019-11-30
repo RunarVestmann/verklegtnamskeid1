@@ -1,5 +1,7 @@
-﻿https://trello.com/b/6zNtiHkD/verklegt-n%C3%A1mskei%C3%B0-1
+#A link to trello:
+https://trello.com/b/6zNtiHkD/verklegt-n%C3%A1mskei%C3%B0-1
 
+#Info to remember
 Pilot og FlightAttendant listarnir í Voyage klasanum: Stak númer 0 inniheldur yfirmenn.
 
 Þegar við birtum allar flugvélategundir, þá skal fylgja fjöldi skráðra flugmanna með leyfi á vélina.
