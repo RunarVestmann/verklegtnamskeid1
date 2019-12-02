@@ -19,4 +19,4 @@ class Window:
         else:
             height, width = os.popen("stty size", "r").read().split()
 
-        return width, height
+        return int(width), int(height)

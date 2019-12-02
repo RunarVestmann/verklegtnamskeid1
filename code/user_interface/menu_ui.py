@@ -14,7 +14,7 @@ class MenuUI:
         print("*" * window_width)
         print("--x-O-x--".center(window_width))
         print()
-        print("NaN Air".center(window_width, " "))
+        print("NaN Air".center(window_width))
         print()
         print("*" * window_width)
 
