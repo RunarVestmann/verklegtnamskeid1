@@ -61,8 +61,25 @@ class MenuUI:
 
     @staticmethod
     def show_main_menu():
+
+        window_width, window_height = Window.get_size()
+
         MenuUI.print_header()
         MenuUI.__print_main_menu_body() #needs to be implemented
+
+        body_height = window_height - MenuUI.get_header_height()
+        offsetted_body_height_center = (body_height//2) - 2
+
+        for _ in range(offsetted_body_height_center):
+            print()
+
+        print("Welcome to the NaN Air booking software".center(window_width))
+        print("Press any of the keys in the brackets '()' to get started".center(window_width))
+
+        for _ in range(offsetted_body_height_center):
+            print()
+
+        print("_" * window_width)
 
         user_input = input("Your action: ").lower().strip()
         #if checks...
