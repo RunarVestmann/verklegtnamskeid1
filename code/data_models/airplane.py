@@ -1,8 +1,8 @@
 class Airplane:
 
-    def __init__(self, name, airplane_type, manufacturer, seat_count, state):
+    def __init__(self, name, aircraft_type, manufacturer, seat_count, state):
         self.__name = name
-        self.__airplane_type = airplane_type
+        self.__aircraft_type = aircraft_type
         self.__manufacturer = manufacturer
         self.__seat_count = seat_count
         self.__state = state
@@ -11,7 +11,7 @@ class Airplane:
         return self.__name
 
     def get_type(self):
-        return self.__airplane_type
+        return self.__aircraft_type
 
     def get_manufacturer(self):
         return self.__manufacturer

@@ -34,4 +34,3 @@ class FlightRoute:
     
     def set_emergency_phone(self, emergency_phone):
         self.__emergency_phone = emergency_phone
-    
