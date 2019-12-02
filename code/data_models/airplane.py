@@ -6,7 +6,7 @@ class Airplane:
         self.__manufacturer = manufacturer
         self.__seat_count = seat_count
         self.__state = state
-    
+
     def get_name(self):
         return self.__name
 
@@ -15,12 +15,13 @@ class Airplane:
 
     def get_manufacturer(self):
         return self.__manufacturer
-    
+
     def get_seat_count(self):
         return self.__seat_count
-    
+
     def get_state(self):
         return self.__state
-    
+
     def set_state(self, state):
         self.__state = state
+        

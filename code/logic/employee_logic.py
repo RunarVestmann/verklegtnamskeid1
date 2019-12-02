@@ -3,11 +3,14 @@ from apis.data_api import DataAPI
 
 class EmployeeLogic:
 
-    def get_all_employees(self):
+    @staticmethod
+    def get_all_employees():
         return DataAPI.get_all_employees()
 
-    def get_employees_on_duty(self):
+    @staticmethod
+    def get_employees_on_duty():
         return []
 
-    def get_employees_off_duty(self):
+    @staticmethod
+    def get_employees_off_duty():
         return []

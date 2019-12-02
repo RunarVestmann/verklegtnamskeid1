@@ -5,31 +5,45 @@ class QuitUI:
 
     @staticmethod
     def __print_quit_menu_body():
+        '''Prints the quit menu body that's below the header'''
 
-        width, height = Window.get_size()
-        body_height = height - MenuUI.HEADER_HEIGHT
+        window_width, window_height = Window.get_size()
 
+        #Calculate the how much space is left on the window
+        body_height = window_height - MenuUI.get_header_height()
+
+        #Calculate how many new lines should be both above and below the quit text
         offsetted_body_height_center = (body_height//2) - 2
 
+        #Print the empty space above the quit text
         for _ in range(offsetted_body_height_center):
             print()
-        print("Are you sure you want to quit?".center(width))
-        print("(Y)es    (N)o".center(width))
-        for _ in range(offsetted_body_height_center):
-            print()
-        print("_" * width)
 
+        print("Are you sure you want to quit?".center(window_width))
+        print("(Y)es    (N)o".center(window_width))
+
+        #Print the empty space below the quit text
+        for _ in range(offsetted_body_height_center):
+            print()
+
+        print("_" * window_width)
 
     @staticmethod
     def show_quit_menu():
         user_input = ''
         while user_input != 'y':
-            MenuUI.print_header(MenuUI.MAIN_OPTIONS[4])
+
+            #Print the header with the Quit option underlined
+            MenuUI.print_header(MenuUI.get_main_options()[4])
+
             QuitUI.__print_quit_menu_body()
+
             user_input = input("Your action: ").lower().strip()
+
+            #Clear the window and exit the program if the user wants to exit
             if user_input.startswith('y'):
                 Window.clear()
-                exit(0)
+                raise SystemExit
+
             elif user_input.startswith('n'):
                 MenuUI.show_main_menu()
-                

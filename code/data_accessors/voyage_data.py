@@ -1,4 +1,5 @@
 from data_models.voyage import Voyage
+from apis.data_api import DataAPI
 
 class VoyageData:
 

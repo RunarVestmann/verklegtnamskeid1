@@ -1,4 +1,4 @@
-from data_models.aircract_types import AircraftType
+from data_models.aircraft_type import AircraftType
 
 class AircraftTypeData:
 
