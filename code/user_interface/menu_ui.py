@@ -44,3 +44,8 @@ class MenuUI:
         '''Prints the NaN Air banner and the main options below the banner'''
         MenuUI.__print_banner()
         MenuUI.__print_main_options(selected_option)
+
+while True:
+    MenuUI.print_header()
+    input()
+    
