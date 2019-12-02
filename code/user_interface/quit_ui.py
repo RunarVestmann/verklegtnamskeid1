@@ -1,5 +1,5 @@
-from menu_ui import MenuUI
-from window import Window
+from user_interface.menu_ui import MenuUI
+from user_interface.window import Window
 
 class QuitUI:
 
@@ -28,6 +28,7 @@ class QuitUI:
             QuitUI.__print_quit_menu_body()
             user_input = input("Your action: ").lower().strip()
             if user_input.startswith('y'):
+                Window.clear()
                 exit(0)
             elif user_input.startswith('n'):
                 MenuUI.show_main_menu()

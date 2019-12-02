@@ -1,6 +1,6 @@
-from data_models.flight_attendant import Flight_attendant
+from data_models.flight_attendant import FlightAttendant
 
-class FlightAttendantLogic:
+class FlightAttendantData:
 
     @staticmethod
     def get_all_flight_attendants():

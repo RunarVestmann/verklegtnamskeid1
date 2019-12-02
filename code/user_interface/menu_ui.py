@@ -1,5 +1,5 @@
-from text_editor import TextEditor
-from window import Window
+from user_interface.text_editor import TextEditor
+from user_interface.window import Window
 
 class MenuUI:
 
