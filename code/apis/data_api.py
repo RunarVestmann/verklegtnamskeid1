@@ -1,20 +1,9 @@
+from data_accessors.aircraft_type_data import AircraftTypeData
+from data_accessors.airplane_data import AirplaneData
+from data_accessors.flight_attendant_data import FlightAttendantData
+
 class DataAPI:
-
-    __airplane_data = None
-    __voyage_data = None
-    __flight_route_data = None
-    __pilot_data = None
-    __flight_attendant = None
-
-    @staticmethod
-    def initialize():
-        pass
-        # __airplane_data = AirplaneData()
-        # __voyage_data = VoyageData()
-        # __flight_route_data = FlightRouteData()
-        # __pilot_data = PilotData()
-        # __flight_attendant = FlightAttendant()
-
+    '''The DataAPI that enables saving and getting data from the csv files'''
 
     ####Employees####
 
@@ -67,4 +56,3 @@ class DataAPI:
     @staticmethod
     def get_all_flight_routes():
         return []
-        

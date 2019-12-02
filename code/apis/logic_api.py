@@ -1,29 +1,15 @@
-# from flight_attendant_logic import FlightAttendant
-# from pilot_logic import PilotLogic
-# from employee_logic import EmployeeLogic
-# from voyage_logic import VoyageLogic
-# from airplane_logic import AirplaneLogic
-from data_accessors.data_api import DataAPI
+from flight_attendant_logic import FlightAttendantLogic
+from pilot_logic import PilotLogic
+from employee_logic import EmployeeLogic
+from voyage_logic import VoyageLogic
+
+from data_api import DataAPI
+
+
 
 class LogicAPI:
     '''The logic layer API that enables the UI layer to save and
        get data from the data layer'''
-
-    __flight_attendant_logic = None
-    __pilot_logic = None
-    __employee_logic = None
-    __voyage_logic = None
-    __airplane_logic = None
-
-    @staticmethod
-    def initialize():
-        DataAPI.initialize()
-        # LogicAPI.__flight_attendant_logic = FlightAttendantLogic()
-        # LogicAPI.__pilot_logic = PilotLogic()
-        # LogicAPI.__employee_logic = EmployeeLogic()
-        # LogicAPI.__voyage_logic = VoyageLogic()
-        # LogicAPI.__airplane_logic = AirplaneLogic()
-
 
     ####Employees####
 

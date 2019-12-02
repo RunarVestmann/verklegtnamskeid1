@@ -5,18 +5,19 @@ class MenuUI:
 
     MAIN_OPTIONS = ("(V)oyages", "(E)mployees", "(A)irplanes", "(F)light routes", "(Q)uit")
     MAIN_OPTIONS_CHAR_COUNT = sum([len(i) for i in MAIN_OPTIONS])
+    HEADER_HEIGHT = 7
 
     @staticmethod
     def __print_banner():
         Window.clear()
         window_width = Window.get_size()[0]
 
-        print("*" * window_width)
+        print("‾" * window_width)
         print("--x-O-x--".center(window_width))
         print()
         print("NaN Air".center(window_width))
         print()
-        print("*" * window_width)
+        print("_" * window_width)
 
     @staticmethod
     def __print_main_options(selected_option=""):
@@ -45,7 +46,6 @@ class MenuUI:
         MenuUI.__print_banner()
         MenuUI.__print_main_options(selected_option)
 
-while True:
-    MenuUI.print_header()
-    input()
+    def show_main_menu():
+        pass
     
