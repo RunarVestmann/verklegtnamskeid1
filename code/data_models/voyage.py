@@ -11,7 +11,7 @@ class Voyage:
     def get_airplane(self):
         return self.__airplane
 
-    def is_fully_Manned(self, fully_manned): # worked on later
+    def is_fully_manned(self): # work on later
         return False
     
     def get_voyage_schedule(self):
