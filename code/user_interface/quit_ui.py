@@ -31,5 +31,4 @@ class QuitUI:
                 exit(0)
             elif user_input.startswith('n'):
                 MenuUI.show_main_menu()
-
-QuitUI.show_quit_menu()
+                
