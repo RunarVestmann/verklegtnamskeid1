@@ -10,4 +10,6 @@ Pilot og FlightAttendant listarnir í Voyage klasanum: Stak númer 0 inniheldur 
 
 Listun vinnuferða skal sýna flugnúmer beggja flugferða, sætaupplýsingar, (skv. verkefnalýsingu: fjöldi lausra sæta og hve mörg sæti seldust)? , staða vinnuferðar. 
 
-fara yfir class diagram eftir forritun
+Fara skal vel yfir class diagram eftir forritun
+
+Munum eftir að gá hvort það sé nú þegar til starfsmaður með sömu kennitölu þegar skrá á starfsmann
