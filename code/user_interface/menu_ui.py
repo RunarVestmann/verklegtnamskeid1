@@ -83,7 +83,7 @@ class MenuUI:
         for _ in range(offset_bottom_window):
             print()
         if is_save_available:
-            print('(S)ave')
+            print('(S)ubmit')
         print('_' * window_width)
 
     @staticmethod

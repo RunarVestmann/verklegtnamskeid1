@@ -1,2 +1,2 @@
-from user_interface.flight_route_ui import FlightRouteUI
-FlightRouteUI.show_flight_route_menu()
+from user_interface.airplanes_ui import AirplanesUI
+AirplanesUI.show_airplanes_menu()
