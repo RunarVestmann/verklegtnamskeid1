@@ -6,11 +6,14 @@
 # from logic.employee_logic import EmployeeLogic
 # from logic.voyage_logic import VoyageLogic
 
-#from data_api import DataAPI
 #from data_models.employee import Employee
 from data_models.flight_route import FlightRoute
 from data_models.pilot import Pilot
 from data_models.flight_attendant import FlightAttendant
+from data_models.airplane import Airplane
+from data_models.voyage import Voyage
+from data_models.flight import Flight
+#import dateutil.parser
 
 class LogicAPI:
     '''The logic layer API that enables the UI layer to save and
@@ -32,27 +35,32 @@ class LogicAPI:
 
     @staticmethod
     def get_employees_on_duty():
-        return EmployeeLogic.get_employees_on_duty()
+        return [Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight","Silverplate B-29"),\
+        Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29")]
+        #return EmployeeLogic.get_employees_on_duty()
 
     @staticmethod
     def get_employees_off_duty():
-        return EmployeeLogic.get_employees_off_duty()
+        return [Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland","Boeing B-29"),\
+        Pilot("Gummyb","2805755419","7711199","4406600","Elisarbetarhagi","gummyb@redhat.com","In flight from Iceland","Boeing B-29")]
+        #return EmployeeLogic.get_employees_off_duty()
 
     ####Pilots####
 
     @staticmethod
     def get_all_pilots():
-        Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland","Silverplate B-29"),\
+        return [Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland","Silverplate B-29"),\
         Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight","Silverplate B-29"),\
         Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
         Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29"),\
-        Pilot("Gummyb","2805755419","7711199","4406600","Elisarbetarhagi","gummyb@redhat.com","In flight from Iceland","Boeing B-29")
+        Pilot("Gummyb","2805755419","7711199","4406600","Elisarbetarhagi","gummyb@redhat.com","In flight from Iceland","Boeing B-29")]
         #return PilotLogic.get_all_pilots()
 
     @staticmethod
     def get_licensed_pilots(pilot_license):
-
-        return PilotLogic.get_licensed_pilots(pilot_license)
+        return [Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland","Silverplate B-29"),\
+        Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight","Silverplate B-29")]
+        #return PilotLogic.get_licensed_pilots(pilot_license)
 
     @staticmethod
     def save_new_pilot(pilot):
@@ -62,7 +70,8 @@ class LogicAPI:
 
     @staticmethod
     def get_all_flight_attendants():
-        return FlightAttendantLogic.get_all_flight_attendants()
+        return [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
+        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")]      #return FlightAttendantLogic.get_all_flight_attendants()
 
     @staticmethod
     def save_new_flight_attendant(flight_attendant):
@@ -76,19 +85,60 @@ class LogicAPI:
 
     @staticmethod
     def get_ongoing_voyages():
-        return VoyageLogic.get_ongoing_voyages()
+        voyage1 = Voyage( (Flight("Iceland","15:00","Nuuk","19:00","NA201",100),Flight("Nuuk","20:00","Iceland","00:00","NA202",20)),\
+        [Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
+        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29")],\
+        [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
+        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")],\
+        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland"),\
+        ("2019-12-23T18:00:00","2019-12-23T22:00:00"),\
+        False,\
+        "In flight to Iceland")
+        return [voyage1]
+
+        # return VoyageLogic.get_ongoing_voyages()
 
     @staticmethod
     def get_voyages_by_date(date):
-        return VoyageLogic.get_voyages_by_date(date)
+        voyage1 = Voyage( (Flight("Iceland","15:00","Nuuk","19:00","NA201",100),Flight("Nuuk","20:00","Iceland","00:00","NA202",20)),\
+        [Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
+        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29")],\
+        [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
+        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")],\
+        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland"),\
+        ("2019-12-23T18:00:00","2019-12-23T22:00:00"),\
+        False,\
+        "In flight to Iceland")
+        return [voyage1]
+        #return VoyageLogic.get_voyages_by_date(date)
 
     @staticmethod
     def get_voyages_by_week(week):
-        return VoyageLogic.get_voyages_by_week(week)
+        voyage1 = Voyage( (Flight("Iceland","15:00","Nuuk","19:00","NA201",100),Flight("Nuuk","20:00","Iceland","00:00","NA202",20)),\
+        [Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
+        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29")],\
+        [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
+        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")],\
+        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland"),\
+        ("2019-12-23T18:00:00","2019-12-23T22:00:00"),\
+        False,\
+        "In flight to Iceland")
+        return [voyage1]
+        #return VoyageLogic.get_voyages_by_week(week)
 
     @staticmethod
     def get_voyages_by_destination(destination):
-        return VoyageLogic.get_voyages_by_destination(destination)
+        voyage1 = Voyage( (Flight("Iceland","15:00","Nuuk","19:00","NA201",100),Flight("Nuuk","20:00","Iceland","00:00","NA202",20)),\
+        [Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
+        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29")],\
+        [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
+        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")],\
+        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland"),\
+        ("2019-12-23T18:00:00","2019-12-23T22:00:00"),\
+        False,\
+        "In flight to Iceland")
+        return [voyage1]
+        #return VoyageLogic.get_voyages_by_destination(destination)
 
     ####Airplanes####
 
@@ -98,19 +148,27 @@ class LogicAPI:
 
     @staticmethod
     def get_all_airplanes():
-        return AirplaneLogic.get_all_airplanes()
+        return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
+        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
+        #return AirplaneLogic.get_all_airplanes()
 
     @staticmethod
     def get_all_airplanes_in_use():
-        return AirplaneLogic.get_all_airplanes_in_use()
+        return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
+        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
+        #return AirplaneLogic.get_all_airplanes_in_use()
 
     @staticmethod
     def get_all_airplane_types():
-        return AircraftTypeLogic.get_all_aircraft_types()
+        return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
+        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
+        #return AircraftTypeLogic.get_all_aircraft_types()
 
     @staticmethod
     def get_all_available_airplanes():
-        return AirplaneLogic.get_all_available_airplanes()
+        return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
+        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
+        #return AirplaneLogic.get_all_available_airplanes()
 
     ####Flight routes####
 
