@@ -38,37 +38,37 @@ class EmployeeUI:
             EmployeeUI.show_employees_off_duty(option_list[7])
 
         else:
-            EmployeeUI.show_airplanes_menu()
-    
+            EmployeeUI.show_employee_menu()
+              
     @staticmethod
-    def show_new_employee_constructor():
+    def show_new_employee_constructor(title):
         pass
 
     @staticmethod
-    def show_all_employees():
+    def show_all_employees(title):
         pass
 
     @staticmethod
-    def show_all_pilots():
+    def show_all_pilots(title):
         pass
 
     @staticmethod
-    def show_all_flight_attendants():
+    def show_all_flight_attendants(title):
         pass
 
     @staticmethod
-    def show_employee_by_name_finder():
+    def show_employee_by_name_finder(title):
         pass
 
     @staticmethod
-    def show_pilot_by_license_finder():
+    def show_pilot_by_license_finder(title):
         pass
 
     @staticmethod
-    def show_employees_on_duty():
+    def show_employees_on_duty(title):
         pass
 
     @staticmethod
-    def show_employees_off_duty():
+    def show_employees_off_duty(title):
         pass
     
