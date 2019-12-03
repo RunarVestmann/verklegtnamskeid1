@@ -1,6 +1,7 @@
 from user_interface.menu_ui import MenuUI
 from user_interface.window import Window
 from user_interface.text_editor import TextEditor
+from apis.logic_api import LogicAPI
 
 class FlightRouteUI:
  
@@ -26,7 +27,6 @@ class FlightRouteUI:
         else:
             FlightRouteUI.show_flight_route_menu()
 
-        
     @staticmethod
     def show_new_flight_route_constructor(title):
         MenuUI.print_header(MenuUI.get_main_options()[3])
@@ -41,9 +41,15 @@ class FlightRouteUI:
 
     @staticmethod
     def show_all_flight_routes(title):
+        table_header = ("Destination", "Airport", "Country", "Flight-time", "Distance", "Contact ", "Emergency phone")
         MenuUI.print_header(MenuUI.get_main_options()[3])
         title = TextEditor.format_text(title, TextEditor.UNDERLINE_TEXT)
         print(title)
-        MenuUI.fill_window_and_print_action_line(1)
+        print("{:<15s} {:<8s} {:<15s} {:<15s} {:<10s} {:<15s} {:<10s}".format(table_header[0], table_header[1], table_header[2], table_header[3], table_header[4], table_header[5], table_header[6]))
+        flrt=LogicAPI.get_all_flight_routes()
+        for element in flrt:
+            print("{:<15s} {:<8s} {:<15s} {:<15s} {:<10s} {:<15s} {:<10s}".format(element.get_destination(), element.get_airport_id(), element.get_country(), element.get_flight_time(), element.get_distance_from_iceland(), element.get_contact_name(), element.get_emergency_phone()))
+        MenuUI.fill_window_and_print_action_line(len(flrt)+2)
         user_input = input("Your action: ").lower().strip()
+
 
