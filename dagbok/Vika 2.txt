@@ -10,3 +10,7 @@ Hörður: Logic klasa
 Guðmundur, Hörður, Rúnar: QuitUI
 
 3.12.2019
+
+
+
+Fannar og Patrik klaruðu að gera test cases fyrir þá sem eru að vinna i UI
