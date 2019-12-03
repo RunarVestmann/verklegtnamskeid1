@@ -10,7 +10,8 @@ Hörður: Logic klasa
 Guðmundur, Hörður, Rúnar: QuitUI
 
 3.12.2019
-
-
-
-Fannar og Patrik klaruðu að gera test cases fyrir þá sem eru að vinna i UI
+Planið í upphaf dags er að halda áfram að vinna í UI, bæta við test cases sem hægt er að vinna með í UI og vinna smá í data layernum.
+Í lok dags gerðum við það sem við ætluðum okkur að gera.
+Rúnar: Vann í data 'layernum' og aðstoðaði við forritun
+Hörður, Guðmundur: Unnu á MenuUI og FlightRouteUI
+Fannar, Patrik: Kláruðu að gera test cases fyrir þá sem eru að vinna i UI
