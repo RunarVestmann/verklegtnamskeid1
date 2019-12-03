@@ -31,12 +31,15 @@ class AirplanesUI:
     @staticmethod
     def show_new_airplane_constructor():
         pass
+
     @staticmethod
     def show_all_airplanes():
         pass
+
     @staticmethod
     def show_airplanes_in_use():
         pass
+    
     @staticmethod
     def show_all_airplane_types():
         pass

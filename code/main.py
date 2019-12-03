@@ -1,2 +1,2 @@
-from user_interface.airplanes_ui import AirplanesUI
-AirplanesUI.show_airplanes_menu()
+from user_interface.employees_ui import EmployeeUI
+EmployeeUI.show_employee_menu()
