@@ -25,7 +25,7 @@ class EmployeeUI:
         elif user_input == '4' or user_input == '(4)':
             EmployeeUI.show_all_flight_attendants(option_list[3])
         
-        if user_input == '5' or user_input == '(5)':
+        elif user_input == '5' or user_input == '(5)':
             EmployeeUI.show_employee_by_name_finder(option_list[4])
 
         elif user_input == '6' or user_input == '(6)':
