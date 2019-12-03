@@ -64,6 +64,13 @@ class MenuUI:
         print("_" * window_width)
 
     @staticmethod
+    def initialize():
+        #Call the timer and check if any flight,
+        #voyage or employee state needs to be updated according to the current time
+        #also check all of them and start an async/await for when the states will get updated
+        pass
+
+    @staticmethod
     def get_header_height():
         '''Returns the height of the header in characters'''
         return MenuUI.__HEADER_HEIGHT
@@ -73,16 +80,16 @@ class MenuUI:
         return MenuUI.__MAIN_OPTIONS
 
     @staticmethod
-    def fill_window_and_print_action_line(menu_line_count, is_save_available = False):
+    def fill_window_and_print_action_line(menu_line_count, is_submit_available=False):
         bottom_space_for_user_input = 2
-        if is_save_available:
+        if is_submit_available:
             bottom_space_for_user_input += 1
         window_width, window_height = Window.get_size()
         body_height = window_height - MenuUI.get_header_height()
         offset_bottom_window = body_height - menu_line_count - bottom_space_for_user_input
         for _ in range(offset_bottom_window):
             print()
-        if is_save_available:
+        if is_submit_available:
             print('(S)ubmit')
         print('_' * window_width)
 
@@ -97,7 +104,7 @@ class MenuUI:
 
         MenuUI.print_header()
         MenuUI.__print_main_menu_body()
-        
+
         user_input = input("Your action: ").lower().strip()
         #if checks...
     
