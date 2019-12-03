@@ -8,8 +8,7 @@ class Window:
         if os.name == "nt":
             os.system("cls") #Windows
         else:
-            print("\033c", end="") #Test for mac \x1b
-            # os.system("clear") #Linux / Mac
+            os.system("clear") #Linux / Mac
 
     @staticmethod
     def get_size():
