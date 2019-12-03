@@ -1,0 +1,2 @@
+from user_interface.flight_route_ui import FlightRouteUI
+FlightRouteUI.show_flight_route_menu()
