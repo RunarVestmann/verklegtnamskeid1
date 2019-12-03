@@ -1,3 +1,3 @@
-from user_interface.quit_ui import QuitUI
+from user_interface.flight_route_ui import FlightRouteUI
 
-QuitUI.show_quit_menu()
+FlightRouteUI.show_flight_route_menu()

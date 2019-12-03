@@ -73,6 +73,20 @@ class MenuUI:
         return MenuUI.__MAIN_OPTIONS
 
     @staticmethod
+    def fill_window_and_print_action_line(menu_line_count, is_save_available = False):
+        bottom_space_for_user_input = 2
+        if is_save_available:
+            bottom_space_for_user_input += 1
+        window_width, window_height = Window.get_size()
+        body_height = window_height - MenuUI.get_header_height()
+        offset_bottom_window = body_height - menu_line_count - bottom_space_for_user_input
+        for _ in range(offset_bottom_window):
+            print()
+        if is_save_available:
+            print('(S)ave')
+        print('_' * window_width)
+
+    @staticmethod
     def print_header(selected_option=""):
         '''Prints the NaN Air banner and the main options below the banner'''
         MenuUI.__print_banner()

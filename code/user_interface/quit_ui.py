@@ -40,6 +40,9 @@ class QuitUI:
 
             user_input = input("Your action: ").lower().strip()
 
+            #need a main_menu function for navigation bar
+
+
             #Clear the window and exit the program if the user wants to exit
             if user_input.startswith('y'):
                 Window.clear()
