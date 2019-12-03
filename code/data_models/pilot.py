@@ -1,4 +1,4 @@
-from employee import Employee
+from data_models.employee import Employee
 
 class Pilot(Employee):
 

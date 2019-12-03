@@ -7,8 +7,11 @@
 # from logic.voyage_logic import VoyageLogic
 
 #from data_api import DataAPI
-from data_models.employee import Employee
+#from data_models.employee import Employee
 from data_models.flight_route import FlightRoute
+from data_models.pilot import Pilot
+from data_models.flight_attendant import FlightAttendant
+
 class LogicAPI:
     '''The logic layer API that enables the UI layer to save and
        get data from the data layer'''
@@ -17,11 +20,13 @@ class LogicAPI:
 
     @staticmethod
     def get_all_employees():
-        return [Employee("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland"),\
-                Employee("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight"),\
-                Employee("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad"),\
-                Employee("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland"),\
-                Employee("Gummy","2805755419","7711199","4406600","Elisarbetarhagi","gummyb@redhat.com","In flight from Iceland")]
+        return [Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland","Silverplate B-29"),\
+        Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight","Silverplate B-29"),\
+        Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
+        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland","Boeing B-29"),\
+        Pilot("Gummyb","2805755419","7711199","4406600","Elisarbetarhagi","gummyb@redhat.com","In flight from Iceland","Boeing B-29"),\
+        FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
+        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")]
             
         #return EmployeeLogic.get_all_employees()
 
@@ -37,10 +42,16 @@ class LogicAPI:
 
     @staticmethod
     def get_all_pilots():
-        return PilotLogic.get_all_pilots()
+        Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland","Silverplate B-29"),\
+        Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight","Silverplate B-29"),\
+        Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
+        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29"),\
+        Pilot("Gummyb","2805755419","7711199","4406600","Elisarbetarhagi","gummyb@redhat.com","In flight from Iceland","Boeing B-29")
+        #return PilotLogic.get_all_pilots()
 
     @staticmethod
     def get_licensed_pilots(pilot_license):
+
         return PilotLogic.get_licensed_pilots(pilot_license)
 
     @staticmethod
