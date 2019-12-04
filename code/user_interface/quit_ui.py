@@ -1,4 +1,4 @@
-from user_interface.menu_ui import MenuUI
+from user_interface.component_ui import ComponentUI
 from user_interface.window import Window
 
 class QuitUI:
@@ -10,7 +10,7 @@ class QuitUI:
         window_width, window_height = Window.get_size()
 
         #Calculate the how much space is left on the window
-        body_height = window_height - MenuUI.get_header_height()
+        body_height = window_height - ComponentUI.get_header_height()
 
         #Calculate how many new lines should be both above and below the quit text
         offsetted_body_height_center = (body_height//2) - 2
@@ -34,7 +34,7 @@ class QuitUI:
         while user_input != 'y':
 
             #Print the header with the Quit option underlined
-            MenuUI.print_header(MenuUI.get_main_options()[4])
+            ComponentUI.print_header(ComponentUI.get_main_options()[4])
 
             QuitUI.__print_quit_menu_body()
 
@@ -49,4 +49,4 @@ class QuitUI:
                 raise SystemExit
 
             elif user_input.startswith('n'):
-                MenuUI.show_main_menu()
+                ComponentUI.show_main_menu()

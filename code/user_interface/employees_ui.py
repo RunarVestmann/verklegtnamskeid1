@@ -1,4 +1,3 @@
-from user_interface.menu_ui import MenuUI
 from user_interface.window import Window
 from user_interface.component_ui import ComponentUI
 
@@ -19,12 +18,12 @@ class EmployeeUI:
         #Keep displaying this menu as long as the user doesn't select anything
         while user_input not in valid_user_options_tuple:
 
-            MenuUI.print_header(MenuUI.get_main_options()[1])
+            ComponentUI.print_header(ComponentUI.get_main_options()[1])
 
             print()
             for i, option in enumerate(option_tuple):
                 print("({}) {}".format(i+1, option))
-            MenuUI.fill_window_and_print_action_line(len(option_tuple)+1)
+            ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1)
             user_input = input("Your action: ").lower().strip()
 
             ####  Test input ####            

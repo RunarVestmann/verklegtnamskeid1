@@ -1,5 +1,5 @@
-# from user_interface.menu_ui import MenuUI
-# MenuUI.show_main_menu()
+# from user_interface.main_menu_ui import MainMenuUI
+# MainMenuUI.show_main_menu()
 
 from user_interface.flight_route_ui import FlightRouteUI
 FlightRouteUI.show_flight_route_menu()

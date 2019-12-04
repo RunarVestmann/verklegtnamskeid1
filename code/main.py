@@ -1,5 +1,5 @@
-from user_interface.menu_ui import MenuUI
+from user_interface.main_menu_ui import MainMenuUI
 
-MenuUI.initialize()
+MainMenuUI.initialize()
 
-MenuUI.show_main_menu()
+MainMenuUI.show_main_menu()
