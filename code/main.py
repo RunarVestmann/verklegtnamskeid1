@@ -1,2 +1,5 @@
-from user_interface.employees_ui import EmployeeUI
-EmployeeUI.show_employee_menu()
+from user_interface.menu_ui import MenuUI
+
+MenuUI.initialize()
+
+MenuUI.show_main_menu()
