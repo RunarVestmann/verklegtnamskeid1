@@ -58,4 +58,22 @@ class ComponentUI:
                 print(reg.format(getfunctions[i][row]()),end="")
             print()
 
+
+          
+    @staticmethod
+    def test_user_input_chose_index(input_form_user, menu_list):
+        '''Test if input from user can be handle as int and used as index  - return int or False'''
+        if input_form_user.startswith("(") and input_form_user.endswith(")") and len(input_form_user)>2:
+            input_form_user = input_form_user[1:-1] #in case if user inputs "()" around the number
+
+        try:
+            # test if user inputs is valid number
+            user_input_chose_index = abs(int(input_form_user)) #"abs" in case if user inputs "-" in front of number
+            if user_input_chose_index > menu_list:
+                user_input_chose_index = False #not valid if out range of menu list
+        except: 
+            user_input_chose_index = False #not valid if string can not handle as int
+
+        return user_input_chose_index
+
         

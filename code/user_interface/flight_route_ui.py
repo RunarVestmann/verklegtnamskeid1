@@ -18,7 +18,7 @@ class FlightRouteUI:
         user_input = input("Your action: ").lower().strip()
 
         ####  Test input ####            
-        selected_number = MenuUI.test_user_input_chose_index(user_input, len(option_list)) #eather int>0 or False - may not be 0
+        selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_list)) #eather int>0 or False - may not be 0
         if selected_number:                                                                #and is with in range of possible menu list
             selected_index = selected_number-1
             option_functions[selected_index](option_list[selected_index])
