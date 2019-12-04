@@ -12,6 +12,8 @@ class AirplaneLogic:
         return DataAPI.get_all_airplanes()
 
     @staticmethod
-    def get_all_available_airplanes():
-        return []
+    def get_all_available_airplanes(schedule):
+        
+        all_airplanes = DataAPI.get_all_airplanes()
+        return [schedule("")]
         
