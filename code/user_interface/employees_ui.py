@@ -4,15 +4,6 @@ from user_interface.component_ui import ComponentUI
 
 class EmployeeUI:
 
-    @staticmethod
-    def __make_valid_employee_menu_options_tuple(option_count):
-        '''Returns a tuple containing valid user inputs in the employee menu screen'''
-        valid_user_options_list = []
-        for i in range(option_count):
-            valid_user_options_list.append(str(i+1))
-            valid_user_options_list.append("({})".format(i+1))
-
-        return tuple(valid_user_options_list)
 
     @staticmethod
     def show_employee_menu():
@@ -21,7 +12,7 @@ class EmployeeUI:
         option_functions = (EmployeeUI.show_new_employee_constructor, EmployeeUI.show_all_employees, EmployeeUI.show_all_pilots, EmployeeUI.show_all_flight_attendants, EmployeeUI.show_employee_by_name_finder, EmployeeUI.show_pilot_by_license_finder, EmployeeUI.show_employees_on_duty, EmployeeUI.show_employees_off_duty)
 
         #Generate a tuple that holds all the valid user inputs
-        valid_user_options_tuple = EmployeeUI.__make_valid_employee_menu_options_tuple(len(option_tuple))
+        valid_user_options_tuple = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
 
         user_input = ''
 

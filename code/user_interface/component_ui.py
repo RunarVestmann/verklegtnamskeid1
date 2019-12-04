@@ -5,6 +5,7 @@ from user_interface.window import Window
 
 class ComponentUI:
 
+############# TABLE REALADED FUNCTIONs #################
     __DEFAULT_SPACE_BETWEEN_COLOMNS = 2
 
 
@@ -59,7 +60,8 @@ class ComponentUI:
             print()
 
 
-          
+    ############# USER CHOSE ACTION REALADED FUNCTIONS #################
+
     @staticmethod
     def test_user_input_chose_index(input_form_user, menu_list):
         '''Test if input from user can be handle as int and used as index  - return int or False'''
@@ -75,5 +77,16 @@ class ComponentUI:
             user_input_chose_index = False #not valid if string can not handle as int
 
         return user_input_chose_index
+
+
+    @staticmethod
+    def make_valid_menu_options_tuple(option_count):
+        '''Returns a tuple containing valid user inputs in menu screens'''
+        valid_user_options_list = []
+        for i in range(option_count):
+            valid_user_options_list.append(str(i+1))
+            valid_user_options_list.append("({})".format(i+1))
+
+        return tuple(valid_user_options_list)
 
         
