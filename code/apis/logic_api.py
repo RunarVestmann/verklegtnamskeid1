@@ -1,10 +1,10 @@
-from logic.airplane_logic import AirplaneLogic
-from logic.aircraft_type_logic import AircraftTypeLogic
-from logic.flight_attendant_logic import FlightAttendantLogic
-from logic.flight_route_logic import FlightRouteLogic
-from logic.pilot_logic import PilotLogic
-from logic.employee_logic import EmployeeLogic
-from logic.voyage_logic import VoyageLogic
+# from logic.airplane_logic import AirplaneLogic
+# from logic.aircraft_type_logic import AircraftTypeLogic
+# from logic.flight_attendant_logic import FlightAttendantLogic
+# from logic.flight_route_logic import FlightRouteLogic
+# from logic.pilot_logic import PilotLogic
+# from logic.employee_logic import EmployeeLogic
+# from logic.voyage_logic import VoyageLogic
 
 #from data_models.employee import Employee
 from data_models.flight_route import FlightRoute

@@ -3,10 +3,10 @@
 
 from user_interface.flight_route_ui import FlightRouteUI
 FlightRouteUI.show_flight_route_menu()
-from logic.employee_logic import EmployeeLogic
-EmployeeLogic.show_employee_menu()
+# from logic.employee_logic import EmployeeLogic
+# EmployeeLogic.show_employee_menu()
 
-print(get_employees_on_duty)
+# print(get_employees_on_duty)
 
 # from user_interface.employees_ui import EmployeeUI
 # EmployeeUI.show_employee_menu()

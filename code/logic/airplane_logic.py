@@ -1,4 +1,4 @@
-from data_models.airplanes import Airplane
+from data_models.airplane import Airplane
 from data_models.voyage import Voyage
 from apis.data_api import DataAPI
 
