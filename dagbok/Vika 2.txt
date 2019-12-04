@@ -20,3 +20,7 @@ Fannar, Patrik: Kláruðu að gera test cases til þess að prófa UI
 4.12.2019
 Planið í upphaf dags er að halda áfram með UI layer, búa til nokkur föll í logic layer ásamt því að búa til save föll í data 
 layer. Eftir daginn í gær var svo aðeins haldið áfram með að byggja upp UI layer um kvöldið. 
+
+
+
+Fannar Patrik:Gerðu State klasa fyrir allt starfsfolk,flugvelar og vinnuferðir klara og gera fall fyrir on of off duty starfsfolk
