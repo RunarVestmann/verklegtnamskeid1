@@ -1,17 +1,22 @@
 2.12.2019
-Planið í upphaf dags er að byrja að forrita og gera beinagrind fyrir kerfið, ætlum að vinna við LogicAPI, DataAPI
-og logic klasa, ef það gengur vel förum við að vinna í UI's. Um helgina skipulögðum við hvernig við mundum
-setja þetta upp og Rúnar setti upp file structure og wrapper klasa fyrir window attributes og leið til að edita
-texta svo að við gætum byrjað í þessu strax. 
+Planið í upphaf dags er að byrja að forrita og gera beinagrind fyrir kerfið, ætlum að vinna við LogicAPI, DataAPI og logic
+klasa, ef það gengur vel förum við að vinna í UI layer. Um helgina skipulögðum við hvernig við mundum setja þetta upp og 
+Rúnar setti upp file structure og wrapper klasa fyrir window attributes og leið til að edita texta svo að við gætum byrjað í 
+þessu strax. 
 Í lok dags gerðum við það sem við ætluðum okkur og byrjuðum aðeins í því að vinna í QuitUI.
 Lítil mæting í dag, Hörður og Rúnar mættu, Guðmundur kom svo seinna eftir vinnu. 
 Rúnar: LogicAPI og DataAPI
 Hörður: Logic klasa
-Guðmundur, Hörður, Rúnar: QuitUI
+Guðmundur, Hörður, Rúnar: Byrjuðu á UI layer
 
 3.12.2019
-Planið í upphaf dags er að halda áfram að vinna í UI, bæta við test cases sem hægt er að vinna með í UI og vinna smá í data layernum.
+Planið í upphaf dags er að halda áfram að vinna í UI layer, bæta við test cases sem hægt er að vinna með í UI layer og vinna
+smá í data layernum.
 Í lok dags gerðum við það sem við ætluðum okkur að gera.
-Rúnar: Vann í data 'layernum' og aðstoðaði við forritun
-Hörður, Guðmundur: Unnu á MenuUI og FlightRouteUI
-Fannar, Patrik: Kláruðu að gera test cases fyrir þá sem eru að vinna i UI
+Rúnar: Vann í data layernum og aðstoðaði við forritun
+Hörður, Guðmundur: Unnu á UI layer
+Fannar, Patrik: Kláruðu að gera test cases til þess að prófa UI
+
+4.12.2019
+Planið í upphaf dags er að halda áfram með UI layer, búa til nokkur föll í logic layer ásamt því að búa til save föll í data 
+layer. Eftir daginn í gær var svo aðeins haldið áfram með að byggja upp UI layer um kvöldið. 
