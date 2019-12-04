@@ -1,6 +1,7 @@
 from user_interface.component_ui import ComponentUI
 from user_interface.window import Window
 
+
 class QuitUI:
 
     @staticmethod
@@ -49,4 +50,5 @@ class QuitUI:
                 raise SystemExit
 
             elif user_input.startswith('n'):
-                ComponentUI.show_main_menu()
+                print() #Problem of inputs neet to be solved
+                #????.show_main_menu()

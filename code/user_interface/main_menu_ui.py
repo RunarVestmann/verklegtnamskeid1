@@ -53,8 +53,7 @@ class MainMenuUI:
             MainMenuUI.__print_main_menu_body()
 
             user_input = input("Your action: ").lower().strip()
-            #if checks...
-
+            
             MainMenuUI.main_menu_action(user_input, valid_options_tuple)
 
     @staticmethod

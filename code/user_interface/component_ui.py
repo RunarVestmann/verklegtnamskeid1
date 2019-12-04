@@ -75,8 +75,6 @@ class ComponentUI:
     ############# TABLE RELATED FUNCTIONS #################
     __DEFAULT_SPACE_BETWEEN_columnS = 2
 
-
-  #workinprogress - Gummi
     @staticmethod
     def generate_columns_registration_list(heads, getfunctions, between=__DEFAULT_SPACE_BETWEEN_columnS):
         '''generate list of number that is used for align space in tables'''
