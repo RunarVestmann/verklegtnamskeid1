@@ -17,15 +17,15 @@ class AirplaneLogic:
         all_airplanes = DataAPI.get_all_airplanes()
         available_airplanes = []
         for airplane in all_airplanes:
-            voyages = DataAPI.get_airplanes_voyages(airplane)
+            voyages = DataAPI.get_airplane_voyages(airplane)
 
-            # if there are no voyages for specific airplane then it is available
+            # if there are no voyages for a specific airplane then it is available
             if not voyages:
                 available_airplanes.append(airplane)
-
+            
             else:
                 for voyage in voyages:
                     voyage_schedule = voyage.get_voyage_schedule()
-                    if schedule_tuple [0] > voyage_schedule [1] or schedule_tuple [1] < voyage_schedule [0]:
+                    if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
                         available_airplanes.append(airplane)
         return available_airplanes

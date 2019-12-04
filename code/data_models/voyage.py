@@ -12,6 +12,9 @@ class Voyage:
     def get_airplane(self):
         return self.__airplane
 
+    def get_flights(self):
+        return self.__flights
+
     def is_fully_manned(self): # work on later
         return False
 
