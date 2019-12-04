@@ -1,5 +1,8 @@
 from user_interface.text_editor import TextEditor
 from user_interface.window import Window
+from user_interface.component_ui import ComponentUI
+#from user_interface.voyage_ui import VoyageUI
+#from user_interface.flight_route_ui import FlightRouteUI
 
 class MenuUI:
 
@@ -109,6 +112,22 @@ class MenuUI:
         user_input = input("Your action: ").lower().strip()
         #if checks...
 
+        MenuUI.main_menu_action(user_input)
+
+
+
+
+    @staticmethod
+    def main_menu_action(input_form_user):
+        main_menu_valid_kays = ['v', 'e', 'a', 'f','q']
+        if input_form_user.startswith("(") and input_form_user.endswith(")") and len(input_form_user)>2:
+            input_form_user = input_form_user[1:-1] #in case if user inputs "()" around the number
+
+        
+        if input_form_user[0] in main_menu_valid_kays:             
+            print("eitthvað sniðugt")
+            #VoyageUI.show_voyage_menu()
+            #FlightRouteUI.show_flight_route_menu()
 
 
 

@@ -5,6 +5,7 @@ from logic.flight_route_logic import FlightRouteLogic
 from logic.pilot_logic import PilotLogic
 from logic.employee_logic import EmployeeLogic
 from logic.voyage_logic import VoyageLogic
+from logic.flight_logic import FlightLogic
 
 #from data_models.employee import Employee
 from data_models.flight_route import FlightRoute
