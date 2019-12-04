@@ -69,7 +69,7 @@ class DataAPI:
     @staticmethod
     def get_all_aircraft_types():
         return AircraftTypeData.get_all_aircraft_types()
-
+    
     ####  Flights  ####
 
     @staticmethod

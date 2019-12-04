@@ -1,11 +1,10 @@
-# from logic.airplane_logic import AirplaneLogic
-# from logic.aircraft_type_logic import AircraftTypeLogic
-# from logic.flight_attendant_logic import FlightAttendantLogic
-# from logic.flight_route_logic import FlightRouteLogic
-# from logic.pilot_logic import PilotLogic
-# from logic.employee_logic import EmployeeLogic
-# from logic.voyage_logic import VoyageLogic
-from logic.flight_logic import FlightLogic
+from logic.airplane_logic import AirplaneLogic
+from logic.aircraft_type_logic import AircraftTypeLogic
+from logic.flight_attendant_logic import FlightAttendantLogic
+from logic.flight_route_logic import FlightRouteLogic
+from logic.pilot_logic import PilotLogic
+from logic.employee_logic import EmployeeLogic
+from logic.voyage_logic import VoyageLogic
 
 #from data_models.employee import Employee
 from data_models.flight_route import FlightRoute
@@ -24,17 +23,12 @@ class LogicAPI:
 
     @staticmethod
     def get_all_employees():
-<<<<<<< HEAD
         return [Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland","Silverplate B-29"),\
-        Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight today","Silverplate B-29"),\
-=======
-        return [Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight from Iceland","Silverplate B-29"),\
         Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight","Silverplate B-29"),\
->>>>>>> 0a08db40fab3b8d84433a7ef036b22c9c6f74680
         Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
         Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland","Boeing B-29"),\
         Pilot("Gummyb","2805755419","7711199","4406600","Elisarbetarhagi","gummyb@redhat.com","In flight from Iceland","Boeing B-29"),\
-        FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight today"),\
+        FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
         FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")]
             
         #return EmployeeLogic.get_all_employees()
@@ -55,7 +49,7 @@ class LogicAPI:
 
     @staticmethod
     def get_all_pilots():
-        return [Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight from Iceland","Silverplate B-29"),\
+        return [Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland","Silverplate B-29"),\
         Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight","Silverplate B-29"),\
         Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
         Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29"),\
@@ -146,6 +140,10 @@ class LogicAPI:
         return [voyage1]
         #return VoyageLogic.get_voyages_by_destination(destination)
 
+    @staticmethod
+    def get_airplanes_voyages(airplane):
+        return VoyageLogic.get_airplanes_voyages(airplane)
+
     ####Airplanes####
 
     @staticmethod
@@ -171,7 +169,7 @@ class LogicAPI:
         #return AircraftTypeLogic.get_all_aircraft_types()
 
     @staticmethod
-    def get_all_available_airplanes():
+    def get_all_available_airplanes(schedule_tuple):
         return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
         Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
         #return AirplaneLogic.get_all_available_airplanes()
@@ -191,8 +189,8 @@ class LogicAPI:
         Longyearbyen = FlightRoute("Svalbarda","Longyearbyen","S2174","4:20","1761","Olle","8829053")
         return[Nuuk,Kulusuk,Thorhavn,Tingwall,Longyearbyen]
 
-        #return DataAPI.get_all_flight_routes()
 
+        #return DataAPI.get_all_flight_routes()
     @staticmethod
     def get_all_flights():
         return FlightLogic.get_all_flights() 
