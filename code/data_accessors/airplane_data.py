@@ -18,4 +18,4 @@ class AirplaneData:
                         row["manufacturer"], row["seat_count"], row["state"]))
             AirplaneData.__all_airplanes_list = all_airplanes_list
 
-        return all_airplanes_list
+        return AirplaneData.__all_airplanes_list
