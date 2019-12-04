@@ -39,16 +39,61 @@ class FlightRouteUI:
 
     @staticmethod
     def show_all_flight_routes(title):
-        table_header = ("Destination", "Airport", "Country", "Flight-time", "Distance", "Contact ", "Emergency phone")
         MenuUI.print_header(MenuUI.get_main_options()[3])
         title = TextEditor.format_text(title, TextEditor.UNDERLINE_TEXT)
         print(title)
-        print("{:<15s} {:<8s} {:<15s} {:<15s} {:<10s} {:<15s} {:<10s}".format(table_header[0], table_header[1],\
-             table_header[2], table_header[3], table_header[4], table_header[5], table_header[6]))
+        
+        # print("{:<15s} {:<8s} {:<15s} {:<15s} {:<10s} {:<15s} {:<10s}".format(table_header[0], table_header[1],\
+        #      table_header[2], table_header[3], table_header[4], table_header[5], table_header[6]))
 
+        BETWEENCOLOMS = 4
         flrt = LogicAPI.get_all_flight_routes()
+        table_header = ("Destination", "Airport", "Country", "Flight-time", "Distance", "Contact ", "Emergency phone")
+        longest_dest = len(table_header[0])
+        longest_airp = len(table_header[1])
+        longest_coun = len(table_header[2])
+        longest_time = len(table_header[3])
+        longest_dist = len(table_header[4])
+        longest_cont = len(table_header[5])
+        longest_phon = len(table_header[6])
+        
+        for c_elem in flrt:
+            compare = len (c_elem.get_destination())
+            if compare > longest_dest:
+                longest_dest = compare
+            compare = len (c_elem.get_airport_id())
+            if compare > longest_airp:
+                longest_airp = compare
+            compare = len (c_elem.get_country())
+            if compare > longest_coun:
+                longest_coun = compare    
+            compare = len (c_elem.get_flight_time())
+            if compare > longest_time:
+                longest_time = compare 
+            compare = len (c_elem.get_distance_from_iceland())
+            if compare > longest_dist:
+                longest_dist = compare
+            compare = len (c_elem.get_contact_name())
+            if compare > longest_cont:
+                longest_cont = compare      
+            compare = len (c_elem.get_emergency_phone())
+            if compare > longest_phon:
+                longest_phon = compare 
+
+        BETWEENCOLOMS = 4
+        colon_registration = "{:<"+str(longest_dest+BETWEENCOLOMS)+"s}{:<"\
+            +str(longest_airp+BETWEENCOLOMS)+"s}{:<"\
+            +str(longest_coun+BETWEENCOLOMS)+"s}{:<"\
+            +str(longest_time+BETWEENCOLOMS)+"s}{:<"\
+            +str(longest_dist+BETWEENCOLOMS)+"s}{:<"\
+            +str(longest_cont+BETWEENCOLOMS)+"s}{:<"\
+            +str(longest_phon+BETWEENCOLOMS)+"s}"
+        
+        print(colon_registration.format(table_header[0], table_header[1],\
+            table_header[2], table_header[3], table_header[4], table_header[5], table_header[6]))
+       
         for element in flrt:
-            print("{:<15s} {:<8s} {:<15s} {:<15s} {:<10s} {:<15s} {:<10s}".format(element.get_destination(), element.get_airport_id(), element.get_country(),\
+            print(colon_registration.format(element.get_destination(), element.get_airport_id(), element.get_country(),\
                  element.get_flight_time(), element.get_distance_from_iceland(), element.get_contact_name(), element.get_emergency_phone()))
                  
         MenuUI.fill_window_and_print_action_line(len(flrt)+2)
