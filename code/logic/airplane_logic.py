@@ -13,6 +13,15 @@ class AirplaneLogic:
         return DataAPI.get_all_airplanes()
 
     @staticmethod
+    def get_airplane(name):
+        all_airplanes = AirplaneLogic.get_all_airplanes()
+        for airplane in all_airplanes:
+            if airplane.get_name() == name:
+                return airplane
+
+        return None
+
+    @staticmethod
     def get_all_available_airplanes(schedule_tuple): # needs testing
         all_airplanes = DataAPI.get_all_airplanes()
         available_airplanes = []
@@ -25,7 +34,7 @@ class AirplaneLogic:
             
             else:
                 for voyage in voyages:
-                    voyage_schedule = voyage.get_voyage_schedule()
+                    voyage_schedule = voyage.get_schedule()
                     if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
                         available_airplanes.append(airplane)
         return available_airplanes

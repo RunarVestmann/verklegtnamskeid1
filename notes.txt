@@ -13,3 +13,9 @@ Listun vinnuferða skal sýna flugnúmer beggja flugferða, sætaupplýsingar, (
 Fara skal vel yfir class diagram eftir forritun
 
 Munum eftir að gá hvort það sé nú þegar til starfsmaður með sömu kennitölu þegar skrá á starfsmann
+
+"ﬂugmenn eru bara með leyﬁ til að ﬂjúga einni ﬂugvélategund á hverjum tíma" Því ætti kannski að skoða comment-ið í pilot_logic.py
+
+Eins og er þá erum við að geyma öll gögnin fyrir flug í voyages.csv
+
+Það má ekki hafa tvær flugvélar með sama nafn
