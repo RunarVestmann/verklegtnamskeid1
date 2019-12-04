@@ -1,10 +1,10 @@
-# from logic.airplane_logic import AirplaneLogic
-# from logic.aircraft_type_logic import AircraftTypeLogic
-# from logic.flight_attendant_logic import FlightAttendantLogic
-# from logic.flight_route_logic import FlightRouteLogic
-# from logic.pilot_logic import PilotLogic
-# from logic.employee_logic import EmployeeLogic
-# from logic.voyage_logic import VoyageLogic
+from logic.airplane_logic import AirplaneLogic
+from logic.aircraft_type_logic import AircraftTypeLogic
+from logic.flight_attendant_logic import FlightAttendantLogic
+from logic.flight_route_logic import FlightRouteLogic
+from logic.pilot_logic import PilotLogic
+from logic.employee_logic import EmployeeLogic
+from logic.voyage_logic import VoyageLogic
 
 #from data_models.employee import Employee
 from data_models.flight_route import FlightRoute
@@ -140,6 +140,10 @@ class LogicAPI:
         return [voyage1]
         #return VoyageLogic.get_voyages_by_destination(destination)
 
+    @staticmethod
+    def get_airplanes_voyages(airplane):
+        return VoyageLogic.get_airplanes_voyages(airplane)
+
     ####Airplanes####
 
     @staticmethod
@@ -165,7 +169,7 @@ class LogicAPI:
         #return AircraftTypeLogic.get_all_aircraft_types()
 
     @staticmethod
-    def get_all_available_airplanes():
+    def get_all_available_airplanes(schedule_tuple):
         return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
         Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
         #return AirplaneLogic.get_all_available_airplanes()
@@ -187,3 +191,15 @@ class LogicAPI:
 
 
         #return DataAPI.get_all_flight_routes()
+    @staticmethod
+    def get_all_flights():
+        return FlightLogic.get_all_flights() 
+
+    @staticmethod
+    def get_flight(departure_time):
+        FlightLogic.get_flight(departure_time)
+
+
+    @staticmethod
+    def save_new_flight(flight):
+        FlightLogic.save_new_flight(flight)

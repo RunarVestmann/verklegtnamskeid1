@@ -5,6 +5,7 @@ from data_accessors.flight_route_data import FlightRouteData
 from data_accessors.pilot_data import PilotData
 from data_accessors.voyage_data import VoyageData
 from data_accessors.employee_data import EmployeeData
+from data_accessors.flight_data import FlightData
 
 class DataAPI:
     '''The DataAPI that enables saving and getting data from the csv files'''
@@ -68,3 +69,14 @@ class DataAPI:
     @staticmethod
     def get_all_aircraft_types():
         return AircraftTypeData.get_all_aircraft_types()
+    
+    ####  Flights  ####
+
+    @staticmethod
+    def get_all_flights():
+        return FlightData.get_all_flights()
+
+    @staticmethod
+    def save_new_flight(flight):
+        FlightData.save_new_flight(flight)
+        
