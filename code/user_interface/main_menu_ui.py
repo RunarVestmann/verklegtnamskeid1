@@ -2,7 +2,11 @@ from user_interface.text_editor import TextEditor
 from user_interface.window import Window
 from user_interface.component_ui import ComponentUI
 from user_interface.voyage_ui import VoyageUI
+from user_interface.employees_ui import EmployeeUI
+from user_interface.airplanes_ui import AirplanesUI
 from user_interface.flight_route_ui import FlightRouteUI
+from user_interface.quit_ui import QuitUI
+
 
 class MainMenuUI:
 
@@ -55,6 +59,7 @@ class MainMenuUI:
 
     @staticmethod
     def main_menu_action(user_input, valid_options_tuple):
+        main_menu_option_functions = (VoyageUI.show_voyage_menu,EmployeeUI.show_employee_menu,AirplanesUI.show_airplanes_menu, FlightRouteUI.show_flight_route_menu, QuitUI.show_quit_menu)
 
         #If the user inputs nothing, we do nothing
         if not user_input:
@@ -65,10 +70,7 @@ class MainMenuUI:
             user_input = user_input[1:-1] #in case if user inputs "()" around the number
 
         if user_input[0] in valid_options_tuple:
-            print("eitthvað sniðugt")
-            #VoyageUI.show_voyage_menu()
-            #FlightRouteUI.show_flight_route_menu()
-
+            main_menu_option_functions[valid_options_tuple.index(user_input[0])]()
 
 
 
