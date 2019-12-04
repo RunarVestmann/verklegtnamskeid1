@@ -18,9 +18,9 @@ Hörður, Guðmundur: Unnu á UI layer
 Fannar, Patrik: Kláruðu að gera test cases til þess að prófa UI
 
 4.12.2019
-Planið í upphaf dags er að halda áfram með UI layer, búa til nokkur föll í logic layer ásamt því að búa til save föll í data 
+Planið í upphaf dags er að halda áfram með UI layer, bæta við virkni í logic layer ásamt því að klára að gera get föll í data 
 layer. Eftir daginn í gær var svo aðeins haldið áfram með að byggja upp UI layer um kvöldið. 
-
-
-
-Fannar Patrik:Gerðu State klasa fyrir allt starfsfolk,flugvelar og vinnuferðir klara og gera fall fyrir on of off duty starfsfolk
+Í lok dags gerðum við það sem við ætluðum okkur, kom upp að sumt hafði gleymst sem að var bætt við. 
+Guðmundur: Vann í UI layer
+Hörður, Rúnar: Unnu í allskonar logic files sem að voru eftir
+Fannar, Patrik: Unnu í logic files og kláruðu að gera föll í data layer.
