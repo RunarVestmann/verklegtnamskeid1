@@ -4,7 +4,6 @@ from data_accessors.flight_attendant_data import FlightAttendantData
 from data_accessors.flight_route_data import FlightRouteData
 from data_accessors.pilot_data import PilotData
 from data_accessors.voyage_data import VoyageData
-from data_accessors.employee_data import EmployeeData
 from data_accessors.flight_data import FlightData
 
 class DataAPI:
@@ -14,7 +13,7 @@ class DataAPI:
 
     @staticmethod
     def get_all_employees():
-        return EmployeeData.get_all_employees()
+        return PilotData.get_all_pilots() + FlightAttendantData.get_all_flight_attendants()
 
     ####  Pilots  ####
 
@@ -69,7 +68,7 @@ class DataAPI:
     @staticmethod
     def get_all_aircraft_types():
         return AircraftTypeData.get_all_aircraft_types()
-    
+
     ####  Flights  ####
 
     @staticmethod

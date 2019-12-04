@@ -197,8 +197,7 @@ class LogicAPI:
 
     @staticmethod
     def get_flight(departure_time):
-        FlightLogic.get_flight(departure_time)
-
+        return FlightLogic.get_flight(departure_time)
 
     @staticmethod
     def save_new_flight(flight):

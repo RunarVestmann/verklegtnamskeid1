@@ -1,5 +1,6 @@
-from data_models.pilot import Pilot
 import csv
+from data_models.pilot import Pilot
+
 
 class PilotData:
 

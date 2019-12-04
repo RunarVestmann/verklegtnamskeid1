@@ -1,4 +1,6 @@
+import csv
 from data_models.aircraft_type import AircraftType
+
 
 class AircraftTypeData:
 
@@ -9,8 +11,8 @@ class AircraftTypeData:
     def get_all_aircraft_types():
         all_aircrafts_list = []
 
-        if not AircraftData.__all_aircrafts_list:
-            with open(AircraftsData.__aircrafts_data_filename, 'r') as file_stream:
+        if not AircraftTypeData.__all_aircrafts_list:
+            with open(AircraftTypeData.__aircraft_data_filename, 'r') as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     all_aircrafts_list.append(AircraftType(row["plane_type"], row["model"],\
@@ -20,5 +22,4 @@ class AircraftTypeData:
             AircraftTypeData.__all_aircrafts_list = all_aircrafts_list
 
         return AircraftTypeData.__all_aircrafts_list
-        
         

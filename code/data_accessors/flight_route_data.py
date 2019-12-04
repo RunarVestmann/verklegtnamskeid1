@@ -1,5 +1,6 @@
-from data_models.flight_route import FlightRoute
 import csv
+from data_models.flight_route import FlightRoute
+
 
 class FlightRouteData:
 

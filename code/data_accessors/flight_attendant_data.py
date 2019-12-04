@@ -1,5 +1,6 @@
-from data_models.flight_attendant import FlightAttendant
 import csv
+from data_models.flight_attendant import FlightAttendant
+
 
 class FlightAttendantData:
 

@@ -1,5 +1,6 @@
-from data_models.airplane import Airplane
 import csv
+from data_models.airplane import Airplane
+
 
 class AirplaneData:
 
