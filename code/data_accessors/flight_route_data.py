@@ -33,7 +33,7 @@ class FlightRouteData:
                  "flight_time": flight_route.get_flight_time(),\
                  "distance_from_iceland": flight_route.get_distance_from_iceland(),
                  "contact_name": flight_route.get_contact_name(),
-                 "emergency_phone": flight_route.get_emergency_phone
+                 "emergency_phone": flight_route.get_emergency_phone()
                  })
 
         if FlightRouteData.__all_flight_routes_list:
