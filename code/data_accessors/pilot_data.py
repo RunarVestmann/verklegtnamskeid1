@@ -22,5 +22,19 @@ class PilotData:
 
     @staticmethod
     def save_new_pilot(pilot):
-        pass
+        field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state", "license"]
+        with open(PilotData.__pilot_data_filename, 'a') as file_stream:
+            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+
+            writer.writerow({"name": pilot.get_name(),\
+                 "ssn": pilot.get_ssn(),\
+                 "phonenumber": pilot.get_phonenumber(),\
+                 "home_address": pilot.get_home_address(),\
+                 "email": pilot.get_email(),
+                 "state": pilot.get_State(),
+                 "license": pilot.get_license()
+                 })
+
+        if PilotData.__all_pilots_list:
+            PilotData.__all_pilots_list.append(pilot)
     
