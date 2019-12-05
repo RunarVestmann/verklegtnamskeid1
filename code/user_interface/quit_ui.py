@@ -52,3 +52,16 @@ class QuitUI:
             elif user_input.startswith('n'):
                 print() #Problem of inputs neet to be solved
                 #????.show_main_menu()
+    
+    @staticmethod
+    def show_quit_menu2():
+        #Print the header with the Quit option underlined
+        ComponentUI.print_header(ComponentUI.get_main_options()[4])
+        QuitUI.__print_quit_menu_body()
+
+    @staticmethod
+    def terminate_program():
+            Window.clear()
+            raise SystemExit
+
+            
