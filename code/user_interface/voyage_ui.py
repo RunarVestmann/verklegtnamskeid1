@@ -55,7 +55,7 @@ class VoyageUI:
         option_functions = (VoyageUI.show_new_voyage_constructor, VoyageUI.show_ongoing_voyages, VoyageUI.show_completed_voyages,\
              VoyageUI.show_find_voyages_by_date, VoyageUI.show_find_voyages_by_week, VoyageUI.show_find_voyages_by_destination)
 
-       #     ####  Test input ####            
+       #####  Test input ####            
         selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
         if selected_number:                                                                  #and is with in range of possible menu list
             selected_index = selected_number-1

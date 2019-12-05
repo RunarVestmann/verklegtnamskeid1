@@ -69,7 +69,7 @@ class MainMenuUI:
 
     @staticmethod
     def main_menu_action(user_input, valid_options_tuple):
-        main_menu_option_functions = (MainMenuUI.show_voyage,EmployeeUI.show_employee_menu,AirplanesUI.show_airplanes_menu, FlightRouteUI.show_flight_route_menu, MainMenuUI.show_quit)
+        main_menu_option_functions = (MainMenuUI.show_voyage,MainMenuUI.show_employee,AirplanesUI.show_airplanes_menu, FlightRouteUI.show_flight_route_menu, MainMenuUI.show_quit)
 
         #If the user inputs nothing, we do nothing
         if not user_input:
@@ -93,6 +93,10 @@ class MainMenuUI:
     @staticmethod
     def show_voyage():
         MainMenuUI.show_frame(VoyageUI.show_voyage_menu,VoyageUI.action_voyage_menu)
+
+    @staticmethod
+    def show_employee():
+        MainMenuUI.show_frame(EmployeeUI.show_employee_menu,EmployeeUI.action_employees_menu)
     
     
     @staticmethod
