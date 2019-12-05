@@ -24,7 +24,7 @@ class AircraftTypeData:
         return AircraftTypeData.__all_aircrafts_list
 
     @staticmethod
-    def save_new_aircraft(aircraft):
+    def save_new_aircraft_type(aircraft):
         field_names = ["plane_type", "model", "capacity", "empty_weight", "max_takeoff_weight",\
             "unit_thrust","service_ceiling","length","height","wingspan"]
         with open(AircraftTypeData.__aircraft_data_filename, 'a') as file_stream:

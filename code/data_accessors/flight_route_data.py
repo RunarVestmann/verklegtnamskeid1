@@ -27,10 +27,10 @@ class FlightRouteData:
         with open(FlightRouteData.__flight_route_data_filename, 'a') as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
-            writer.writerow({"country": flight_route.get_country(),\
-                 "destination": flight_route.get_destination(),\
-                 "airport_id": flight_route.get_airport_id(),\
-                 "flight_time": flight_route.get_flight_time(),\
+            writer.writerow({"country": flight_route.get_country(),
+                 "destination": flight_route.get_destination(),
+                 "airport_id": flight_route.get_airport_id(),
+                 "flight_time": flight_route.get_flight_time(),
                  "distance_from_iceland": flight_route.get_distance_from_iceland(),
                  "contact_name": flight_route.get_contact_name(),
                  "emergency_phone": flight_route.get_emergency_phone()

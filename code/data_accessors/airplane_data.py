@@ -27,9 +27,12 @@ class AirplaneData:
         with open(AirplaneData.__airplane_data_filename, 'a') as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
-            writer.writerow({"name": airplane.get_name(), "aircraft_type": airplane.get_type(),\
-                 "manufacturer": airplane.get_manufacturer(),\
-                 "seat_count": airplane.get_seat_count(), "state": airplane.get_state()})
+            writer.writerow({
+                 "name": airplane.get_name(),
+                 "aircraft_type": airplane.get_type(),
+                 "manufacturer": airplane.get_manufacturer(),
+                 "seat_count": airplane.get_seat_count(),
+                 "state": airplane.get_state()})
 
         if AirplaneData.__all_airplanes_list:
             AirplaneData.__all_airplanes_list.append(airplane)

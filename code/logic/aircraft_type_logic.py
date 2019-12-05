@@ -6,3 +6,8 @@ class AircraftTypeLogic:
     @staticmethod
     def get_all_aircraft_types():
         return DataAPI.get_all_aircraft_types()
+    
+    @staticmethod
+    def save_new_aircraft_type(aircraft_type):
+        DataAPI.save_new_aircraft_type(aircraft_type)
+
