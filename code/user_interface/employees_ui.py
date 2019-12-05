@@ -1,6 +1,6 @@
 from user_interface.window import Window
 from user_interface.component_ui import ComponentUI
-
+from user_interface.text_editor import TextEditor
 
 
 class EmployeeUI:
@@ -35,35 +35,59 @@ class EmployeeUI:
 
 
 
-
+    DUMMYNMBR=1
     @staticmethod
     def show_new_employee_constructor():
+        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(EmployeeUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_all_employees():
+        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(EmployeeUI.__option_tuple[1], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_all_pilots():
+        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(EmployeeUI.__option_tuple[2], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_all_flight_attendants():
+        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(EmployeeUI.__option_tuple[3], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_employee_by_name_finder():
+        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(EmployeeUI.__option_tuple[4], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_pilot_by_license_finder():
+        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(EmployeeUI.__option_tuple[5], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_employees_on_duty():
+        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(EmployeeUI.__option_tuple[6], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_employees_off_duty():
+        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(EmployeeUI.__option_tuple[7], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
