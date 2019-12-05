@@ -1,10 +1,11 @@
 import csv
+import os
 from data_models.flight_route import FlightRoute
 
 
 class FlightRouteData:
 
-    __flight_route_data_filename = "../data_storage/flight_routes.csv"
+    __flight_route_data_filename = os.path.join("..", "data_storage", "flight_routes.csv")
     __all_flight_routes_list = []
 
     @staticmethod
@@ -21,5 +22,19 @@ class FlightRouteData:
         return FlightRouteData.__all_flight_routes_list
 
     @staticmethod
-    def save_new_flight_attendant(flight_attendant):
-        pass
+    def save_new_flight_route(flight_route):
+        field_names = ["country", "destination", "airport_id", "flight_time", "distance_from_iceland", "contact_name", "emergency_phone"]
+        with open(FlightRouteData.__flight_route_data_filename, 'a') as file_stream:
+            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+
+            writer.writerow({"country": flight_route.get_country(),\
+                 "destination": flight_route.get_destination(),\
+                 "airport_id": flight_route.get_airport_id(),\
+                 "flight_time": flight_route.get_flight_time(),\
+                 "distance_from_iceland": flight_route.get_distance_from_iceland(),
+                 "contact_name": flight_route.get_contact_name(),
+                 "emergency_phone": flight_route.get_emergency_phone
+                 })
+
+        if FlightRouteData.__all_flight_routes_list:
+            FlightRouteData.__all_flight_routes_list.append(flight_route)
