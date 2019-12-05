@@ -18,7 +18,7 @@ class FlightRouteUI:
         
     @staticmethod
     def action_flight_route_menu(user_input):
-        option_tuple = FlightRouteUI.__option_tuple  
+        option_tuple = FlightRouteUI.__option_tuple  #ath 
         option_functions = (FlightRouteUI.show_new_flight_route_constructor, FlightRouteUI.show_all_flight_routes)
 
 
@@ -26,7 +26,8 @@ class FlightRouteUI:
         selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
         if selected_number:                                                                  #and is with in range of possible menu list
             selected_index = selected_number-1
-            return option_functions[selected_index]
+            new_display = [option_functions[selected_index], FlightRouteUI.action_new_flight_route]
+            return new_display
         else:
             return False
 
@@ -40,7 +41,35 @@ class FlightRouteUI:
             print("({}) {}: ".format(i+1,option))
 
         ComponentUI.fill_window_and_print_action_line(len(constructor_flrt_tuple)+1, True)
-        #user_input = input("Your action: ").lower().strip()
+    
+    @staticmethod
+    def action_new_flight_route(user_input):
+        #option_functions = (FlightRouteUI.field_new_input)
+
+        ####  Test input ####            
+        selected_number = user_input # ComponentUI.test_user_input_chose_index(user_input, 7) #ath           #eather int>0 or False - may not be 0
+        if selected_number == '1':                                                                  #and is with in range of possible menu list
+            #selected_index = selected_number-1
+            new_display = [FlightRouteUI.field_new_input, FlightRouteUI.action_field_new_input,"Insert country name: "]
+            return new_display
+        else:
+            return False
+
+    
+    
+    @staticmethod
+    def field_new_input():
+        ComponentUI.print_header(ComponentUI.get_main_options()[3])
+        print(TextEditor.format_text(FlightRouteUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(2)
+
+    @staticmethod
+    def action_field_new_input(user_input):
+        pass
+
+
+
+
 
     @staticmethod
     def show_all_flight_routes():
@@ -56,7 +85,7 @@ class FlightRouteUI:
         ComponentUI.fill_in_table(table_header,flight_routes_getfunctions_tuple, False)
                  
         ComponentUI.fill_window_and_print_action_line(len(flrt_list)+2)
-        #user_input = input("Your action: ").lower().strip()
+        
 
 
 

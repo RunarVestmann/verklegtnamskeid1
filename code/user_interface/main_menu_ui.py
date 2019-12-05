@@ -56,8 +56,14 @@ class MainMenuUI:
             MainMenuUI.main_menu_action(user_input, valid_options_tuple) #handle main menu options
             if extra_menu_function and user_input != '':
                 new_menu = extra_menu_function(user_input) #handle sub-menu and other option than main menu
+                #get this as list
                 if new_menu:
-                    MainMenuUI.show_frame(new_menu)
+                    if len(new_menu) == 3:
+                        MainMenuUI.show_frame(new_menu[0], new_menu[1], new_menu[2])
+                    elif len(new_menu) == 2:
+                        MainMenuUI.show_frame(new_menu[0], new_menu[1])
+                    else:
+                        MainMenuUI.show_frame(new_menu[0])
 
 
     

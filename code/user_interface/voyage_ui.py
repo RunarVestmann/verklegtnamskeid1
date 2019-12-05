@@ -31,7 +31,8 @@ class VoyageUI:
         selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
         if selected_number:                                                                  #and is with in range of possible menu list
             selected_index = selected_number-1
-            return option_functions[selected_index]
+            new_display = [option_functions[selected_index]]
+            return new_display
         else:
             return False
         
