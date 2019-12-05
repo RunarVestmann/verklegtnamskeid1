@@ -8,13 +8,13 @@ class FlightLogic:
         return DataAPI.get_all_flights()
 
     @staticmethod
-    def get_flight(departure_time):
+    def get_flight(departure_location, departure_time):
         '''Returns a flight at the given departure time, if no flight was found,
            None is returned'''
         all_flights_list = DataAPI.get_all_flights()
 
         for flight in all_flights_list:
-            if flight.departure_time == departure_time:
+            if flight.get_departure_location() == departure_location and flight.get_departure_time() == departure_time:
                 return flight
 
         return None

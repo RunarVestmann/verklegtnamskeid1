@@ -1,46 +1,64 @@
 import csv
 from data_models.voyage import Voyage
 from data_models.flight import Flight
-# from apis.logic_api import LogicAPI
 
 class VoyageData:
 
-    __voyage_data_filename = "../data_storage/pilots.csv"
+    __voyage_data_filename = "../data_storage/voyages.csv"
     __all_voyages_list = []
 
-    # @staticmethod
-    # def get_all_voyages():
+    __max_pilots_onboard = 10
+    __max_flight_attendants_on_board = 10
+    __flights_per_voyage = 2
 
-    #     #If we haven't cached all the voyages we grab them from the file
-    #     if not VoyageData.__all_voyages_list:
-    #         all_voyages_list = []
-    #         with open(VoyageData.__voyage_data_filename, 'r') as file_stream:
-    #             reader = csv.DictReader(file_stream)
-    #             for row in reader:
-    #                 flights_tuple = (LogicAPI.get_flight(row["flight1"]), LogicAPI.get_flight(row["flight2"]))
-    #                 pilots_list = []
-    #                 flight_attendants_list = []
+    @staticmethod
+    def __get_employees(head_employee_str, normal_employee_str, row):
+        employees_list = []
 
-    #                 #populate pilots_list if there is at least a captain registered
-    #                 if row["captain"]:
-    #                     pass
+        head_employee = row[head_employee_str]
+            #populate the pilots_list if there is at least a captain registered
+        if head_employee:
+            employees_list.append(head_employee)
+            for i in range(1, VoyageData.__max_pilots_onboard):
+                employee = row[normal_employee_str + str(i)]
 
-    #                 #populate flight_attendants_list if there is at least a cabin manager registered
-    #                 if row["cabin_manager"]:
-    #                     pass
+                #If there are more employees to add, we add them
+                if employee:
+                    employees_list.append(employee)
 
-    #                 airplane = LogicAPI.get_airplane(row["airplane"])#Needs implementation
+        return employees_list
 
-    #                 state = row["state"]
 
-    #                 #fullymanned (False) need implementation
+    @staticmethod
+    def get_all_voyages():
 
-    #                 all_voyages_list.append(Voyage(flights_tuple, pilots_list, flight_attendants_list, airplane,\
-    #                      (flights_tuple[0].get_departure_time(), flights_tuple[1].get_departure_time()), False, state))
+        #If we haven't cached all the voyages we grab them from the file
+        if not VoyageData.__all_voyages_list:
+            all_voyages_list = []
+            with open(VoyageData.__voyage_data_filename, 'r') as file_stream:
+                reader = csv.DictReader(file_stream)
+                for row in reader:
+                    flight1 = Flight(row["flight1_departure_location"], row["flight1_departure_time"],\
+                         row["flight1_arrival_location"], row["flight1_arrival_time"], row["flight1_number"]) 
+                    flight2 = Flight(row["flight2_departure_location"], row["flight2_departure_time"],\
+                         row["flight2_arrival_location"], row["flight2_arrival_time"], row["flight2_number"])
 
-    #             VoyageData.__all_voyages_list = all_voyages_list
+                    flights_tuple = (flight1, flight2)
 
-    #         return VoyageData.__all_voyages_list
+                    pilots_list = VoyageData.__get_employees("captain", "copilot", row)
+
+                    flight_attendants_list = VoyageData.__get_employees("cabin_manager", "flight_attendant", row)
+
+                    airplane = row["airplane"]
+
+                    state = row["state"]
+
+                    all_voyages_list.append(Voyage(flights_tuple, pilots_list, flight_attendants_list, airplane,\
+                         (flights_tuple[0].get_departure_time(), flights_tuple[1].get_departure_time()), state))
+
+                VoyageData.__all_voyages_list = all_voyages_list
+
+            return VoyageData.__all_voyages_list
 
     @staticmethod
     def save_new_voyage(voyage):

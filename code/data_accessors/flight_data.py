@@ -14,7 +14,7 @@ class FlightData:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     all_flights_list.append(Flight(row["departure_location"], row["departure_time"],\
-                        row["arrival_location"], row["arrival_time"], row["number"], row["sold_ticket_count"]))
+                        row["arrival_location"], row["arrival_time"], row["number"]))
 
             FlightData.__all_flights_list = all_flights_list
 
