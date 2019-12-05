@@ -22,4 +22,15 @@ class FlightData:
 
     @staticmethod
     def save_new_flight(flight):
-        pass
+        field_names = ["departure_location", "departure_time", "arrival_location", "arrival_time", "number"]
+        with open(FlightData.__flight_data_filename, 'a') as file_stream:
+            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+
+            writer.writerow({"departure_location": flight.get_departure_location(),\
+                 "departure_time": flight.get_departure_time(),\
+                 "arrival_location": flight.get_arrival_location(),\
+                 "number": flight.get_numger()})
+
+        if FlightData.__all_flights_list:
+            FlightData.__all_flights_list.append(flight)
+
