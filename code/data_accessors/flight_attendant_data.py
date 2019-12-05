@@ -24,6 +24,17 @@ class FlightAttendantData:
     @staticmethod
     def save_new_flight_attendant(flight_attendant):
         field_names = ["name", "ssn", "phonenumber", "seat_count", "state"]
+        with open(FlightAttendantData.__flight_attendant_data_filename, 'a') as file_stream:
+            writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
-        
-    
+            writer.writerow({
+                "name": flight_attendant.get_name(),
+                "ssn": flight_attendant.get_ssn(),
+                "phonenumber": flight_attendant.get_phonenumber(),
+                "home_address": flight_attendant.get_home_address(),
+                "email": flight_attendant.get_email(),
+                "state": flight_attendant.get_state()
+            })
+
+        if FlightAttendantData.__all_flight_attendants_list:
+            FlightAttendantData.__all_flight_attendants_list.append(flight_attendant)
