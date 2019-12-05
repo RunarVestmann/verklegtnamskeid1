@@ -46,14 +46,18 @@ class MainMenuUI:
     def show_frame(show_function, extra_menu_function=False, input_message="Your action: "):
         ''' common element around every display window '''
         user_input = ''
-        valid_options_tuple = MainMenuUI.__MAIN_MENU_VALID_OPTIONS_TUPLE 
+        valid_options_tuple = list(MainMenuUI.__MAIN_MENU_VALID_OPTIONS_TUPLE)
+        
+    
 
         while user_input not in valid_options_tuple:
-            show_function()
+            show_function() #function that needs to be handled
             user_input = input(input_message).lower().strip()
-            MainMenuUI.main_menu_action(user_input, valid_options_tuple)
+            MainMenuUI.main_menu_action(user_input, valid_options_tuple) #handle main menu options
             if extra_menu_function and user_input != '':
-                extra_menu_function(user_input)
+                new_menu = extra_menu_function(user_input) #handle sub-menu and other option than main menu
+                if new_menu:
+                    MainMenuUI.show_frame(new_menu)
 
 
     
@@ -65,7 +69,7 @@ class MainMenuUI:
 
     @staticmethod
     def main_menu_action(user_input, valid_options_tuple):
-        main_menu_option_functions = (VoyageUI.show_voyage_menu,EmployeeUI.show_employee_menu,AirplanesUI.show_airplanes_menu, FlightRouteUI.show_flight_route_menu, MainMenuUI.show_quit)
+        main_menu_option_functions = (MainMenuUI.show_voyage,EmployeeUI.show_employee_menu,AirplanesUI.show_airplanes_menu, FlightRouteUI.show_flight_route_menu, MainMenuUI.show_quit)
 
         #If the user inputs nothing, we do nothing
         if not user_input:
@@ -79,7 +83,7 @@ class MainMenuUI:
             main_menu_option_functions[valid_options_tuple.index(user_input[0])]()
 
     @staticmethod
-    def confirme_quit(user_input):
+    def confirm_quit(user_input):
         #Clear the window and exit the program if the user wants to exit
         if user_input.startswith('y'):
             QuitUI.terminate_program()
@@ -87,8 +91,13 @@ class MainMenuUI:
             MainMenuUI.show_frame(MainMenuUI.show_main_menu)
 
     @staticmethod
+    def show_voyage():
+        MainMenuUI.show_frame(VoyageUI.show_voyage_menu,VoyageUI.action_voyage_menu)
+    
+    
+    @staticmethod
     def show_quit():
-        MainMenuUI.show_frame(QuitUI.show_quit_menu2, MainMenuUI.confirme_quit)
+        MainMenuUI.show_frame(QuitUI.show_quit_menu2, MainMenuUI.confirm_quit)
 
     #það þarf að setja inn show fyrir alla flokkana og aðlaga Klasana að því!
 

@@ -61,7 +61,7 @@ class QuitUI:
 
     @staticmethod
     def terminate_program():
-            Window.clear()
-            raise SystemExit
+        Window.clear()
+        raise SystemExit
 
             
