@@ -1,11 +1,11 @@
 import csv
+import os
 import platform
 from data_models.flight_attendant import FlightAttendant
 
 
 class FlightAttendantData:
-
-    __mac_path = "..\data_storage\flight_attendants.csv"
+    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/flight_attendants.csv")
     __other_path = "../data_storage/flight_attendants.csv"
     __flight_attendant_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
     __all_flight_attendants_list = []
@@ -26,7 +26,7 @@ class FlightAttendantData:
 
     @staticmethod
     def save_new_flight_attendant(flight_attendant):
-        field_names = ["name", "ssn", "phonenumber", "seat_count", "state"]
+        field_names = ["name", "ssn", "phonenumber", "home_address" "email", "state"]
         with open(FlightAttendantData.__flight_attendant_data_filename, 'a') as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
