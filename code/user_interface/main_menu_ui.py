@@ -69,7 +69,7 @@ class MainMenuUI:
 
     @staticmethod
     def main_menu_action(user_input, valid_options_tuple):
-        main_menu_option_functions = (MainMenuUI.show_voyage,MainMenuUI.show_employee,AirplanesUI.show_airplanes_menu, FlightRouteUI.show_flight_route_menu, MainMenuUI.show_quit)
+        main_menu_option_functions = (MainMenuUI.show_voyage, MainMenuUI.show_employee, MainMenuUI.show_airplanes, MainMenuUI.show_flight_route, MainMenuUI.show_quit)
 
         #If the user inputs nothing, we do nothing
         if not user_input:
@@ -92,13 +92,20 @@ class MainMenuUI:
 
     @staticmethod
     def show_voyage():
-        MainMenuUI.show_frame(VoyageUI.show_voyage_menu,VoyageUI.action_voyage_menu)
+        MainMenuUI.show_frame(VoyageUI.show_voyage_menu, VoyageUI.action_voyage_menu)
 
     @staticmethod
     def show_employee():
-        MainMenuUI.show_frame(EmployeeUI.show_employee_menu,EmployeeUI.action_employees_menu)
+        MainMenuUI.show_frame(EmployeeUI.show_employee_menu, EmployeeUI.action_employees_menu)
     
-    
+    @staticmethod
+    def show_airplanes():
+        MainMenuUI.show_frame(AirplanesUI.show_airplanes_menu, AirplanesUI.action_airplanes_menu)
+   
+    @staticmethod
+    def show_flight_route():
+        MainMenuUI.show_frame(FlightRouteUI.show_flight_route_menu, FlightRouteUI.action_flight_route_menu)
+
     @staticmethod
     def show_quit():
         MainMenuUI.show_frame(QuitUI.show_quit_menu2, MainMenuUI.confirm_quit)
