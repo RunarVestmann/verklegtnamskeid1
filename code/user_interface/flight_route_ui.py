@@ -8,7 +8,7 @@ class FlightRouteUI:
     @staticmethod
     def show_flight_route_menu():
         ComponentUI.print_header(ComponentUI.get_main_options()[3])
-        option_tuple = ('New flightroute', 'Show all flight routes')
+        option_tuple = ('New flight route', 'Show all flight routes')
         option_functions = (FlightRouteUI.show_new_flight_route_constructor, FlightRouteUI.show_all_flight_routes)
 
         #Generate a tuple that holds all the valid user inputs
@@ -26,7 +26,7 @@ class FlightRouteUI:
             user_input = input("Your action: ").lower().strip()
 
             ####  Test input ####            
-            selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
+            selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #either int>0 or False - may not be 0
             if selected_number:                                                                      #and is with in range of possible menu list
                 selected_index = selected_number-1
                 option_functions[selected_index](option_tuple[selected_index])

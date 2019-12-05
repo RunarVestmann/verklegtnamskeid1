@@ -7,7 +7,7 @@ class AirplanesUI:
     @staticmethod
     def show_airplanes_menu():
         ComponentUI.print_header(ComponentUI.get_main_options()[2])
-        option_tuple = ('New airplane', 'Show all airplanes', 'Show airplanes in use', 'show all airplane types')
+        option_tuple = ('New airplane', 'Show all airplanes', 'Show airplanes in use', 'Show all airplane types')
         option_functions = (AirplanesUI.show_new_airplane_constructor, AirplanesUI.show_all_airplanes, AirplanesUI.show_airplanes_in_use, AirplanesUI.show_all_airplane_types)
 
         #Generate a tuple that holds all the valid user inputs
@@ -24,7 +24,7 @@ class AirplanesUI:
             user_input = input("Your action: ").lower().strip()
 
             ####  Test input ####            
-            selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
+            selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #either int>0 or False - may not be 0
             if selected_number:                                                                      #and is with in range of possible menu list
                 selected_index = selected_number-1
                 option_functions[selected_index](option_tuple[selected_index])
