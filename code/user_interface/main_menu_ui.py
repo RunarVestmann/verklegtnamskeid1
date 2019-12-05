@@ -90,7 +90,7 @@ class MainMenuUI:
     def show_quit():
         MainMenuUI.show_frame(QuitUI.show_quit_menu2, MainMenuUI.confirme_quit)
 
-    #það þarf að setja inn show fyrir alla flokkana og aðlaga Klasana að því !
+    #það þarf að setja inn show fyrir alla flokkana og aðlaga Klasana að því!
 
 
 

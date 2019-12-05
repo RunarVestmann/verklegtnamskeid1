@@ -50,7 +50,7 @@ class QuitUI:
                 raise SystemExit
 
             elif user_input.startswith('n'):
-                print() #Problem of inputs neet to be solved
+                print() 
                 #????.show_main_menu()
     
     @staticmethod
