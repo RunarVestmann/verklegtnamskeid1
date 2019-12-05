@@ -26,4 +26,14 @@ Hörður, Rúnar: Unnu í allskonar logic files sem að voru eftir
 Fannar, Patrik: Unnu í logic files og kláruðu að gera föll í data layer.
 
 5.12.2019 
-Planið í upphaf dags er að testa back-endann og unit testa logic- og data klasa og gá hvort rétt virkni sé til staðar. Ásamt þessu þarf að halda áfram með að vinna á UI layer og framkvæma save föll fyrir data layer. 
+Planið í upphaf dags er að testa back-endann og unit testa logic- og data klasa og gá hvort rétt virkni sé til staðar. Ásamt
+þessu þarf að halda áfram með að vinna á UI layer, bæta við macOS support fyrir csv files og framkvæma save föll fyrir data
+layer. 
+Í lok dags gerðum við það sem við ætluðum okkur, komnir vel á leið með verkefnið, eina sem er eftir er betri UI layer virkni
+og mögulega meiri macOS support ásamt því að gá virkni Linux varðandi save föll.
+Fannar: uppfærði klasarit, gerði data api testing og hjálpaði aðeins með UI layer
+Patrik: data layer klasa testing
+Rúnar, Hörður, Patrik: bjuggu til save föll
+Hörður: bjó til macOS support fyrir csv files
+Guðmundur: Hélt áfram með UI layer
+
