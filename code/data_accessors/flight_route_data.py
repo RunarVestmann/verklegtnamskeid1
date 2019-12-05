@@ -1,11 +1,14 @@
 import csv
 import os
+import platform
 from data_models.flight_route import FlightRoute
 
 
 class FlightRouteData:
 
-    __flight_route_data_filename = os.path.join("..", "data_storage", "flight_routes.csv")
+    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/flight_routes.csv")
+    __other_path = "../data_storage/flight_routes.csv"
+    __flight_route_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
     __all_flight_routes_list = []
 
     @staticmethod

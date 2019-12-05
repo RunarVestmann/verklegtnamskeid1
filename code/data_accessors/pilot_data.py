@@ -1,10 +1,14 @@
 import csv
+import os
+import platform
 from data_models.pilot import Pilot
 
 
 class PilotData:
 
-    __pilot_data_filename = "../data_storage/pilots.csv"
+    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/pilots.csv")
+    __other_path = "../data_storage/pilots.csv"
+    __pilot_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
     __all_pilots_list = []
 
     @staticmethod

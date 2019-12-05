@@ -1,10 +1,14 @@
 from data_models.flight import Flight
+import os
+import platform
 import csv
 
 class FlightData:
 
-    __flight_data_filename = "../data_storage/flights.csv"
-    __all_flights_list = []
+    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/flights.csv")
+    __other_path = "../data_storage/flights.csv"
+    __flight_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+    __all_flight_attendants_list = []
 
     @staticmethod
     def get_all_flights():

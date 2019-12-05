@@ -1,10 +1,14 @@
 import csv
+import os
+import platform
 from data_models.aircraft_type import AircraftType
 
 
 class AircraftTypeData:
 
-    __aircraft_data_filename = "../data_storage/aircraft_types.csv"
+    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/aircraft_type.csv")
+    __other_path = "../data_storage/aircraft_type.csv"
+    __aircraft_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
     __all_aircrafts_list = []
 
     @staticmethod
