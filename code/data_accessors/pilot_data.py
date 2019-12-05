@@ -14,7 +14,7 @@ class PilotData:
             with open(PilotData.__pilot_data_filename, 'r') as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
-                    all_pilots_list.append(Pilot(row["name"], row["ssn"], row["mobile_phone"], row["home_phone"],\
+                    all_pilots_list.append(Pilot(row["name"], row["ssn"], row["phonenumber"],\
                                                 row["home_address"], row["email"], row["state"], row["license"]))
             PilotData.__all_pilots_list = all_pilots_list
 

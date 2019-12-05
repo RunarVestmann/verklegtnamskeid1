@@ -15,7 +15,7 @@ class FlightAttendantData:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     all_flight_attendants_list.append(FlightAttendant(row["name"], row["ssn"],\
-                        row["mobile_phone"], row["home_phone"], row["home_address"], row["email"], row["state"]))
+                         row["phonenumber"], row["home_address"], row["email"], row["state"]))
             FlightAttendantData.__all_flight_attendants_list = all_flight_attendants_list
 
         return FlightAttendantData.__all_flight_attendants_list
@@ -23,5 +23,7 @@ class FlightAttendantData:
 
     @staticmethod
     def save_new_flight_attendant(flight_attendant):
-        pass
+        field_names = ["name", "ssn", "phonenumber", "seat_count", "state"]
+
+        
     
