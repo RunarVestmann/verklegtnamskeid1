@@ -1,7 +1,7 @@
 country,destination,airport_id,flight_time,distance_from_iceland,contact_name,emergency_phone
 Greenland,Nuuk,02,02:00,123,Runner,5812345
-Iceland,Hell,Styx,14:00,1000km,Hades,<bound method FlightRoute.get_emergency_phone of <data_models.flight_route.FlightRoute object at 0x02E319B0>>
-Iceland,Hell,Styx,14:00,1000km,Hades,<bound method FlightRoute.get_emergency_phone of <data_models.flight_route.FlightRoute object at 0x02D419B0>>
+Iceland,Hell,Styx,14:00,1000km,Hades,8954955
+Iceland,Hell,Styx,14:00,1000km,Hades,666
 Iceland,Hell,Styx,14:00,1000km,Hades,666
 Iceland,Hell,Styx,14:00,1000km,Hades,666
 Iceland,Hell,Styx,14:00,1000km,Hades,666
