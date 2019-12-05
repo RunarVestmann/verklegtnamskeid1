@@ -47,8 +47,8 @@ class FlightRouteUI:
         #option_functions = (FlightRouteUI.field_new_input)
 
         ####  Test input ####            
-        selected_number = user_input # ComponentUI.test_user_input_chose_index(user_input, 7) #ath           #eather int>0 or False - may not be 0
-        if selected_number == '1':                                                                  #and is with in range of possible menu list
+        selected_number = ComponentUI.test_user_input_chose_index(user_input, 7) #ath           #eather int>0 or False - may not be 0
+        if selected_number:                                                                  #and is with in range of possible menu list
             #selected_index = selected_number-1
             new_display = [FlightRouteUI.field_new_input, FlightRouteUI.action_field_new_input,"Insert country name: "]
             return new_display
