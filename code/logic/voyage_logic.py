@@ -24,6 +24,12 @@ class VoyageLogic:
         for voyage in all_voyages_with_limited_data:
             airplane = AirplaneLogic.get_airplane(voyage.get_airplane())
 
+            flight1_departure_location, flight1_departue_time, \
+            flight2_departure_location, flight2_departure_time = voyage.get_flights()
+
+            flight1 = FlightLogic.get_flight(flight1_departure_location, flight1_departue_time)
+            flight2 = FlightLogic.get_flight(flight2_departure_location, flight2_departure_time)
+
             pilots_list = []
             if voyage.get_pilots():
                 pilots_list = [PilotLogic.get_pilot(pilot) for pilot in voyage.get_pilots()]
@@ -33,13 +39,12 @@ class VoyageLogic:
                 flight_attendants_list = [FlightAttendantLogic.get_flight_attendant(flight_attendant)\
                      for flight_attendant in voyage.get_flight_attendants()]
 
-            voyage_with_all_data = Voyage(voyage.get_flights(), pilots_list, flight_attendants_list,\
+            voyage_with_all_data = Voyage((flight1, flight2), pilots_list, flight_attendants_list,\
                  airplane, voyage.get_schedule(), voyage.get_state())
 
             all_voyages.append(voyage_with_all_data)
 
         return all_voyages
-
 
 
     @staticmethod

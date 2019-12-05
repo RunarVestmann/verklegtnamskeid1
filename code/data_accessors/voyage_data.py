@@ -38,23 +38,24 @@ class VoyageData:
             with open(VoyageData.__voyage_data_filename, 'r') as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
-                    flight1 = Flight(row["flight1_departure_location"], row["flight1_departure_time"],\
-                         row["flight1_arrival_location"], row["flight1_arrival_time"], row["flight1_number"]) 
-                    flight2 = Flight(row["flight2_departure_location"], row["flight2_departure_time"],\
-                         row["flight2_arrival_location"], row["flight2_arrival_time"], row["flight2_number"])
 
-                    flights_tuple = (flight1, flight2)
+                    flight1_departure_location = row["flight1_departure_location"]
+                    flight1_departure_time = row["flight1_departure_time"]
+                    flight2_departure_location = row["flight2_departure_location"]
+                    flight2_departure_time = row["flight2_departure_time"]
+
 
                     pilots_list = VoyageData.__get_employees("captain", "copilot", row)
 
                     flight_attendants_list = VoyageData.__get_employees("cabin_manager", "flight_attendant", row)
 
-                    airplane = row["airplane"]
+                    airplane_name = row["airplane_name"]
 
                     state = row["state"]
 
-                    all_voyages_list.append(Voyage(flights_tuple, pilots_list, flight_attendants_list, airplane,\
-                         (flights_tuple[0].get_departure_time(), flights_tuple[1].get_departure_time()), state))
+                    all_voyages_list.append(Voyage((flight1_departure_location, flight1_departure_time,\
+                         flight2_departure_location, flight2_departure_time),\
+                         pilots_list, flight_attendants_list, airplane_name, state))
 
                 VoyageData.__all_voyages_list = all_voyages_list
 
@@ -71,15 +72,49 @@ class VoyageData:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
             flight1, flight2 = voyage.get_flights()
+            pilots_ssn_list = []
 
-            writer.writerow({"flight1_departure_location": flight1.get_departure_location(),\
-                 "flight1_departure_time": flight1.get_departure_time(),\
-                 "flight2_departure_location": flight2.get_departure_location(),\
-                 "flight2_departure_time": flight2.get_departure_time(),\
-                 "email": pilot.get_email(),
-                 "state": pilot.get_State(),
-                 "license": pilot.get_license()
+            for pilot in voyage.get_pilots():
+                pilots_ssn_list.append(pilot.get_ssn())
+
+            while len(pilots_ssn_list < VoyageData.__max_pilots_onboard):
+                pilots_ssn_list.append("")
+
+            flight_attendants_ssn_list = []
+
+            for flight_attendant in voyage.get_flight_attendants():
+                flight_attendant.append(flight_attendant)
+
+            while len(flight_attendants_ssn_list < VoyageData.__max_flight_attendants_on_board):
+                flight_attendants_ssn_list.append("")
+
+            writer.writerow({"flight1_departure_location": flight1.get_departure_location(),
+                 "flight1_departure_time": flight1.get_departure_time(),
+                 "flight2_departure_location": flight2.get_departure_location(),
+                 "flight2_departure_time": flight2.get_departure_time(),
+                 "captain": pilots_ssn_list[0],
+                 "copilot1": pilots_ssn_list[1],
+                 "copilot2": pilots_ssn_list[2],
+                 "copilot3": pilots_ssn_list[3],
+                 "copilot4": pilots_ssn_list[4],
+                 "copilot5": pilots_ssn_list[5],
+                 "copilot6": pilots_ssn_list[6],
+                 "copilot7": pilots_ssn_list[7],
+                 "copilot8": pilots_ssn_list[8],
+                 "copilot9": pilots_ssn_list[9],
+                 "cabin_manager": flight_attendants_ssn_list[0],
+                 "flight_attendant1": flight_attendants_ssn_list[1],
+                 "flight_attendant2": flight_attendants_ssn_list[2],
+                 "flight_attendant3": flight_attendants_ssn_list[3],
+                 "flight_attendant4": flight_attendants_ssn_list[4],
+                 "flight_attendant5": flight_attendants_ssn_list[5],
+                 "flight_attendant6": flight_attendants_ssn_list[6],
+                 "flight_attendant7": flight_attendants_ssn_list[7],
+                 "flight_attendant8": flight_attendants_ssn_list[8],
+                 "flight_attendant9": flight_attendants_ssn_list[9],
+                 "airplane": voyage.get_airplane().get_name(),
+                 "state": voyage.get_state()
                  })
 
-        if PilotData.__all_pilots_list:
-            PilotData.__all_pilots_list.append(pilot)
+        if VoyageData.__all_voyages_list:
+            VoyageData.__all_voyages_list.append(voyage)
