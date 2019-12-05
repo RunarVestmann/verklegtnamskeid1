@@ -36,14 +36,23 @@ class AirplanesUI:
     DUMMYNMBR=1
     @staticmethod
     def show_new_airplane_constructor():
+        ComponentUI.print_header(ComponentUI.get_main_options()[2])
+        print(TextEditor.format_text(AirplanesUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_all_airplanes():
+        ComponentUI.print_header(ComponentUI.get_main_options()[2])
+        print(TextEditor.format_text(AirplanesUI.__option_tuple[1], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
         pass
 
     @staticmethod
     def show_airplanes_in_use():
+        ComponentUI.print_header(ComponentUI.get_main_options()[2])
+        print(TextEditor.format_text(AirplanesUI.__option_tuple[2], TextEditor.UNDERLINE_TEXT))
+        ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
         pass
     
     @staticmethod
