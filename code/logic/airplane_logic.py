@@ -14,7 +14,7 @@ class AirplaneLogic:
 
     @staticmethod
     def get_airplane(name):
-        all_airplanes = AirplaneLogic.get_all_airplanes()
+        all_airplanes = DataAPI.get_all_airplanes()
         for airplane in all_airplanes:
             if airplane.get_name() == name:
                 return airplane

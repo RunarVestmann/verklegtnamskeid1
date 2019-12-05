@@ -51,11 +51,13 @@ class VoyageData:
 
                     airplane_name = row["airplane_name"]
 
+                    schedule = row["schedule"].split("_")
+
                     state = row["state"]
 
                     all_voyages_list.append(Voyage((flight1_departure_location, flight1_departure_time,\
                          flight2_departure_location, flight2_departure_time),\
-                         pilots_list, flight_attendants_list, airplane_name, state))
+                         pilots_list, flight_attendants_list, airplane_name, (schedule[0], schedule[1]), state))
 
                 VoyageData.__all_voyages_list = all_voyages_list
 
@@ -66,7 +68,7 @@ class VoyageData:
         field_names = ["flight1_departure_location", "flight1_departure_time", "flight2_departure_location", "flight2_departure_time",\
              "captain", "copilot1", "copilot2", "copilot3", "copilot4", "copilot5", "copilot6", "copilot7", "copilot8", "copilot9",\
              "cabin_manager", "flight_attendant1", "flight_attendant2", "flight_attendant3", "flight_attendant4", "flight_attendant5",\
-             "flight_attendant6", "flight_attendant7", "flight_attendant8", "flight_attendant9", "airplane", "state"]
+             "flight_attendant6", "flight_attendant7", "flight_attendant8", "flight_attendant9", "airplane_name", "schedule", "state"]
 
         with open(VoyageData.__voyage_data_filename, 'a') as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
@@ -88,7 +90,8 @@ class VoyageData:
             while len(flight_attendants_ssn_list < VoyageData.__max_flight_attendants_on_board):
                 flight_attendants_ssn_list.append("")
 
-            writer.writerow({"flight1_departure_location": flight1.get_departure_location(),
+            writer.writerow({
+                 "flight1_departure_location": flight1.get_departure_location(),
                  "flight1_departure_time": flight1.get_departure_time(),
                  "flight2_departure_location": flight2.get_departure_location(),
                  "flight2_departure_time": flight2.get_departure_time(),
@@ -112,7 +115,8 @@ class VoyageData:
                  "flight_attendant7": flight_attendants_ssn_list[7],
                  "flight_attendant8": flight_attendants_ssn_list[8],
                  "flight_attendant9": flight_attendants_ssn_list[9],
-                 "airplane": voyage.get_airplane().get_name(),
+                 "airplane_name": voyage.get_airplane().get_name(),
+                 "schedule": voyage.get_schedule(),
                  "state": voyage.get_state()
                  })
 

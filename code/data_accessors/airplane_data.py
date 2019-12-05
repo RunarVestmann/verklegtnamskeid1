@@ -6,8 +6,8 @@ from data_models.airplane import Airplane
 
 class AirplaneData:
 
-    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/airplane_data.csv")
-    __other_path = "../data_storage/airplane_data.csv"
+    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/airplanes.csv")
+    __other_path = "../data_storage/airplanes.csv"
     __airplane_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
     __all_airplanes_list = []
 
