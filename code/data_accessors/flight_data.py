@@ -26,10 +26,10 @@ class FlightData:
         with open(FlightData.__flight_data_filename, 'a') as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
-            writer.writerow({"departure_location": flight.get_departure_location(),\
-                 "departure_time": flight.get_departure_time(),\
-                 "arrival_location": flight.get_arrival_location(),\
-                 "arrival_time": flight.get_arrival_time(),\
+            writer.writerow({"departure_location": flight.get_departure_location(),
+                 "departure_time": flight.get_departure_time(),
+                 "arrival_location": flight.get_arrival_location(),
+                 "arrival_time": flight.get_arrival_time(),
                  "number": flight.get_number()})
 
         if FlightData.__all_flights_list:

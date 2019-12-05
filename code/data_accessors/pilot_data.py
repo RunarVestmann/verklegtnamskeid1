@@ -26,10 +26,10 @@ class PilotData:
         with open(PilotData.__pilot_data_filename, 'a') as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
-            writer.writerow({"name": pilot.get_name(),\
-                 "ssn": pilot.get_ssn(),\
-                 "phonenumber": pilot.get_phonenumber(),\
-                 "home_address": pilot.get_home_address(),\
+            writer.writerow({"name": pilot.get_name(),
+                 "ssn": pilot.get_ssn(),
+                 "phonenumber": pilot.get_phonenumber(),
+                 "home_address": pilot.get_home_address(),
                  "email": pilot.get_email(),
                  "state": pilot.get_state(),
                  "license": pilot.get_license()
