@@ -20,7 +20,7 @@ class MainMenuUI:
         body_height = window_height - ComponentUI.get_header_height()
 
         #Calculate how many new lines should be both above and below the quit text
-        offsetted_body_height_center = (body_height//2) - 2
+        offsetted_body_height_center = (body_height//2) - 1
 
         #Print the empty space above the welcome text
         for _ in range(offsetted_body_height_center):
