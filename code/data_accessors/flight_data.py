@@ -29,6 +29,7 @@ class FlightData:
             writer.writerow({"departure_location": flight.get_departure_location(),\
                  "departure_time": flight.get_departure_time(),\
                  "arrival_location": flight.get_arrival_location(),\
+                 "arrival_time": flight.get_arrival_time(),\
                  "number": flight.get_number()})
 
         if FlightData.__all_flights_list:
