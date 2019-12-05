@@ -1,10 +1,13 @@
 import csv
+import platform
 from data_models.flight_attendant import FlightAttendant
 
 
 class FlightAttendantData:
 
-    __flight_attendant_data_filename = "../data_storage/flight_attendants.csv"
+    __mac_path = "..\data_storage\flight_attendants.csv"
+    __other_path = "../data_storage/flight_attendants.csv"
+    __flight_attendant_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
     __all_flight_attendants_list = []
 
     @staticmethod
