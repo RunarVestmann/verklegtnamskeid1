@@ -44,7 +44,7 @@ class VoyageLogic:
 
     @staticmethod
     def get_ongoing_voyages():#needs testing
-        all_voyages = DataAPI.get_all_voyages()
+        all_voyages = VoyageLogic.get_all_voyages()
         ongoing_voyages = []
         completed_state = State.get_voyage_states()[4]
 
@@ -56,7 +56,7 @@ class VoyageLogic:
 
     @staticmethod
     def get_completed_voyages():#needs testing
-        all_voyages = DataAPI.get_all_voyages()
+        all_voyages = VoyageLogic.get_all_voyages()
         completed_voyages = []
         completed_state = State.get_voyage_states()[4]
 
@@ -68,7 +68,7 @@ class VoyageLogic:
 
     @staticmethod
     def get_voyages_by_date(date):#needs testing
-        all_voyages = DataAPI.get_all_voyages()
+        all_voyages = VoyageLogic.get_all_voyages()
         desired_voyages = []
 
         for voyage in all_voyages:
@@ -79,7 +79,7 @@ class VoyageLogic:
 
     @staticmethod
     def get_voyages_by_week(week): #needs testing
-        all_voyages = DataAPI.get_all_voyages()
+        all_voyages = VoyageLogic.get_all_voyages()
         desired_voyages = []
 
         for voyage in all_voyages:
@@ -96,7 +96,7 @@ class VoyageLogic:
 
     @staticmethod
     def get_voyages_by_destination(destination):#needs testing
-        all_voyages = DataAPI.get_all_voyages()
+        all_voyages = VoyageLogic.get_all_voyages()
         desired_voyages = []
 
         for voyage in all_voyages:
@@ -107,7 +107,7 @@ class VoyageLogic:
 
     @staticmethod
     def get_airplane_voyages(airplane):#needs testing
-        all_voyages = DataAPI.get_all_voyages()
+        all_voyages = VoyageLogic.get_all_voyages()
         airplane_voyages = []
 
         for voyage in all_voyages:
