@@ -31,7 +31,7 @@ class PilotData:
                  "phonenumber": pilot.get_phonenumber(),\
                  "home_address": pilot.get_home_address(),\
                  "email": pilot.get_email(),
-                 "state": pilot.get_State(),
+                 "state": pilot.get_state(),
                  "license": pilot.get_license()
                  })
 
