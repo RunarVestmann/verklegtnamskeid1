@@ -43,5 +43,3 @@ Planið í upphaf dags er að vinna mikið í UI layer, bæta við sumum logic f
 Guðmundur, Rúnar: Unnu í UI layer
 Patrik, Fannar: Bættu við logic föllum
 Patrik, Hörður: Unit testuðu
-
-
