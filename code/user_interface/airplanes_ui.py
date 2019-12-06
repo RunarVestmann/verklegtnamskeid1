@@ -5,30 +5,52 @@ from apis.logic_api import LogicAPI
 class AirplanesUI:
     __option_tuple = ('New airplane', 'Show all airplanes', 'Show airplanes in use', 'Show all airplane types')
    
+    @staticmethod
+    def __print_airplanes_route_menu():
+        ComponentUI.print_header(ComponentUI.get_main_options()[2])
+        print()
+        for i, option in enumerate(AirplanesUI.__option_tuple):
+            print("({}) {}".format(i+1,option))
+        ComponentUI.fill_window_and_print_action_line(len(AirplanesUI.__option_tuple)+1)
  
     @staticmethod
     def show_airplanes_menu():
-        ComponentUI.print_header(ComponentUI.get_main_options()[2])
-        option_tuple = AirplanesUI.__option_tuple
-        print()
-        for i, option in enumerate(option_tuple):
-            print("({}) {}".format(i+1,option))
-        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1)
+        menu_option_functions = (AirplanesUI.__show_new_airplane_constructor, AirplanesUI.__show_all_airplanes,\
+            AirplanesUI.__show_airplanes_in_use, AirplanesUI.__show_all_airplane_types)
+
+        valid_input = False
+
+        while not valid_input:
+
+            AirplanesUI.__print_airplanes_route_menu()
+            
+
+            user_input = input("Your action: ").lower().strip()
+
+            user_input = ComponentUI.remove_brackets(user_input)
+
+            if user_input[0].isdigit():
+                valid_input = ComponentUI.test_user_input_chose_index(user_input, len(menu_option_functions))
+                if valid_input:
+                    index = valid_input - 1
+                    menu_option_functions[index]()
+            
+            return user_input
          
     
-    @staticmethod
-    def action_airplanes_menu(user_input):
-        option_tuple = AirplanesUI.__option_tuple  
-        option_functions = (AirplanesUI.show_new_airplane_constructor, AirplanesUI.show_all_airplanes, AirplanesUI.show_airplanes_in_use, AirplanesUI.show_all_airplane_types)
+    # @staticmethod
+    # def action_airplanes_menu(user_input):
+    #     option_tuple = AirplanesUI.__option_tuple  
+    #     option_functions = (AirplanesUI.show_new_airplane_constructor, AirplanesUI.show_all_airplanes, AirplanesUI.show_airplanes_in_use, AirplanesUI.show_all_airplane_types)
 
-       #####  Test input ####            
-        selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
-        if selected_number:                                                                      #and is with in range of possible menu list
-            selected_index = selected_number-1
-            new_display = [option_functions[selected_index]]
-            return new_display
-        else:
-            return False
+    #    #####  Test input ####            
+    #     selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
+    #     if selected_number:                                                                      #and is with in range of possible menu list
+    #         selected_index = selected_number-1
+    #         new_display = [option_functions[selected_index]]
+    #         return new_display
+    #     else:
+    #         return False
 
 
 
@@ -36,14 +58,15 @@ class AirplanesUI:
       
     DUMMYNMBR=1
     @staticmethod
-    def show_new_airplane_constructor():
+    def __show_new_airplane_constructor():
         ComponentUI.print_header(ComponentUI.get_main_options()[2])
         print(TextEditor.format_text(AirplanesUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
         pass 
 
     @staticmethod
-    def show_all_airplanes():
+    def __show_all_airplanes():
+            #þarf að setja inni loopu og vilid opions
         ComponentUI.print_header(ComponentUI.get_main_options()[2])
         print(TextEditor.format_text(AirplanesUI.__option_tuple[1], TextEditor.UNDERLINE_TEXT))
 
@@ -59,14 +82,14 @@ class AirplanesUI:
 
 
     @staticmethod
-    def show_airplanes_in_use():
+    def __show_airplanes_in_use():
         ComponentUI.print_header(ComponentUI.get_main_options()[2])
         print(TextEditor.format_text(AirplanesUI.__option_tuple[2], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
         pass
     
     @staticmethod
-    def show_all_airplane_types():
+    def __show_all_airplane_types():
         ComponentUI.print_header(ComponentUI.get_main_options()[1])
         print(TextEditor.format_text(AirplanesUI.__option_tuple[3], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
