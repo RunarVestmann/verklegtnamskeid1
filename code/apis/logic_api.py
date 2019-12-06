@@ -216,3 +216,7 @@ class LogicAPI:
     @staticmethod
     def save_new_flight(flight):
         FlightLogic.save_new_flight(flight)
+    
+    @staticmethod
+    def is_airport_id_available(airport_id):
+        FlightRouteLogic.is_airport_id_available(airport_id)
