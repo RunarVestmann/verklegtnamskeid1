@@ -77,7 +77,7 @@ class ComponentUI:
         ComponentUI.__print_main_options(selected_option)
 
 
-    ############# TABLE RELATED FUNCTIONS #################
+  ############# TABLE RELATED FUNCTIONS #################
     __DEFAULT_SPACE_BETWEEN_columnS = 2
 
     @staticmethod
@@ -89,8 +89,11 @@ class ComponentUI:
 
         for i, column in enumerate(getfunctions):
             for row in column:
-                if len(row()) > longest_values[i]:
-                    longest_values[i] = len(row())
+                row_value = row()
+                testlength = len(str(row_value))
+                
+                if testlength > longest_values[i]:
+                    longest_values[i] = testlength
 
         return longest_values
 
@@ -126,8 +129,9 @@ class ComponentUI:
 
             for i in range(len(heads)):
                 reg = "{:<"+str(registration_list[i]+between)+"s}"
-                print(reg.format(getfunctions[i][row]()),end="")
+                print(reg.format(str(getfunctions[i][row]())),end="")
             print()
+
 
 
     ############# USER CHOSE ACTION RELATED FUNCTIONS #################
