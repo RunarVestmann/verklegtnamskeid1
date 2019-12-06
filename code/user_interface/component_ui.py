@@ -20,8 +20,13 @@ class ComponentUI:
     ############# HEADER RELATED FUNCTIONS AND VARIABLES #################
 
     __MAIN_OPTIONS = ("(V)oyages", "(E)mployees", "(A)irplanes", "(F)light routes", "(Q)uit")
+    __MENU_VALID_OPTIONS_TUPLE = ('v', 'e', 'a', 'f', 'q')
     __MAIN_OPTIONS_CHAR_COUNT = sum([len(i) for i in __MAIN_OPTIONS])
     __HEADER_HEIGHT = 7
+
+    @staticmethod
+    def get_menu_valid_options_tuple():
+        return ComponentUI.__MENU_VALID_OPTIONS_TUPLE
 
     @staticmethod
     def get_header_height():
@@ -128,14 +133,21 @@ class ComponentUI:
     ############# USER CHOSE ACTION RELATED FUNCTIONS #################
 
     @staticmethod
-    def test_user_input_chose_index(input_form_user, menu_list):
+    def remove_brackets(user_input):
+        if user_input.startswith("(") and user_input.endswith(")") and len(user_input)>2:
+            user_input = user_input[1:-1] #in case if user inputs "()" around the number
+
+        return user_input
+
+    @staticmethod
+    def test_user_input_chose_index(user_input, menu_list):
         '''Test if input from user can be handle as int and used as index  - return int or False'''
-        if input_form_user.startswith("(") and input_form_user.endswith(")") and len(input_form_user)>2:
-            input_form_user = input_form_user[1:-1] #in case if user inputs "()" around the number
+        
+        user_input = ComponentUI.remove_brackets(user_input)
 
         try:
             # test if user inputs is valid number
-            user_input_chose_index = abs(int(input_form_user)) #"abs" in case if user inputs "-" in front of number
+            user_input_chose_index = abs(int(user_input)) #"abs" in case if user inputs "-" in front of number
             if user_input_chose_index > menu_list:
                 user_input_chose_index = False #not valid if out range of menu list
         except: 
@@ -153,5 +165,4 @@ class ComponentUI:
             valid_user_options_list.append("({})".format(i+1))
 
         return tuple(valid_user_options_list)
-
         
