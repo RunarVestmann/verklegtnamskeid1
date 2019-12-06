@@ -30,6 +30,6 @@ class FlightAttendantLogic:
         all_flight_attendants = DataAPI.get_all_flight_attendants()
         for flight_attendant in all_flight_attendants:
             if flight_attendant.get_ssn() == flight_attendants:
-                return True
+                return False
         
-        return False
+        return True
