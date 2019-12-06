@@ -6,9 +6,14 @@ from data_models.flight_attendant import FlightAttendant
 
 class FlightAttendantData:
 
+    #The paths we found worked for the different operating systems
     __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/flight_attendants.csv")
     __other_path = "../data_storage/flight_attendants.csv"
+
+    #Store the filename according to whether the user has a Mac or not
     __flight_attendant_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+
+    #A list to cache all the flight attendants once they've been fetched
     __all_flight_attendants_list = []
 
     @staticmethod
@@ -42,3 +47,7 @@ class FlightAttendantData:
 
         if FlightAttendantData.__all_flight_attendants_list:
             FlightAttendantData.__all_flight_attendants_list.append(flight_attendant)
+
+    @staticmethod
+    def change_saved_flight_attendant(flight_attendant):
+        pass

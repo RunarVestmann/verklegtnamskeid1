@@ -1,13 +1,20 @@
-from data_models.flight import Flight
 import os
 import platform
 import csv
+import datetime
+import dateutil.parser as util
+from data_models.flight import Flight
 
 class FlightData:
 
+    #The paths we found worked for the different operating systems
     __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/flights.csv")
     __other_path = "../data_storage/flights.csv"
+
+    #Store the filename according to whether the user has a Mac or not
     __flight_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+
+    #A list to cache all the flights once they've been fetched
     __all_flights_list = []
 
     @staticmethod
@@ -17,8 +24,9 @@ class FlightData:
             with open(FlightData.__flight_data_filename, 'r') as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
-                    all_flights_list.append(Flight(row["departure_location"], row["departure_time"],\
-                        row["arrival_location"], row["arrival_time"], row["number"]))
+                    #Append to the list and change the times to be of type datetime with util.parse()
+                    all_flights_list.append(Flight(row["departure_location"], util.parse(row["departure_time"]),\
+                        row["arrival_location"], util.parse(row["arrival_time"]), row["number"]))
 
             FlightData.__all_flights_list = all_flights_list
 
@@ -31,11 +39,10 @@ class FlightData:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
             writer.writerow({"departure_location": flight.get_departure_location(),
-                 "departure_time": flight.get_departure_time(),
+                 "departure_time": flight.get_departure_time().isoformat(),
                  "arrival_location": flight.get_arrival_location(),
-                 "arrival_time": flight.get_arrival_time(),
+                 "arrival_time": flight.get_arrival_time().isoformat(),
                  "number": flight.get_number()})
 
         if FlightData.__all_flights_list:
             FlightData.__all_flights_list.append(flight)
-

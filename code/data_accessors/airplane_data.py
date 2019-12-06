@@ -2,13 +2,19 @@ import csv
 import os
 import platform
 from data_models.airplane import Airplane
+from data_models.aircraft_type import AircraftType
 
 
 class AirplaneData:
 
+    #The paths we found worked for the different operating systems
     __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/airplanes.csv")
     __other_path = "../data_storage/airplanes.csv"
+
+    #Store the filename according to whether the user has a Mac or not
     __airplane_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+
+    #A list to cache all the airplanes once they've been fetched
     __all_airplanes_list = []
 
     @staticmethod
@@ -33,7 +39,7 @@ class AirplaneData:
 
             writer.writerow({
                  "name": airplane.get_name(),
-                 "aircraft_type": airplane.get_type(),
+                 "aircraft_type": airplane.get_type().get_plane_type(),
                  "manufacturer": airplane.get_manufacturer(),
                  "seat_count": airplane.get_seat_count(),
                  "state": airplane.get_state()})

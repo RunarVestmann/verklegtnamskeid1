@@ -6,9 +6,14 @@ from data_models.aircraft_type import AircraftType
 
 class AircraftTypeData:
 
+    #The paths we found worked for the different operating systems
     __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/aircraft_type.csv")
     __other_path = "../data_storage/aircraft_type.csv"
+
+    #Store the filename according to whether the user has a Mac or not
     __aircraft_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+
+    #A list to cache all the aircraft types once they've been fetched
     __all_aircrafts_list = []
 
     @staticmethod

@@ -22,4 +22,6 @@ Eins og er þá erum við að geyma öll gögnin fyrir flug í voyages.csv
 
 Við erum ekki að geyma tickets sold neinstaðar lengur, þar sem krafan var ekki við hæfi
 
-Við þurfum að laga weird new line í flights.csv skránni
+Við þurfum að laga weird new line í flights.csv skránni?
+
+Hver flugvél hefur aircraft type tilvik

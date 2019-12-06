@@ -1,12 +1,23 @@
 import csv
+import os
+import platform
+import dateutil.parser as util
 from data_models.voyage import Voyage
 from data_models.flight import Flight
 
 class VoyageData:
 
-    __voyage_data_filename = "../data_storage/voyages.csv"
+    #The paths we found worked for the different operating systems
+    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/voyages.csv")
+    __other_path = "../data_storage/voyages.csv"
+
+    #Store the filename according to whether the user has a Mac or not
+    __voyage_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+
+    #A list to cache all the pilots once they've been fetched
     __all_voyages_list = []
 
+    #Constants that have been predetermined
     __max_pilots_onboard = 10
     __max_flight_attendants_on_board = 10
     __flights_per_voyage = 2
@@ -31,10 +42,16 @@ class VoyageData:
 
     @staticmethod
     def get_all_voyages():
+        '''Returns a list of voyages with some of the voyage data missing,
+           VoyageLogic.get_all_voyages() is responsible for getting the missing data
+           so don't call this function elsewhere'''
 
         #If we haven't cached all the voyages we grab them from the file
         if not VoyageData.__all_voyages_list:
+
+            #A list to temporarily store all the voyages
             all_voyages_list = []
+
             with open(VoyageData.__voyage_data_filename, 'r') as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
@@ -44,7 +61,6 @@ class VoyageData:
                     flight2_departure_location = row["flight2_departure_location"]
                     flight2_departure_time = row["flight2_departure_time"]
 
-
                     pilots_list = VoyageData.__get_employees("captain", "copilot", row)
 
                     flight_attendants_list = VoyageData.__get_employees("cabin_manager", "flight_attendant", row)
@@ -53,15 +69,23 @@ class VoyageData:
 
                     schedule = row["schedule"].split("_")
 
+                    #Change the data from being a string to a tuple of datetime objects
+                    schedule = util.parse(schedule[0]), util.parse(schedule[1])
+
                     state = row["state"]
 
                     all_voyages_list.append(Voyage((flight1_departure_location, flight1_departure_time,\
                          flight2_departure_location, flight2_departure_time),\
-                         pilots_list, flight_attendants_list, airplane_name, (schedule[0], schedule[1]), state))
+                         pilots_list, flight_attendants_list, airplane_name, schedule, state))
 
                 VoyageData.__all_voyages_list = all_voyages_list
 
             return VoyageData.__all_voyages_list
+
+    @staticmethod
+    def __fill_list_with_empty_strings(a_list, max_length):
+        while len(a_list) < max_length:
+            a_list.append("")
 
     @staticmethod
     def save_new_voyage(voyage):
@@ -76,19 +100,21 @@ class VoyageData:
             flight1, flight2 = voyage.get_flights()
             pilots_ssn_list = []
 
+            #Add all the pilots social security numbers to the list
             for pilot in voyage.get_pilots():
                 pilots_ssn_list.append(pilot.get_ssn())
 
-            while len(pilots_ssn_list < VoyageData.__max_pilots_onboard):
-                pilots_ssn_list.append("")
+            #Fill the list with empty strings if the number of pilots registered < max
+            VoyageData.__fill_list_with_empty_strings(pilots_ssn_list, VoyageData.__max_pilots_onboard)
 
             flight_attendants_ssn_list = []
 
+            #Add all the flight attendants social security numbers to the list
             for flight_attendant in voyage.get_flight_attendants():
                 flight_attendant.append(flight_attendant)
 
-            while len(flight_attendants_ssn_list < VoyageData.__max_flight_attendants_on_board):
-                flight_attendants_ssn_list.append("")
+            #Fill the list with empty strings if the number of flight attendants registered < max
+            VoyageData.__fill_list_with_empty_strings(flight_attendants_ssn_list, VoyageData.__max_flight_attendants_on_board)
 
             writer.writerow({
                  "flight1_departure_location": flight1.get_departure_location(),
@@ -120,5 +146,6 @@ class VoyageData:
                  "state": voyage.get_state()
                  })
 
+        #If we've have cached all the voyages, we add this new one to the cached list
         if VoyageData.__all_voyages_list:
             VoyageData.__all_voyages_list.append(voyage)

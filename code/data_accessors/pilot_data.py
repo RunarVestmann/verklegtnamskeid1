@@ -6,9 +6,14 @@ from data_models.pilot import Pilot
 
 class PilotData:
 
+    #The paths we found worked for the different operating systems
     __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/pilots.csv")
     __other_path = "../data_storage/pilots.csv"
+
+    #Store the filename according to whether the user has a Mac or not
     __pilot_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+
+    #A list to cache all the pilots once they've been fetched
     __all_pilots_list = []
 
     @staticmethod
@@ -41,4 +46,8 @@ class PilotData:
 
         if PilotData.__all_pilots_list:
             PilotData.__all_pilots_list.append(pilot)
+
+    @staticmethod
+    def change_saved_pilot(pilot):
+        pass
     

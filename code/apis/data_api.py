@@ -25,6 +25,10 @@ class DataAPI:
     def save_new_pilot(pilot):
         PilotData.save_new_pilot(pilot)
 
+    @staticmethod
+    def change_saved_pilot(pilot):
+        pass
+
     ####  Flight Atttendants  ####
 
     @staticmethod
@@ -34,6 +38,10 @@ class DataAPI:
     @ staticmethod
     def save_new_flight_attendant(flight_attendant):
         FlightAttendantData.save_new_flight_attendant(flight_attendant)
+
+    @staticmethod
+    def change_saved_flight_attendant(flight_attendant):
+        pass
 
     ####  Airplanes  ####
 
@@ -50,6 +58,10 @@ class DataAPI:
     @staticmethod
     def save_new_voyage(voyage):
         VoyageData.save_new_voyage(voyage)
+
+    @staticmethod
+    def change_saved_voyage(voyage):
+        pass
 
     @staticmethod
     def get_all_voyages():

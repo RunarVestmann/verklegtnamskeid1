@@ -18,7 +18,7 @@ class State:
     #__IN_FLIGHT_FROM_ICELAND
     __WAITING_FOR_FLIGHT_TO_ICELAND = "Waiting for flight to Iceland"
     #__IN_FLIGHT_TO_ICELAND
-    __VOYAGE_COMPLETED = "Completed"
+    __VOYAGE_COMPLETED = "Voyage completed"
 
     __voyage_states = (__WAITING_FOR_FLIGHT_FROM_ICELAND, __IN_FLIGHT_FROM_ICELAND,\
          __WAITING_FOR_FLIGHT_TO_ICELAND, __IN_FLIGHT_TO_ICELAND, __VOYAGE_COMPLETED)

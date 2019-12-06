@@ -1,5 +1,6 @@
 from data_models.airplane import Airplane
 from data_models.voyage import Voyage
+from logic.aircraft_type_logic import AircraftTypeLogic
 from apis.data_api import DataAPI
 
 class AirplaneLogic:
@@ -9,8 +10,18 @@ class AirplaneLogic:
         DataAPI.save_new_airplane(airplane)
 
     @staticmethod
-    def get_all_airplanes():
-        return DataAPI.get_all_airplanes()
+    def get_all_airplanes(): #needs testing
+        all_airplanes_with_limited_data = DataAPI.get_all_airplanes()
+
+        all_airplanes = []
+
+        for airplane in all_airplanes_with_limited_data:
+            aircraft_type = AircraftTypeLogic.get_aircraft_type(airplane.get_type())
+
+            all_airplanes.append(Airplane(airplane.get_name(), aircraft_type, airplane.get_manufacturer,\
+                airplane.get_seat_count(), airplane.get_state()))
+
+        return all_airplanes
 
     @staticmethod
     def get_airplane(name):
@@ -37,4 +48,5 @@ class AirplaneLogic:
                     voyage_schedule = voyage.get_schedule()
                     if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
                         available_airplanes.append(airplane)
+                        
         return available_airplanes
