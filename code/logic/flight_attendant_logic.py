@@ -23,3 +23,13 @@ class FlightAttendantLogic:
     @staticmethod
     def save_new_flight_attendant(flight_attendant):
         DataAPI.save_new_flight_attendant(flight_attendant)
+
+
+    @staticmethod
+    def is_flight_attendant_avaliable(flight_attendants):
+        all_flight_attendants = DataAPI.get_all_flight_attendants()
+        for flight_attendant in all_flight_attendants:
+            if flight_attendant.get_ssn() == flight_attendants:
+                return True
+        
+        return False

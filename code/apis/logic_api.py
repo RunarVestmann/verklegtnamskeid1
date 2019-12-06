@@ -78,6 +78,9 @@ class LogicAPI:
     def save_new_flight_attendant(flight_attendant):
         FlightAttendantLogic.save_new_flight_attendant(flight_attendant)
 
+    def is_flight_attendant_avaliable(flight_attendant):
+        return FlightAttendantLogic.is_flight_attendant_avaliable(flight_attendant)
+
     ####Voyages####
 
     @staticmethod
