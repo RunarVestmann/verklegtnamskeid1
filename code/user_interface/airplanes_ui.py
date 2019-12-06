@@ -48,7 +48,6 @@ class AirplanesUI:
         print(TextEditor.format_text(AirplanesUI.__option_tuple[1], TextEditor.UNDERLINE_TEXT))
 
  
-        
         table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
         airplanes_list = LogicAPI.get_all_airplanes()
         airplanes_getfunctions_tuple = ([airplane.get_name for airplane in airplanes_list],[airplane.get_state for airplane in airplanes_list],\
