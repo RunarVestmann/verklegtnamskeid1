@@ -153,6 +153,10 @@ class LogicAPI:
     @staticmethod
     def get_airplane_voyages(airplane):
         return VoyageLogic.get_airplane_voyages(airplane)
+    
+    @staticmethod
+    def is_voyage_schedule_start_day_and_time_available(voyage_day_and_time):
+        return VoyageLogic.is_voyage_schedule_start_day_and_time_available(voyage_day_and_time)
 
     ####Airplanes####
     
