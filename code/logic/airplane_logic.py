@@ -33,6 +33,15 @@ class AirplaneLogic:
         return None
 
     @staticmethod
+    def is_airplane_name_available(plane_name):
+        all_airplanes = DataAPI.get_all_airplanes()
+        for airplane in all_airplanes:
+            if airplane.get_name() == plane_name:
+                return False
+                
+        return True
+
+    @staticmethod
     def get_all_available_airplanes(schedule_tuple): # needs testing
         all_airplanes = DataAPI.get_all_airplanes()
         available_airplanes = []

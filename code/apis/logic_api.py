@@ -149,6 +149,10 @@ class LogicAPI:
         return VoyageLogic.get_airplane_voyages(airplane)
 
     ####Airplanes####
+    
+    @staticmethod
+    def is_airplane_name_available(plane_name):
+        return AirplaneLogic.is_airplane_name_available(plane_name)
 
     @staticmethod
     def save_new_airplane(airplane):
