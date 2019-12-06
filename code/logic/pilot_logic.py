@@ -33,3 +33,11 @@ class PilotLogic:
     @staticmethod
     def save_new_pilot(pilot):
         DataAPI.save_new_pilot(pilot)
+
+    @staticmethod
+    def is_pilot_ssn_available(pilot_ssn):
+        all_pilots = DataAPI.get_all_pilots()
+        for pilot in all_pilots:
+            if pilot.get_ssn() == pilot_ssn:
+                return False
+        return True

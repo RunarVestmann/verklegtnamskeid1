@@ -67,6 +67,11 @@ class LogicAPI:
     def save_new_pilot(pilot):
         PilotLogic.save_new_pilot(pilot)
 
+        
+    @staticmethod
+    def is_pilot_ssn_available(pilot_ssn):
+        PilotLogic.is_pilot_ssn_available(pilot_ssn)
+
     ####Flight attendants####
 
     @staticmethod
