@@ -166,7 +166,7 @@ class LogicAPI:
 
     @staticmethod
     def save_new_airplane(airplane):
-        AirplaneLogic.save_new_airplane(airplane)
+        return AirplaneLogic.save_new_airplane(airplane)
 
     @staticmethod
     def get_all_airplanes():
