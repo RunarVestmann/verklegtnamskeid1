@@ -67,6 +67,11 @@ class LogicAPI:
     def save_new_pilot(pilot):
         PilotLogic.save_new_pilot(pilot)
 
+        
+    @staticmethod
+    def is_pilot_ssn_available(pilot_ssn):
+        PilotLogic.is_pilot_ssn_available(pilot_ssn)
+
     ####Flight attendants####
 
     @staticmethod
@@ -78,6 +83,10 @@ class LogicAPI:
     def save_new_flight_attendant(flight_attendant):
         FlightAttendantLogic.save_new_flight_attendant(flight_attendant)
 
+    @staticmethod
+    def is_flight_attendant_ssn_avaliable(flight_attendant_ssn):
+        return FlightAttendantLogic.is_flight_attendant_ssn_avaliable(flight_attendant_ssn)
+        
     ####Voyages####
 
     @staticmethod
@@ -144,12 +153,20 @@ class LogicAPI:
     @staticmethod
     def get_airplane_voyages(airplane):
         return VoyageLogic.get_airplane_voyages(airplane)
+    
+    @staticmethod
+    def is_voyage_schedule_start_day_and_time_available(voyage_day_and_time):
+        return VoyageLogic.is_voyage_schedule_start_day_and_time_available(voyage_day_and_time)
 
     ####Airplanes####
+    
+    @staticmethod
+    def is_airplane_name_available(plane_name):
+        return AirplaneLogic.is_airplane_name_available(plane_name)
 
     @staticmethod
     def save_new_airplane(airplane):
-        AirplaneLogic.save_new_airplane(airplane)
+        return AirplaneLogic.save_new_airplane(airplane)
 
     @staticmethod
     def get_all_airplanes():
@@ -203,3 +220,7 @@ class LogicAPI:
     @staticmethod
     def save_new_flight(flight):
         FlightLogic.save_new_flight(flight)
+    
+    @staticmethod
+    def is_airport_id_available(airport_id):
+        FlightRouteLogic.is_airport_id_available(airport_id)

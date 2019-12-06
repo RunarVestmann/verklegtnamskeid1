@@ -27,7 +27,7 @@ class DataAPI:
 
     @staticmethod
     def change_saved_pilot(pilot):
-        pass
+        PilotData.change_saved_pilot()
 
     ####  Flight Atttendants  ####
 
@@ -41,7 +41,7 @@ class DataAPI:
 
     @staticmethod
     def change_saved_flight_attendant(flight_attendant):
-        pass
+        FlightAttendantData.change_saved_flight_attendant(flight_attendant)
 
     ####  Airplanes  ####
 

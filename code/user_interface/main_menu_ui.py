@@ -10,8 +10,6 @@ from user_interface.quit_ui import QuitUI
 
 class MainMenuUI:
 
-    __MAIN_MENU_VALID_OPTIONS_TUPLE = ('v', 'e', 'a', 'f', 'q')
-
     @staticmethod
     def __print_main_menu_body():
         window_width, window_height = Window.get_size()
@@ -43,35 +41,21 @@ class MainMenuUI:
         pass
 
     @staticmethod
-    def show_frame(show_function, extra_menu_function=False, input_message="Your action: "):
+    def show_frame(show_function):
         ''' common element around every display window '''
         user_input = ''
-        valid_options_tuple = list(MainMenuUI.__MAIN_MENU_VALID_OPTIONS_TUPLE)
-        
-    
+        valid_options_tuple = ComponentUI.get_menu_valid_options_tuple()
 
-        while user_input not in valid_options_tuple:
-            show_function() #function that needs to be handled
-            user_input = input(input_message).lower().strip()
+        while True:
+            user_input = show_function() #function that needs to be handled
             MainMenuUI.main_menu_action(user_input, valid_options_tuple) #handle main menu options
-            if extra_menu_function and user_input != '':
-                new_menu = extra_menu_function(user_input) #handle sub-menu and other option than main menu
-                #get this as list
-                if new_menu:
-                    if len(new_menu) == 3:
-                        MainMenuUI.show_frame(new_menu[0], new_menu[1], new_menu[2])
-                    elif len(new_menu) == 2:
-                        MainMenuUI.show_frame(new_menu[0], new_menu[1])
-                    else:
-                        MainMenuUI.show_frame(new_menu[0])
 
-
-    
-    
     @staticmethod
     def show_main_menu():
         ComponentUI.print_header()
         MainMenuUI.__print_main_menu_body()
+
+        return input("Your action: ").lower().strip()
 
     @staticmethod
     def main_menu_action(user_input, valid_options_tuple):
@@ -98,23 +82,23 @@ class MainMenuUI:
 
     @staticmethod
     def show_voyage():
-        MainMenuUI.show_frame(VoyageUI.show_voyage_menu, VoyageUI.action_voyage_menu)
+        MainMenuUI.show_frame(VoyageUI.show_voyage_menu) #, VoyageUI.action_voyage_menu
 
     @staticmethod
     def show_employee():
-        MainMenuUI.show_frame(EmployeeUI.show_employee_menu, EmployeeUI.action_employees_menu)
+        MainMenuUI.show_frame(EmployeeUI.show_employee_menu) #, EmployeeUI.action_employees_menu
     
     @staticmethod
     def show_airplanes():
-        MainMenuUI.show_frame(AirplanesUI.show_airplanes_menu, AirplanesUI.action_airplanes_menu)
+        MainMenuUI.show_frame(AirplanesUI.show_airplanes_menu) #, AirplanesUI.action_airplanes_menu
    
     @staticmethod
     def show_flight_route():
-        MainMenuUI.show_frame(FlightRouteUI.show_flight_route_menu, FlightRouteUI.action_flight_route_menu)
+        MainMenuUI.show_frame(FlightRouteUI.show_flight_route_menu) #, FlightRouteUI.action_flight_route_menu
 
     @staticmethod
     def show_quit():
-        MainMenuUI.show_frame(QuitUI.show_quit_menu2, MainMenuUI.confirm_quit)
+        MainMenuUI.show_frame(QuitUI.show_quit_menu2) #, MainMenuUI.confirm_quit
 
     #það þarf að setja inn show fyrir alla flokkana og aðlaga Klasana að því!
 

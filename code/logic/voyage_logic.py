@@ -120,3 +120,11 @@ class VoyageLogic:
                 airplane_voyages.append(voyage)
 
         return airplane_voyages
+
+    @staticmethod
+    def is_voyage_schedule_start_day_and_time_available(voyage_day_and_time):
+        all_voyages = VoyageLogic.get_all_voyages()
+        for voyage in all_voyages:
+            if voyage.get_schedule()[0] == voyage_day_and_time:
+                return False
+        return True
