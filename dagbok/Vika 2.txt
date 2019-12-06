@@ -38,4 +38,10 @@ Hörður: bjó til macOS support fyrir csv files
 Guðmundur: Hélt áfram með UI layer
 
 6.12.2019
+Planið í upphaf dags er að vinna mikið í UI layer, bæta við sumum logic föllum og unit testa mikið.
+Í lok dags gerðum við það sem við ætluðum okkur.
+Guðmundur, Rúnar: Unnu í UI layer
+Patrik, Fannar: Bættu við logic föllum
+Patrik, Hörður: Unit testuðu
+
 
