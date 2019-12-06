@@ -75,31 +75,41 @@ class FlightRouteUI:
     @staticmethod
     def __show_new_flight_route_constructor():
 
-        user_input = ""
-
         valid_options = list(ComponentUI.make_valid_menu_options_tuple(\
             len(FlightRouteUI.__constructor_flrt_tuple))) + \
                 list(ComponentUI.get_menu_valid_options_tuple())
 
-        user_input_list = []
+        all_options_count = len(FlightRouteUI.__constructor_flrt_tuple)
 
-        while user_input not in valid_options:
+        user_input_list = [""] * all_options_count
+
+        user_input=""
+
+        while True:
 
             FlightRouteUI.__show_input_field_options(user_input_list)
 
             user_input = input("Your action: ").lower().split()
 
-            valid_input = ComponentUI.test_user_input_chose_index(user_input, len(FlightRouteUI.__constructor_flrt_tuple))
+            if user_input[0].isdigit():
+                valid_input = ComponentUI.test_user_input_chose_index(user_input, all_options_count)
+                if valid_input:
+                    index = valid_input - 1
 
-            if valid_input:
-                index = valid_input - 1
-                
-                FlightRouteUI.__show_input_field_options(user_input_list, True)
-                user_input = input(FlightRouteUI.__input_field_tuple[index]).lower().strip()
+                    #Refresh menu
+                    FlightRouteUI.__show_input_field_options(user_input_list)
 
-                #error check
+                    #Get a new input
+                    user_input = input(FlightRouteUI.__input_field_tuple[index])
 
-                user_input_list.append(user_input)
+                    #error check
+
+                    user_input_list[index] = user_input
+
+
+            elif user_input[0] in valid_options:
+                return user_input
+
                 
                 
     # @staticmethod

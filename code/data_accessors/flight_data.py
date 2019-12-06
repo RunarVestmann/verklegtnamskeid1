@@ -1,7 +1,6 @@
 import os
 import platform
 import csv
-import datetime
 import dateutil.parser as util
 from data_models.flight import Flight
 
@@ -31,6 +30,17 @@ class FlightData:
             FlightData.__all_flights_list = all_flights_list
 
         return FlightData.__all_flights_list
+
+    @staticmethod
+    def get_flight(departure_location, departure_time):
+        all_flights_list = FlightData.get_all_flights()
+
+        for flight in all_flights_list:
+            if flight.get_departure_location() == departure_location and\
+                flight.get_departure_time() == departure_time:
+                return flight
+
+        return None
 
     @staticmethod
     def save_new_flight(flight):

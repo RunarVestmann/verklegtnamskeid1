@@ -30,6 +30,13 @@ class PilotData:
         return PilotData.__all_pilots_list
 
     @staticmethod
+    def get_pilot(ssn):
+        for pilot in PilotData.get_all_pilots():
+            if pilot.get_ssn() == ssn:
+                return pilot
+        return None
+
+    @staticmethod
     def save_new_pilot(pilot):
         field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state", "license"]
         with open(PilotData.__pilot_data_filename, 'a') as file_stream:

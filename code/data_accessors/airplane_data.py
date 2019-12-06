@@ -3,6 +3,7 @@ import os
 import platform
 from data_models.airplane import Airplane
 from data_models.aircraft_type import AircraftType
+from data_accessors.aircraft_type_data import AircraftTypeData
 
 
 class AirplaneData:
@@ -25,11 +26,23 @@ class AirplaneData:
             with open(AirplaneData.__airplane_data_filename, 'r') as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
-                    all_airplanes_list.append(Airplane(row["name"], row["aircraft_type"],\
+                    all_airplanes_list.append(Airplane(row["name"], AircraftTypeData.get_aircraft_type(row["aircraft_type"]),\
                         row["manufacturer"], row["seat_count"], row["state"]))
+                        
             AirplaneData.__all_airplanes_list = all_airplanes_list
 
         return AirplaneData.__all_airplanes_list
+
+    @staticmethod
+    def get_airplane(airplane_name):
+        '''Returns an airplane that has the given name,
+           returns None if no such airplane is found'''
+
+        for airplane in AirplaneData.get_all_airplanes():
+            if airplane.get_name() == airplane_name:
+                return airplane
+
+        return None
 
     @staticmethod
     def save_new_airplane(airplane):

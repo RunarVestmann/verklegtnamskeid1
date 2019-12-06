@@ -22,18 +22,26 @@ class DataAPI:
         return PilotData.get_all_pilots()
 
     @staticmethod
+    def get_pilot(ssn):
+        return PilotData.get_pilot(ssn)
+
+    @staticmethod
     def save_new_pilot(pilot):
         PilotData.save_new_pilot(pilot)
 
     @staticmethod
     def change_saved_pilot(pilot):
-        PilotData.change_saved_pilot()
+        PilotData.change_saved_pilot(pilot)
 
     ####  Flight Atttendants  ####
 
     @staticmethod
     def get_all_flight_attendants():
         return FlightAttendantData.get_all_flight_attendants()
+
+    @staticmethod
+    def get_flight_attendant(ssn):
+        return FlightAttendantData.get_flight_attendant(ssn)
 
     @ staticmethod
     def save_new_flight_attendant(flight_attendant):
@@ -48,6 +56,10 @@ class DataAPI:
     @staticmethod
     def save_new_airplane(airplane):
         AirplaneData.save_new_airplane(airplane)
+
+    @staticmethod
+    def get_airplane(name):
+        return AirplaneData.get_airplane(name)
 
     @staticmethod
     def get_all_airplanes():
@@ -68,6 +80,21 @@ class DataAPI:
         return VoyageData.get_all_voyages()
 
     @staticmethod
+    def get_airplane_voyages(airplane):
+        all_voyages = VoyageData.get_all_voyages()
+
+        airplanes_voyages = []
+
+        if all_voyages:
+            for voyage in all_voyages:
+                if voyage.get_airplane() == airplane:
+                    airplanes_voyages.append(voyage)
+
+        return airplanes_voyages
+
+    ####  Flight routes  ####
+
+    @staticmethod
     def save_new_flight_route(flight_route):
         FlightRouteData.save_new_flight_route(flight_route)
 
@@ -80,6 +107,11 @@ class DataAPI:
     @staticmethod
     def get_all_aircraft_types():
         return AircraftTypeData.get_all_aircraft_types()
+
+    @staticmethod
+    def get_aircraft_type(plane_type):
+        return AircraftTypeData.get_aircraft_type(plane_type)
+
     @staticmethod
     def save_new_aircraft_type(aircraft_type):
         AircraftTypeData.save_new_aircraft_type(aircraft_type)
@@ -93,4 +125,8 @@ class DataAPI:
     @staticmethod
     def save_new_flight(flight):
         FlightData.save_new_flight(flight)
+
+    @staticmethod
+    def get_flight(departure_location, departure_time):
+        return FlightData.get_flight(departure_location, departure_time)
         

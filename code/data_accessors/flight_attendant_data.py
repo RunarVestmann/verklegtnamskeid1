@@ -29,6 +29,13 @@ class FlightAttendantData:
 
         return FlightAttendantData.__all_flight_attendants_list
 
+    @staticmethod
+    def get_flight_attendant(ssn):
+        for flight_attendant in FlightAttendantData.get_all_flight_attendants():
+            if flight_attendant.get_ssn() == ssn:
+                return flight_attendant
+
+        return None
 
     @staticmethod
     def save_new_flight_attendant(flight_attendant):

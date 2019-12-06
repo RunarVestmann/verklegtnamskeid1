@@ -33,6 +33,14 @@ class AircraftTypeData:
         return AircraftTypeData.__all_aircrafts_list
 
     @staticmethod
+    def get_aircraft_type(plane_type):
+        for aircraft_type in AircraftTypeData.get_all_aircraft_types():
+            if aircraft_type.get_plane_type() == plane_type:
+                return aircraft_type
+
+        return None
+
+    @staticmethod
     def save_new_aircraft_type(aircraft):
         field_names = ["plane_type", "model", "capacity", "empty_weight", "max_takeoff_weight",\
             "unit_thrust","service_ceiling","length","height","wingspan"]

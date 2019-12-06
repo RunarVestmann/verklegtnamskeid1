@@ -11,26 +11,22 @@ class AirplaneLogic:
 
     @staticmethod
     def get_all_airplanes(): #needs testing
-        all_airplanes_with_limited_data = DataAPI.get_all_airplanes()
+        return DataAPI.get_all_airplanes()
+        # all_airplanes_with_limited_data = DataAPI.get_all_airplanes()
 
-        all_airplanes = []
+        # all_airplanes = []
 
-        for airplane in all_airplanes_with_limited_data:
-            aircraft_type = AircraftTypeLogic.get_aircraft_type(airplane.get_type())
+        # for airplane in all_airplanes_with_limited_data:
+        #     aircraft_type = AircraftTypeLogic.get_aircraft_type(airplane.get_type())
 
-            all_airplanes.append(Airplane(airplane.get_name(), aircraft_type, airplane.get_manufacturer,\
-                airplane.get_seat_count(), airplane.get_state()))
+        #     all_airplanes.append(Airplane(airplane.get_name(), aircraft_type, airplane.get_manufacturer,\
+        #         airplane.get_seat_count(), airplane.get_state()))
 
-        return all_airplanes
+        # return all_airplanes
 
     @staticmethod
     def get_airplane(name):
-        all_airplanes = DataAPI.get_all_airplanes()
-        for airplane in all_airplanes:
-            if airplane.get_name() == name:
-                return airplane
-
-        return None
+        return DataAPI.get_airplane(name)
 
     @staticmethod
     def is_airplane_name_available(plane_name):
@@ -38,24 +34,23 @@ class AirplaneLogic:
         for airplane in all_airplanes:
             if airplane.get_name() == plane_name:
                 return False
-                
+
         return True
 
     @staticmethod
     def get_all_available_airplanes(schedule_tuple): # needs testing
-        all_airplanes = DataAPI.get_all_airplanes()
         available_airplanes = []
-        for airplane in all_airplanes:
-            voyages = DataAPI.get_airplane_voyages(airplane)
+        for airplane in DataAPI.get_all_airplanes():
+            airplanes_voyages = DataAPI.get_airplane_voyages(airplane)
 
             # if there are no voyages for a specific airplane then it is available
-            if not voyages:
+            if not airplanes_voyages:
                 available_airplanes.append(airplane)
-            
+
             else:
-                for voyage in voyages:
+                for voyage in airplanes_voyages:
                     voyage_schedule = voyage.get_schedule()
                     if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
                         available_airplanes.append(airplane)
-                        
+
         return available_airplanes

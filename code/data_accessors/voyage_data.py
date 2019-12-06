@@ -4,6 +4,10 @@ import platform
 import dateutil.parser as util
 from data_models.voyage import Voyage
 from data_models.flight import Flight
+from data_accessors.airplane_data import AirplaneData
+from data_accessors.flight_data import FlightData
+from data_accessors.flight_attendant_data import FlightAttendantData
+from data_accessors.pilot_data import PilotData
 
 class VoyageData:
 
@@ -56,16 +60,26 @@ class VoyageData:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
 
-                    flight1_departure_location = row["flight1_departure_location"]
-                    flight1_departure_time = row["flight1_departure_time"]
-                    flight2_departure_location = row["flight2_departure_location"]
-                    flight2_departure_time = row["flight2_departure_time"]
+                    flight1 = FlightData.get_flight(row["flight1_departure_location"], util.parse(row["flight1_departure_time"]))
+                    flight2 = FlightData.get_flight(row["flight2_departure_location"], util.parse( row["flight2_departure_time"]))
 
-                    pilots_list = VoyageData.__get_employees("captain", "copilot", row)
+                    pilots_ssn_list = VoyageData.__get_employees("captain", "copilot", row)
 
-                    flight_attendants_list = VoyageData.__get_employees("cabin_manager", "flight_attendant", row)
+                    pilots_list = []
 
-                    airplane_name = row["airplane_name"]
+                    for pilot_ssn in pilots_ssn_list:
+                        if pilot_ssn:
+                            pilots_list.append(PilotData.get_pilot(pilot_ssn))
+
+                    flight_attendants_ssn_list = VoyageData.__get_employees("cabin_manager", "flight_attendant", row)
+
+                    flight_attendants_list = []
+
+                    for flight_attendants_ssn in flight_attendants_ssn_list:
+                        if flight_attendants_ssn:
+                            flight_attendants_list.append(FlightAttendantData.get_flight_attendant(flight_attendants_ssn))
+
+                    airplane = AirplaneData.get_airplane(row["airplane_name"])
 
                     schedule = row["schedule"].split("_")
 
@@ -74,9 +88,7 @@ class VoyageData:
 
                     state = row["state"]
 
-                    all_voyages_list.append(Voyage((flight1_departure_location, flight1_departure_time,\
-                         flight2_departure_location, flight2_departure_time),\
-                         pilots_list, flight_attendants_list, airplane_name, schedule, state))
+                    all_voyages_list.append(Voyage((flight1, flight2), pilots_list, flight_attendants_list, airplane, schedule, state))
 
                 VoyageData.__all_voyages_list = all_voyages_list
 
@@ -142,7 +154,7 @@ class VoyageData:
                  "flight_attendant8": flight_attendants_ssn_list[8],
                  "flight_attendant9": flight_attendants_ssn_list[9],
                  "airplane_name": voyage.get_airplane().get_name(),
-                 "schedule": voyage.get_schedule(),
+                 "schedule": voyage.get_schedule()[0].isoformat() + '_' + voyage.get_schedule()[1].isoformat(),
                  "state": voyage.get_state()
                  })
 

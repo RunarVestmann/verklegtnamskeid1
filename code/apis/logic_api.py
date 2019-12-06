@@ -1,21 +1,21 @@
-from logic.airplane_logic import AirplaneLogic
-from logic.aircraft_type_logic import AircraftTypeLogic
-from logic.flight_attendant_logic import FlightAttendantLogic
-from logic.flight_route_logic import FlightRouteLogic
-from logic.pilot_logic import PilotLogic
-from logic.employee_logic import EmployeeLogic
-from logic.voyage_logic import VoyageLogic
-from logic.flight_logic import FlightLogic
+from logic.airplane_logic import AirplaneLogic, Airplane
+from logic.aircraft_type_logic import AircraftTypeLogic, AircraftType
+from logic.flight_attendant_logic import FlightAttendantLogic, FlightAttendant
+from logic.flight_route_logic import FlightRouteLogic, FlightRoute
+from logic.pilot_logic import PilotLogic, Pilot
+from logic.employee_logic import EmployeeLogic, Employee
+from logic.voyage_logic import VoyageLogic, Voyage
+from logic.flight_logic import FlightLogic, Flight #Má sleppa öllu eftir kommuna þegar alvöru gögnin verða til notkunar
+
 
 #from data_models.employee import Employee
-from data_models.flight_route import FlightRoute
-from data_models.pilot import Pilot
-from data_models.flight_attendant import FlightAttendant
-from data_models.airplane import Airplane
-from data_models.voyage import Voyage
-from data_models.flight import Flight
+# from data_models.flight_route import FlightRoute
+# from data_models.pilot import Pilot
+# from data_models.flight_attendant import FlightAttendant
+# from data_models.airplane import Airplane
+# from data_models.voyage import Voyage
+# from data_models.flight import Flight
 #import dateutil.parser
-from apis.data_api import DataAPI
 class LogicAPI:
     '''The logic layer API that enables the UI layer to save and
        get data from the data layer'''
