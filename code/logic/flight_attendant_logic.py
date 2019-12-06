@@ -26,10 +26,10 @@ class FlightAttendantLogic:
 
 
     @staticmethod
-    def is_flight_attendant_avaliable(flight_attendants):
+    def is_flight_attendant_ssn_avaliable(flight_attendant_ssn):
         all_flight_attendants = DataAPI.get_all_flight_attendants()
         for flight_attendant in all_flight_attendants:
-            if flight_attendant.get_ssn() == flight_attendants:
+            if flight_attendant.get_ssn() == flight_attendant_ssn:
                 return False
         
         return True
