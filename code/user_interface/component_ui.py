@@ -41,19 +41,28 @@ class ComponentUI:
 
         ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit)
 
+    @staticmethod
+    def run_frame(option_tuple, underlined_main_option, valid_user_inputs, frame_functions):
+        user_input = ""
 
+        while user_input not in ComponentUI.get_navigation_options_tuple():
 
+            ComponentUI.print_frame_menu(option_tuple, underlined_main_option)
 
-        # print(TextEditor.format_text(FlightRouteUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
+            user_input = ComponentUI.get_user_input()
 
-        # if not in_field:
-        #     for i, option in enumerate(FlightRouteUI.__constructor_flrt_tuple):
-        #         print("({}) {}: {}".format(i+1,option, "" if not user_input_list else user_input_list[i]))
-        # else: 
-        #     for i, option in enumerate(FlightRouteUI.__constructor_flrt_tuple):
-        #         print("- {}: {}".format(option, "" if not user_input_list else user_input_list[i]))
+            if not user_input:
+                continue
 
-        # ComponentUI.fill_window_and_print_action_line(len(FlightRouteUI.__constructor_flrt_tuple)+1, not in_field)
+            user_input = ComponentUI.remove_brackets(user_input)
+
+            if user_input in valid_user_inputs:
+
+                selected_index = int(user_input) - 1
+
+                user_input = frame_functions[selected_index]()
+
+        return user_input
 
     ############# HEADER RELATED FUNCTIONS AND VARIABLES #################
 

@@ -7,38 +7,20 @@ from apis.logic_api import LogicAPI
 
 
 class VoyageUI:
-    __option_tuple = ('New voyage', 'Show ongoing voyages','Show completed voyages', 'Find voyages by date', 'Find voyages by week', 'Find voyages by destination')
-
-    
-
-    @staticmethod
-    def show_voyage_menu():
-        ComponentUI.print_header(ComponentUI.get_main_options()[0])
-        option_tuple = VoyageUI.__option_tuple    #('New voyage', 'Show ongoing voyages','Show completed voyages', 'Find voyages by date', 'Find voyages by week', 'Find voyages by destination')
-        print()
-        for i, option in enumerate(option_tuple):
-            print("({}) {}".format(i+1,option))
-        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1)    
-
+    __option_tuple = ('New voyage', 'Show ongoing voyages','Show completed voyages', 'Find voyages by date',\
+         'Find voyages by week', 'Find voyages by destination')
 
     @staticmethod
-    def action_voyage_menu(user_input):
-        option_tuple = VoyageUI.__option_tuple  
-        option_functions = (VoyageUI.show_new_voyage_constructor, VoyageUI.show_ongoing_voyages, VoyageUI.show_completed_voyages,\
-             VoyageUI.show_find_voyages_by_date, VoyageUI.show_find_voyages_by_week, VoyageUI.show_find_voyages_by_destination)
+    def show():
+        valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(VoyageUI.__option_tuple))
 
-       #####  Test input ####            
-        selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
-        if selected_number:                                                                  #and is with in range of possible menu list
-            selected_index = selected_number-1
-            new_display = [option_functions[selected_index]]
-            return new_display
-        else:
-            return False
-        
+        frame_functions = (VoyageUI.__show_new_voyage_constructor, VoyageUI.__show_ongoing_voyages, VoyageUI.__show_completed_voyages,\
+            VoyageUI.__show_find_voyages_by_date, VoyageUI.__show_find_voyages_by_week, VoyageUI.__show_find_voyages_by_destination)
+
+        return ComponentUI.run_frame(VoyageUI.__option_tuple, ComponentUI.get_main_options()[0], valid_user_inputs, frame_functions) 
 
     @staticmethod
-    def show_new_voyage_constructor():
+    def __show_new_voyage_constructor():
         ComponentUI.print_header(ComponentUI.get_main_options()[0])
         print(TextEditor.format_text(VoyageUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
         
@@ -51,7 +33,7 @@ class VoyageUI:
 
     DUMMYNMBR=1
     @staticmethod
-    def show_ongoing_voyages():
+    def __show_ongoing_voyages():
         ComponentUI.print_header(ComponentUI.get_main_options()[0])
         print(TextEditor.format_text(VoyageUI.__option_tuple[1], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
@@ -60,28 +42,28 @@ class VoyageUI:
     
     
     @staticmethod
-    def show_completed_voyages():
+    def __show_completed_voyages():
         ComponentUI.print_header(ComponentUI.get_main_options()[0])
         print(TextEditor.format_text(VoyageUI.__option_tuple[2], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
         pass
     
     @staticmethod    
-    def show_find_voyages_by_date():
+    def __show_find_voyages_by_date():
         ComponentUI.print_header(ComponentUI.get_main_options()[0])
         print(TextEditor.format_text(VoyageUI.__option_tuple[3], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
         pass
     
     @staticmethod
-    def show_find_voyages_by_week():
+    def __show_find_voyages_by_week():
         ComponentUI.print_header(ComponentUI.get_main_options()[0])
         print(TextEditor.format_text(VoyageUI.__option_tuple[4], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
         pass
     
     @staticmethod
-    def show_find_voyages_by_destination():
+    def __show_find_voyages_by_destination():
         ComponentUI.print_header(ComponentUI.get_main_options()[0])
         print(TextEditor.format_text(VoyageUI.__option_tuple[4], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)

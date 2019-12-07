@@ -12,29 +12,9 @@ class FlightRouteUI:
 
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
 
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-
         frame_functions = (FlightRouteUI.__show_new_flight_route_constructor, FlightRouteUI.__show_all_flight_routes)
 
-        user_input = ""
-
-        while user_input not in navigation_bar_options:
-
-            ComponentUI.print_frame_menu(option_tuple, ComponentUI.get_main_options()[3])
-
-            user_input = ComponentUI.get_user_input()
-
-            if not user_input:
-                continue
-
-            user_input = ComponentUI.remove_brackets(user_input)
-
-            if user_input in valid_user_inputs:
-                selected_index = int(user_input) - 1
-
-                user_input = frame_functions[selected_index]()
-
-        return user_input
+        return ComponentUI.run_frame(option_tuple, ComponentUI.get_main_options()[3], valid_user_inputs, frame_functions)
 
     @staticmethod
     def __show_new_flight_route_constructor():
