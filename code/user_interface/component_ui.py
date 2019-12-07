@@ -25,7 +25,7 @@ class ComponentUI:
     __HEADER_HEIGHT = 7
 
     @staticmethod
-    def get_menu_valid_options_tuple():
+    def get_navigation_options_tuple():
         return ComponentUI.__MENU_VALID_OPTIONS_TUPLE
 
     @staticmethod
@@ -135,6 +135,10 @@ class ComponentUI:
 
 
     ############# USER CHOSE ACTION RELATED FUNCTIONS #################
+
+    @staticmethod
+    def get_user_input(message="Your action: "):
+        return input(message).lower().strip()
 
     @staticmethod
     def remove_brackets(user_input):

@@ -223,4 +223,4 @@ class LogicAPI:
     
     @staticmethod
     def is_airport_id_available(airport_id):
-        FlightRouteLogic.is_airport_id_available(airport_id)
+        return FlightRouteLogic.is_airport_id_available(airport_id)
