@@ -12,17 +12,6 @@ class AirplaneLogic:
     @staticmethod
     def get_all_airplanes(): #needs testing
         return DataAPI.get_all_airplanes()
-        # all_airplanes_with_limited_data = DataAPI.get_all_airplanes()
-
-        # all_airplanes = []
-
-        # for airplane in all_airplanes_with_limited_data:
-        #     aircraft_type = AircraftTypeLogic.get_aircraft_type(airplane.get_type())
-
-        #     all_airplanes.append(Airplane(airplane.get_name(), aircraft_type, airplane.get_manufacturer,\
-        #         airplane.get_seat_count(), airplane.get_state()))
-
-        # return all_airplanes
 
     @staticmethod
     def get_airplane(name):
