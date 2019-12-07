@@ -43,12 +43,19 @@ class VoyageData:
 
         return employees_list
 
+    @staticmethod
+    def get_airplane_voyages(airplane):
+        airplanes_voyages = []
+
+        for voyage in VoyageData.get_all_voyages():
+            if voyage.get_airplane() == airplane:
+                airplanes_voyages.append(voyage)
+
+        return airplanes_voyages
 
     @staticmethod
     def get_all_voyages():
-        '''Returns a list of voyages with some of the voyage data missing,
-           VoyageLogic.get_all_voyages() is responsible for getting the missing data
-           so don't call this function elsewhere'''
+        '''Returns a list of all the voyages'''
 
         #If we haven't cached all the voyages we grab them from the file
         if not VoyageData.__all_voyages_list:

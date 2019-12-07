@@ -81,16 +81,7 @@ class DataAPI:
 
     @staticmethod
     def get_airplane_voyages(airplane):
-        all_voyages = VoyageData.get_all_voyages()
-
-        airplanes_voyages = []
-
-        if all_voyages:
-            for voyage in all_voyages:
-                if voyage.get_airplane() == airplane:
-                    airplanes_voyages.append(voyage)
-
-        return airplanes_voyages
+        return VoyageData.get_airplane_voyages(airplane)
 
     ####  Flight routes  ####
 
