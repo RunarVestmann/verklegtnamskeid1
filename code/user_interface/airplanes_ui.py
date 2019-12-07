@@ -19,7 +19,7 @@ class AirplanesUI:
         frame_functions = (AirplanesUI.__show_new_airplane_constructor, AirplanesUI.__show_all_airplanes,\
             AirplanesUI.__show_airplanes_in_use, AirplanesUI.__show_all_airplane_types)
 
-        return ComponentUI.run_frame(option_tuple, ComponentUI.get_main_options()[3], valid_user_inputs, frame_functions)
+        return ComponentUI.run_frame(option_tuple, ComponentUI.get_main_options()[2], valid_user_inputs, frame_functions)
 
         
         # user_input = ""
