@@ -5,6 +5,23 @@ from user_interface.window import Window
 class QuitUI:
 
     @staticmethod
+    def show():
+        user_input = ""
+        while not user_input.startswith('n'):
+
+            ComponentUI.print_header(ComponentUI.get_main_options()[4])
+            QuitUI.__print_quit_menu_body()
+
+            user_input = ComponentUI.get_user_input()
+            user_input = ComponentUI.remove_brackets(user_input)
+
+            if user_input.startswith('y'):
+                Window.clear()
+                raise SystemExit
+
+        return "Back to main menu"
+
+    @staticmethod
     def __print_quit_menu_body():
         '''Prints the quit menu body that's below the header'''
 
@@ -28,40 +45,4 @@ class QuitUI:
             print()
 
         print("_" * window_width)
-
-    @staticmethod
-    def show_quit_menu():
-        user_input = ''
-        while user_input != 'y':
-
-            #Print the header with the Quit option underlined
-            ComponentUI.print_header(ComponentUI.get_main_options()[4])
-
-            QuitUI.__print_quit_menu_body()
-
-            user_input = input("Your action: ").lower().strip()
-
-            #need a main_menu function for navigation bar
-
-
-            #Clear the window and exit the program if the user wants to exit
-            if user_input.startswith('y'):
-                Window.clear()
-                raise SystemExit
-
-            elif user_input.startswith('n'):
-                print() 
-                #????.show_main_menu()
-    
-    @staticmethod
-    def show_quit_menu2():
-        #Print the header with the Quit option underlined
-        ComponentUI.print_header(ComponentUI.get_main_options()[4])
-        QuitUI.__print_quit_menu_body()
-
-    @staticmethod
-    def terminate_program():
-        Window.clear()
-        raise SystemExit
-
-            
+        

@@ -77,7 +77,6 @@ class ComponentUI:
 
     @staticmethod
     def __print_banner():
-        Window.clear()
         window_width = Window.get_size()[0]
 
         print("‾" * window_width)
@@ -111,6 +110,7 @@ class ComponentUI:
     @staticmethod
     def print_header(selected_option=""):
         '''Prints the NaN Air banner and the main options below the banner'''
+        Window.clear()
         ComponentUI.__print_banner()
         ComponentUI.__print_main_options(selected_option)
 

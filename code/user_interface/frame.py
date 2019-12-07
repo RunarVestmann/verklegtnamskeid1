@@ -1,11 +1,10 @@
 from user_interface.airplanes_ui import AirplanesUI
+from user_interface.component_ui import ComponentUI
 from user_interface.employees_ui import EmployeeUI
 from user_interface.flight_route_ui import FlightRouteUI
 from user_interface.voyage_ui import VoyageUI
 from user_interface.quit_ui import QuitUI
 from user_interface.main_menu_ui import MainMenuUI
-
-from user_interface.component_ui import ComponentUI
 
 class Frame:
 
@@ -28,6 +27,10 @@ class Frame:
 
             #Don't do anything if the user presses enter
             if not user_input:
+                continue
+
+            if user_input == "Back to main menu":
+                current_frame = MainMenuUI
                 continue
 
             user_input = ComponentUI.remove_brackets(user_input)
