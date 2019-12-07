@@ -17,6 +17,44 @@ class ComponentUI:
             print('(S)ubmit')
         print('_' * window_width)
 
+    @staticmethod
+    def print_frame_menu(option_tuple, underlined_main_option, underlined_sub_option=""):
+        ComponentUI.print_header(underlined_main_option)
+        print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
+
+        for i, option in enumerate(option_tuple):
+            print("({}) {}".format(i+1, option))
+        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, False)
+
+    @staticmethod
+    def print_frame_constructor_menu(option_tuple, underlined_main_option, underlined_sub_option, user_input_list,print_submit=False, selected_option_index=1000, ):
+
+        ComponentUI.print_header(underlined_main_option)
+        print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
+
+        for i, option in enumerate(option_tuple):
+            if print_submit:
+                print("({}) {}: {}".format(i+1, option, "" if not user_input_list else user_input_list[i]))
+            else:
+                print("- {}: {}".format(option if selected_option_index != i else TextEditor.color_text(option, TextEditor.BLUE_TEXT),\
+                     "" if not user_input_list else user_input_list[i]))
+
+        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit)
+
+
+
+
+        # print(TextEditor.format_text(FlightRouteUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
+
+        # if not in_field:
+        #     for i, option in enumerate(FlightRouteUI.__constructor_flrt_tuple):
+        #         print("({}) {}: {}".format(i+1,option, "" if not user_input_list else user_input_list[i]))
+        # else: 
+        #     for i, option in enumerate(FlightRouteUI.__constructor_flrt_tuple):
+        #         print("- {}: {}".format(option, "" if not user_input_list else user_input_list[i]))
+
+        # ComponentUI.fill_window_and_print_action_line(len(FlightRouteUI.__constructor_flrt_tuple)+1, not in_field)
+
     ############# HEADER RELATED FUNCTIONS AND VARIABLES #################
 
     __MAIN_OPTIONS = ("(V)oyages", "(E)mployees", "(A)irplanes", "(F)light routes", "(Q)uit")

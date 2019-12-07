@@ -1,5 +1,3 @@
-from user_interface.main_menu_ui import MainMenuUI
+from user_interface.frame import Frame
 
-MainMenuUI.initialize()
-
-MainMenuUI.show_frame(MainMenuUI.show_main_menu)
+Frame.initialize()

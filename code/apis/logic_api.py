@@ -200,15 +200,15 @@ class LogicAPI:
 
     @staticmethod
     def get_all_flight_routes():
-        Nuuk = FlightRoute("Greenland","Nuuk","G2192","4:00","1570km","Oddur","1234666")
-        Kulusuk = FlightRoute("Greenland","Kulusuk","G3892","2:00","871km","Baldur","1126662")
-        Thorhavn = FlightRoute("Faroe Islands","Thorhavn","F8198","1:10","493km","Sverre","9991234")
-        Tingwall = FlightRoute("Hjaltlandseyjum","Tingwall","H8219","3:00","1100km","mcdougal","9991298")
-        Longyearbyen = FlightRoute("Svalbarda","Longyearbyen","S2174","4:20","1761","Olle","8829053")
-        return[Nuuk,Kulusuk,Thorhavn,Tingwall,Longyearbyen]
+        # Nuuk = FlightRoute("Greenland","Nuuk","G2192","4:00","1570km","Oddur","1234666")
+        # Kulusuk = FlightRoute("Greenland","Kulusuk","G3892","2:00","871km","Baldur","1126662")
+        # Thorhavn = FlightRoute("Faroe Islands","Thorhavn","F8198","1:10","493km","Sverre","9991234")
+        # Tingwall = FlightRoute("Hjaltlandseyjum","Tingwall","H8219","3:00","1100km","mcdougal","9991298")
+        # Longyearbyen = FlightRoute("Svalbarda","Longyearbyen","S2174","4:20","1761","Olle","8829053")
+        # return[Nuuk,Kulusuk,Thorhavn,Tingwall,Longyearbyen]
 
+        return FlightRouteLogic.get_all_flight_routes()
 
-        # return DataAPI.get_all_flight_routes()
     @staticmethod
     def get_all_flights():
         return FlightLogic.get_all_flights() 
