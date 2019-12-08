@@ -117,8 +117,6 @@ class VoyageData:
                  "state": voyage.get_state()
                 })
 
-        
-
     @staticmethod
     def get_all_voyages():
         '''Returns a list of all the voyages'''

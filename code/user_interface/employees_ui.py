@@ -11,7 +11,7 @@ class EmployeeUI:
     __option_tuple = ('New employees', 'Show all employees', 'Show all pilots', 'Show all flight attendants', 'Find employee by name',\
                        'Find pilots by license', 'Show employees on duty', 'Show employees off duty')
     
-    __FRAME_IN_USE = ComponentUI.get_main_options()[1]
+    __FRAME_IN_USE_STR = ComponentUI.get_main_options()[1]
     @staticmethod
     def show():
         
@@ -21,20 +21,8 @@ class EmployeeUI:
             EmployeeUI.__show_all_flight_attendants, EmployeeUI.__show_employee_by_name_finder, EmployeeUI.__show_pilot_by_license_finder,\
                 EmployeeUI.__show_employees_on_duty, EmployeeUI.__show_employees_off_duty)
 
-        return ComponentUI.run_frame(EmployeeUI.__option_tuple, EmployeeUI.__FRAME_IN_USE, valid_user_inputs, frame_functions)
-
-    @staticmethod
-    def show_employee_menu():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        option_tuple = EmployeeUI.__option_tuple
-        print()
-        for i, option in enumerate(option_tuple):
-            print("({}) {}".format(i+1, option))
-        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1)
+        return ComponentUI.run_frame(EmployeeUI.__option_tuple, EmployeeUI.__FRAME_IN_USE_STR, valid_user_inputs, frame_functions)
     
-
-
-    DUMMYNMBR=1
     @staticmethod
     def __show_new_employee_constructor():
         input_message_tuple = ("Insert job title(p for pilot,f for flight attendant): ", "Insert Name: ", "Insert Social security number: ",\
@@ -49,8 +37,8 @@ class EmployeeUI:
 
             greyed_out_option_index = 6 if not user_input_list[0].lower().startswith('p') else 1000
 
-            ComponentUI.print_frame_constructor_menu(option_tuple, EmployeeUI.__FRAME_IN_USE, "New employeee",\
-            user_input_list,True, greyed_out_option_index=greyed_out_option_index)
+            ComponentUI.print_frame_constructor_menu(option_tuple, EmployeeUI.__FRAME_IN_USE_STR, "New employeee",\
+            user_input_list, True, greyed_out_option_index=greyed_out_option_index)
             user_input = ComponentUI.get_user_input()
             
             
@@ -68,8 +56,8 @@ class EmployeeUI:
                         continue
 
 
-                ComponentUI.print_frame_constructor_menu(option_tuple,EmployeeUI.__FRAME_IN_USE,"New employeee",\
-                user_input_list,False,index)
+                ComponentUI.print_frame_constructor_menu(option_tuple, EmployeeUI.__FRAME_IN_USE_STR, "New employeee",\
+                user_input_list, False, index)
 
                 user_input = input(input_message_tuple[index]).strip()
                 if not user_input:
@@ -85,7 +73,7 @@ class EmployeeUI:
 
                     if not user_input.lower().startswith("f") and not user_input.lower().startswith("p"):
                         employee_info_already_exists = True
-                        user_input = user_input + " " + TextEditor.color_text_background("Please insert 'f' or 'p', another input is required",TextEditor.RED_BACKGROUND)
+                        user_input = user_input + " " + TextEditor.color_text_background("Please insert 'f' or 'p', another input is required", TextEditor.RED_BACKGROUND)
                     else:
                         employee_info_already_exists = False
 
@@ -117,43 +105,48 @@ class EmployeeUI:
                 user_input = ""
 
             elif user_input.startswith('s'):
-                #Needs fix
-                if ((all(user_input_list) and user_input_list[6].lower().startswith('p')) or (all(user_input_list[:-1])\
-                     and user_input_list[6].lower().startswith('p'))) and not employee_info_already_exists:
+                job_title_str = user_input_list[0].lower()
 
-                    if user_input_list[0].lower().startswith('f'):
-                        flight_attendant = FlightAttendant(
-                            user_input_list[1],
-                            user_input_list[2],
-                            user_input_list[3],
-                            user_input_list[4],
-                            user_input_list[5],
-                            "Not scheduled for flight"
-                        )
-                        LogicAPI.save_new_flight_attendant(flight_attendant)
+                if all(user_input_list) and job_title_str.startswith('p') and not employee_info_already_exists:
+                    
+                    pilot = Pilot(
+                        user_input_list[1],
+                        user_input_list[2],
+                        user_input_list[3],
+                        user_input_list[4],
+                        user_input_list[5],
+                        "Not scheduled for flight",
+                        user_input_list[6]
+                    )
+                    LogicAPI.save_new_pilot(pilot)
 
-                        break
+                    user_input = "A new pilot has been registered"
 
-                    elif user_input_list[0].lower().startswith('p'):
-                        pilot = Pilot(
-                            user_input_list[1],
-                            user_input_list[2],
-                            user_input_list[3],
-                            user_input_list[4],
-                            user_input_list[5],
-                            "Not scheduled for flight",
-                            "Boeing test"
-                        )
-                        LogicAPI.save_new_pilot(pilot)
+                    break
+                
+                elif all(user_input_list[:-1]) and job_title_str.startswith('f') and not employee_info_already_exists:
 
-                        break
+                    flight_attendant = FlightAttendant(
+                        user_input_list[1],
+                        user_input_list[2],
+                        user_input_list[3],
+                        user_input_list[4],
+                        user_input_list[5],
+                        "Not scheduled for flight"
+                    )
+                    LogicAPI.save_new_flight_attendant(flight_attendant)
+
+                    user_input = "A new flight attendant has been registered"
+
+                    break
+
 
         return user_input
 
 
     @staticmethod
     def __show_all_employees():
-        ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE)
+        ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("Show all employees", TextEditor.UNDERLINE_TEXT))
         
         table_header = ("Job title" "Name", "SSN", "Phone number", "Home address", "E-mail", "State")

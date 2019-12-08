@@ -65,7 +65,7 @@ class FlightRouteUI:
                 #Check if the airport id already exists
                 elif index == 3:
                     if not LogicAPI.is_airport_id_available(user_input):
-                        user_input = user_input + " " + TextEditor.color_text_background("Airport id already exists, another input is required", TextEditor.RED_BACKGROUND)
+                        user_input = user_input + " " + TextEditor.color_text_background("Airport id already exists", TextEditor.RED_BACKGROUND)
                         flight_route_info_already_exists = True
                     else:
                         flight_route_info_already_exists = False
@@ -75,7 +75,7 @@ class FlightRouteUI:
                     if 'km' in user_input:
                         user_input = user_input.replace('km', '')
                     if not user_input.isdigit():
-                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
+                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
                         flight_route_info_already_exists = True
                     else:
                         flight_route_info_already_exists = False
@@ -97,7 +97,7 @@ class FlightRouteUI:
 
                     #Put a message on the screen indicating the phonenumber is invalid
                     if not user_input.isdigit():
-                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
+                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
                         flight_route_info_already_exists = True
                     else:
                         flight_route_info_already_exists = False
@@ -118,7 +118,7 @@ class FlightRouteUI:
                         user_input_list[6],
                     )
                     LogicAPI.save_new_flight_route(new_flight_route)
-
+                    user_input = "A new flight route has been registered"
                     break
 
         return user_input

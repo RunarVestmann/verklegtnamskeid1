@@ -3,7 +3,6 @@ import os
 import platform
 from data_models.pilot import Pilot
 
-
 class PilotData:
 
     #The paths we found worked for the different operating systems

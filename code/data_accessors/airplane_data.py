@@ -5,7 +5,6 @@ from data_models.airplane import Airplane
 from data_models.aircraft_type import AircraftType
 from data_accessors.aircraft_type_data import AircraftTypeData
 
-
 class AirplaneData:
 
     #The paths we found worked for the different operating systems
@@ -15,7 +14,7 @@ class AirplaneData:
     #Store the filename according to whether the user has a Mac or not
     __airplane_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
 
-    __NOT_IN_USE_STATES_TUPLE = ("Not scheduled","Not in use")
+    __NOT_IN_USE_STATES_TUPLE = ("Not scheduled", "Not in use")
 
     #A list to cache all the airplanes once they've been fetched
     __all_airplanes_list = []
@@ -46,10 +45,9 @@ class AirplaneData:
 
         return None
 
-
     @staticmethod
     def get_all_airplanes_in_use():
-        '''Returns airplanes in use by exluding airplanes that have-not-in-us-state form all airplane list'''
+        '''Returns airplanes in use by exlcluding airplanes that have not-in-use-state form all airplane list'''
         airplane_in_use = []
 
         for airplane in AirplaneData.get_all_airplanes():
@@ -57,8 +55,6 @@ class AirplaneData:
                 airplane_in_use.append(airplane)
         
         return airplane_in_use
-
-            
 
     @staticmethod
     def save_new_airplane(airplane):

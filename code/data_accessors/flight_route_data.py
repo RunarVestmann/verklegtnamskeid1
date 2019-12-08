@@ -3,7 +3,6 @@ import os
 import platform
 from data_models.flight_route import FlightRoute
 
-
 class FlightRouteData:
 
     #The paths we found worked for the different operating systems

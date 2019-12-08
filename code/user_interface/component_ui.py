@@ -4,7 +4,7 @@ from user_interface.window import Window
 class ComponentUI:
 
     @staticmethod
-    def fill_window_and_print_action_line(menu_line_count, is_submit_available=False):
+    def fill_window_and_print_action_line(menu_line_count, is_submit_available=False, submit_message=""):
         bottom_space_for_user_input = 2
         if is_submit_available:
             bottom_space_for_user_input += 1
@@ -15,29 +15,33 @@ class ComponentUI:
             print()
         if is_submit_available:
             print('(S)ubmit')
+        elif submit_message:
+            print(TextEditor.edit_text(submit_message, TextEditor.GREEN_TEXT, text_format=TextEditor.BOLD_TEXT))
+
         print('_' * window_width)
 
     @staticmethod
-    def print_frame_menu(option_tuple, underlined_main_option, underlined_sub_option=""):
+    def print_frame_menu(option_tuple, underlined_main_option, underlined_sub_option="", save_message=""):
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
 
         for i, option in enumerate(option_tuple):
             print("({}) {}".format(i+1, option))
-        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, False)
+
+        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, False, save_message)
 
     @staticmethod
     def print_frame_constructor_menu(option_tuple, underlined_main_option, underlined_sub_option,\
-         user_input_list,print_submit=False, selected_option_index=1000, greyed_out_option_index=1000):
+         user_input_list, print_submit=False, selected_option_index=1000, greyed_out_option_index=1000):
 
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
 
         for i, option in enumerate(option_tuple):
             if print_submit:
-                print("({}) {}: {}".format(i+1, TextEditor.color_text(option,TextEditor.DARKGRAY_TEXT) if i == greyed_out_option_index else option, "" if not user_input_list else user_input_list[i]))
+                print("({}) {}: {}".format(i+1, TextEditor.color_text(option, TextEditor.DARKGRAY_TEXT) if i == greyed_out_option_index else option, "" if not user_input_list else user_input_list[i]))
             else:
-                print("- {}: {}".format(option if selected_option_index != i else TextEditor.color_text(option, TextEditor.BLUE_TEXT),\
+                print("- {}: {}".format(option if selected_option_index != i else TextEditor.edit_text(option, TextEditor.BLUE_TEXT, text_format=TextEditor.BOLD_TEXT),\
                      "" if not user_input_list else user_input_list[i]))
 
         ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit)
@@ -48,7 +52,10 @@ class ComponentUI:
 
         while user_input not in ComponentUI.get_navigation_options_tuple():
 
-            ComponentUI.print_frame_menu(option_tuple, underlined_main_option)
+            if "A new" and "has been registered" in user_input:
+                ComponentUI.print_frame_menu(option_tuple, underlined_main_option, save_message=user_input)
+            else:
+                ComponentUI.print_frame_menu(option_tuple, underlined_main_option)
 
             user_input = ComponentUI.get_user_input()
 
@@ -112,7 +119,7 @@ class ComponentUI:
             main_options = []
             for option in ComponentUI.__MAIN_OPTIONS:
                 if selected_option == option:
-                    option = TextEditor.format_text(option, TextEditor.UNDERLINE_TEXT)
+                    option = TextEditor.format_text(option, TextEditor.UNDERLINE_TEXT + TextEditor.BOLD_TEXT)
                 main_options.append(option)
 
             print(spaces_between.join(main_options))
@@ -123,10 +130,10 @@ class ComponentUI:
         Window.clear()
         ComponentUI.__print_banner()
         ComponentUI.__print_main_options(selected_option)
-
-
-    def centerd_text_message(message_str):
-            # centered feedback messege 
+    
+    @staticmethod
+    def centered_text_message(message_str):
+            # centered feedback message
             window_width, window_height = Window.get_size()
 
             #Calculate the how much space is left on the window

@@ -1,7 +1,6 @@
 from user_interface.component_ui import ComponentUI
 from user_interface.window import Window
 
-
 class QuitUI:
 
     @staticmethod

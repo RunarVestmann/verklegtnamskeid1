@@ -3,7 +3,6 @@ import os
 import platform
 from data_models.flight_attendant import FlightAttendant
 
-
 class FlightAttendantData:
 
     #The paths we found worked for the different operating systems

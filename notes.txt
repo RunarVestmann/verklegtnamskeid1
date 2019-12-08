@@ -25,3 +25,5 @@ Við erum ekki að geyma tickets sold neinstaðar lengur, þar sem krafan var ek
 Við þurfum að laga weird new line í flights.csv skránni?
 
 Hver flugvél hefur aircraft type tilvik
+
+Quit og MainMenu er ekki með input á neðstu línu
