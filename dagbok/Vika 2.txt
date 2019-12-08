@@ -4,7 +4,7 @@ klasa, ef það gengur vel förum við að vinna í UI layer. Um helgina skipul�
 Rúnar setti upp file structure og wrapper klasa fyrir window attributes og leið til að edita texta svo að við gætum byrjað í 
 þessu strax. 
 Í lok dags gerðum við það sem við ætluðum okkur og byrjuðum aðeins í því að vinna í QuitUI.
-Lítil mæting í dag.
+Lítil mæting í dag vegna misskilnings fostudeginum aður.
 Rúnar: LogicAPI og DataAPI
 Hörður: Logic klasa
 Guðmundur, Hörður, Rúnar: Byrjuðu á UI layer
