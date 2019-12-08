@@ -14,6 +14,10 @@ class AirplaneLogic:
         return DataAPI.get_all_airplanes()
 
     @staticmethod
+    def get_all_airplanes_in_use(): #needs testing
+        return DataAPI.get_all_airplanes_in_use()
+
+    @staticmethod
     def get_airplane(name):
         return DataAPI.get_airplane(name)
 

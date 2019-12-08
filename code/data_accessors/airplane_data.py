@@ -15,6 +15,8 @@ class AirplaneData:
     #Store the filename according to whether the user has a Mac or not
     __airplane_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
 
+    __NOT_IN_USE_STATES_TUPLE = ("Not scheduled","Not in use")
+
     #A list to cache all the airplanes once they've been fetched
     __all_airplanes_list = []
 
@@ -43,6 +45,20 @@ class AirplaneData:
                 return airplane
 
         return None
+
+
+    @staticmethod
+    def get_all_airplanes_in_use():
+        '''Returns airplanes in use by exluding airplanes that have-not-in-us-state form all airplane list'''
+        airplane_in_use = []
+
+        for airplane in AirplaneData.get_all_airplanes():
+            if airplane.get_state() not in AirplaneData.__NOT_IN_USE_STATES_TUPLE:
+                airplane_in_use.append(airplane)
+        
+        return airplane_in_use
+
+            
 
     @staticmethod
     def save_new_airplane(airplane):

@@ -134,15 +134,21 @@ class AirplanesUI:
  
         table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
         airplanes_list = LogicAPI.get_all_airplanes_in_use()
-        airplanes_getfunctions_tuple = ([airplane.get_name for airplane in airplanes_list],[airplane.get_state for airplane in airplanes_list],\
-           [airplane.get_type for airplane in airplanes_list], [airplane.get_manufacturer for airplane in airplanes_list], [airplane.get_seat_count for airplane in airplanes_list])
+        if airplanes_list:
+            airplanes_getfunctions_tuple = ([airplane.get_name for airplane in airplanes_list],[airplane.get_state for airplane in airplanes_list],\
+            [airplane.get_type for airplane in airplanes_list], [airplane.get_manufacturer for airplane in airplanes_list], [airplane.get_seat_count for airplane in airplanes_list])
 
-        ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
-                 
-        ComponentUI.fill_window_and_print_action_line(len(airplanes_list)+2)
+            ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
+            ComponentUI.fill_window_and_print_action_line(len(airplanes_list)+2)
+        
+        else:
+            ComponentUI.centerd_text_message("There are no airpanes in use at the moment !")
 
+           
         return ComponentUI.get_user_input()
     
+
+
     @staticmethod
     def __show_all_airplane_types():
         ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR)
@@ -158,5 +164,3 @@ class AirplanesUI:
         ComponentUI.fill_window_and_print_action_line(len(airplanes_list)+2)
 
         return ComponentUI.get_user_input()
-
-        pass

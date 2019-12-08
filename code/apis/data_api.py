@@ -65,6 +65,10 @@ class DataAPI:
     def get_all_airplanes():
         return AirplaneData.get_all_airplanes()
 
+    @staticmethod
+    def get_all_airplanes_in_use():
+        return AirplaneData.get_all_airplanes_in_use()
+
     ####  Voyages ####
 
     @staticmethod
