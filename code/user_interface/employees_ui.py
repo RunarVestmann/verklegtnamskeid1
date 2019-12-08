@@ -37,11 +37,11 @@ class EmployeeUI:
     DUMMYNMBR=1
     @staticmethod
     def __show_new_employee_constructor():
-        input_message_tuple = ("Insert job position(p for pilot,f for flight attendant): ", "Insert Name: ", "Insert Social security number: ",\
+        input_message_tuple = ("Insert job title(p for pilot,f for flight attendant): ", "Insert Name: ", "Insert Social security number: ",\
             "Insert Phone number: ", "Insert Home address: ", "Insert E-mail: ", "Insert License: ")
         user_input = ""
         navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-        option_tuple = ("Job position", "Name", "Social security number", "Phone number", "Home address", "E-mail", "License")
+        option_tuple = ("Job title", "Name", "Social security number", "Phone number", "Home address", "E-mail", "License")
         user_input_list = [""] * len(option_tuple)
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
         employee_info_already_exists = False
@@ -76,8 +76,12 @@ class EmployeeUI:
                     continue
 
                 if index == 0:
+
                     if user_input.lower().startswith('f'):
+                        user_input = "Flight attendant"
                         user_input_list[6] = ""
+                    elif user_input.lower().startswith('p'):
+                        user_input = "Pilot"
 
                     if not user_input.lower().startswith("f") and not user_input.lower().startswith("p"):
                         employee_info_already_exists = True
@@ -113,8 +117,9 @@ class EmployeeUI:
                 user_input = ""
 
             elif user_input.startswith('s'):
-
-                if all(user_input_list) and not employee_info_already_exists:
+                #Needs fix
+                if ((all(user_input_list) and user_input_list[6].lower().startswith('p')) or (all(user_input_list[:-1])\
+                     and user_input_list[6].lower().startswith('p'))) and not employee_info_already_exists:
 
                     if user_input_list[0].lower().startswith('f'):
                         flight_attendant = FlightAttendant(
@@ -148,10 +153,20 @@ class EmployeeUI:
 
     @staticmethod
     def __show_all_employees():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        print(TextEditor.format_text(EmployeeUI.__option_tuple[1], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
-        pass
+        ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE)
+        print(TextEditor.format_text("Show all employees", TextEditor.UNDERLINE_TEXT))
+        
+        table_header = ("Job title" "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+        all_employees = LogicAPI.get_all_employees()
+        flight_routes_getfunctions_tuple = (["Pilot" if isinstance(employee, Pilot) else "Flight attandant" for employee in all_employees], [employee.get_name for employee in all_employees],[employee.get_ssn for employee in all_employees],\
+            [employee.get_phonenumber for employee in all_employees],[employee.get_home_address for employee in all_employees],[employee.get_email for employee in all_employees],\
+                [employee.get_state for employee in all_employees])
+
+        ComponentUI.fill_in_table(table_header,flight_routes_getfunctions_tuple, False)
+                 
+        ComponentUI.fill_window_and_print_action_line(len(all_employees)+2)
+
+        return ComponentUI.get_user_input()
 
     @staticmethod
     def __show_all_pilots():

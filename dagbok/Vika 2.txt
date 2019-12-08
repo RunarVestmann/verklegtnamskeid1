@@ -1,38 +1,43 @@
-Kæra Dagbók
-
 2.12.2019
-Planið í upphaf dags er að byrja að forrita og gera beinagrind fyrir kerfið, ætlum að vinna við LogicAPI, DataAPI og logic
+Planið í upphaf dags er að byrja að forrita beinagrind fyrir kerfið. Við ætlum að vinna við LogicAPI, DataAPI og logic
 klasa, ef það gengur vel förum við að vinna í UI layer. Um helgina skipulögðum við hvernig við mundum setja þetta upp og 
-Rúnar setti upp file structure og wrapper klasa fyrir window attributes og leið til að edita texta svo að við gætum byrjað í 
-þessu strax. 
-Í lok dags gerðum við það sem við ætluðum okkur og byrjuðum aðeins í því að vinna í QuitUI.
+Rúnar setti upp file structure og wrapper klasa fyrir window attributes og fann leið til að edita texta.
+
+Í lok dags vorum við komnir með beinagrindur fyrir flest alla klasana í klasaritinnu og vorum byrjaðir að kóða QuitUI klasann.
 Lítil mæting í dag vegna misskilnings föstudeginum áður.
+
 Rúnar: LogicAPI og DataAPI
 Hörður: Logic klasa
 Guðmundur, Hörður, Rúnar: Byrjuðu á UI layer
 
 3.12.2019
-Planið í upphaf dags er að halda áfram að vinna í UI layer, bæta við test cases sem hægt er að vinna með í UI layer og vinna
-smá í data layernum.
+Planið í upphaf dags er að halda áfram að vinna í UI layer-num, bæta við test gögnum í LogicAPI sem hægt er að nýta í UI layer-num.
+Rúnar fékk "batman" hlutverkið og var að aðstoða við forritun ásamt því að kóða klasa í Data layer-num.
+
 Í lok dags gerðum við það sem við ætluðum okkur að gera.
+
 Rúnar: Vann í data layernum og aðstoðaði við forritun
 Hörður, Guðmundur: Unnu á UI layer
-Fannar, Patrik: Kláruðu að gera test cases til þess að prófa UI
+Fannar, Patrik: Kláruðu að gera test gögn til þess að hægt væri að prófa UI klasa
 
 4.12.2019
-Planið í upphaf dags er að halda áfram með UI layer, bæta við virkni í logic layer ásamt því að klára að gera get föll í data 
-layer. Eftir daginn í gær var svo aðeins haldið áfram með að byggja upp UI layer um kvöldið. 
-Í lok dags gerðum við það sem við ætluðum okkur, kom upp að sumt hafði gleymst sem að var bætt við. 
+Planið í upphaf dags er að halda áfram með UI layer-inn, bæta við virkni í logic layer-inn ásamt því að klára að gera get föll í data 
+layer-num. Eftir daginn í gær var svo aðeins haldið áfram með að byggja upp UI layer um kvöldið. 
+
+Í lok dags gerðum við það sem við ætluðum okkur en það kom upp að sumt hafði gleymst sem var síðan bætt við. 
+
 Guðmundur: Vann í UI layer
-Hörður, Rúnar: Unnu í allskonar logic files sem að voru eftir
+Hörður, Rúnar: Unnu í allskonar logic files sem voru eftir
 Fannar, Patrik: Unnu í logic files og kláruðu að gera föll í data layer.
 
 5.12.2019 
-Planið í upphaf dags er að testa back-endann og unit testa logic- og data klasa og gá hvort rétt virkni sé til staðar. Ásamt
-þessu þarf að halda áfram með að vinna á UI layer, bæta við macOS support fyrir csv files og framkvæma save föll fyrir data
-layer. 
+Planið í upphaf dags er að unit testa logic- og data klasa til að gá hvort rétt virkni sé til staðar. Ásamt
+því þarf að halda áfram með að vinna i UI layer-num og bæta við macOS support fyrir csv files og kóða save föll fyrir data
+layer.
+
 Í lok dags gerðum við það sem við ætluðum okkur, komnir vel á leið með verkefnið, eina sem er eftir er betri UI layer virkni
 og mögulega meiri macOS support ásamt því að gá virkni Linux varðandi save föll.
+
 Fannar: uppfærði klasarit, gerði data api testing og hjálpaði aðeins með UI layer
 Patrik: data layer klasa testing
 Rúnar, Hörður, Patrik: bjuggu til save föll
@@ -40,15 +45,19 @@ Hörður: bjó til macOS support fyrir csv files
 Guðmundur: Hélt áfram með UI layer
 
 6.12.2019
-Planið í upphaf dags er að vinna mikið í UI layer, bæta við sumum logic föllum og unit testa mikið.
+Planið í upphaf dags er að vinna mikið í UI layer-num ásamt því að bæta við nokkrum logic föllum og unit test-a það sem komið er.
+
 Í lok dags gerðum við það sem við ætluðum okkur.
+
 Guðmundur, Rúnar: Unnu í UI layer
 Patrik, Fannar: Bættu við logic föllum
 Patrik, Hörður: Unit testuðu
 
 8.12.2019
-Vorum byrja testa krofunar og fá allt til að virka 
+Planið í upphaf dags er að kóða leið til að hægt sé að skrá nýjan starfsmann og flugvél inn í kerfið.
 
-Fannar, Rúnar: klaruðu að gera function fyrir að geta buið til alla employees, gerðum greyed out option fyrir employees
-Guðmundur, Patrik: gerðum margt sem tengdist UI.
-Hörður: Var fjarverandi i dag og var rekinn á hopfundi sem keeper of the dagbók.
+Í lok dags er virknin til að geta skráð nýjan starfsmann og flugvél til staðar.
+
+Fannar, Rúnar: Unnu í EmployeeUI klasanum
+Guðmundur, Patrik: Unnu í AirplaneUI klasanum
+Hörður: Komst ekki á þennan stutta sunnudagshitting
