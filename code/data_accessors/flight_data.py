@@ -46,7 +46,7 @@ class FlightData:
     def save_new_flight(flight):
         field_names = ["departure_location", "departure_time", "arrival_location", "arrival_time", "number"]
         with open(FlightData.__flight_data_filename, 'a') as file_stream:
-            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({"departure_location": flight.get_departure_location(),
                  "departure_time": flight.get_departure_time().isoformat(),

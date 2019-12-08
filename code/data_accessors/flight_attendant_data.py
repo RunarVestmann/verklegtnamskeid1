@@ -41,7 +41,7 @@ class FlightAttendantData:
     def save_new_flight_attendant(flight_attendant):
         field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state"]
         with open(FlightAttendantData.__flight_attendant_data_filename, 'a') as file_stream:
-            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({
                 "name": flight_attendant.get_name(),

@@ -33,7 +33,7 @@ class FlightRouteData:
     def save_new_flight_route(flight_route):
         field_names = ["country", "destination", "airport_id", "flight_time", "distance_from_iceland", "contact_name", "emergency_phone"]
         with open(FlightRouteData.__flight_route_data_filename, 'a') as file_stream:
-            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({"country": flight_route.get_country(),
                  "destination": flight_route.get_destination(),

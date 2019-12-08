@@ -43,9 +43,9 @@ class AircraftTypeData:
     @staticmethod
     def save_new_aircraft_type(aircraft):
         field_names = ["plane_type", "model", "capacity", "empty_weight", "max_takeoff_weight",\
-            "unit_thrust","service_ceiling","length","height","wingspan"]
+            "unit_thrust", "service_ceiling", "length", "height", "wingspan"]
         with open(AircraftTypeData.__aircraft_data_filename, 'a') as file_stream:
-            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({
                 "plane_type": aircraft.get_plane_type(),

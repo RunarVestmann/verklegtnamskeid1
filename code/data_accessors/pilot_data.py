@@ -40,7 +40,7 @@ class PilotData:
     def save_new_pilot(pilot):
         field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state", "license"]
         with open(PilotData.__pilot_data_filename, 'a') as file_stream:
-            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({"name": pilot.get_name(),
                  "ssn": pilot.get_ssn(),

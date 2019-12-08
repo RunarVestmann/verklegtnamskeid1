@@ -76,7 +76,7 @@ class VoyageData:
              "flight_attendant6", "flight_attendant7", "flight_attendant8", "flight_attendant9", "airplane_name", "schedule", "state"]
 
         with open(VoyageData.__voyage_data_filename, 'w') as file_stream:
-            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
             writer.writeheader()
             for voyage in voyages:
                 flight1, flight2 = voyage.get_flights()
@@ -175,7 +175,7 @@ class VoyageData:
              "flight_attendant6", "flight_attendant7", "flight_attendant8", "flight_attendant9", "airplane_name", "schedule", "state"]
 
         with open(VoyageData.__voyage_data_filename, 'a') as file_stream:
-            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             flight1, flight2 = voyage.get_flights()
 
