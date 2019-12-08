@@ -43,3 +43,10 @@ Planið í upphaf dags er að vinna mikið í UI layer, bæta við sumum logic f
 Guðmundur, Rúnar: Unnu í UI layer
 Patrik, Fannar: Bættu við logic föllum
 Patrik, Hörður: Unit testuðu
+
+8.12.2019
+Vorum byrja testa krofunar og fá allt til að virka 
+
+Fannar, Rúnar: klaruðu að gera function fyrir að geta buið til alla employees, gerðum greyed out option fyrir employees
+Guðmundur, Patrik: gerðu allt að gera sem tengist airplanes.
+Hörður: Var fjarverandi i dag og var rekinn á hopfundi.
