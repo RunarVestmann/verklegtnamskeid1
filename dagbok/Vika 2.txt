@@ -48,5 +48,5 @@ Patrik, Hörður: Unit testuðu
 Vorum byrja testa krofunar og fá allt til að virka 
 
 Fannar, Rúnar: klaruðu að gera function fyrir að geta buið til alla employees, gerðum greyed out option fyrir employees
-Guðmundur, Patrik: gerðu allt að gera sem tengist airplanes.
-Hörður: Var fjarverandi i dag og var rekinn á hopfundi.
+Guðmundur, Patrik: gerðum margt sem tengdist UI.
+Hörður: Var fjarverandi i dag og var rekinn á hopfundi sem keeper of the dagbók.
