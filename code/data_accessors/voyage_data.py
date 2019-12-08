@@ -44,6 +44,20 @@ class VoyageData:
         return employees_list
 
     @staticmethod
+    def change_saved_voyage(saved_voyage, changed_voyage):
+
+        updated_list_of_voyages = []
+
+        for voyage in VoyageData.get_all_voyages():
+
+            if voyage == saved_voyage:
+                updated_list_of_voyages.append(changed_voyage)
+            else:
+                updated_list_of_voyages.append(voyage)
+
+        VoyageData.overwrite_all_voyages(updated_list_of_voyages)
+
+    @staticmethod
     def get_airplane_voyages(airplane):
         airplanes_voyages = []
 
@@ -52,6 +66,53 @@ class VoyageData:
                 airplanes_voyages.append(voyage)
 
         return airplanes_voyages
+
+    @staticmethod
+    def overwrite_all_voyages(voyages):
+
+        field_names = ["flight1_departure_location", "flight1_departure_time", "flight2_departure_location", "flight2_departure_time",\
+             "captain", "copilot1", "copilot2", "copilot3", "copilot4", "copilot5", "copilot6", "copilot7", "copilot8", "copilot9",\
+             "cabin_manager", "flight_attendant1", "flight_attendant2", "flight_attendant3", "flight_attendant4", "flight_attendant5",\
+             "flight_attendant6", "flight_attendant7", "flight_attendant8", "flight_attendant9", "airplane_name", "schedule", "state"]
+
+        with open(VoyageData.__voyage_data_filename, 'w') as file_stream:
+            writer = csv.DictWriter(file_stream, fieldnames=field_names)
+            writer.writeheader()
+            for voyage in voyages:
+                flight1, flight2 = voyage.get_flights()
+                pilots_ssn_list = [pilot.get_ssn() for pilot in voyage.get_pilots()]
+                VoyageData.__fill_list_with_empty_strings(pilots_ssn_list, VoyageData.__max_pilots_onboard)
+                flight_attendants_ssn_list = [flight_attendant.get_ssn() for flight_attendant in voyage.get_flight_attendants()]
+                VoyageData.__fill_list_with_empty_strings(flight_attendants_ssn_list, VoyageData.__max_flight_attendants_on_board)
+                writer.writerow({
+                "flight1_departure_location": flight1.get_departure_location(),
+                 "flight1_departure_time": flight1.get_departure_time(),
+                 "flight2_departure_location": flight2.get_departure_location(),
+                 "flight2_departure_time": flight2.get_departure_time(),
+                 "captain": pilots_ssn_list[0],
+                 "copilot1": pilots_ssn_list[1],
+                 "copilot2": pilots_ssn_list[2],
+                 "copilot3": pilots_ssn_list[3],
+                 "copilot4": pilots_ssn_list[4],
+                 "copilot5": pilots_ssn_list[5],
+                 "copilot6": pilots_ssn_list[6],
+                 "copilot7": pilots_ssn_list[7],
+                 "copilot8": pilots_ssn_list[8],
+                 "copilot9": pilots_ssn_list[9],
+                 "cabin_manager": flight_attendants_ssn_list[0],
+                 "flight_attendant1": flight_attendants_ssn_list[1],
+                 "flight_attendant2": flight_attendants_ssn_list[2],
+                 "flight_attendant3": flight_attendants_ssn_list[3],
+                 "flight_attendant4": flight_attendants_ssn_list[4],
+                 "flight_attendant5": flight_attendants_ssn_list[5],
+                 "flight_attendant6": flight_attendants_ssn_list[6],
+                 "flight_attendant7": flight_attendants_ssn_list[7],
+                 "flight_attendant8": flight_attendants_ssn_list[8],
+                 "flight_attendant9": flight_attendants_ssn_list[9],
+                 "airplane_name": voyage.get_airplane().get_name(),
+                 "schedule": voyage.get_schedule()[0].isoformat() + '_' + voyage.get_schedule()[1].isoformat(),
+                 "state": voyage.get_state()
+                })
 
     @staticmethod
     def get_all_voyages():
@@ -68,7 +129,7 @@ class VoyageData:
                 for row in reader:
 
                     flight1 = FlightData.get_flight(row["flight1_departure_location"], util.parse(row["flight1_departure_time"]))
-                    flight2 = FlightData.get_flight(row["flight2_departure_location"], util.parse( row["flight2_departure_time"]))
+                    flight2 = FlightData.get_flight(row["flight2_departure_location"], util.parse(row["flight2_departure_time"]))
 
                     pilots_ssn_list = VoyageData.__get_employees("captain", "copilot", row)
 
@@ -99,7 +160,7 @@ class VoyageData:
 
                 VoyageData.__all_voyages_list = all_voyages_list
 
-            return VoyageData.__all_voyages_list
+        return VoyageData.__all_voyages_list
 
     @staticmethod
     def __fill_list_with_empty_strings(a_list, max_length):
@@ -117,6 +178,7 @@ class VoyageData:
             writer = csv.DictWriter(file_stream, fieldnames=field_names)
 
             flight1, flight2 = voyage.get_flights()
+
             pilots_ssn_list = []
 
             #Add all the pilots social security numbers to the list
@@ -130,7 +192,7 @@ class VoyageData:
 
             #Add all the flight attendants social security numbers to the list
             for flight_attendant in voyage.get_flight_attendants():
-                flight_attendant.append(flight_attendant)
+                flight_attendants_ssn_list.append(flight_attendant)
 
             #Fill the list with empty strings if the number of flight attendants registered < max
             VoyageData.__fill_list_with_empty_strings(flight_attendants_ssn_list, VoyageData.__max_flight_attendants_on_board)

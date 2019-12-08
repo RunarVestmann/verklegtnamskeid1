@@ -72,8 +72,8 @@ class DataAPI:
         VoyageData.save_new_voyage(voyage)
 
     @staticmethod
-    def change_saved_voyage(voyage):
-        pass
+    def change_saved_voyage(saved_voyage, changed_voyage):
+        VoyageData.change_saved_voyage(saved_voyage, changed_voyage)
 
     @staticmethod
     def get_all_voyages():
