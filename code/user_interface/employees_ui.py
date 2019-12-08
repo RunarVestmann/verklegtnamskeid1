@@ -1,6 +1,9 @@
 from user_interface.window import Window
 from user_interface.component_ui import ComponentUI
 from user_interface.text_editor import TextEditor
+from data_models.flight_attendant import FlightAttendant
+from apis.logic_api import LogicAPI
+from data_models.pilot import Pilot
 
 
 class EmployeeUI:
@@ -8,7 +11,7 @@ class EmployeeUI:
     __option_tuple = ('New employees', 'Show all employees', 'Show all pilots', 'Show all flight attendants', 'Find employee by name',\
                        'Find pilots by license', 'Show employees on duty', 'Show employees off duty')
     
-
+    __FRAME_IN_USE = ComponentUI.get_main_options()[1]
     @staticmethod
     def show():
         
@@ -18,7 +21,7 @@ class EmployeeUI:
             EmployeeUI.__show_all_flight_attendants, EmployeeUI.__show_employee_by_name_finder, EmployeeUI.__show_pilot_by_license_finder,\
                 EmployeeUI.__show_employees_on_duty, EmployeeUI.__show_employees_off_duty)
 
-        return ComponentUI.run_frame(EmployeeUI.__option_tuple, ComponentUI.get_main_options()[1], valid_user_inputs, frame_functions)
+        return ComponentUI.run_frame(EmployeeUI.__option_tuple, EmployeeUI.__FRAME_IN_USE, valid_user_inputs, frame_functions)
 
     @staticmethod
     def show_employee_menu():
@@ -50,11 +53,98 @@ class EmployeeUI:
     DUMMYNMBR=1
     @staticmethod
     def __show_new_employee_constructor():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        print(TextEditor.format_text(EmployeeUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
-        pass
+        input_message_tuple = ("Insert job position(p for pilot,f for flight attendant): ","Insert Name: ","Insert Social security number: ",\
+            "Insert Phone number: ","Insert Home address: ","Insert E-mail: ")
+        user_input = ""
+        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+        option_tuple = {"Job position","Name","Social security number","Phone number","Home address","E-mail"}
+        user_input_list = [""] * len(option_tuple)
+        valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
+        employee_info_already_exists = False
+        while user_input not in navigation_bar_options:
+            ComponentUI.print_frame_constructor_menu(option_tuple,EmployeeUI.__FRAME_IN_USE,"New employeee",\
+            user_input_list,True)
+            user_input = ComponentUI.get_user_input()
+            
+            
+            if not user_input:
+                continue
+            user_input = ComponentUI.remove_brackets(user_input)
+            
+            
+            if user_input in valid_user_inputs:
+                index = int(user_input) - 1
+                ComponentUI.print_frame_constructor_menu(option_tuple,EmployeeUI.__FRAME_IN_USE,"New employeee",\
+                user_input_list,False,index)
 
+                user_input = input(input_message_tuple[index]).strip()
+                if not user_input:
+                    continue
+
+                if index == 0:
+                    if not user_input.lower().startswith("f") and not user_input.lower().startswith("p"):
+                        employee_info_already_exists = True
+                        user_input = user_input + " " + TextEditor.color_text_background("Please insert 'f' or 'p', another input is required",TextEditor.RED_BACKGROUND)
+                    else:
+                        employee_info_already_exists = False
+
+                elif index == 1:
+                    contact_name_list = []
+                    for name in user_input.split():
+                        contact_name_list.append(name.capitalize())
+                    user_input = " ".join(contact_name_list)
+
+                elif index == 2 or index == 3:
+                    if '-' in user_input:
+                        user_input = user_input.replace('-', '')
+                    if '' in user_input:
+                        user_input = user_input.replace(' ', '')
+                    
+                    if not user_input.isdigit():
+                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
+                        employee_info_already_exists = True
+                    else:
+                        employee_info_already_exists = False
+                elif index == 5:
+                    if not "@" in user_input and not "." in user_input:
+                        employee_info_already_exists = True
+                        user_input = user_input + " " + TextEditor.color_text_background("Invalid e-mail, another input is required", TextEditor.RED_BACKGROUND)
+                    
+                user_input_list[index] = user_input
+                user_input = ""    
+
+            elif user_input.startswith('s'):
+                if all(user_input_list) and not employee_info_already_exists:
+                    if user_input_list[0].lower().startswith('f'):
+                        flight_attendant = FlightAttendant(
+                            user_input_list[1],
+                            user_input_list[2],
+                            user_input_list[3],
+                            user_input_list[4],
+                            user_input_list[5],
+                            "Not scheduled for flight"
+                            
+                        )   
+                        LogicAPI.save_new_flight_attendant(flight_attendant)
+
+                        break
+                    
+                    if user_input_list[0].lower().startswith('p'):
+                        pilot = Pilot(
+                            user_input_list[1],
+                            user_input_list[2],
+                            user_input_list[3],
+                            user_input_list[4],
+                            user_input_list[5],
+                            "Not scheduled for flight",
+                            "Boeing test"
+                            
+                        )   
+                        LogicAPI.save_new_pilot(pilot)
+
+                        break
+
+        return user_input      
     @staticmethod
     def __show_all_employees():
         ComponentUI.print_header(ComponentUI.get_main_options()[1])
