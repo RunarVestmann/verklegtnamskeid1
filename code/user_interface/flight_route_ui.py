@@ -5,6 +5,7 @@ from data_models.flight_route import FlightRoute
 from apis.logic_api import LogicAPI
 
 class FlightRouteUI:
+    __FRAME_IN_USE_STR = ComponentUI.get_main_options()[3]
 
     @staticmethod
     def show():
@@ -14,7 +15,7 @@ class FlightRouteUI:
 
         frame_functions = (FlightRouteUI.__show_new_flight_route_constructor, FlightRouteUI.__show_all_flight_routes)
 
-        return ComponentUI.run_frame(option_tuple, ComponentUI.get_main_options()[3], valid_user_inputs, frame_functions)
+        return ComponentUI.run_frame(option_tuple, FlightRouteUI.__FRAME_IN_USE_STR, valid_user_inputs, frame_functions)
 
     @staticmethod
     def __show_new_flight_route_constructor():
@@ -125,7 +126,7 @@ class FlightRouteUI:
     @staticmethod
     def __show_all_flight_routes():
 
-        ComponentUI.print_header(ComponentUI.get_main_options()[3])
+        ComponentUI.print_header(FlightRouteUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("Show all flight routes", TextEditor.UNDERLINE_TEXT))
         
         table_header = ("Destination", "Airport", "Country", "Flight-time", "Distance", "Contact", "Emergency phone")
