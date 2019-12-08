@@ -5,7 +5,7 @@ from data_models.airplane import Airplane
 from apis.logic_api import LogicAPI
 
 class AirplanesUI:
-
+    __FRAME_IN_USE_STRING = ComponentUI.get_main_options()[2]
     __option_tuple = ('New airplane', 'Show all airplanes', 'Show airplanes in use', 'Show all airplane types')
 
     @staticmethod
@@ -21,22 +21,21 @@ class AirplanesUI:
         frame_functions = (AirplanesUI.__show_new_airplane_constructor, AirplanesUI.__show_all_airplanes,\
             AirplanesUI.__show_airplanes_in_use, AirplanesUI.__show_all_airplane_types)
 
-        return ComponentUI.run_frame(option_tuple, ComponentUI.get_main_options()[2], valid_user_inputs, frame_functions)
+        return ComponentUI.run_frame(option_tuple, AirplanesUI.__FRAME_IN_USE_STRING, valid_user_inputs, frame_functions)
 
     DUMMYNMBR=1
     @staticmethod
     def __show_new_airplane_constructor():
-        
-        ComponentUI.print_header(ComponentUI.get_main_options()[2])
-        print(TextEditor.format_text(AirplanesUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
+               
+        print(TextEditor.format_text(AirplanesUI.__FRAME_IN_USE_STRING, TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
         pass 
 
     @staticmethod
     def __show_all_airplanes():
             #þarf að setja inni loopu og vilid opions
-        ComponentUI.print_header(ComponentUI.get_main_options()[2])
-        print(TextEditor.format_text("Show all airplanes", TextEditor.UNDERLINE_TEXT))
+        print(TextEditor.format_text(AirplanesUI.__FRAME_IN_USE_STRING, TextEditor.UNDERLINE_TEXT))
+        print(TextEditor.format_text("All airplanes", TextEditor.UNDERLINE_TEXT))
  
         table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
         airplanes_list = LogicAPI.get_all_airplanes()
@@ -52,14 +51,14 @@ class AirplanesUI:
 
     @staticmethod
     def __show_airplanes_in_use():
-        ComponentUI.print_header(ComponentUI.get_main_options()[2])
+        print(TextEditor.format_text(AirplanesUI.__FRAME_IN_USE_STRING, TextEditor.UNDERLINE_TEXT))
         print(TextEditor.format_text(AirplanesUI.__option_tuple[2], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
         pass
     
     @staticmethod
     def __show_all_airplane_types():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
+        print(TextEditor.format_text(AirplanesUI.__FRAME_IN_USE_STRING, TextEditor.UNDERLINE_TEXT))
         print(TextEditor.format_text(AirplanesUI.__option_tuple[3], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
 
