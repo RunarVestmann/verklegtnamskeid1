@@ -55,6 +55,36 @@ class PilotData:
             PilotData.__all_pilots_list.append(pilot)
 
     @staticmethod
-    def change_saved_pilot(pilot):
-        pass
-    
+    def change_saved_pilot(saved_pilot, changed_pilot):
+        updated_list_of_pilots = []
+
+        for pilot in PilotData.get_all_pilots():
+
+            if pilot == saved_pilot:
+                updated_list_of_pilots.append(changed_pilot)
+            else:
+                updated_list_of_pilots.append(pilot)
+
+        PilotData.__overwrite_all_pilots(updated_list_of_pilots)
+
+    @staticmethod
+    def __overwrite_all_pilots(pilots):
+        field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state", "license"]
+        with open(PilotData.__pilot_data_filename, 'w') as file_stream:
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
+
+            writer.writeheader()
+
+            PilotData.__all_pilots_list = []
+
+            for pilot in pilots:
+                PilotData.__all_pilots_list.append(pilot)
+                writer.writerow({
+                    "name": pilot.get_name(),
+                    "ssn": pilot.get_ssn(),
+                    "phonenumber": pilot.get_phonenumber(),
+                    "home_address": pilot.get_home_address(),
+                    "email": pilot.get_email(),
+                    "state": pilot.get_state(),
+                    "license": pilot.get_license()
+                    })

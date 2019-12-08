@@ -120,4 +120,8 @@ class DataAPI:
     @staticmethod
     def get_flight(departure_location, departure_time):
         return FlightData.get_flight(departure_location, departure_time)
+
+    @staticmethod
+    def change_saved_flight(saved_flight, changed_flight):
+        FlightData.change_saved_flight(saved_flight, changed_flight)
         

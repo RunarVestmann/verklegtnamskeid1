@@ -11,8 +11,11 @@ class VoyageLogic:
 
     @staticmethod
     def get_all_voyages():
-
         return DataAPI.get_all_voyages()
+
+    @staticmethod
+    def change_saved_voyage(saved_voyage, changed_voyage):
+        DataAPI.change_saved_voyage(saved_voyage, changed_voyage)
 
     @staticmethod
     def get_ongoing_voyages():#needs testing

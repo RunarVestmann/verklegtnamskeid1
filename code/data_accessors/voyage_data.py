@@ -55,7 +55,7 @@ class VoyageData:
             else:
                 updated_list_of_voyages.append(voyage)
 
-        VoyageData.overwrite_all_voyages(updated_list_of_voyages)
+        VoyageData.__overwrite_all_voyages(updated_list_of_voyages)
 
     @staticmethod
     def get_airplane_voyages(airplane):
@@ -68,7 +68,7 @@ class VoyageData:
         return airplanes_voyages
 
     @staticmethod
-    def overwrite_all_voyages(voyages):
+    def __overwrite_all_voyages(voyages):
 
         field_names = ["flight1_departure_location", "flight1_departure_time", "flight2_departure_location", "flight2_departure_time",\
              "captain", "copilot1", "copilot2", "copilot3", "copilot4", "copilot5", "copilot6", "copilot7", "copilot8", "copilot9",\
@@ -78,12 +78,15 @@ class VoyageData:
         with open(VoyageData.__voyage_data_filename, 'w') as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
             writer.writeheader()
+            VoyageData.__all_voyages_list = []
             for voyage in voyages:
+                VoyageData.__all_voyages_list.append(voyage)
                 flight1, flight2 = voyage.get_flights()
                 pilots_ssn_list = [pilot.get_ssn() for pilot in voyage.get_pilots()]
                 VoyageData.__fill_list_with_empty_strings(pilots_ssn_list, VoyageData.__max_pilots_onboard)
                 flight_attendants_ssn_list = [flight_attendant.get_ssn() for flight_attendant in voyage.get_flight_attendants()]
                 VoyageData.__fill_list_with_empty_strings(flight_attendants_ssn_list, VoyageData.__max_flight_attendants_on_board)
+
                 writer.writerow({
                 "flight1_departure_location": flight1.get_departure_location(),
                  "flight1_departure_time": flight1.get_departure_time(),
@@ -113,6 +116,8 @@ class VoyageData:
                  "schedule": voyage.get_schedule()[0].isoformat() + '_' + voyage.get_schedule()[1].isoformat(),
                  "state": voyage.get_state()
                 })
+
+        
 
     @staticmethod
     def get_all_voyages():

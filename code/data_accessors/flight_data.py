@@ -43,6 +43,37 @@ class FlightData:
         return None
 
     @staticmethod
+    def change_saved_flight(saved_flight, changed_flight):
+        updated_list_of_flights = []
+
+        for flight in FlightData.get_all_flights():
+
+            if flight == saved_flight:
+                updated_list_of_flights.append(changed_flight)
+            else:
+                updated_list_of_flights.append(flight)
+
+        FlightData.__overwrite_all_flights(updated_list_of_flights)
+
+    @staticmethod
+    def __overwrite_all_flights(flights):
+        field_names = ["departure_location", "departure_time", "arrival_location", "arrival_time", "number"]
+        FlightData.__all_flights_list = []
+        with open(FlightData.__flight_data_filename, 'w') as file_stream:
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
+            writer.writeheader()
+            for flight in flights:
+                FlightData.__all_flights_list.append(flight)
+                writer.writerow({
+                    "departure_location": flight.get_departure_location(),
+                    "departure_time": flight.get_departure_time().isoformat(),
+                    "arrival_location": flight.get_arrival_location(),
+                    "arrival_time": flight.get_arrival_time().isoformat(),
+                    "number": flight.get_number()
+                    })
+
+
+    @staticmethod
     def save_new_flight(flight):
         field_names = ["departure_location", "departure_time", "arrival_location", "arrival_time", "number"]
         with open(FlightData.__flight_data_filename, 'a') as file_stream:

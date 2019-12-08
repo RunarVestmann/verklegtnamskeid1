@@ -14,5 +14,9 @@ class FlightLogic:
         return DataAPI.get_flight(departure_location, departure_time)
 
     @staticmethod
+    def change_saved_flight(saved_flight, changed_flight):
+        DataAPI.change_saved_flight(saved_flight, changed_flight)
+
+    @staticmethod
     def save_new_flight(flight):
         DataAPI.save_new_flight(flight)

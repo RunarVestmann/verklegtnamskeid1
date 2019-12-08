@@ -67,6 +67,10 @@ class LogicAPI:
     def save_new_pilot(pilot):
         PilotLogic.save_new_pilot(pilot)
 
+    @staticmethod
+    def change_saved_pilot(pilot):
+        PilotLogic.change_saved_pilot(pilot)
+
         
     @staticmethod
     def is_pilot_ssn_available(pilot_ssn):
@@ -84,6 +88,10 @@ class LogicAPI:
         FlightAttendantLogic.save_new_flight_attendant(flight_attendant)
 
     @staticmethod
+    def change_saved_flight_attendant(flight_attendant):
+        FlightAttendantLogic.change_saved_flight_attendant(flight_attendant)
+
+    @staticmethod
     def is_flight_attendant_ssn_avaliable(flight_attendant_ssn):
         return FlightAttendantLogic.is_flight_attendant_ssn_avaliable(flight_attendant_ssn)
         
@@ -92,6 +100,10 @@ class LogicAPI:
     @staticmethod
     def save_new_voyage(voyage):
         VoyageLogic.save_new_voyage(voyage)
+
+    @staticmethod
+    def change_saved_voyage(saved_voyage, changed_voyage):
+        VoyageLogic.change_saved_voyage(saved_voyage, changed_voyage)
 
     @staticmethod
     def get_ongoing_voyages():
@@ -216,6 +228,10 @@ class LogicAPI:
     @staticmethod
     def get_flight(departure_time):
         return FlightLogic.get_flight(departure_time)
+
+    @staticmethod
+    def change_saved_flight(saved_flight, changed_flight):
+        FlightLogic.change_saved_flight(saved_flight, changed_flight)
 
     @staticmethod
     def save_new_flight(flight):
