@@ -32,38 +32,25 @@ class EmployeeUI:
             print("({}) {}".format(i+1, option))
         ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1)
     
-     
-    @staticmethod
-    def action_employees_menu(user_input):
-        option_tuple = EmployeeUI.__option_tuple  
-        option_functions = (EmployeeUI.show_new_employee_constructor, EmployeeUI.show_all_employees, EmployeeUI.show_all_pilots, EmployeeUI.show_all_flight_attendants, EmployeeUI.show_employee_by_name_finder, EmployeeUI.show_pilot_by_license_finder, EmployeeUI.show_employees_on_duty, EmployeeUI.show_employees_off_duty)
-
-       #####  Test input ####            
-        selected_number = ComponentUI.test_user_input_chose_index(user_input, len(option_tuple)) #eather int>0 or False - may not be 0
-        if selected_number:                                                                      #and is with in range of possible menu list
-            selected_index = selected_number-1
-            new_display = [option_functions[selected_index]]
-            return new_display
-        else:
-            return False
-              
-
 
 
     DUMMYNMBR=1
     @staticmethod
     def __show_new_employee_constructor():
-        input_message_tuple = ("Insert job position(p for pilot,f for flight attendant): ","Insert Name: ","Insert Social security number: ",\
-            "Insert Phone number: ","Insert Home address: ","Insert E-mail: ")
+        input_message_tuple = ("Insert job position(p for pilot,f for flight attendant): ", "Insert Name: ", "Insert Social security number: ",\
+            "Insert Phone number: ", "Insert Home address: ", "Insert E-mail: ", "Insert License: ")
         user_input = ""
         navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-        option_tuple = {"Job position","Name","Social security number","Phone number","Home address","E-mail"}
+        option_tuple = ("Job position", "Name", "Social security number", "Phone number", "Home address", "E-mail", "License")
         user_input_list = [""] * len(option_tuple)
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
         employee_info_already_exists = False
         while user_input not in navigation_bar_options:
-            ComponentUI.print_frame_constructor_menu(option_tuple,EmployeeUI.__FRAME_IN_USE,"New employeee",\
-            user_input_list,True)
+
+            greyed_out_option_index = 6 if not user_input_list[0].lower().startswith('p') else 1000
+
+            ComponentUI.print_frame_constructor_menu(option_tuple, EmployeeUI.__FRAME_IN_USE, "New employeee",\
+            user_input_list,True, greyed_out_option_index=greyed_out_option_index)
             user_input = ComponentUI.get_user_input()
             
             
@@ -73,7 +60,14 @@ class EmployeeUI:
             
             
             if user_input in valid_user_inputs:
+
                 index = int(user_input) - 1
+
+                if index == 6:
+                    if not user_input_list[0].lower().startswith('p'):
+                        continue
+
+
                 ComponentUI.print_frame_constructor_menu(option_tuple,EmployeeUI.__FRAME_IN_USE,"New employeee",\
                 user_input_list,False,index)
 
@@ -82,6 +76,9 @@ class EmployeeUI:
                     continue
 
                 if index == 0:
+                    if user_input.lower().startswith('f'):
+                        user_input_list[6] = ""
+
                     if not user_input.lower().startswith("f") and not user_input.lower().startswith("p"):
                         employee_info_already_exists = True
                         user_input = user_input + " " + TextEditor.color_text_background("Please insert 'f' or 'p', another input is required",TextEditor.RED_BACKGROUND)
@@ -95,6 +92,7 @@ class EmployeeUI:
                     user_input = " ".join(contact_name_list)
 
                 elif index == 2 or index == 3:
+
                     if '-' in user_input:
                         user_input = user_input.replace('-', '')
                     if '' in user_input:
@@ -105,16 +103,19 @@ class EmployeeUI:
                         employee_info_already_exists = True
                     else:
                         employee_info_already_exists = False
+
                 elif index == 5:
-                    if not "@" in user_input and not "." in user_input:
+                    if "@" not in user_input and "." not in user_input:
                         employee_info_already_exists = True
                         user_input = user_input + " " + TextEditor.color_text_background("Invalid e-mail, another input is required", TextEditor.RED_BACKGROUND)
-                    
+
                 user_input_list[index] = user_input
-                user_input = ""    
+                user_input = ""
 
             elif user_input.startswith('s'):
+
                 if all(user_input_list) and not employee_info_already_exists:
+
                     if user_input_list[0].lower().startswith('f'):
                         flight_attendant = FlightAttendant(
                             user_input_list[1],
@@ -123,13 +124,12 @@ class EmployeeUI:
                             user_input_list[4],
                             user_input_list[5],
                             "Not scheduled for flight"
-                            
-                        )   
+                        )
                         LogicAPI.save_new_flight_attendant(flight_attendant)
 
                         break
-                    
-                    if user_input_list[0].lower().startswith('p'):
+
+                    elif user_input_list[0].lower().startswith('p'):
                         pilot = Pilot(
                             user_input_list[1],
                             user_input_list[2],
@@ -138,13 +138,14 @@ class EmployeeUI:
                             user_input_list[5],
                             "Not scheduled for flight",
                             "Boeing test"
-                            
-                        )   
+                        )
                         LogicAPI.save_new_pilot(pilot)
 
                         break
 
-        return user_input      
+        return user_input
+
+
     @staticmethod
     def __show_all_employees():
         ComponentUI.print_header(ComponentUI.get_main_options()[1])

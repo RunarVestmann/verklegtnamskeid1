@@ -27,14 +27,15 @@ class ComponentUI:
         ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, False)
 
     @staticmethod
-    def print_frame_constructor_menu(option_tuple, underlined_main_option, underlined_sub_option, user_input_list,print_submit=False, selected_option_index=1000, ):
+    def print_frame_constructor_menu(option_tuple, underlined_main_option, underlined_sub_option,\
+         user_input_list,print_submit=False, selected_option_index=1000, greyed_out_option_index=1000):
 
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
 
         for i, option in enumerate(option_tuple):
             if print_submit:
-                print("({}) {}: {}".format(i+1, option, "" if not user_input_list else user_input_list[i]))
+                print("({}) {}: {}".format(i+1, TextEditor.color_text(option,TextEditor.DARKGRAY_TEXT) if i == greyed_out_option_index else option, "" if not user_input_list else user_input_list[i]))
             else:
                 print("- {}: {}".format(option if selected_option_index != i else TextEditor.color_text(option, TextEditor.BLUE_TEXT),\
                      "" if not user_input_list else user_input_list[i]))
