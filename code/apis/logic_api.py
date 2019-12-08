@@ -182,9 +182,9 @@ class LogicAPI:
 
     @staticmethod
     def get_all_airplanes():
-        return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
-        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
-        #return AirplaneLogic.get_all_airplanes()
+        # return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
+        # Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
+        return AirplaneLogic.get_all_airplanes()
 
     @staticmethod
     def get_all_airplanes_in_use():

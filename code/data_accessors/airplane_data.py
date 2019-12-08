@@ -26,8 +26,8 @@ class AirplaneData:
             with open(AirplaneData.__airplane_data_filename, 'r') as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
-                    all_airplanes_list.append(Airplane(row["name"], AircraftTypeData.get_aircraft_type(row["aircraft_type"]),\
-                        row["manufacturer"], row["seat_count"], row["state"]))
+                    all_airplanes_list.append(Airplane(row["name"], row["aircraft_type"],\
+                        row["manufacturer"], row["seat_count"], row["state"]))  #AircraftTypeData.get_aircraft_type(row["aircraft_type"])
                         
             AirplaneData.__all_airplanes_list = all_airplanes_list
 
@@ -52,7 +52,7 @@ class AirplaneData:
 
             writer.writerow({
                  "name": airplane.get_name(),
-                 "aircraft_type": airplane.get_type().get_plane_type(),
+                 "aircraft_type": airplane.get_type(), #.get_plane_type(),
                  "manufacturer": airplane.get_manufacturer(),
                  "seat_count": airplane.get_seat_count(),
                  "state": airplane.get_state()})
