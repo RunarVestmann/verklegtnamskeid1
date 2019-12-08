@@ -1,3 +1,5 @@
+Kæra Dagbók
+
 25.11.2019
 Planið í upphaf dags er að rifja upp hvernig á að nota git og github og fara vel yfir verkefnið, eftir það ætlum við að vinna
 saman við gerð kröfulistans. Ef það gengur vel þá jafnvel förum við í það að gera notkunartilvikin.
