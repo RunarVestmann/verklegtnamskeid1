@@ -1,6 +1,7 @@
 from user_interface.window import Window
 from user_interface.text_editor import TextEditor
 from user_interface.component_ui import ComponentUI
+from data_models.airplane import Airplane
 from apis.logic_api import LogicAPI
 
 class AirplanesUI:
@@ -9,40 +10,45 @@ class AirplanesUI:
 
     @staticmethod
     def show():
+        option_tuple = ('New airplane', 'Show all airplanes', 'Show airplanes in use', 'Show all airplane types')
 
-        valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(AirplanesUI.__option_tuple))
+        valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
 
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+        #navigation_bar_options = ComponentUI.get_navigation_options_tuple()
 
         frame_functions = (AirplanesUI.__show_new_airplane_constructor, AirplanesUI.__show_all_airplanes,\
             AirplanesUI.__show_airplanes_in_use, AirplanesUI.__show_all_airplane_types)
 
-        user_input = ""
+        return ComponentUI.run_frame(option_tuple, ComponentUI.get_main_options()[2], valid_user_inputs, frame_functions)
 
-        while user_input not in navigation_bar_options:
+        
+        # user_input = ""
 
-            ComponentUI.print_frame_menu(AirplanesUI.__option_tuple, ComponentUI.get_main_options()[2])
+        # while user_input not in navigation_bar_options:
 
-            user_input = ComponentUI.get_user_input()
+        #     ComponentUI.print_frame_menu(AirplanesUI.__option_tuple, ComponentUI.get_main_options()[2])
 
-            if not user_input:
-                continue
+        #     user_input = ComponentUI.get_user_input()
 
-            user_input = ComponentUI.remove_brackets(user_input)
+        #     if not user_input:
+        #         continue
 
-            if user_input in valid_user_inputs:
+        #     user_input = ComponentUI.remove_brackets(user_input)
 
-                index = int(user_input) - 1
+        #     if user_input in valid_user_inputs:
 
-                user_input = frame_functions[index]()
+        #         index = int(user_input) - 1
 
-        return user_input
+        #         user_input = frame_functions[index]()
+
+        # return user_input
 
     #The functions below need to be implemented
 
     DUMMYNMBR=1
     @staticmethod
     def __show_new_airplane_constructor():
+        
         ComponentUI.print_header(ComponentUI.get_main_options()[2])
         print(TextEditor.format_text(AirplanesUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
         ComponentUI.fill_window_and_print_action_line(AirplanesUI.DUMMYNMBR, False)
@@ -52,8 +58,7 @@ class AirplanesUI:
     def __show_all_airplanes():
             #þarf að setja inni loopu og vilid opions
         ComponentUI.print_header(ComponentUI.get_main_options()[2])
-        print(TextEditor.format_text(AirplanesUI.__option_tuple[1], TextEditor.UNDERLINE_TEXT))
-
+        print(TextEditor.format_text("Show all airplanes", TextEditor.UNDERLINE_TEXT))
  
         table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
         airplanes_list = LogicAPI.get_all_airplanes()
@@ -63,6 +68,8 @@ class AirplanesUI:
         ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
                  
         ComponentUI.fill_window_and_print_action_line(len(airplanes_list)+2)
+
+        return ComponentUI.get_user_input()
 
 
     @staticmethod
