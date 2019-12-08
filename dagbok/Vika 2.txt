@@ -1,10 +1,12 @@
+Kæra Dagbók
+
 2.12.2019
 Planið í upphaf dags er að byrja að forrita og gera beinagrind fyrir kerfið, ætlum að vinna við LogicAPI, DataAPI og logic
 klasa, ef það gengur vel förum við að vinna í UI layer. Um helgina skipulögðum við hvernig við mundum setja þetta upp og 
 Rúnar setti upp file structure og wrapper klasa fyrir window attributes og leið til að edita texta svo að við gætum byrjað í 
 þessu strax. 
 Í lok dags gerðum við það sem við ætluðum okkur og byrjuðum aðeins í því að vinna í QuitUI.
-Lítil mæting í dag vegna misskilnings fostudeginum aður.
+Lítil mæting í dag vegna misskilnings föstudeginum áður.
 Rúnar: LogicAPI og DataAPI
 Hörður: Logic klasa
 Guðmundur, Hörður, Rúnar: Byrjuðu á UI layer
