@@ -9,7 +9,7 @@ class EmployeeUI:
     #Generate a tuple that holds all the valid user inputs
     __option_tuple = ('New employees', 'Show all employees', 'Show all pilots', 'Show all flight attendants', 'Find employee by name or ssn',\
                        'Find pilots by license', 'Show employees on duty', 'Show employees off duty')
-    
+  
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[1]
     @staticmethod
     def show():
@@ -24,7 +24,8 @@ class EmployeeUI:
     
     @staticmethod
     def __show_new_employee_constructor():
-        input_message_tuple = ("Insert job title('f' for flight attendant, 'p' for pilot): ", "Insert Name: ", "Insert Social security number: ",\
+        input_message_tuple = ("Insert job title(" + TextEditor.format_text('f', TextEditor.BOLD_TEXT) + " for flight attendant, "\
+            + TextEditor.format_text('p', TextEditor.BOLD_TEXT)+ " for pilot): ", "Insert Name: ", "Insert Social security number: ",\
             "Insert Phone number: ", "Insert Home address: ", "Insert E-mail: ", "Insert License: ")
         user_input = ""
         navigation_bar_options = ComponentUI.get_navigation_options_tuple()
@@ -34,22 +35,23 @@ class EmployeeUI:
         employee_info_already_exists = False
         while user_input not in navigation_bar_options:
 
-            greyed_out_option_index = [6] if not user_input_list[0].lower().startswith('p') else [1000]
+            greyed_out_option_index_list = [6] if not user_input_list[0].lower().startswith('p') else []
 
             ComponentUI.print_frame_constructor_menu(option_tuple, EmployeeUI.__FRAME_IN_USE_STR, "New employeee",\
-            user_input_list, True, greyed_out_option_index_list=greyed_out_option_index)
+            user_input_list, True, greyed_out_option_index_list=greyed_out_option_index_list)
             user_input = ComponentUI.get_user_input()
             
             
             if not user_input:
                 continue
+
             user_input = ComponentUI.remove_brackets(user_input)
-            
             
             if user_input in valid_user_inputs:
 
                 index = int(user_input) - 1
 
+                #Don't allow the user to enter a license if the employee ain't a pilot
                 if index == 6:
                     if not user_input_list[0].lower().startswith('p'):
                         continue
@@ -62,6 +64,7 @@ class EmployeeUI:
                 if not user_input:
                     continue
 
+                #Only accept something that starts with f or p in the input for the job title
                 if index == 0:
 
                     if user_input.lower().startswith('f'):
@@ -76,12 +79,14 @@ class EmployeeUI:
                     else:
                         employee_info_already_exists = False
 
+                #Capitalize the first letters of the name the user inputs
                 elif index == 1:
-                    contact_name_list = []
+                    name_list = []
                     for name in user_input.split():
-                        contact_name_list.append(name.capitalize())
-                    user_input = " ".join(contact_name_list)
+                        name_list.append(name.capitalize())
+                    user_input = " ".join(name_list)
 
+                #Remove any '-' and whitespace from the user input and tell the user if the input is invalid
                 elif index == 2 or index == 3:
 
                     if '-' in user_input:
@@ -95,7 +100,7 @@ class EmployeeUI:
                     else:
                         employee_info_already_exists = False
 
-                #Email error check
+                #Check if email is at least of length 5 and contains @ and .
                 elif index == 5:
                     if "@" not in user_input and "." not in user_input and len(user_input) < 5:
                         employee_info_already_exists = True
@@ -199,8 +204,6 @@ class EmployeeUI:
 
         info_header_tuple = ("Job title", "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
 
-        input_message = "Invalid input"
-
         invalid_input = False
 
         while user_input not in navigation_bar_options:
@@ -209,7 +212,7 @@ class EmployeeUI:
 
             ComponentUI.fill_window_and_print_action_line(1)
 
-            user_input = input(TextEditor.color_text_background("Insert name or ssn: ") if invalid_input else "Insert name or ssn: ").strip()
+            user_input = input("Insert name or ssn: ").strip()
 
             employees = []
 
@@ -275,12 +278,50 @@ class EmployeeUI:
     @staticmethod
     def __show_pilot_by_license_finder():
         
+        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
 
-        ComponentUI.print_frame_table_menu()
+        user_input = ""
 
-        input("Insert a license: ")
-        
-        
+        info_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+
+        invalid_input = False
+
+        while user_input not in navigation_bar_options:
+            ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find pilots by license", TextEditor.UNDERLINE_TEXT))
+
+            ComponentUI.fill_window_and_print_action_line(1)
+
+            user_input = input("Insert license: ").strip()
+
+            if not user_input:
+                continue
+
+            pilots_list = []
+
+            pilots_list = LogicAPI.get_licensed_pilots(user_input)
+
+            ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find pilots by license", TextEditor.UNDERLINE_TEXT))
+
+            if not pilots_list:
+                
+                ComponentUI.centered_text_message("Could not find a pilot with a license for {}".format(user_input))
+            
+                return ComponentUI.get_user_input()
+
+            else: 
+                pilot_info_tuple = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
+                [pilot.get_phonenumber() for pilot in pilots_list],[pilot.get_home_address() for pilot in pilots_list],[pilot.get_email() for pilot in pilots_list],\
+                [pilot.get_state() for pilot in pilots_list])
+
+            ComponentUI.print_frame_table_menu(info_header_tuple, pilot_info_tuple, len(pilot_info_tuple[0]), EmployeeUI.__FRAME_IN_USE_STR, "Find pilots by license")
+            
+            break #Needs more 
+
+
+        return ComponentUI.get_user_input()
+
 
     @staticmethod
     def __show_employees_on_duty():

@@ -58,9 +58,7 @@ class LogicAPI:
 
     @staticmethod
     def get_licensed_pilots(pilot_license):
-        return [Pilot("Fannar","1803823879","7746969","4661200","Drekagili","fannark82@msn.is","Waiting for flight to Iceland","Silverplate B-29"),\
-        Pilot("Patrik","2004972309","7721234","4601600","Skessugili","patrik97@simnet.is","Not scheduled for flight","Silverplate B-29")]
-        #return PilotLogic.get_licensed_pilots(pilot_license)
+        return PilotLogic.get_licensed_pilots(pilot_license)
 
     @staticmethod
     def save_new_pilot(pilot):
