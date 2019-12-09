@@ -281,8 +281,8 @@ class EmployeeUI:
 
     @staticmethod
     def __show_employees_on_duty():
-        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
-        print(TextEditor.format_text("All employees on duty", TextEditor.UNDERLINE_TEXT))
+        # ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+        # print(TextEditor.format_text("All employees on duty", TextEditor.UNDERLINE_TEXT))
  
         table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
         employees_on_duty_list = LogicAPI.get_employees_on_duty()
@@ -293,7 +293,8 @@ class EmployeeUI:
         if not employees_on_duty_list:
             ComponentUI.centered_text_message("No employee is on duty at the moment")
         else:
-            ComponentUI.print_table(table_header_tuple,employees_on_duty_value_tuple)
+            ComponentUI.print_frame_table_menu(table_header_tuple, employees_on_duty_value_tuple, len(employees_on_duty_value_tuple[0]),\
+                EmployeeUI. __FRAME_IN_USE_STR, "All employees on duty")
         return ComponentUI.get_user_input()
 
     @staticmethod
