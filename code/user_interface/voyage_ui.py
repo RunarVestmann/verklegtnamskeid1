@@ -38,7 +38,7 @@ class VoyageUI:
 
         while user_input not in navigation_bar_options:
 
-            greyed_out_option_index_list = [1000] if not user_input_list[2] else 
+            greyed_out_option_index_list = [1000] if not user_input_list[2] else [3,4]
 
             ComponentUI.print_frame_constructor_menu(option_tuple, FRAME_IN_USE_STR,\
                  "New voyage", user_input_list, True, greyed_out_option_index_list=greyed_out_option_index_list)

@@ -209,10 +209,8 @@ class EmployeeUI:
 
     @staticmethod
     def __show_pilot_by_license_finder():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        print(TextEditor.format_text(EmployeeUI.__option_tuple[5], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
         pass
+        
 
     @staticmethod
     def __show_employees_on_duty():
