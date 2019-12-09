@@ -40,9 +40,9 @@ class VoyageUI:
 
         while user_input not in navigation_bar_options:
 
-            greyed_out_option_index_list = [1000] if not user_input_list[2] else [3,4]
+            greyed_out_option_index_list = [] if not user_input_list[2] else [3,4]
 
-            ComponentUI.print_frame_constructor_menu(option_tuple, VoyageUI.FRAME_IN_USE_STR,\
+            ComponentUI.print_frame_constructor_menu(option_tuple, VoyageUI.__FRAME_IN_USE_STR,\
                  "New voyage", user_input_list, True, greyed_out_option_index_list=greyed_out_option_index_list)
             
             user_input = ComponentUI.get_user_input()
@@ -58,7 +58,7 @@ class VoyageUI:
                 flight_route_info_tuple = ([flight_route.get_destination() for flight_route in all_flight_routes],\
                 [flight_route.get_airport_id() for flight_route in all_flight_routes])
                 ComponentUI.print_frame_table_menu(("Destination","Airport id"),\
-                    flight_route_info_tuple,[[]]*len(flight_route_info_tuple) if not flight_route_info_tuple else len(flight_route_info_tuple[0]),ComponentUI.get_main_options()[0],"Flight route")
+                    flight_route_info_tuple, [[]]*len(flight_route_info_tuple) if not flight_route_info_tuple else len(flight_route_info_tuple[0]),ComponentUI.get_main_options()[0],"Flight route")
                 
 
                 user_input = input(input_message_tuple[index]).strip()
@@ -82,7 +82,7 @@ class VoyageUI:
                     LogicAPI.save_new_voyage(new_voyage)
                     user_input = "A new voyage has been registered"
                     break
-                
+
         return user_input
 
     @staticmethod

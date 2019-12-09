@@ -61,3 +61,12 @@ Planið í upphaf dags er að kóða leið til að hægt sé að skrá nýjan st
 Fannar, Rúnar: Unnu í EmployeeUI klasanum
 Guðmundur, Patrik: Unnu í AirplaneUI klasanum
 Hörður: Komst ekki á þennan stutta sunnudagshitting
+
+9.12.2019
+Planið í upphaf dags er að klára A kröfu lúkkið varðandi EmployeeUI og AirplaneUI.
+
+Í lok dags komumst við vel á leið, við erum komnir með leiðir til að sýna allar, flugleiðir, starfsmenn, 
+flugleiðir og flugvélar og einnig er hægt að skrá ný tilvik af þeim klösum og þau gögn vistast í skrá.
+
+Fannar, Rúnar, Patrik: Unnu í EmployeeUI og VoyageUI virkninni og tókst að ljúka first draft af því
+Guðmundur, Hörður: Unnu í að gera generic föll í ComponentUI sem munu nýtast í hinum UI klösunum ásamt því að klára first draft af AirplaneUI virkninni
