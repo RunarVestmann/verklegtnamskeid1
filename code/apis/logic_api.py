@@ -75,9 +75,7 @@ class LogicAPI:
 
     @staticmethod
     def get_all_flight_attendants():
-        return [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
-        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")]      #return FlightAttendantLogic.get_all_flight_attendants()
-
+        return FlightAttendantLogic.get_all_flight_attendants()
     @staticmethod
     def save_new_flight_attendant(flight_attendant):
         FlightAttendantLogic.save_new_flight_attendant(flight_attendant)

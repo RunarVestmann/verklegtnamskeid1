@@ -166,11 +166,11 @@ class EmployeeUI:
         ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
         print(TextEditor.format_text("All pilots", TextEditor.UNDERLINE_TEXT))
  
-        table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+        table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State", "License")
         pilots_list = LogicAPI.get_all_pilots()
         pilots_value_list = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
            [pilot.get_phonenumber() for pilot in pilots_list], [pilot.get_home_address() for pilot in pilots_list],\
-           [pilot.get_email() for pilot in pilots_list], [pilot.get_state() for pilot in pilots_list])
+           [pilot.get_email() for pilot in pilots_list], [pilot.get_state() for pilot in pilots_list], [pilot.get_license() for pilot in pilots_list])
 
         ComponentUI.print_table(table_header_tuple,pilots_value_list)
 
@@ -178,10 +178,19 @@ class EmployeeUI:
 
     @staticmethod
     def __show_all_flight_attendants():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        print(TextEditor.format_text(EmployeeUI.__option_tuple[3], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
-        pass
+        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+        print(TextEditor.format_text("All flight attendants", TextEditor.UNDERLINE_TEXT))
+ 
+        table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+        flight_attendants_list = LogicAPI.get_all_flight_attendants()
+        flight_attendants_value_tuple = ([flight_attendant.get_name() for flight_attendant in flight_attendants_list],[flight_attendant.get_ssn() for flight_attendant in flight_attendants_list],\
+           [flight_attendant.get_phonenumber() for flight_attendant in flight_attendants_list], [flight_attendant.get_home_address() for flight_attendant in flight_attendants_list],\
+           [flight_attendant.get_email() for flight_attendant in flight_attendants_list], [flight_attendant.get_state() for flight_attendant in flight_attendants_list])
+
+        ComponentUI.print_table(table_header_tuple,flight_attendants_value_tuple)
+
+        return ComponentUI.get_user_input()
+
 
     @staticmethod
     def __show_employee_by_name_finder():
