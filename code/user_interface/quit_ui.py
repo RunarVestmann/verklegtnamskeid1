@@ -24,7 +24,7 @@ class QuitUI:
     def __print_quit_menu_body():
         '''Prints the quit menu body that's below the header'''
 
-        ComponentUI.centerd_text_message("Are you sure you want to quit?","(Y)es    (N)o")
+        ComponentUI.centered_text_message("Are you sure you want to quit?","(Y)es    (N)o")
 
         # window_width, window_height = Window.get_size()
 

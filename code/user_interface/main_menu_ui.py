@@ -5,7 +5,7 @@ class MainMenuUI:
 
     @staticmethod
     def __print_main_menu_body():
-        ComponentUI.centerd_text_message("Welcome to the NaN Air booking software",\
+        ComponentUI.centered_text_message("Welcome to the NaN Air booking software",\
             "Press any of the keys in the brackets '()' to get started")
             
         # window_width, window_height = Window.get_size()

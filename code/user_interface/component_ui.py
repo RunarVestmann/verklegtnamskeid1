@@ -137,25 +137,10 @@ class ComponentUI:
         ComponentUI.__print_main_options(selected_option)
 
     
+
+
     @staticmethod
-    def centered_text_message(message_str):
-            # centered feedback message
-            window_width, window_height = Window.get_size()
-
-            #Calculate the how much space is left on the window
-            body_height = window_height - ComponentUI.get_header_height()
-
-            #Calculate how many new lines should be both above and below the quit text
-            offsetted_body_height_center = (body_height//2) - 2
-            for _ in range(offsetted_body_height_center):
-                print()
-            print(message_str.center(window_width))
-            for _ in range(offsetted_body_height_center):
-                print()
-            
-            print("_" * window_width)
-
-    def centerd_text_message(message_str, secund_line_str='', offset=2):
+    def centered_text_message(message_str, secund_line_str='', offset=2):
         # centered feedback messege 
         window_width, window_height = Window.get_size()
 

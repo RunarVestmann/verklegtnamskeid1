@@ -143,7 +143,7 @@ class AirplanesUI:
             ComponentUI.fill_window_and_print_action_line(len(airplanes_list)+2)
         
         else:
-            ComponentUI.centerd_text_message("There are no airpanes in use at the moment !","",3)
+            ComponentUI.centered_text_message("There are no airpanes in use at the moment !","",3)
 
            
         return ComponentUI.get_user_input()
