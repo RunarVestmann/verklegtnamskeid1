@@ -7,6 +7,8 @@ from apis.logic_api import LogicAPI
 class FlightRouteUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[3]
     NAVIGATION_BAR_OPTIONS = ComponentUI.get_navigation_options_tuple()
+    FLIGHT_ROUTE_OPTION_TUBLE = ("Country", "Destination", "Airport id", "Flight time", "Distance from Iceland",\
+             "Contact name", "Emergency phonenumber") # to use when displaying flight route profile and new flight route
 
     @staticmethod
     def show():
@@ -23,15 +25,15 @@ class FlightRouteUI:
 
         #navigation_bar_options = ComponentUI.get_navigation_options_tuple()
 
-        option_tuple = ("Country", "Destination", "Airport id", "Flight time", "Distance from Iceland",\
-             "Contact name", "Emergency phonenumber")
+        #option_tuple = ("Country", "Destination", "Airport id", "Flight time", "Distance from Iceland",\
+        #     "Contact name", "Emergency phonenumber")
 
-        valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
+        valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))
 
         input_message_tuple = ("Insert Country: ", "Insert Destination: ", "Insert Airport id: ", "Insert Flight time(hours:minutes): ",\
              "Insert Distance from Iceland in km: ", "Insert Contact name: ", "Insert Emergency phonenumber: ")
 
-        user_input_list = [""] * len(option_tuple)
+        user_input_list = [""] * len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE)
 
         user_input = ""
 
@@ -39,8 +41,8 @@ class FlightRouteUI:
 
         while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
 
-            ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[3],\
-                 "New flight route", user_input_list, True)
+            ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE, \
+                ComponentUI.get_main_options()[3], "New flight route", user_input_list, True)
 
             user_input = ComponentUI.get_user_input()
 
@@ -51,8 +53,8 @@ class FlightRouteUI:
 
             if user_input in valid_user_inputs:
                 index = int(user_input) - 1
-                ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[3],\
-                     "New flight route", user_input_list, False, index)
+                ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
+                     ComponentUI.get_main_options()[3], "New flight route", user_input_list, False, index)
 
                 user_input = input(input_message_tuple[index]).strip()
 
@@ -164,14 +166,38 @@ class FlightRouteUI:
 
     @staticmethod
     def __show_flight_route(flrt):
-
+        
         user_input = ''
+        user_input_list = []
+        user_input_list.append(flrt.get_country())
+        user_input_list.append(flrt.get_destination())
+        user_input_list.append(flrt.get_airport_id())
+        user_input_list.append(flrt.get_flight_time())
+        user_input_list.append(flrt.get_distance_from_iceland())
+        user_input_list.append(flrt.get_contact_name())
+        user_input_list.append(flrt.get_emergency_phone())
      
         while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
-            print(flrt)
-
+            ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
+            ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4], True) # BW ## taka út síðasta true-ið
+            
+           
             user_input = ComponentUI.get_user_input()
-
             user_input = ComponentUI.remove_brackets(user_input)
+            if user_input in ["6","7"]:  #valid_user_inputs:
+                index = int(user_input) - 1
+                ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
+                    ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, False, index, [0,1,2,3,4])
+      
+                user_input = input("input_message_tuple[index]  Your action: ").strip()
+
+                if not user_input:
+                    continue
+
+
+            
+
+
+
 
         return user_input
