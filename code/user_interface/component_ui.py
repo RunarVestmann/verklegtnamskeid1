@@ -47,6 +47,17 @@ class ComponentUI:
         ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit)
 
     @staticmethod
+    def print_frame_table_menu(heads, getfunctions, table_height, underlined_main_option, underlined_sub_option, print_submit=False):
+
+        ComponentUI.print_header(underlined_main_option)
+        print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
+
+        ComponentUI.fill_in_table(heads,getfunctions,True)
+
+        ComponentUI.fill_window_and_print_action_line(table_height+2, print_submit) 
+
+
+    @staticmethod
     def run_frame(option_tuple, underlined_main_option, valid_user_inputs, frame_functions):
         user_input = ""
 
@@ -197,10 +208,10 @@ class ComponentUI:
 
         registration_list = ComponentUI.generate_columns_registration_list(heads, getfunctions, between)
 
+        if has_numbers:
+            print("{:<4s}".format(""),end="")
         for i in range(len(heads)):
-            if has_numbers:
-                print("{:<4s}".format(""),end="")
-            reg =  "{:<"+str(registration_list[i]+between)+"s}"
+            reg = "{:<"+str(registration_list[i]+between)+"s}"
             print(reg.format(heads[i]),end="")
         print()
 
