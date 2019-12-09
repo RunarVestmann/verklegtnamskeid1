@@ -7,7 +7,7 @@ from apis.logic_api import LogicAPI
 
 class AirplanesUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[2]
-    __option_tuple = ('New airplane', 'Show all airplanes', 'Show airplanes in use', 'Show all airplane types')
+    
 
     @staticmethod
     def show():
@@ -24,7 +24,7 @@ class AirplanesUI:
 
         return ComponentUI.run_frame(option_tuple, AirplanesUI.__FRAME_IN_USE_STR, valid_user_inputs, frame_functions)
 
-    DUMMYNMBR=1
+    
     @staticmethod
     def __show_new_airplane_constructor():
                
@@ -57,16 +57,43 @@ class AirplanesUI:
 
             if user_input in valid_user_inputs:
                 index = int(user_input) - 1
-                ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[2],\
-                     "New airplane", user_input_list, False, index)
+                # ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[2],\
+                #      "New airplane", user_input_list, False, index)
 
-                user_input = input(input_message_tuple[index]).strip()
+
+                if index == 0: # ath með aðra hér
+                    ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[2],\
+                     "New airplane", user_input_list, False, index)
+                    user_input = input(input_message_tuple[index]).strip()
+                else:
+                    table_header_tuple = ("Type", "Manufacturer", "Seats")
+                    aircrafttype_list = LogicAPI.get_all_airplane_types()
+                    airplanes_getfunctions_tuple = ([aircraft_type.get_plane_type() for aircraft_type in aircrafttype_list],[aircraft_type.get_model() for aircraft_type in aircrafttype_list],\
+                        [aircraft_type.get_capacity() for aircraft_type in aircrafttype_list])
+                    
+                    table_height = len(aircrafttype_list)
+                    ComponentUI.print_frame_table_menu(table_header_tuple, airplanes_getfunctions_tuple, table_height,\
+                        ComponentUI.get_main_options()[2], "New airplane")
+                    
+                    user_input = input("Insert number of desired type: ").strip()
+
+                    if not user_input:
+                        continue
+
+                    table_index = int(user_input) - 1
+                    chosen_table_line = aircrafttype_list[table_index]
+                    user_input_list[1] = chosen_table_line.get_plane_type()
+                    user_input_list[2] = chosen_table_line.get_model()
+                    user_input_list[3] = chosen_table_line.get_capacity()
+
+
+
 
                 if not user_input:
                     continue
 
                 #Capitalize the first letter of the Name , Type and Manufacturer 
-                if index == 0 or index == 1 or index == 2:
+                if index == 0:       # or index == 1 or index == 2:
                     user_input = user_input.capitalize()
 
                 #Check if airplane name already exists
@@ -77,22 +104,12 @@ class AirplanesUI:
                     else:
                         airplane_info_already_exists = False
 
-                #Seat capacity cannot contain letters except "seats"
-                elif index == 3:
-                    if 'seats' in user_input.lower():
-                        user_input = user_input.lower().replace('seats', '')
-                    user_input = user_input.strip()
-                    if not user_input.isdigit():
-                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
-                        airplane_info_already_exists = True
-                    else:
-                        airplane_info_already_exists = False
-
+            
 
                
-
+                if index == 0:
+                    user_input_list[index] = user_input
                 
-                user_input_list[index] = user_input
                 user_input = ""
 
             elif user_input.startswith('s'):
