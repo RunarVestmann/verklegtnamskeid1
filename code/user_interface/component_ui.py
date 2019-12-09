@@ -80,6 +80,11 @@ class ComponentUI:
     __HEADER_HEIGHT = 7
 
     @staticmethod
+    def print_table(table_header_tuple, value_list):
+        ComponentUI.fill_in_table(table_header_tuple, value_list, False)
+        ComponentUI.fill_window_and_print_action_line(len(value_list)+2)
+
+    @staticmethod
     def get_navigation_options_tuple():
         return ComponentUI.__MENU_VALID_OPTIONS_TUPLE
 
