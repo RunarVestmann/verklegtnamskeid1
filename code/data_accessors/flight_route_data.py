@@ -42,7 +42,7 @@ class FlightRouteData:
     def __overwrite_all_flight_routes(flight_routes):
         field_names = ["country", "destination", "airport_id", "flight_time", "distance_from_iceland", "contact_name", "emergency_phone"]
         FlightRouteData.__all_flight_routes_list = []
-        with open(FlightRouteData.__all_flight_routes_list, 'w') as file_stream:
+        with open(FlightRouteData.__flight_route_data_filename, 'w') as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
             writer.writeheader()
             for flight_route in flight_routes:
