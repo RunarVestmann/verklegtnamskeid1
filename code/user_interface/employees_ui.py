@@ -163,8 +163,6 @@ class EmployeeUI:
 
     @staticmethod
     def __show_all_pilots():
-        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
-        print(TextEditor.format_text("All pilots", TextEditor.UNDERLINE_TEXT))
  
         table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State", "License")
         pilots_list = LogicAPI.get_all_pilots()
@@ -172,22 +170,22 @@ class EmployeeUI:
            [pilot.get_phonenumber() for pilot in pilots_list], [pilot.get_home_address() for pilot in pilots_list],\
            [pilot.get_email() for pilot in pilots_list], [pilot.get_state() for pilot in pilots_list], [pilot.get_license() for pilot in pilots_list])
 
-        ComponentUI.print_table(table_header_tuple,pilots_value_list)
+        ComponentUI.print_frame_table_menu(table_header_tuple,pilots_value_list,\
+            len(pilots_value_list[0]) if pilots_value_list else [[]] * len(table_header_tuple), EmployeeUI.__FRAME_IN_USE_STR,"All pilots")
 
         return ComponentUI.get_user_input()
 
     @staticmethod
     def __show_all_flight_attendants():
-        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
-        print(TextEditor.format_text("All flight attendants", TextEditor.UNDERLINE_TEXT))
- 
+
         table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
         flight_attendants_list = LogicAPI.get_all_flight_attendants()
         flight_attendants_value_tuple = ([flight_attendant.get_name() for flight_attendant in flight_attendants_list],[flight_attendant.get_ssn() for flight_attendant in flight_attendants_list],\
            [flight_attendant.get_phonenumber() for flight_attendant in flight_attendants_list], [flight_attendant.get_home_address() for flight_attendant in flight_attendants_list],\
            [flight_attendant.get_email() for flight_attendant in flight_attendants_list], [flight_attendant.get_state() for flight_attendant in flight_attendants_list])
 
-        ComponentUI.print_table(table_header_tuple,flight_attendants_value_tuple)
+        ComponentUI.print_frame_table_menu(table_header_tuple,flight_attendants_value_tuple,len(flight_attendants_value_tuple[0]),\
+            EmployeeUI. __FRAME_IN_USE_STR, "All flight attendants")
 
         return ComponentUI.get_user_input()
 
@@ -276,7 +274,12 @@ class EmployeeUI:
 
     @staticmethod
     def __show_pilot_by_license_finder():
-        pass
+        
+
+        ComponentUI.print_frame_table_menu()
+
+        input("Insert a license: ")
+        
         
 
     @staticmethod
@@ -298,11 +301,7 @@ class EmployeeUI:
         return ComponentUI.get_user_input()
 
     @staticmethod
-    def __show_employees_off_duty():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
-        print(TextEditor.format_text("All employees off duty", TextEditor.UNDERLINE_TEXT))
- 
+    def __show_employees_off_duty(): 
         table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
         employees_off_duty_list = LogicAPI.get_employees_off_duty()
         
@@ -311,8 +310,9 @@ class EmployeeUI:
            [employees_off_duty.get_phonenumber() for employees_off_duty in employees_off_duty_list], [employees_off_duty.get_home_address() for employees_off_duty in employees_off_duty_list],\
            [employees_off_duty.get_email() for employees_off_duty in employees_off_duty_list], [employees_off_duty.get_state() for employees_off_duty in employees_off_duty_list])
         if not employees_off_duty_list:
+            ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
             ComponentUI.centered_text_message("No employee is off duty at the moment")
         else:
-            ComponentUI.print_table(table_header_tuple,employees_off_duty_value_tuple)
+            ComponentUI.print_frame_table_menu(table_header_tuple,employees_off_duty_value_tuple, len(employees_off_duty_value_tuple[0]),EmployeeUI.__FRAME_IN_USE_STR,"All employees off duty")
 
         return ComponentUI.get_user_input()
