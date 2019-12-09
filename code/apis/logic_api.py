@@ -170,6 +170,10 @@ class LogicAPI:
         FlightRouteLogic.save_new_flight_route(flight_route)
 
     @staticmethod
+    def change_saved_flight_route(saved_flight_route, changed_flight_route):
+        FlightRouteLogic.change_saved_flight_route(saved_flight_route, changed_flight_route)
+
+    @staticmethod
     def get_all_flight_routes():
         # Nuuk = FlightRoute("Greenland","Nuuk","G2192","4:00","1570km","Oddur","1234666")
         # Kulusuk = FlightRoute("Greenland","Kulusuk","G3892","2:00","871km","Baldur","1126662")

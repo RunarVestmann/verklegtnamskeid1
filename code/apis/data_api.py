@@ -94,6 +94,10 @@ class DataAPI:
         FlightRouteData.save_new_flight_route(flight_route)
 
     @staticmethod
+    def change_saved_flight_route(saved_flight_route, changed_flight_route):
+        FlightRouteData.change_saved_flight_route(saved_flight_route, changed_flight_route
+
+    @staticmethod
     def get_all_flight_routes():
         return FlightRouteData.get_all_flight_routes()
 
