@@ -151,11 +151,11 @@ class EmployeeUI:
         
         table_header = ("Job title", "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
         all_employees = LogicAPI.get_all_employees()
-        flight_routes_getfunctions_tuple = (["Pilot" if isinstance(employee, Pilot) else "Flight attandant" for employee in all_employees], [employee.get_name for employee in all_employees],[employee.get_ssn for employee in all_employees],\
-            [employee.get_phonenumber for employee in all_employees],[employee.get_home_address for employee in all_employees],[employee.get_email for employee in all_employees],\
-                [employee.get_state for employee in all_employees])
+        employees_getfunctions_tuple = (["Pilot" if isinstance(employee, Pilot) else "Flight attendant" for employee in all_employees], [employee.get_name() for employee in all_employees],[employee.get_ssn() for employee in all_employees],\
+            [employee.get_phonenumber() for employee in all_employees],[employee.get_home_address() for employee in all_employees],[employee.get_email() for employee in all_employees],\
+                [employee.get_state(v) for employee in all_employees])
 
-        ComponentUI.fill_in_table(table_header,flight_routes_getfunctions_tuple, False)
+        ComponentUI.fill_in_table(table_header,employees_getfunctions_tuple, False)
                  
         ComponentUI.fill_window_and_print_action_line(len(all_employees)+2)
 

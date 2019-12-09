@@ -172,15 +172,15 @@ class ComponentUI:
     __DEFAULT_SPACE_BETWEEN_columnS = 2
 
     @staticmethod
-    def generate_columns_registration_list(heads, getfunctions, between=__DEFAULT_SPACE_BETWEEN_columnS):
+    def generate_columns_registration_list(heads, values, between=__DEFAULT_SPACE_BETWEEN_columnS):
         '''generate list of number that is used for align space in tables'''
         longest_values = []
         for head in heads:
             longest_values.append(len(head))
 
-        for i, column in enumerate(getfunctions):
+        for i, column in enumerate(values):
             for row in column:
-                row_value = row()
+                row_value = row
                 testlength = len(str(row_value))
                 
                 if testlength > longest_values[i]:
@@ -220,7 +220,7 @@ class ComponentUI:
 
             for i in range(len(heads)):
                 reg = "{:<"+str(registration_list[i]+between)+"s}"
-                print(reg.format(str(getfunctions[i][row]())),end="")
+                print(reg.format(str(getfunctions[i][row])),end="")
             print()
 
 
