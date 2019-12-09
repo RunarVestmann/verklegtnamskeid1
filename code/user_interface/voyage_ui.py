@@ -201,7 +201,7 @@ class VoyageUI:
 
             voyages_list = []
 
-            voyages_list = LogicAPI.get_voyages_by_week(user_input)
+            voyages_list = LogicAPI.get_voyages_by_week(int(user_input))
 
             ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
             print(TextEditor.format_text("Find voyages by week", TextEditor.UNDERLINE_TEXT))
