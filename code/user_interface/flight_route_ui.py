@@ -158,7 +158,7 @@ class FlightRouteUI:
             selected_flrt = flrt_list[table_index]
             # senda inn í nýtt fall
 
-            FlightRouteUI.__show_flight_route(selected_flrt)
+            user_input = FlightRouteUI.__show_flight_route(selected_flrt)
 
 
         return user_input
@@ -176,7 +176,11 @@ class FlightRouteUI:
         user_input_list.append(flrt.get_distance_from_iceland())
         user_input_list.append(flrt.get_contact_name())
         user_input_list.append(flrt.get_emergency_phone())
-     
+
+        valid_user_inputs = ["6","7","(6)","(7)"]
+        #ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))            
+       
+        flight_route_info_already_exists = False
         while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
             ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4], True) # BW ## taka út síðasta true-ið
@@ -184,20 +188,64 @@ class FlightRouteUI:
            
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
-            if user_input in ["6","7"]:  #valid_user_inputs:
+            if user_input in valid_user_inputs: 
                 index = int(user_input) - 1
                 ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
                     ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, False, index, [0,1,2,3,4])
-      
-                user_input = input("input_message_tuple[index]  Your action: ").strip()
 
-                if not user_input:
-                    continue
-
-
-            
+                if(index == 5):
+                    user_input = input("Insert new contact name: ").strip()
+                elif(index == 6):
+                    user_input = input("Insert new Emergency phonenumber: ").strip()
 
 
 
+                #Capitalize the first letters in the contacts name
+                if index == 5:
+                    if not user_input: #use existing name in case if user cancel or leve blanc 
+                        user_input = user_input_list[index]
+
+                    contact_name_list = []
+                    for name in user_input.split():
+                        contact_name_list.append(name.capitalize())
+                    user_input = " ".join(contact_name_list)
+
+                #Remove any spaces or dashes from the phonenumber
+                elif index == 6:
+                    if not user_input: #use existing phonenumber in case if user cancel or leve blanc 
+                        user_input = user_input_list[index]
+
+                    if '-' in user_input:
+                        user_input = user_input.replace('-', '')
+                    if '' in user_input:
+                        user_input = user_input.replace(' ', '')
+
+                    #Put a message on the screen indicating the phonenumber is invalid
+                    if not user_input.isdigit():
+                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
+                        flight_route_info_already_exists = True
+                    else:
+                        flight_route_info_already_exists = False
+                
+                user_input_list[index] = user_input
+                user_input = ""
+
+            elif user_input.startswith('s'):
+                if all(user_input_list) and not flight_route_info_already_exists:
+
+                    edited_flight_route = FlightRoute(
+                        user_input_list[0],
+                        user_input_list[1],
+                        user_input_list[2],
+                        user_input_list[3],
+                        user_input_list[4],
+                        user_input_list[5],
+                        user_input_list[6]
+                    )
+
+                    LogicAPI.change_saved_flight_route(flrt, edited_flight_route)
+                    #þarfnast skoðunnar
+                    user_input = "A new flight route contact information has been edited"
+                    break
 
         return user_input
