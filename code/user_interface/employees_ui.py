@@ -163,10 +163,20 @@ class EmployeeUI:
 
     @staticmethod
     def __show_all_pilots():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        print(TextEditor.format_text(EmployeeUI.__option_tuple[2], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
-        pass
+        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+        print(TextEditor.format_text("All pilots", TextEditor.UNDERLINE_TEXT))
+ 
+        table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+        pilots_list = LogicAPI.get_all_pilots()
+        pilots_getfunctions_tuple = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
+           [pilot.get_phonenumber() for pilot in pilots_list], [pilot.get_home_address() for pilot in pilots_list],\
+           [pilot.get_email() for pilot in pilots_list], [pilot.get_state() for pilot in pilots_list])
+
+        ComponentUI.fill_in_table(table_header_tuple, pilots_getfunctions_tuple, False)
+                 
+        ComponentUI.fill_window_and_print_action_line(len(pilots_list)+2)
+
+        return ComponentUI.get_user_input()
 
     @staticmethod
     def __show_all_flight_attendants():
