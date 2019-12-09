@@ -2,6 +2,7 @@ from user_interface.window import Window
 from user_interface.text_editor import TextEditor
 from user_interface.component_ui import ComponentUI
 from apis.logic_api import LogicAPI
+from data_models.voyage import Voyage
 
 FRAME_IN_USE_STR = ComponentUI.get_main_options()[0]
 
@@ -30,13 +31,14 @@ class VoyageUI:
         navigation_bar_options = ComponentUI.get_navigation_options_tuple()
 
         user_input = ""
+        voyage_info_already_exists = False
 
         input_message_tuple = ("Insert Flight route: ", "Insert Voyage schedule: ", "Insert Airplane: ", "Insert Pilots: ",\
             "Insert Flight attendants: ")
 
         while user_input not in navigation_bar_options:
 
-            greyed_out_option_index_list = [1000]
+            greyed_out_option_index_list = [1000] if not user_input_list[2] else 
 
             ComponentUI.print_frame_constructor_menu(option_tuple, FRAME_IN_USE_STR,\
                  "New voyage", user_input_list, True, greyed_out_option_index_list=greyed_out_option_index_list)
@@ -59,6 +61,22 @@ class VoyageUI:
 
                 user_input_list[index] = user_input
                 user_input = ""
+
+            elif user_input.startswith("s"):
+                if all(user_input_list) and not voyage_info_already_exists:
+
+                    new_voyage = Voyage(
+                        user_input_list[0],
+                        user_input_list[1],
+                        user_input_list[2],
+                        user_input_list[3],
+                        user_input_list[4],
+                        user_input_list[5]
+                    )
+                    LogicAPI.save_new_voyage(new_voyage)
+                    user_input = "A new flight route has been registered"
+                    break
+                
 
 
 

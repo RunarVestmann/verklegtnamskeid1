@@ -115,7 +115,7 @@ class FlightRouteUI:
                         user_input_list[3],
                         user_input_list[4],
                         user_input_list[5],
-                        user_input_list[6],
+                        user_input_list[6]
                     )
                     LogicAPI.save_new_flight_route(new_flight_route)
                     user_input = "A new flight route has been registered"
