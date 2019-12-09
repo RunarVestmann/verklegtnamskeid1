@@ -117,8 +117,8 @@ class AirplanesUI:
  
         table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
         airplanes_list = LogicAPI.get_all_airplanes()
-        airplanes_getfunctions_tuple = ([airplane.get_name for airplane in airplanes_list],[airplane.get_state for airplane in airplanes_list],\
-           [airplane.get_type for airplane in airplanes_list], [airplane.get_manufacturer for airplane in airplanes_list], [airplane.get_seat_count for airplane in airplanes_list])
+        airplanes_getfunctions_tuple = ([airplane.get_name() for airplane in airplanes_list],[airplane.get_state() for airplane in airplanes_list],\
+           [airplane.get_type() for airplane in airplanes_list], [airplane.get_manufacturer() for airplane in airplanes_list], [airplane.get_seat_count() for airplane in airplanes_list])
 
         ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
                  
@@ -135,8 +135,8 @@ class AirplanesUI:
         table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
         airplanes_list = LogicAPI.get_all_airplanes_in_use()
         if airplanes_list:
-            airplanes_getfunctions_tuple = ([airplane.get_name for airplane in airplanes_list],[airplane.get_state for airplane in airplanes_list],\
-            [airplane.get_type for airplane in airplanes_list], [airplane.get_manufacturer for airplane in airplanes_list], [airplane.get_seat_count for airplane in airplanes_list])
+            airplanes_getfunctions_tuple = ([airplane.get_name() for airplane in airplanes_list],[airplane.get_state() for airplane in airplanes_list],\
+            [airplane.get_type() for airplane in airplanes_list], [airplane.get_manufacturer() for airplane in airplanes_list], [airplane.get_seat_count() for airplane in airplanes_list])
 
             ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
             ComponentUI.fill_window_and_print_action_line(len(airplanes_list)+2)
@@ -156,8 +156,8 @@ class AirplanesUI:
  
         table_header_tuple = ("Type", "Manufacturer", "Seats")
         airplanes_list = LogicAPI.get_all_airplane_types()
-        airplanes_getfunctions_tuple = ([airplane.get_type for airplane in airplanes_list],[airplane.get_manufacturer for airplane in airplanes_list],\
-           [airplane.get_seat_count for airplane in airplanes_list])
+        airplanes_getfunctions_tuple = ([airplane.get_type() for airplane in airplanes_list],[airplane.get_manufacturer() for airplane in airplanes_list],\
+           [airplane.get_seat_count() for airplane in airplanes_list])
 
         ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
                  
