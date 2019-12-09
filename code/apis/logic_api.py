@@ -189,9 +189,9 @@ class LogicAPI:
 
     @staticmethod
     def get_all_airplane_types():
-        return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
-        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
-        #return AircraftTypeLogic.get_all_aircraft_types()
+        # return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
+        # Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
+        return AircraftTypeLogic.get_all_aircraft_types()
 
     @staticmethod
     def get_all_available_airplanes(schedule_tuple):
