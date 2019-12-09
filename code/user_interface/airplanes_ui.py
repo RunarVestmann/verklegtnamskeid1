@@ -2,6 +2,7 @@ from user_interface.window import Window
 from user_interface.text_editor import TextEditor
 from user_interface.component_ui import ComponentUI
 from data_models.airplane import Airplane
+from data_models.aircraft_type import AircraftType
 from apis.logic_api import LogicAPI
 
 class AirplanesUI:
@@ -155,12 +156,12 @@ class AirplanesUI:
         print(TextEditor.format_text("All airplanes types", TextEditor.UNDERLINE_TEXT))
  
         table_header_tuple = ("Type", "Manufacturer", "Seats")
-        airplanes_list = LogicAPI.get_all_airplane_types()
-        airplanes_getfunctions_tuple = ([airplane.get_type() for airplane in airplanes_list],[airplane.get_manufacturer() for airplane in airplanes_list],\
-           [airplane.get_seat_count() for airplane in airplanes_list])
+        aircrafttype_list = LogicAPI.get_all_airplane_types()
+        airplanes_getfunctions_tuple = ([aircraft_type.get_plane_type() for aircraft_type in aircrafttype_list],[aircraft_type.get_model() for aircraft_type in aircrafttype_list],\
+           [aircraft_type.get_capacity() for aircraft_type in aircrafttype_list])
 
         ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
                  
-        ComponentUI.fill_window_and_print_action_line(len(airplanes_list)+2)
+        ComponentUI.fill_window_and_print_action_line(len(aircrafttype_list)+2)
 
         return ComponentUI.get_user_input()
