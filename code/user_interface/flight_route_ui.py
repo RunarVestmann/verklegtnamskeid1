@@ -183,7 +183,7 @@ class FlightRouteUI:
         flight_route_info_already_exists = False
         while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
-            ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4], True) # BW ## taka út síðasta true-ið
+            ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4])
             
            
             user_input = ComponentUI.get_user_input()
