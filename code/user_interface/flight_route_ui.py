@@ -6,6 +6,7 @@ from apis.logic_api import LogicAPI
 
 class FlightRouteUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[3]
+    NAVIGATION_BAR_OPTIONS = ComponentUI.get_navigation_options_tuple()
 
     @staticmethod
     def show():
@@ -20,7 +21,7 @@ class FlightRouteUI:
     @staticmethod
     def __show_new_flight_route_constructor():
 
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+        #navigation_bar_options = ComponentUI.get_navigation_options_tuple()
 
         option_tuple = ("Country", "Destination", "Airport id", "Flight time", "Distance from Iceland",\
              "Contact name", "Emergency phonenumber")
@@ -36,7 +37,7 @@ class FlightRouteUI:
 
         flight_route_info_already_exists = False
 
-        while user_input not in navigation_bar_options:
+        while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
 
             ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[3],\
                  "New flight route", user_input_list, True)
@@ -126,15 +127,51 @@ class FlightRouteUI:
     @staticmethod
     def __show_all_flight_routes():
 
-        ComponentUI.print_header(FlightRouteUI.__FRAME_IN_USE_STR)
-        print(TextEditor.format_text("Show all flight routes", TextEditor.UNDERLINE_TEXT))
+        user_input = ''
+
+        #ComponentUI.print_header(FlightRouteUI.__FRAME_IN_USE_STR)
+        #print(TextEditor.format_text("Show all flight routes", TextEditor.UNDERLINE_TEXT))
         
-        table_header = ("Destination", "Airport", "Country", "Flight-time", "Distance", "Contact", "Emergency phone")
-        flrt_list = LogicAPI.get_all_flight_routes()
-        flight_routes_value_tuple = ([flightr.get_destination() for flightr in flrt_list],[flightr.get_airport_id() for flightr in flrt_list],\
-            [flightr.get_country() for flightr in flrt_list],[flightr.get_flight_time() for flightr in flrt_list],[flightr.get_distance_from_iceland() for flightr in flrt_list],\
-                [flightr.get_contact_name() for flightr in flrt_list],[flightr.get_emergency_phone() for flightr in flrt_list])
+        while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
 
-        ComponentUI.print_table(table_header, flight_routes_value_tuple)
+            table_header = ("Destination", "Airport", "Country", "Flight-time", "Distance", "Contact", "Emergency phone")
+            flrt_list = LogicAPI.get_all_flight_routes()
+            flight_routes_value_tuple = ([flightr.get_destination() for flightr in flrt_list],[flightr.get_airport_id() for flightr in flrt_list],\
+                [flightr.get_country() for flightr in flrt_list],[flightr.get_flight_time() for flightr in flrt_list],[flightr.get_distance_from_iceland() for flightr in flrt_list],\
+                    [flightr.get_contact_name() for flightr in flrt_list],[flightr.get_emergency_phone() for flightr in flrt_list])
 
-        return ComponentUI.get_user_input()
+
+            table_height = len(flrt_list)
+            ComponentUI.print_frame_table_menu(table_header, flight_routes_value_tuple, table_height, ComponentUI.print_header(FlightRouteUI.__FRAME_IN_USE_STR),"All flight routes")
+
+            user_input = ComponentUI.get_user_input()
+
+            user_input = ComponentUI.remove_brackets(user_input)
+            if not user_input.isdigit() or int(user_input) > table_height:
+                continue
+
+            
+            table_index = int(user_input)-1
+
+            selected_flrt = flrt_list[table_index]
+            # senda inn í nýtt fall
+
+            FlightRouteUI.__show_flight_route(selected_flrt)
+
+
+        return user_input
+
+
+    @staticmethod
+    def __show_flight_route(flrt):
+
+        user_input = ''
+     
+        while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
+            print(flrt)
+
+            user_input = ComponentUI.get_user_input()
+
+            user_input = ComponentUI.remove_brackets(user_input)
+
+        return user_input

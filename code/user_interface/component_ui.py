@@ -96,7 +96,7 @@ class ComponentUI:
     __MAIN_OPTIONS_CHAR_COUNT = sum([len(i) for i in __MAIN_OPTIONS])
     __HEADER_HEIGHT = 7
 
-    @staticmethod
+    @staticmethod # NOT IN USE CHECK - IF POSSIBLE TO TAKE OUT
     def print_table(table_header_tuple, value_list):
         ComponentUI.fill_in_table(table_header_tuple, value_list, False)
         ComponentUI.fill_window_and_print_action_line(len(value_list)+2)
