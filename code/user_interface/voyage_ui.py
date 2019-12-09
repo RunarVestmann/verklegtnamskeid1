@@ -3,7 +3,7 @@ from user_interface.text_editor import TextEditor
 from user_interface.component_ui import ComponentUI
 from apis.logic_api import LogicAPI
 
-
+FRAME_IN_USE_STR = ComponentUI.get_main_options()[0]
 
 
 class VoyageUI:
@@ -21,15 +21,48 @@ class VoyageUI:
 
     @staticmethod
     def __show_new_voyage_constructor():
-        ComponentUI.print_header(ComponentUI.get_main_options()[0])
-        print(TextEditor.format_text(VoyageUI.__option_tuple[0], TextEditor.UNDERLINE_TEXT))
         
-        constructor_voyage_tuple = ('Flight route', 'Voyage schedule', 'Airplane', 'Pilots', 'Flight attendants')
-        for i, option in enumerate(constructor_voyage_tuple):
-            print("({}) {}: ".format(i+1,option))
+        option_tuple = ('Flight route', 'Voyage schedule', 'Airplane', 'Pilots', 'Flight attendants')
+        user_input_list = [""] * len(option_tuple)
 
-        ComponentUI.fill_window_and_print_action_line(len(constructor_voyage_tuple)+1, True)
-       # user_input = input("Your action: ").lower().strip()
+        valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
+
+        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+
+        user_input = ""
+
+        input_message_tuple = ("Insert Flight route: ", "Insert Voyage schedule: ", "Insert Airplane: ", "Insert Pilots: ",\
+            "Insert Flight attendants: ")
+
+        while user_input not in navigation_bar_options:
+
+            greyed_out_option_index_list = [1000]
+
+            ComponentUI.print_frame_constructor_menu(option_tuple, FRAME_IN_USE_STR,\
+                 "New voyage", user_input_list, True, greyed_out_option_index_list=greyed_out_option_index_list)
+            
+            user_input = ComponentUI.get_user_input()
+
+            if not user_input:
+                continue
+
+            user_input = ComponentUI.remove_brackets(user_input)
+
+            if user_input in valid_user_inputs:
+                index = int(user_input) - 1
+
+                ComponentUI.print_frame_constructor_menu(option_tuple, FRAME_IN_USE_STR,\
+                 "New voyage", user_input_list, False, index, greyed_out_option_index_list=greyed_out_option_index_list)
+
+                user_input = input(input_message_tuple[index]).strip()
+
+
+                user_input_list[index] = user_input
+                user_input = ""
+
+
+
+        return user_input
 
     DUMMYNMBR=1
     @staticmethod
