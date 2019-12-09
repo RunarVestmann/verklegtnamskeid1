@@ -6,7 +6,7 @@ from data_models.flight_attendant import FlightAttendant
 class FlightAttendantData:
 
     #Store the filename path
-    __flight_attendant_data_filename = os.path.realpath("../data_storage/flights.csv")
+    __flight_attendant_data_filename = os.path.realpath("../data_storage/flight_attendants.csv")
 
     #A list to cache all the flight attendants once they've been fetched
     __all_flight_attendants_list = []
@@ -18,8 +18,14 @@ class FlightAttendantData:
             with open(FlightAttendantData.__flight_attendant_data_filename, 'r') as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
-                    all_flight_attendants_list.append(FlightAttendant(row["name"], row["ssn"],\
-                         row["phonenumber"], row["home_address"], row["email"], row["state"]))
+                    all_flight_attendants_list.append(FlightAttendant(
+                        row["name"],
+                        row["ssn"],
+                        row["phonenumber"],
+                        row["home_address"],
+                        row["email"],
+                        row["state"]
+                        ))
             FlightAttendantData.__all_flight_attendants_list = all_flight_attendants_list
 
         return FlightAttendantData.__all_flight_attendants_list

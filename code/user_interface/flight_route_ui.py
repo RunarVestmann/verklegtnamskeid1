@@ -131,12 +131,10 @@ class FlightRouteUI:
         
         table_header = ("Destination", "Airport", "Country", "Flight-time", "Distance", "Contact", "Emergency phone")
         flrt_list = LogicAPI.get_all_flight_routes()
-        flight_routes_getfunctions_tuple = ([flightr.get_destination() for flightr in flrt_list],[flightr.get_airport_id() for flightr in flrt_list],\
+        flight_routes_value_tuple = ([flightr.get_destination() for flightr in flrt_list],[flightr.get_airport_id() for flightr in flrt_list],\
             [flightr.get_country() for flightr in flrt_list],[flightr.get_flight_time() for flightr in flrt_list],[flightr.get_distance_from_iceland() for flightr in flrt_list],\
                 [flightr.get_contact_name() for flightr in flrt_list],[flightr.get_emergency_phone() for flightr in flrt_list])
 
-        ComponentUI.fill_in_table(table_header,flight_routes_getfunctions_tuple, False)
-                 
-        ComponentUI.fill_window_and_print_action_line(len(flrt_list)+2)
+        ComponentUI.print_table(table_header, flight_routes_value_tuple)
 
         return ComponentUI.get_user_input()
