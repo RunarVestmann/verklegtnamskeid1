@@ -168,13 +168,11 @@ class EmployeeUI:
  
         table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
         pilots_list = LogicAPI.get_all_pilots()
-        pilots_getfunctions_tuple = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
+        pilots_value_list = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
            [pilot.get_phonenumber() for pilot in pilots_list], [pilot.get_home_address() for pilot in pilots_list],\
            [pilot.get_email() for pilot in pilots_list], [pilot.get_state() for pilot in pilots_list])
 
-        ComponentUI.fill_in_table(table_header_tuple, pilots_getfunctions_tuple, False)
-                 
-        ComponentUI.fill_window_and_print_action_line(len(pilots_list)+2)
+        ComponentUI.print_table(table_header_tuple,pilots_value_list)
 
         return ComponentUI.get_user_input()
 
