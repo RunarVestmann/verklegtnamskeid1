@@ -140,7 +140,7 @@ class ComponentUI:
 
 
     @staticmethod
-    def centered_text_message(message_str, secund_line_str='', offset=2):
+    def centered_text_message(message_str, second_line_str='', offset=2):
         # centered feedback messege 
         window_width, window_height = Window.get_size()
 
@@ -152,7 +152,7 @@ class ComponentUI:
         for _ in range(offsetted_body_height_center):
             print()
         print(message_str.center(window_width))
-        print(secund_line_str.center(window_width))
+        print(second_line_str.center(window_width))
         for _ in range(offsetted_body_height_center):
             print()
         

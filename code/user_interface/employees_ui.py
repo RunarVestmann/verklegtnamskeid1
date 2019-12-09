@@ -194,10 +194,18 @@ class EmployeeUI:
 
     @staticmethod
     def __show_employee_by_name_finder():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        print(TextEditor.format_text(EmployeeUI.__option_tuple[4], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
-        pass
+        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+        print(TextEditor.format_text("Find by name", TextEditor.UNDERLINE_TEXT))
+ 
+        table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+        flight_attendants_list = LogicAPI.get_all_flight_attendants()
+        flight_attendants_value_tuple = ([flight_attendant.get_name() for flight_attendant in flight_attendants_list],[flight_attendant.get_ssn() for flight_attendant in flight_attendants_list],\
+           [flight_attendant.get_phonenumber() for flight_attendant in flight_attendants_list], [flight_attendant.get_home_address() for flight_attendant in flight_attendants_list],\
+           [flight_attendant.get_email() for flight_attendant in flight_attendants_list], [flight_attendant.get_state() for flight_attendant in flight_attendants_list])
+
+        ComponentUI.print_table(table_header_tuple,flight_attendants_value_tuple)
+
+        return ComponentUI.get_user_input()
 
     @staticmethod
     def __show_pilot_by_license_finder():
@@ -208,14 +216,37 @@ class EmployeeUI:
 
     @staticmethod
     def __show_employees_on_duty():
-        ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        print(TextEditor.format_text(EmployeeUI.__option_tuple[6], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
-        pass
+        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+        print(TextEditor.format_text("All employees on duty", TextEditor.UNDERLINE_TEXT))
+ 
+        table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+        employees_on_duty_list = LogicAPI.get_employees_on_duty()
+        employees_on_duty_value_tuple = ([employees_on_duty.get_name() for employees_on_duty in employees_on_duty_list],[employees_on_duty.get_ssn() for employees_on_duty in employees_on_duty_list],\
+           [employees_on_duty.get_phonenumber() for employees_on_duty in employees_on_duty_list], [employees_on_duty.get_home_address() for employees_on_duty in employees_on_duty_list],\
+           [employees_on_duty.get_email() for employees_on_duty in employees_on_duty_list], [employees_on_duty.get_state() for employees_on_duty in employees_on_duty_list])
+
+        if not employees_on_duty_list:
+            ComponentUI.centered_text_message("No employee is on duty at the moment")
+        else:
+            ComponentUI.print_table(table_header_tuple,employees_on_duty_value_tuple)
+        return ComponentUI.get_user_input()
 
     @staticmethod
     def __show_employees_off_duty():
         ComponentUI.print_header(ComponentUI.get_main_options()[1])
-        print(TextEditor.format_text(EmployeeUI.__option_tuple[7], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(EmployeeUI.DUMMYNMBR, False)
-        pass
+        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+        print(TextEditor.format_text("All employees off duty", TextEditor.UNDERLINE_TEXT))
+ 
+        table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+        employees_off_duty_list = LogicAPI.get_employees_off_duty()
+        
+
+        employees_off_duty_value_tuple = ([employees_off_duty.get_name() for employees_off_duty in employees_off_duty_list],[employees_off_duty.get_ssn() for employees_off_duty in employees_off_duty_list],\
+           [employees_off_duty.get_phonenumber() for employees_off_duty in employees_off_duty_list], [employees_off_duty.get_home_address() for employees_off_duty in employees_off_duty_list],\
+           [employees_off_duty.get_email() for employees_off_duty in employees_off_duty_list], [employees_off_duty.get_state() for employees_off_duty in employees_off_duty_list])
+        if not employees_off_duty_list:
+            ComponentUI.centered_text_message("No employee is off duty at the moment")
+        else:
+            ComponentUI.print_table(table_header_tuple,employees_off_duty_value_tuple)
+
+        return ComponentUI.get_user_input()
