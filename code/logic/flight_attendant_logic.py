@@ -4,8 +4,13 @@ from apis.data_api import DataAPI
 class FlightAttendantLogic:
 
     @staticmethod
+    def __sort_list_by_name(a_list):
+        '''Returns a new list sorted in alphabetical name order, returns [] if the list was empty'''
+        return a_list if not a_list else sorted(a_list, key=lambda value: value.get_name())
+
+    @staticmethod
     def get_all_flight_attendants():
-        return DataAPI.get_all_flight_attendants()
+        return FlightAttendantLogic.__sort_list_by_name(DataAPI.get_all_flight_attendants())
 
     @staticmethod
     def get_flight_attendant(ssn):
@@ -33,6 +38,6 @@ class FlightAttendantLogic:
         all_flight_attendants = DataAPI.get_all_flight_attendants()
         for flight_attendant in all_flight_attendants:
             if flight_attendant.get_ssn() == flight_attendant_ssn:
-                return False
-        
+                return 
+
         return True

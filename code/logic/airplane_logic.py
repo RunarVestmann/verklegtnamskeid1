@@ -6,16 +6,21 @@ from apis.data_api import DataAPI
 class AirplaneLogic:
 
     @staticmethod
+    def __sort_list_by_name(a_list):
+        '''Returns a new list sorted in alphabetical name order, returns [] if the list was empty'''
+        return a_list if not a_list else sorted(a_list, key=lambda value: value.get_name())
+
+    @staticmethod
     def save_new_airplane(airplane):
         DataAPI.save_new_airplane(airplane)
 
     @staticmethod
     def get_all_airplanes(): #needs testing
-        return DataAPI.get_all_airplanes()
+        return AirplaneLogic.__sort_list_by_name(DataAPI.get_all_airplanes())
 
     @staticmethod
     def get_all_airplanes_in_use(): #needs testing
-        return DataAPI.get_all_airplanes_in_use()
+        return AirplaneLogic.__sort_list_by_name(DataAPI.get_all_airplanes_in_use())
 
     @staticmethod
     def get_airplane(name):
@@ -46,4 +51,4 @@ class AirplaneLogic:
                     if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
                         available_airplanes.append(airplane)
 
-        return available_airplanes
+        return AirplaneLogic.__sort_list_by_name(available_airplanes)

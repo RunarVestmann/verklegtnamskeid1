@@ -4,9 +4,13 @@ from apis.data_api import DataAPI
 class PilotLogic:
 
     @staticmethod
-    def get_all_pilots():
-        return DataAPI.get_all_pilots()
+    def __sort_list_by_name(a_list):
+        '''Returns a new list sorted in alphabetical name order, returns [] if the list was empty'''
+        return a_list if not a_list else sorted(a_list, key=lambda value: value.get_name())
 
+    @staticmethod
+    def get_all_pilots():
+        return PilotLogic.__sort_list_by_name(DataAPI.get_all_pilots())
 
     @staticmethod
     def get_licensed_pilots(pilot_license):
@@ -15,7 +19,7 @@ class PilotLogic:
         for pilot in all_pilots:
             if pilot.get_license() == pilot_license:
                 licensed_pilots.append(pilot)
-        return licensed_pilots
+        return PilotLogic.__sort_list_by_name(licensed_pilots)
 
     @staticmethod
     def get_pilot(ssn):

@@ -5,8 +5,13 @@ from apis.data_api import DataAPI
 class EmployeeLogic:
 
     @staticmethod
+    def __sort_list_by_name(a_list):
+        '''Returns a new list sorted in alphabetical name order, returns [] if the list was empty'''
+        return a_list if not a_list else sorted(a_list, key=lambda value: value.get_name())
+
+    @staticmethod
     def get_all_employees():
-        return DataAPI.get_all_employees()
+        return EmployeeLogic.__sort_list_by_name(DataAPI.get_all_employees())
 
     @staticmethod
     def get_employee_by_ssn(ssn):
@@ -39,7 +44,7 @@ class EmployeeLogic:
             if employee.get_state() != not_scheduled_state:
                 employees_on_duty.append(employee)
 
-        return employees_on_duty
+        return EmployeeLogic.__sort_list_by_name(employees_on_duty)
 
     @staticmethod
     def get_employees_off_duty():
@@ -50,4 +55,4 @@ class EmployeeLogic:
             if employee.get_state() == not_scheduled_state:
                 employees_off_duty.append(employee)
 
-        return employees_off_duty
+        return EmployeeLogic.__sort_list_by_name(employees_off_duty)

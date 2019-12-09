@@ -32,7 +32,7 @@ class ComponentUI:
 
     @staticmethod
     def print_frame_constructor_menu(option_tuple, underlined_main_option, underlined_sub_option,\
-         user_input_list, print_submit=False, selected_option_index=1000, greyed_out_option_index_list=[1000], greyed_with_out_number=False):
+         user_input_list, print_submit=False, selected_option_index=1000, greyed_out_option_index_list=[], greyed_with_out_number=False):
 
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
@@ -45,7 +45,8 @@ class ComponentUI:
 
 
             if print_submit:
-                print("{} {}: {}".format(prefix_str, TextEditor.color_text(option, TextEditor.DARKGRAY_TEXT) if i in greyed_out_option_index_list else option, "" if not user_input_list else user_input_list[i]))
+                print("{} {}: {}".format(prefix_str, TextEditor.color_text(option, TextEditor.DARKGRAY_TEXT)\
+                     if i in greyed_out_option_index_list else option, "" if not user_input_list else user_input_list[i]))
             else:
                 print("- {}: {}".format(option if selected_option_index != i else TextEditor.edit_text(option, TextEditor.BLUE_TEXT, text_format=TextEditor.BOLD_TEXT),\
                      "" if not user_input_list else user_input_list[i]))
@@ -53,12 +54,12 @@ class ComponentUI:
         ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit)
 
     @staticmethod
-    def print_frame_table_menu(heads, getfunctions, table_height, underlined_main_option, underlined_sub_option, print_submit=False):
+    def print_frame_table_menu(heads, value_tuple, table_height, underlined_main_option, underlined_sub_option, print_submit=False):
 
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
 
-        ComponentUI.fill_in_table(heads,getfunctions,True)
+        ComponentUI.fill_in_table(heads, value_tuple, True)
 
         ComponentUI.fill_window_and_print_action_line(table_height+2, print_submit) 
 
@@ -158,7 +159,8 @@ class ComponentUI:
 
     @staticmethod
     def centered_text_message(message_str, second_line_str='', offset=2):
-        # centered feedback messege 
+        '''Prints a centered feedback message'''
+
         window_width, window_height = Window.get_size()
 
         #Calculate the how much space is left on the window
@@ -172,7 +174,7 @@ class ComponentUI:
         print(second_line_str.center(window_width))
         for _ in range(offsetted_body_height_center):
             print()
-        
+
         print("_" * window_width)
 
   ############# TABLE RELATED FUNCTIONS #################
