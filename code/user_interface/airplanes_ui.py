@@ -75,12 +75,10 @@ class AirplanesUI:
                     ComponentUI.print_frame_table_menu(table_header_tuple, airplanes_getfunctions_tuple, table_height,\
                         ComponentUI.get_main_options()[2], "New airplane")
 
-                    user_input = input("Insert number of desired type: ").strip()
+                    user_input = ComponentUI.get_user_input("Insert number of desired type: ")
 
-                    if not user_input:
-                        continue
-
-                    if not user_input.isdigit() or int(user_input) > table_height:
+                    user_input = ComponentUI.remove_brackets(user_input)
+                    if not user_input.isdigit() or int(user_input) > table_height or not user_input:
                         continue
 
                     table_index = int(user_input) - 1
