@@ -32,14 +32,20 @@ class ComponentUI:
 
     @staticmethod
     def print_frame_constructor_menu(option_tuple, underlined_main_option, underlined_sub_option,\
-         user_input_list, print_submit=False, selected_option_index=1000, greyed_out_option_index_list=[1000]):
+         user_input_list, print_submit=False, selected_option_index=1000, greyed_out_option_index_list=[1000], greyed_with_out_number=False):
 
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
 
         for i, option in enumerate(option_tuple):
+            if i in greyed_out_option_index_list and greyed_with_out_number:
+                prefix_str = " - "
+            else:
+                prefix_str = "(" + str(i+1) +")"
+
+
             if print_submit:
-                print("({}) {}: {}".format(i+1, TextEditor.color_text(option, TextEditor.DARKGRAY_TEXT) if i in greyed_out_option_index_list else option, "" if not user_input_list else user_input_list[i]))
+                print("{} {}: {}".format(prefix_str, TextEditor.color_text(option, TextEditor.DARKGRAY_TEXT) if i in greyed_out_option_index_list else option, "" if not user_input_list else user_input_list[i]))
             else:
                 print("- {}: {}".format(option if selected_option_index != i else TextEditor.edit_text(option, TextEditor.BLUE_TEXT, text_format=TextEditor.BOLD_TEXT),\
                      "" if not user_input_list else user_input_list[i]))
