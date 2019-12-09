@@ -47,7 +47,7 @@ class VoyageLogic:
         desired_voyages = []
 
         for voyage in all_voyages:
-            if voyage.get_schedule[0] == date:
+            if voyage.get_schedule()[0].date() == date:
                 desired_voyages.append(voyage)
 
         return desired_voyages
@@ -59,11 +59,8 @@ class VoyageLogic:
 
         for voyage in all_voyages:
 
-            #Store what date the voyage departs
-            year, month, date = voyage.get_schedule().split("-")
-
             #Get which week in the year each voyage is scheduled
-            voyage_week_in_year_int = datetime.date(year, month, date).isocalendar()[1]
+            voyage_week_in_year_int = voyage.get_schedule()[0].date().isocalendar()[1]
             if voyage_week_in_year_int == week:
                 desired_voyages.append(voyage)
 

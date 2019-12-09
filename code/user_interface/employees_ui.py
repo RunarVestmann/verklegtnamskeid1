@@ -171,12 +171,12 @@ class EmployeeUI:
  
         table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State", "License")
         pilots_list = LogicAPI.get_all_pilots()
-        pilots_value_list = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
+        pilot_value_tuple = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
            [pilot.get_phonenumber() for pilot in pilots_list], [pilot.get_home_address() for pilot in pilots_list],\
            [pilot.get_email() for pilot in pilots_list], [pilot.get_state() for pilot in pilots_list], [pilot.get_license() for pilot in pilots_list])
 
-        ComponentUI.print_frame_table_menu(table_header_tuple,pilots_value_list,\
-            len(pilots_value_list[0]) if pilots_value_list else [[]] * len(table_header_tuple), EmployeeUI.__FRAME_IN_USE_STR,"All pilots")
+        ComponentUI.print_frame_table_menu(table_header_tuple,pilot_value_tuple,\
+            len(pilot_value_tuple[0]) if pilot_value_tuple else [[]] * len(table_header_tuple), EmployeeUI.__FRAME_IN_USE_STR,"All pilots")
 
         return ComponentUI.get_user_input()
 
@@ -203,8 +203,6 @@ class EmployeeUI:
         user_input = ""
 
         info_header_tuple = ("Job title", "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
-
-        invalid_input = False
 
         while user_input not in navigation_bar_options:
             ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
@@ -284,8 +282,6 @@ class EmployeeUI:
 
         info_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
 
-        invalid_input = False
-
         while user_input not in navigation_bar_options:
             ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
             print(TextEditor.format_text("Find pilots by license", TextEditor.UNDERLINE_TEXT))
@@ -317,7 +313,7 @@ class EmployeeUI:
 
             ComponentUI.print_frame_table_menu(info_header_tuple, pilot_info_tuple, len(pilot_info_tuple[0]), EmployeeUI.__FRAME_IN_USE_STR, "Find pilots by license")
             
-            break #Needs more 
+            break #Needs profile functionality 
 
 
         return ComponentUI.get_user_input()

@@ -65,8 +65,8 @@ class LogicAPI:
         PilotLogic.save_new_pilot(pilot)
 
     @staticmethod
-    def change_saved_pilot(pilot):
-        PilotLogic.change_saved_pilot(pilot)
+    def change_saved_pilot(saved_pilot, change_pilot):
+        PilotLogic.change_saved_pilot(saved_pilot, change_pilot)
 
         
     @staticmethod
@@ -83,8 +83,8 @@ class LogicAPI:
         FlightAttendantLogic.save_new_flight_attendant(flight_attendant)
 
     @staticmethod
-    def change_saved_flight_attendant(flight_attendant):
-        FlightAttendantLogic.change_saved_flight_attendant(flight_attendant)
+    def change_saved_flight_attendant(saved_flight_attendant, changed_flight_attendant):
+        FlightAttendantLogic.change_saved_flight_attendant(saved_flight_attendant, changed_flight_attendant)
 
     @staticmethod
     def is_flight_attendant_ssn_avaliable(flight_attendant_ssn):
@@ -102,60 +102,24 @@ class LogicAPI:
 
     @staticmethod
     def get_ongoing_voyages():
-        voyage1 = Voyage( (Flight("Iceland","15:00","Nuuk","19:00","NA201",100),Flight("Nuuk","20:00","Iceland","00:00","NA202",20)),\
-        [Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
-        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29")],\
-        [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
-        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")],\
-        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland"),\
-        ("2019-12-23T18:00:00","2019-12-23T22:00:00"),\
-        False,\
-        "In flight to Iceland")
-        return [voyage1]
+        return VoyageLogic.get_ongoing_voyages()
 
-        # return VoyageLogic.get_ongoing_voyages()
+    @staticmethod
+    def get_completed_voyages():#needs testing
+        return VoyageLogic.get_completed_voyages()
 
     @staticmethod
     def get_voyages_by_date(date):
-        voyage1 = Voyage( (Flight("Iceland","15:00","Nuuk","19:00","NA201",100),Flight("Nuuk","20:00","Iceland","00:00","NA202",20)),\
-        [Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
-        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29")],\
-        [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
-        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")],\
-        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland"),\
-        ("2019-12-23T18:00:00","2019-12-23T22:00:00"),\
-        False,\
-        "In flight to Iceland")
-        return [voyage1]
-        #return VoyageLogic.get_voyages_by_date(date)
+
+        return VoyageLogic.get_voyages_by_date(date)
 
     @staticmethod
     def get_voyages_by_week(week):
-        voyage1 = Voyage( (Flight("Iceland","15:00","Nuuk","19:00","NA201",100),Flight("Nuuk","20:00","Iceland","00:00","NA202",20)),\
-        [Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
-        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29")],\
-        [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
-        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")],\
-        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland"),\
-        ("2019-12-23T18:00:00","2019-12-23T22:00:00"),\
-        False,\
-        "In flight to Iceland")
-        return [voyage1]
-        #return VoyageLogic.get_voyages_by_week(week)
+        return VoyageLogic.get_voyages_by_week(week)
 
     @staticmethod
     def get_voyages_by_destination(destination):
-        voyage1 = Voyage( (Flight("Iceland","15:00","Nuuk","19:00","NA201",100),Flight("Nuuk","20:00","Iceland","00:00","NA202",20)),\
-        [Pilot("Runar","2804803219","7776666","5812345","Dvergagili","runar80@hotmail.com","Landed abroad","Silverplate B-29"),\
-        Pilot("Hordur","2411932369","7739009","4663800","Langholt","hordur93@gmail.com","In flight to Iceland", "Boeing B-29")],\
-        [FlightAttendant("Samantha","1112981199","5464723","7766889","Tussugil", "samantha@thecity.com","Not scheduled for flight"),\
-        FlightAttendant("Veronica","1012981199","5564723","7866889","Mellugil", "veronica@thecity.com","Landed abroad")],\
-        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland"),\
-        ("2019-12-23T18:00:00","2019-12-23T22:00:00"),\
-        False,\
-        "In flight to Iceland")
-        return [voyage1]
-        #return VoyageLogic.get_voyages_by_destination(destination)
+        return VoyageLogic.get_voyages_by_destination(destination)
 
     @staticmethod
     def get_airplane_voyages(airplane):
@@ -195,9 +159,9 @@ class LogicAPI:
 
     @staticmethod
     def get_all_available_airplanes(schedule_tuple):
-        return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
-        Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
-        #return AirplaneLogic.get_all_available_airplanes()
+        # return [Airplane("Enola","Boeing B-29","Boeing",146,"Landed abroad"),\
+        # Airplane("Bockscar","Silverplate B-29","Boeing",80,"In flight to Iceland")]
+        return AirplaneLogic.get_all_available_airplanes(schedule_tuple)
 
     ####Flight routes####
 

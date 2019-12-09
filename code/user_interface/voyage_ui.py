@@ -1,3 +1,4 @@
+import datetime
 from user_interface.window import Window
 from user_interface.text_editor import TextEditor
 from user_interface.component_ui import ComponentUI
@@ -7,7 +8,7 @@ from data_models.voyage import Voyage
 class VoyageUI:
 
 
-    FRAME_IN_USE_STR = ComponentUI.get_main_options()[0]
+    __FRAME_IN_USE_STR = ComponentUI.get_main_options()[0]
 
     __option_tuple = ('New voyage', 'Show ongoing voyages','Show completed voyages', 'Find voyages by date',\
          'Find voyages by week', 'Find voyages by destination')
@@ -62,6 +63,7 @@ class VoyageUI:
 
                 user_input = input(input_message_tuple[index]).strip()
 
+                #Error checks and selection screens need to be added
 
                 user_input_list[index] = user_input
                 user_input = ""
@@ -81,41 +83,148 @@ class VoyageUI:
                     user_input = "A new voyage has been registered"
                     break
                 
-
-
-
         return user_input
 
-    DUMMYNMBR=1
     @staticmethod
     def __show_ongoing_voyages():
-        ComponentUI.print_header(ComponentUI.get_main_options()[0])
-        print(TextEditor.format_text(VoyageUI.__option_tuple[1], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
-        pass
 
-    
-    
+        table_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
+
+        ongoing_voyages_list = LogicAPI.get_ongoing_voyages()
+
+        voyage_value_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in ongoing_voyages_list],
+                              [voyage.get_airplane().get_name() for voyage in ongoing_voyages_list],
+                              [voyage.get_schedule()[0] for voyage in ongoing_voyages_list],
+                              [voyage.get_schedule()[1] for voyage in ongoing_voyages_list],
+                              [voyage.get_state() for voyage in ongoing_voyages_list])
+
+        ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple,\
+             len(voyage_value_tuple) if not voyage_value_tuple\
+             else len(voyage_value_tuple[0]),\
+            VoyageUI.__FRAME_IN_USE_STR, "Ongoing voyages")
+
+
+
+        return ComponentUI.get_user_input()
+
     @staticmethod
     def __show_completed_voyages():
-        ComponentUI.print_header(ComponentUI.get_main_options()[0])
-        print(TextEditor.format_text(VoyageUI.__option_tuple[2], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
-        pass
-    
+        table_header_tuple = ("Destination", "Airplane name", "Start time", "End time")
+
+        completed_voyages_list = LogicAPI.get_completed_voyages()
+
+        voyage_value_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in completed_voyages_list],
+                              [voyage.get_airplane().get_name() for voyage in completed_voyages_list],
+                              [voyage.get_schedule()[0] for voyage in completed_voyages_list],
+                              [voyage.get_schedule()[1] for voyage in completed_voyages_list],
+                              [voyage.get_state() for voyage in completed_voyages_list])
+
+        ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple,len(voyage_value_tuple) if not voyage_value_tuple\
+             else len(voyage_value_tuple[0]),\
+            VoyageUI.__FRAME_IN_USE_STR, "Completed voyages")
+
+
+
+        return ComponentUI.get_user_input()
+
     @staticmethod    
     def __show_find_voyages_by_date():
-        ComponentUI.print_header(ComponentUI.get_main_options()[0])
-        print(TextEditor.format_text(VoyageUI.__option_tuple[3], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
-        pass
+        user_input = ""
+
+        info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
+
+        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+
+        while not user_input.startswith(navigation_bar_options):
+            ComponentUI.print_header(VoyageUI. __FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find voyages by date", TextEditor.UNDERLINE_TEXT))
+
+            ComponentUI.fill_window_and_print_action_line(1)
+
+            user_input = input("Insert date(dd-mm-yy): ").strip()
+
+            if not user_input:
+                continue
+
+            #Error checks needed (perhaps let the user input the day, month and year seperately?)
+
+            day, month, year = user_input.split("-")
+
+            user_input = datetime.date(int(year), int(month), int(day))
+
+            voyages_list = []
+
+            voyages_list = LogicAPI.get_voyages_by_date(user_input)
+
+            ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find voyages by date", TextEditor.UNDERLINE_TEXT))
+
+            if not voyages_list:
+                
+                ComponentUI.centered_text_message("Could not find a voyage on the date: {}-{}-{}".format(user_input.day, user_input.month, user_input.year))
+            
+                return ComponentUI.get_user_input()
+
+            else: 
+                voyage_info_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in voyages_list],
+                              [voyage.get_airplane().get_name() for voyage in voyages_list],
+                              [voyage.get_schedule()[0] for voyage in voyages_list],
+                              [voyage.get_schedule()[1] for voyage in voyages_list],
+                              [voyage.get_state() for voyage in voyages_list])
+
+            ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, len(voyage_info_tuple[0]), VoyageUI.__FRAME_IN_USE_STR, "Find voyages by date")
+            
+            break #Needs profile functionality
+
+        return ComponentUI.get_user_input()
     
     @staticmethod
     def __show_find_voyages_by_week():
-        ComponentUI.print_header(ComponentUI.get_main_options()[0])
-        print(TextEditor.format_text(VoyageUI.__option_tuple[4], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
-        pass
+        user_input = ""
+
+        info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
+
+        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+
+        while not user_input.startswith(navigation_bar_options):
+            ComponentUI.print_header(VoyageUI. __FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find voyages by week", TextEditor.UNDERLINE_TEXT))
+
+            ComponentUI.fill_window_and_print_action_line(1)
+
+            user_input = input("Insert week number: ").strip()
+
+            if not user_input:
+                continue
+
+            #Error checks needed
+
+            voyages_list = []
+
+            voyages_list = LogicAPI.get_voyages_by_week(user_input)
+
+            ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find voyages by week", TextEditor.UNDERLINE_TEXT))
+
+            if not voyages_list:
+                
+                ComponentUI.centered_text_message("Could not find a voyage on week: {}".format(user_input))
+            
+                return ComponentUI.get_user_input()
+
+            else:
+                voyage_info_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in voyages_list],
+                              [voyage.get_airplane().get_name() for voyage in voyages_list],
+                              [voyage.get_schedule()[0] for voyage in voyages_list],
+                              [voyage.get_schedule()[1] for voyage in voyages_list],
+                              [voyage.get_state() for voyage in voyages_list])
+
+            ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, len(voyage_info_tuple[0]),\
+                 VoyageUI.__FRAME_IN_USE_STR, "Find voyages by date")
+            
+            break #Needs profile functionality
+
+        return ComponentUI.get_user_input()
     
     @staticmethod
     def __show_find_voyages_by_destination():
