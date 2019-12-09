@@ -34,10 +34,10 @@ class EmployeeUI:
         employee_info_already_exists = False
         while user_input not in navigation_bar_options:
 
-            greyed_out_option_index = 6 if not user_input_list[0].lower().startswith('p') else 1000
+            greyed_out_option_index = [6] if not user_input_list[0].lower().startswith('p') else [1000]
 
             ComponentUI.print_frame_constructor_menu(option_tuple, EmployeeUI.__FRAME_IN_USE_STR, "New employeee",\
-            user_input_list, True, greyed_out_option_index=greyed_out_option_index)
+            user_input_list, True, greyed_out_option_index_list=greyed_out_option_index)
             user_input = ComponentUI.get_user_input()
             
             
