@@ -7,7 +7,7 @@ from data_models.pilot import Pilot
 
 class EmployeeUI:
     #Generate a tuple that holds all the valid user inputs
-    __option_tuple = ('New employees', 'Show all employees', 'Show all pilots', 'Show all flight attendants', 'Find employee by name',\
+    __option_tuple = ('New employees', 'Show all employees', 'Show all pilots', 'Show all flight attendants', 'Find employee by name or ssn',\
                        'Find pilots by license', 'Show employees on duty', 'Show employees off duty')
     
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[1]
@@ -194,16 +194,83 @@ class EmployeeUI:
 
     @staticmethod
     def __show_employee_by_name_finder():
-        ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
-        print(TextEditor.format_text("Find by name", TextEditor.UNDERLINE_TEXT))
- 
-        table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
-        flight_attendants_list = LogicAPI.get_all_flight_attendants()
-        flight_attendants_value_tuple = ([flight_attendant.get_name() for flight_attendant in flight_attendants_list],[flight_attendant.get_ssn() for flight_attendant in flight_attendants_list],\
-           [flight_attendant.get_phonenumber() for flight_attendant in flight_attendants_list], [flight_attendant.get_home_address() for flight_attendant in flight_attendants_list],\
-           [flight_attendant.get_email() for flight_attendant in flight_attendants_list], [flight_attendant.get_state() for flight_attendant in flight_attendants_list])
 
-        ComponentUI.print_table(table_header_tuple,flight_attendants_value_tuple)
+        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+
+        user_input = ""
+
+        info_header_tuple = ("Job title", "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+
+        input_message = "Invalid input"
+
+        invalid_input = False
+
+        while user_input not in navigation_bar_options:
+            ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find employee by name or ssn", TextEditor.UNDERLINE_TEXT))
+
+            ComponentUI.fill_window_and_print_action_line(1)
+
+            user_input = input(TextEditor.color_text_background("Insert name or ssn: ") if invalid_input else "Insert name or ssn: ").strip()
+
+            employees = []
+
+            if not user_input:
+                continue
+
+            #If he enters  a digit
+            if user_input.isdigit():
+                if '-' in user_input:
+                    user_input = user_input.replace('-', '')
+                if '' in user_input:
+                    user_input = user_input.replace(' ', '')
+
+                employees = LogicAPI.get_employee_by_ssn(user_input)
+
+                ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
+                print(TextEditor.format_text("Find employee by name or ssn", TextEditor.UNDERLINE_TEXT))
+
+                if not employees:
+                    ComponentUI.centered_text_message("No employee found with the ssn: {}".format(user_input))
+
+                    return ComponentUI.get_user_input()
+
+                else:
+                    
+                    employee_info_tuple =  (["Pilot" if isinstance(employee, Pilot) else "Flight attendant" for employee in employees], [employee.get_name() for employee in employees],[employee.get_ssn() for employee in employees],\
+                        [employee.get_phonenumber() for employee in employees],[employee.get_home_address() for employee in employees],[employee.get_email() for employee in employees],\
+                        [employee.get_state() for employee in employees])                    
+
+                    ComponentUI.print_frame_table_menu(info_header_tuple,employee_info_tuple, len(employee_info_tuple[0]),  EmployeeUI.__FRAME_IN_USE_STR, "Find employee by name or ssn")
+                    break
+            else:
+                name_list = []
+                for name in user_input.split():
+                    name_list.append(name.capitalize())
+
+                user_input = " ".join(name_list)
+
+
+                employees = LogicAPI.get_employee_by_name(user_input)
+
+                ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+                print(TextEditor.format_text("Find employee by name or ssn", TextEditor.UNDERLINE_TEXT))
+
+                if not employees:
+                    
+                    ComponentUI.centered_text_message("Could not find an employee named {}".format(user_input))
+                
+                    return ComponentUI.get_user_input()
+
+                else: 
+                    employee_info_tuple = (["Pilot" if isinstance(employee, Pilot) else "Flight attendant" for employee in employees], [employee.get_name() for employee in employees],[employee.get_ssn() for employee in employees],\
+                    [employee.get_phonenumber() for employee in employees],[employee.get_home_address() for employee in employees],[employee.get_email() for employee in employees],\
+                    [employee.get_state() for employee in employees])
+
+                ComponentUI.print_frame_table_menu(info_header_tuple,employee_info_tuple, len(employee_info_tuple[0]),  EmployeeUI.__FRAME_IN_USE_STR, "Find employee by name or ssn")
+                
+                break #Needs more 
+
 
         return ComponentUI.get_user_input()
 

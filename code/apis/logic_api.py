@@ -42,6 +42,14 @@ class LogicAPI:
     def get_employees_off_duty():
         return EmployeeLogic.get_employees_off_duty()
 
+    @staticmethod
+    def get_employee_by_ssn(ssn):
+        return EmployeeLogic.get_employee_by_ssn(ssn)
+
+    @staticmethod
+    def get_employee_by_name(name):
+        return EmployeeLogic.get_employee_by_name(name)
+
     ####Pilots####
 
     @staticmethod
