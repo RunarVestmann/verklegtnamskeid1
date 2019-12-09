@@ -1,6 +1,6 @@
 plane_type,model,capacity,empty_weight,max_takeoff_weight,unit_thrust,service_ceiling,length,height,wingspan
 NABAE146,Fokker,128,65,16144,29480,44,10700,27,8Na,F,12,44,3232,222,22222,2,3,4
-Airbus,A318,227,44,68,000Kg,32323,22222,2,3,4
+Airbus,A318,227,44,68000,32323,22222,2,3,4
 Airbus,A220-100,116,44,3232,222,22222,2,3,4
 Airbus,A220-300,141,3232,222,22222,2,3,4
 Boeing,737-600,155,1122,222,33322,5,6,7
