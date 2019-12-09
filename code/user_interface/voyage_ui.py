@@ -247,6 +247,8 @@ class VoyageUI:
 
             #Error checks needed
 
+            user_input = user_input.capitalize()
+
             voyages_list = []
 
             voyages_list = LogicAPI.get_voyages_by_destination(user_input)
