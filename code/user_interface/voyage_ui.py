@@ -4,10 +4,11 @@ from user_interface.component_ui import ComponentUI
 from apis.logic_api import LogicAPI
 from data_models.voyage import Voyage
 
-FRAME_IN_USE_STR = ComponentUI.get_main_options()[0]
-
-
 class VoyageUI:
+
+
+    FRAME_IN_USE_STR = ComponentUI.get_main_options()[0]
+
     __option_tuple = ('New voyage', 'Show ongoing voyages','Show completed voyages', 'Find voyages by date',\
          'Find voyages by week', 'Find voyages by destination')
 
@@ -40,7 +41,7 @@ class VoyageUI:
 
             greyed_out_option_index_list = [1000] if not user_input_list[2] else [3,4]
 
-            ComponentUI.print_frame_constructor_menu(option_tuple, FRAME_IN_USE_STR,\
+            ComponentUI.print_frame_constructor_menu(option_tuple, VoyageUI.FRAME_IN_USE_STR,\
                  "New voyage", user_input_list, True, greyed_out_option_index_list=greyed_out_option_index_list)
             
             user_input = ComponentUI.get_user_input()
@@ -52,9 +53,12 @@ class VoyageUI:
 
             if user_input in valid_user_inputs:
                 index = int(user_input) - 1
-
-                ComponentUI.print_frame_constructor_menu(option_tuple, FRAME_IN_USE_STR,\
-                 "New voyage", user_input_list, False, index, greyed_out_option_index_list=greyed_out_option_index_list)
+                all_flight_routes = LogicAPI.get_all_flight_routes()
+                flight_route_info_tuple = ([flight_route.get_destination() for flight_route in all_flight_routes],\
+                [flight_route.get_airport_id() for flight_route in all_flight_routes])
+                ComponentUI.print_frame_table_menu(("Destination","Airport id"),\
+                    flight_route_info_tuple,[[]]*len(flight_route_info_tuple) if not flight_route_info_tuple else len(flight_route_info_tuple[0]),ComponentUI.get_main_options()[0],"Flight route")
+                
 
                 user_input = input(input_message_tuple[index]).strip()
 
@@ -74,7 +78,7 @@ class VoyageUI:
                         user_input_list[5]
                     )
                     LogicAPI.save_new_voyage(new_voyage)
-                    user_input = "A new flight route has been registered"
+                    user_input = "A new voyage has been registered"
                     break
                 
 
