@@ -5,7 +5,6 @@ from data_models.flight_attendant import FlightAttendant
 from apis.logic_api import LogicAPI
 from data_models.pilot import Pilot
 
-
 class EmployeeUI:
     #Generate a tuple that holds all the valid user inputs
     __option_tuple = ('New employees', 'Show all employees', 'Show all pilots', 'Show all flight attendants', 'Find employee by name',\
@@ -25,7 +24,7 @@ class EmployeeUI:
     
     @staticmethod
     def __show_new_employee_constructor():
-        input_message_tuple = ("Insert job title(p for pilot,f for flight attendant): ", "Insert Name: ", "Insert Social security number: ",\
+        input_message_tuple = ("Insert job title('f' for flight attendant, 'p' for pilot): ", "Insert Name: ", "Insert Social security number: ",\
             "Insert Phone number: ", "Insert Home address: ", "Insert E-mail: ", "Insert License: ")
         user_input = ""
         navigation_bar_options = ComponentUI.get_navigation_options_tuple()
@@ -96,8 +95,9 @@ class EmployeeUI:
                     else:
                         employee_info_already_exists = False
 
+                #Email error check
                 elif index == 5:
-                    if "@" not in user_input and "." not in user_input:
+                    if "@" not in user_input and "." not in user_input and len(user_input) < 5:
                         employee_info_already_exists = True
                         user_input = user_input + " " + TextEditor.color_text_background("Invalid e-mail, another input is required", TextEditor.RED_BACKGROUND)
 
@@ -149,7 +149,7 @@ class EmployeeUI:
         ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("Show all employees", TextEditor.UNDERLINE_TEXT))
         
-        table_header = ("Job title" "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
+        table_header = ("Job title", "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
         all_employees = LogicAPI.get_all_employees()
         flight_routes_getfunctions_tuple = (["Pilot" if isinstance(employee, Pilot) else "Flight attandant" for employee in all_employees], [employee.get_name for employee in all_employees],[employee.get_ssn for employee in all_employees],\
             [employee.get_phonenumber for employee in all_employees],[employee.get_home_address for employee in all_employees],[employee.get_email for employee in all_employees],\

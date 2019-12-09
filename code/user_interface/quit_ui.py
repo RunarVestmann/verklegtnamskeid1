@@ -24,24 +24,26 @@ class QuitUI:
     def __print_quit_menu_body():
         '''Prints the quit menu body that's below the header'''
 
-        window_width, window_height = Window.get_size()
+        ComponentUI.centerd_text_message("Are you sure you want to quit?","(Y)es    (N)o")
 
-        #Calculate the how much space is left on the window
-        body_height = window_height - ComponentUI.get_header_height()
+        # window_width, window_height = Window.get_size()
 
-        #Calculate how many new lines should be both above and below the quit text
-        offsetted_body_height_center = (body_height//2) - 2
+        # #Calculate the how much space is left on the window
+        # body_height = window_height - ComponentUI.get_header_height()
 
-        #Print the empty space above the quit text
-        for _ in range(offsetted_body_height_center):
-            print()
+        # #Calculate how many new lines should be both above and below the quit text
+        # offsetted_body_height_center = (body_height//2) - 2
 
-        print("Are you sure you want to quit?".center(window_width))
-        print("(Y)es    (N)o".center(window_width))
+        # #Print the empty space above the quit text
+        # for _ in range(offsetted_body_height_center):
+        #     print()
 
-        #Print the empty space below the quit text
-        for _ in range(offsetted_body_height_center):
-            print()
+        # print("Are you sure you want to quit?".center(window_width))
+        # print("(Y)es    (N)o".center(window_width))
 
-        print("_" * window_width)
+        # #Print the empty space below the quit text
+        # for _ in range(offsetted_body_height_center):
+        #     print()
+
+        # print("_" * window_width)
         

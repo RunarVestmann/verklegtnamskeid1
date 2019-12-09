@@ -14,7 +14,7 @@ class AirplaneData:
     #Store the filename according to whether the user has a Mac or not
     __airplane_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
 
-    __NOT_IN_USE_STATES_TUPLE = ("Not scheduled", "Not in use")
+    __NOT_IN_USE_STATES_TUPLE = ("Not scheduled","Not in use")      #for testing emty,"Waiting for flight from Iceland")
 
     #A list to cache all the airplanes once they've been fetched
     __all_airplanes_list = []
