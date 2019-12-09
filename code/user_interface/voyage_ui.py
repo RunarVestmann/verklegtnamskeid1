@@ -220,7 +220,7 @@ class VoyageUI:
                               [voyage.get_state() for voyage in voyages_list])
 
             ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, len(voyage_info_tuple[0]),\
-                 VoyageUI.__FRAME_IN_USE_STR, "Find voyages by date")
+                 VoyageUI.__FRAME_IN_USE_STR, "Find voyages by week")
             
             break #Needs profile functionality
 
@@ -228,10 +228,51 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_destination():
-        ComponentUI.print_header(ComponentUI.get_main_options()[0])
-        print(TextEditor.format_text(VoyageUI.__option_tuple[4], TextEditor.UNDERLINE_TEXT))
-        ComponentUI.fill_window_and_print_action_line(VoyageUI.DUMMYNMBR, False)
-        pass
+        user_input = ""
+
+        info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
+
+        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+
+        while not user_input.startswith(navigation_bar_options):
+            ComponentUI.print_header(VoyageUI. __FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
+
+            ComponentUI.fill_window_and_print_action_line(1)
+
+            user_input = input("Insert destination: ").strip()
+
+            if not user_input:
+                continue
+
+            #Error checks needed
+
+            voyages_list = []
+
+            voyages_list = LogicAPI.get_voyages_by_destination(user_input)
+
+            ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
+
+            if not voyages_list:
+                
+                ComponentUI.centered_text_message("Could not find a voyage going to destination: {}".format(user_input))
+            
+                return ComponentUI.get_user_input()
+
+            else:
+                voyage_info_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in voyages_list],
+                              [voyage.get_airplane().get_name() for voyage in voyages_list],
+                              [voyage.get_schedule()[0] for voyage in voyages_list],
+                              [voyage.get_schedule()[1] for voyage in voyages_list],
+                              [voyage.get_state() for voyage in voyages_list])
+
+            ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, len(voyage_info_tuple[0]),\
+                 VoyageUI.__FRAME_IN_USE_STR, "Find voyages by destination")
+            
+            break #Needs profile functionality
+
+        return ComponentUI.get_user_input()
 
  
         
