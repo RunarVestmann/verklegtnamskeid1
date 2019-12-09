@@ -46,7 +46,7 @@ class AirplanesUI:
         while user_input not in navigation_bar_options:
 
             ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[2],\
-                 "New airplane", user_input_list, True)
+                 "New airplane", user_input_list, True, 1000, [2,3], True)
 
             user_input = ComponentUI.get_user_input()
 
@@ -65,7 +65,7 @@ class AirplanesUI:
                     ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[2],\
                      "New airplane", user_input_list, False, index)
                     user_input = input(input_message_tuple[index]).strip()
-                else:
+                elif index == 1:
                     table_header_tuple = ("Type", "Manufacturer", "Seats")
                     aircrafttype_list = LogicAPI.get_all_airplane_types()
                     airplanes_getfunctions_tuple = ([aircraft_type.get_plane_type() for aircraft_type in aircrafttype_list],[aircraft_type.get_model() for aircraft_type in aircrafttype_list],\
@@ -74,10 +74,13 @@ class AirplanesUI:
                     table_height = len(aircrafttype_list)
                     ComponentUI.print_frame_table_menu(table_header_tuple, airplanes_getfunctions_tuple, table_height,\
                         ComponentUI.get_main_options()[2], "New airplane")
-                    
+
                     user_input = input("Insert number of desired type: ").strip()
 
                     if not user_input:
+                        continue
+
+                    if not user_input.isdigit() or int(user_input) > table_height:
                         continue
 
                     table_index = int(user_input) - 1
@@ -85,12 +88,7 @@ class AirplanesUI:
                     user_input_list[1] = chosen_table_line.get_plane_type()
                     user_input_list[2] = chosen_table_line.get_model()
                     user_input_list[3] = chosen_table_line.get_capacity()
-
-
-
-
-                if not user_input:
-                    continue
+                
 
                 #Capitalize the first letter of the Name , Type and Manufacturer 
                 if index == 0:       # or index == 1 or index == 2:
