@@ -11,12 +11,8 @@ from data_accessors.pilot_data import PilotData
 
 class VoyageData:
 
-    #The paths we found worked for the different operating systems
-    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/voyages.csv")
-    __other_path = "../data_storage/voyages.csv"
-
-    #Store the filename according to whether the user has a Mac or not
-    __voyage_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+    #Store the filename path
+    __voyage_data_filename = os.path.realpath("../data_storage/voyages.csv")
 
     #A list to cache all the pilots once they've been fetched
     __all_voyages_list = []

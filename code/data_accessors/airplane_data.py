@@ -7,12 +7,14 @@ from data_accessors.aircraft_type_data import AircraftTypeData
 
 class AirplaneData:
 
-    #The paths we found worked for the different operating systems
-    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/airplanes.csv")
-    __other_path = "../data_storage/airplanes.csv"
+    # #The paths we found worked for the different operating systems
+    # __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/airplanes.csv")
+    # __other_path = os.path.realpath("../data_storage/airplanes.csv")
 
-    #Store the filename according to whether the user has a Mac or not
-    __airplane_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+    # #Store the filename according to whether the user has a Mac or not
+    # __airplane_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+
+    __airplane_data_filename = os.path.realpath("../data_storage/airplanes.csv")
 
     __NOT_IN_USE_STATES_TUPLE = ("Not scheduled","Not in use")      #for testing emty,"Waiting for flight from Iceland")
 

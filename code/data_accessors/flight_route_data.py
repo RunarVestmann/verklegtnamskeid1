@@ -5,12 +5,8 @@ from data_models.flight_route import FlightRoute
 
 class FlightRouteData:
 
-    #The paths we found worked for the different operating systems
-    __mac_path = os.path.realpath("verklegtnamskeid1/data_storage/flight_routes.csv")
-    __other_path = "../data_storage/flight_routes.csv"
-
-    #Store the filename according to whether the user has a Mac or not
-    __flight_route_data_filename = __mac_path if platform.system() == "Darwin" else __other_path
+    #Store the filename path
+    __flight_route_data_filename = os.path.realpath("../data_storage/flight_routes.csv")
 
     #A list to cache all the flight routes once they've been fetched
     __all_flight_routes_list = []
