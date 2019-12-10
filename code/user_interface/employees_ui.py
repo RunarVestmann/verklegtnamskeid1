@@ -11,6 +11,8 @@ class EmployeeUI:
                        'Find pilots by license', 'Show employees on duty', 'Show employees off duty')
   
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[1]
+   
+   
     @staticmethod
     def show():
         
@@ -57,7 +59,7 @@ class EmployeeUI:
                 if not user_input.isdigit():
                     user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
                     employee_info_already_exists = True
-                elif len(user_input) < 10:
+                elif len(user_input) < 10 and index == 3:
                     user_input = user_input + " " + TextEditor.color_text_background("Must be of length 10, another input is required", TextEditor.RED_BACKGROUND)
                     employee_info_already_exists = True
                 else:
@@ -278,7 +280,8 @@ class EmployeeUI:
 
                 ComponentUI.print_frame_table_menu(info_header_tuple,employee_info_tuple, len(employee_info_tuple[0]),  EmployeeUI.__FRAME_IN_USE_STR, "Find employee by name or ssn")
                 
-                break #Needs more 
+                break
+
 
 
         return ComponentUI.get_user_input()
@@ -363,3 +366,89 @@ class EmployeeUI:
             ComponentUI.print_frame_table_menu(table_header_tuple,employees_off_duty_value_tuple, len(employees_off_duty_value_tuple[0]),EmployeeUI.__FRAME_IN_USE_STR,"All employees off duty")
 
         return ComponentUI.get_user_input()
+
+
+    @staticmethod
+    def __show_employee(employee):
+        user_input = ''
+        user_input_list = [
+            employee.get_name(),
+            employee.get_ssn(),
+            employee.get_phonenumber(),
+            employee.get_home_address(),
+            employee.get_email(),
+            employee.get_state()
+        ]
+
+        valid_user_inputs = ["3","4","5","6"]
+       
+        employee_info_already_exists = False
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
+            ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
+            ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4])
+            
+           
+            user_input = ComponentUI.get_user_input()
+            user_input = ComponentUI.remove_brackets(user_input)
+            if user_input in valid_user_inputs: 
+                index = int(user_input) - 1
+                ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
+                    ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, False, index, [0,1,2,3,4])
+
+                if(index == 5):
+                    user_input = input("Insert new contact name: ").strip()
+                elif(index == 6):
+                    user_input = input("Insert new Emergency phonenumber: ").strip()
+
+
+
+                #Capitalize the first letters in the contacts name
+                if index == 5:
+                    if not user_input: #use existing name in case if user cancels or leaves it blank 
+                        user_input = user_input_list[index]
+
+                    contact_name_list = []
+                    for name in user_input.split():
+                        contact_name_list.append(name.capitalize())
+                    user_input = " ".join(contact_name_list)
+
+                #Remove any spaces or dashes from the phonenumber
+                elif index == 6:
+                    if not user_input: #use existing phonenumber in case if user cancels or leaves it blank
+                        user_input = user_input_list[index]
+
+                    if '-' in user_input:
+                        user_input = user_input.replace('-', '')
+                    if '' in user_input:
+                        user_input = user_input.replace(' ', '')
+
+                    #Put a message on the screen indicating the phonenumber is invalid
+                    if not user_input.isdigit():
+                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
+                        flight_route_info_already_exists = True
+                    else:
+                        flight_route_info_already_exists = False
+                
+                user_input_list[index] = user_input
+                user_input = ""
+
+            elif user_input.startswith('s'):
+                if all(user_input_list) and not flight_route_info_already_exists:
+
+                    edited_flight_route = FlightRoute(
+                        user_input_list[0],
+                        user_input_list[1],
+                        user_input_list[2],
+                        user_input_list[3],
+                        user_input_list[4],
+                        user_input_list[5],
+                        user_input_list[6]
+                    )
+
+                    LogicAPI.change_saved_flight_route(flrt, edited_flight_route)
+                    #þarfnast skoðunnar(Kannski er þetta ok þar sem breytingar sjást, næ ekki að láta þetta virka heldur)
+                    user_input = "A new flight route contact information has been edited"
+                    break
+
+        return user_input
+
