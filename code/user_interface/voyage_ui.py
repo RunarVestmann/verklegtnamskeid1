@@ -113,23 +113,33 @@ class VoyageUI:
 
     @staticmethod
     def __show_completed_voyages():
-        table_header_tuple = ("Destination", "Airplane name", "Start time", "End time")
+        ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
+        print(TextEditor.format_text("Completed voyages", TextEditor.UNDERLINE_TEXT))
+    
+        user_input = ""
+        while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
+            table_header_tuple = ("Destination", "Airplane name", "Start time", "End time")
+            completed_voyages_list = LogicAPI.get_completed_voyages()
+            voyage_value_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in completed_voyages_list],
+                                [voyage.get_airplane().get_name() for voyage in completed_voyages_list],
+                                [voyage.get_schedule()[0] for voyage in completed_voyages_list],
+                                [voyage.get_schedule()[1] for voyage in completed_voyages_list],
+                                [voyage.get_state() for voyage in completed_voyages_list])
+            table_height = len(completed_voyages_list)
+            ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Completed voyages")
+            user_input = ComponentUI.get_user_input()
+            user_input = ComponentUI.remove_brackets(user_input)
+            if not user_input.isdigit() or int(user_input) > table_height:
+                    continue
+            if completed_voyages_list: 
+                table_index = int(user_input)-1
+                voyage = completed_voyages_list[table_index]        
 
-        completed_voyages_list = LogicAPI.get_completed_voyages()
+                user_input = VoyageUI.__show_voyage(voyage)
+            else:
+                ComponentUI.centered_text_message("There are no completed voyages at the moment !","",3)
 
-        voyage_value_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in completed_voyages_list],
-                              [voyage.get_airplane().get_name() for voyage in completed_voyages_list],
-                              [voyage.get_schedule()[0] for voyage in completed_voyages_list],
-                              [voyage.get_schedule()[1] for voyage in completed_voyages_list],
-                              [voyage.get_state() for voyage in completed_voyages_list])
-
-        ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple,len(voyage_value_tuple) if not voyage_value_tuple\
-             else len(voyage_value_tuple[0]),\
-            VoyageUI.__FRAME_IN_USE_STR, "Completed voyages")
-
-
-
-        return ComponentUI.get_user_input()
+        return user_input
 
     @staticmethod    
     def __show_find_voyages_by_date():
@@ -286,22 +296,21 @@ class VoyageUI:
     def __show_voyage(voyage): #Needs work!!
         user_input = ''
         user_input_list = [
-            voyage.get_country(),
-            voyage.get_destination(),
-            voyage.get_airport_id(),
-            voyage.get_flight_time(),
-            voyage.get_distance_from_iceland(),
-            voyage.get_contact_name(),
-            voyage.get_emergency_phone()
+            voyage.get_flights(),
+            voyage.get_pilots(),
+            voyage.get_flight_attendants(),
+            voyage.get_airplane(),
+            voyage.get_schedule(),
+            voyage.get_state()
         ]
 
-        valid_user_inputs = ["6","7","(6)","(7)"]
+        valid_user_inputs = ["2","3"]
         #ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))            
        
         voyage_info_already_exists = False
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(VoyageUI.__INFO_TUPLE,\
-            ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4])
+            ComponentUI.get_main_options()[0], "Voyage scheduled " + user_input_list[2], user_input_list, True, 1000, [0,3,4,5])
             
            
             user_input = ComponentUI.get_user_input()
@@ -309,59 +318,33 @@ class VoyageUI:
             if user_input in valid_user_inputs: 
                 index = int(user_input) - 1
                 ComponentUI.print_frame_constructor_menu(VoyageUI.__INFO_TUPLE,\
-            ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4])
+            ComponentUI.get_main_options()[0], "Voyage scheduled " + user_input_list[2], user_input_list, False, 1000, [0,3,4,5])
 
-                if(index == 5):
-                    user_input = input("Insert new contact name: ").strip()
-                elif(index == 6):
-                    user_input = input("Insert new Emergency phonenumber: ").strip()
+                if(index == 1):
+                    user_input = input("Insert pilot: ").strip()
+                elif(index == 2):
+                    user_input = input("Insert flight attendant: ").strip()
 
 
 
-                #Capitalize the first letters in the contacts name
-                if index == 5:
-                    if not user_input: #use existing name in case if user cancels or leaves it blank 
-                        user_input = user_input_list[index]
 
-                    contact_name_list = []
-                    for name in user_input.split():
-                        contact_name_list.append(name.capitalize())
-                    user_input = " ".join(contact_name_list)
 
-                #Remove any spaces or dashes from the phonenumber
-                elif index == 6:
-                    if not user_input: #use existing phonenumber in case if user cancels or leaves it blank
-                        user_input = user_input_list[index]
-
-                    if '-' in user_input:
-                        user_input = user_input.replace('-', '')
-                    if '' in user_input:
-                        user_input = user_input.replace(' ', '')
-
-                    #Put a message on the screen indicating the phonenumber is invalid
-                    if not user_input.isdigit():
-                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
-                        flight_route_info_already_exists = True
-                    else:
-                        flight_route_info_already_exists = False
-                
                 user_input_list[index] = user_input
                 user_input = ""
 
             elif user_input.startswith('s'):
-                if all(user_input_list) and not flight_route_info_already_exists:
+                if all(user_input_list) and not voyage_info_already_exists:
 
-                    edited_flight_route = FlightRoute(
+                    edited_voyage = Voyage(
                         user_input_list[0],
                         user_input_list[1],
                         user_input_list[2],
                         user_input_list[3],
                         user_input_list[4],
                         user_input_list[5],
-                        user_input_list[6]
                     )
 
-                    LogicAPI.change_saved_flight_route(voyage, edited_flight_route)
+                    LogicAPI.change_saved_voyage(voyage, edited_voyage)
                     #þarfnast skoðunnar(Kannski er þetta ok þar sem breytingar sjást, næ ekki að láta þetta virka heldur)
                     user_input = "A voyage has been edited"
                     break
