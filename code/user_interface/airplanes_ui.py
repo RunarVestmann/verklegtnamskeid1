@@ -158,21 +158,28 @@ class AirplanesUI:
     def __show_airplanes_in_use():
         ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All airplanes in use", TextEditor.UNDERLINE_TEXT))
- 
-        table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
-        airplanes_list = LogicAPI.get_all_airplanes_in_use()
-        if airplanes_list:
-            airplanes_getfunctions_tuple = ([airplane.get_name() for airplane in airplanes_list],[airplane.get_state() for airplane in airplanes_list],\
-            [airplane.get_type() for airplane in airplanes_list], [airplane.get_manufacturer() for airplane in airplanes_list], [airplane.get_seat_count() for airplane in airplanes_list])
+        user_input = ""
+        while user_input not in AirplanesUI.navigation_bar_options:
+            table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
+            airplanes_list = LogicAPI.get_all_airplanes_in_use()
+            if airplanes_list:
+                airplanes_getfunctions_tuple = ([airplane.get_name() for airplane in airplanes_list],[airplane.get_state() for airplane in airplanes_list],\
+                [airplane.get_type() for airplane in airplanes_list], [airplane.get_manufacturer() for airplane in airplanes_list], [airplane.get_seat_count() for airplane in airplanes_list])
+                table_height = len(airplanes_list)
+                ComponentUI.print_frame_table_menu(table_header_tuple,airplanes_getfunctions_tuple,table_height, ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR),"All airplanes in use")
+                user_input = ComponentUI.get_user_input()
+                user_input = ComponentUI.remove_brackets(user_input)
+                if not user_input.isdigit() or int(user_input) > table_height:
+                    continue
+                table_index = int(user_input)-1
+                airplane = airplanes_list[table_index]        
 
-            ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
-            ComponentUI.fill_window_and_print_action_line(len(airplanes_list)+2)
-        
-        else:
-            ComponentUI.centered_text_message("There are no airpanes in use at the moment !","",3)
+                user_input = AirplanesUI.__show_airplane(airplane)
+            else:
+                ComponentUI.centered_text_message("There are no airplanes in use at the moment !","",3)
 
            
-        return ComponentUI.get_user_input()
+            return user_input
     
 
 
@@ -180,17 +187,27 @@ class AirplanesUI:
     def __show_all_airplane_types():
         ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All airplanes types", TextEditor.UNDERLINE_TEXT))
- 
-        table_header_tuple = ("Type", "Manufacturer", "Seats")
-        aircrafttype_list = LogicAPI.get_all_airplane_types()
-        airplanes_getfunctions_tuple = ([aircraft_type.get_plane_type() for aircraft_type in aircrafttype_list],[aircraft_type.get_model() for aircraft_type in aircrafttype_list],\
-           [aircraft_type.get_capacity() for aircraft_type in aircrafttype_list])
+        user_input = ""
+        while user_input not in AirplanesUI.navigation_bar_options:
+            table_header_tuple = ("Type", "Manufacturer", "Seats")
+            airplane_type_list = LogicAPI.get_all_airplane_types()
+            airplanes_getfunctions_tuple = ([aircraft_type.get_plane_type() for aircraft_type in airplane_type_list],[aircraft_type.get_manufacturer() for aircraft_type in airplane_type_list],\
+                [aircraft_type.get_seat_count() for aircraft_type in airplane_type_list])
+            table_height = len(airplane_type_list)
 
-        ComponentUI.fill_in_table(table_header_tuple, airplanes_getfunctions_tuple, False)
-                 
-        ComponentUI.fill_window_and_print_action_line(len(aircrafttype_list)+2)
+            ComponentUI.print_frame_table_menu(table_header_tuple, airplanes_getfunctions_tuple, table_height, ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR),"All airplane types")
+            user_input = ComponentUI.get_user_input()
+            user_input = ComponentUI.remove_brackets(user_input)
+            if not user_input.isdigit() or int(user_input) > table_height:
+                    continue
+            table_index = int(user_input)-1
+            airplane = airplane_type_list[table_index]        
 
-        return ComponentUI.get_user_input()
+            user_input = AirplanesUI.__show_airplane(airplane)
+
+        return user_input
+        # Needs fixing (Missing attribute manufacturer and seat count)
+
 
     @staticmethod
     def __show_airplane(airplane):
