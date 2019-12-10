@@ -309,6 +309,8 @@ class EmployeeUI:
             if not user_input:
                 continue
 
+            user_input = user_input.capitalize()
+            
             pilots_list = []
 
             pilots_list = LogicAPI.get_licensed_pilots(user_input)
