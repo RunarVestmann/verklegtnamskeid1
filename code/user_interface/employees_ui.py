@@ -23,7 +23,7 @@ class EmployeeUI:
         return ComponentUI.run_frame(EmployeeUI.__option_tuple, EmployeeUI.__FRAME_IN_USE_STR, valid_user_inputs, frame_functions)
     
     @staticmethod
-    def __constructor_error_check(user_input, employee_info_already_exists, index, ):
+    def __constructor_error_check(user_input, employee_info_already_exists, index, user_input_list):
         #Only accept something that starts with f or p in the input for the job title
             if index == 0:
 

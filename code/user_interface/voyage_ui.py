@@ -275,7 +275,3 @@ class VoyageUI:
             break #Needs profile functionality
 
         return ComponentUI.get_user_input()
-
- 
-        
-        
