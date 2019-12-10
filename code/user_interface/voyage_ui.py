@@ -152,7 +152,10 @@ class VoyageUI:
 
             #Error checks needed (perhaps let the user input the day, month and year seperately?)
 
-            day, month, year = user_input.split("-")
+            if user_input[2] == "-":
+                day, month, year = user_input.split("-")
+            elif user_input[2] == " ":
+                day, month, year = user_input.split(" ")
 
             user_input = datetime.date(int(year), int(month), int(day))
             voyages_list = []
