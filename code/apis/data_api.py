@@ -58,6 +58,10 @@ class DataAPI:
         AirplaneData.save_new_airplane(airplane)
 
     @staticmethod
+    def change_saved_airplane(saved_airplane, changed_airplane):
+        AirplaneData.change_saved_airplane(saved_airplane, changed_airplane)
+
+    @staticmethod
     def get_airplane(name):
         return AirplaneData.get_airplane(name)
 

@@ -37,6 +37,35 @@ class AirplaneData:
         return AirplaneData.__all_airplanes_list
 
     @staticmethod
+    def change_saved_airplane(saved_airplane, changed_airplane):
+        updated_list_of_airplanes = []
+
+        for airplane in AirplaneData.get_all_airplanes():
+
+            if airplane == saved_airplane:
+                updated_list_of_airplanes.append(changed_airplane)
+            else:
+                updated_list_of_airplanes.append(airplane)
+
+        AirplaneData.__overwrite_all_airplanes(updated_list_of_airplanes)
+
+    @staticmethod
+    def __overwrite_all_airplanes(airplanes):
+        field_names = ["name", "aircraft_type", "manufacturer", "seat_count", "state"]
+        with open(AirplaneData.__airplane_data_filename, 'w') as file_stream:
+            writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
+            writer.writeheader()
+            AirplaneData.__all_airplanes_list = []
+            for airplane in airplanes:
+                AirplaneData.__all_airplanes_list.append(airplane)
+                writer.writerow({
+                 "name": airplane.get_name(),
+                 "aircraft_type": airplane.get_type(), #.get_plane_type(),
+                 "manufacturer": airplane.get_manufacturer(),
+                 "seat_count": airplane.get_seat_count(),
+                 "state": airplane.get_state()})
+
+    @staticmethod
     def get_airplane(airplane_name):
         '''Returns an airplane that has the given name,
            returns None if no such airplane is found'''

@@ -138,6 +138,10 @@ class LogicAPI:
     @staticmethod
     def save_new_airplane(airplane):
         return AirplaneLogic.save_new_airplane(airplane)
+    
+    @staticmethod
+    def change_saved_airplane(saved_airplane, changed_airplane):
+        AirplaneLogic.change_saved_airplane(saved_airplane, changed_airplane)
 
     @staticmethod
     def get_all_airplanes():

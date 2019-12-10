@@ -15,6 +15,10 @@ class AirplaneLogic:
         DataAPI.save_new_airplane(airplane)
 
     @staticmethod
+    def change_saved_airplane(saved_airplane, changed_airplane):
+        DataAPI.change_saved_airplane(saved_airplane, changed_airplane)
+
+    @staticmethod
     def get_all_airplanes(): #needs testing
         return AirplaneLogic.__sort_list_by_name(DataAPI.get_all_airplanes())
 

@@ -141,7 +141,7 @@ class VoyageUI:
 
             ComponentUI.fill_window_and_print_action_line(1)
 
-            user_input = input("Insert date(dd-mm-yy): ").strip()
+            user_input = input("Insert date(dd-mm-yyyy): ").strip()
 
             if not user_input:
                 continue
@@ -151,7 +151,6 @@ class VoyageUI:
             day, month, year = user_input.split("-")
 
             user_input = datetime.date(int(year), int(month), int(day))
-
             voyages_list = []
 
             voyages_list = LogicAPI.get_voyages_by_date(user_input)
