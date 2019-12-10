@@ -1,8 +1,8 @@
 name,ssn,phonenumber,home_address,email,state,license
-Billy Bob,2104793599,8521543,Kjarnagata,Billy@nanair.com,Not scheduled for flight,Commercial Pilot
-Jason Statham,2408714389,7118822,Trollaborgir,Jasonstat@kickazz.com,Not scheduled for flight,Commercial Pilot
-Laddi Haraldsson,2503641259,8447214,Bollagardur 1,Laddi@strumpur.is,Not scheduled for flight,Commercial Pilot
-Jackie Chan,1802582279,7224577,Berjarimi 5,Jackieboy@kungfu.is,Not scheduled for flight,Commercial Pilot
-Zlatan Ibrahimovic,2107863319,7221666,Grand hotel,Daretozlatan@theking.is,Not scheduled for flight,Commercial Pilot
-Bruce Lee,1909824369,8444218,Bessastadir,Fckchunknorris@pres.is,Not scheduled for flight,Commercial Pilot
-Leo Messi,1405883349,7762299,Asbru 5,Messi@thegoat.is,Not scheduled for flight,Commercial Pilot
+Billy Bob,2104793599,8521543,Kjarnagata,Billy@nanair.com,,Transporter
+Jason Statham,2408714389,7118822,Trollaborgir,Jasonstat@kickazz.com,Not scheduled for flight,Focker
+Laddi Haraldsson,2503641259,8447214,Bollagardur 1,Laddi@strumpur.is,Not scheduled for flight,Transporter
+Jackie Chan,1802582279,7224577,Berjarimi 5,Jackieboy@kungfu.is,Not scheduled for flight,Focker
+Zlatan Ibrahimovic,2107863319,7221666,Grand hotel,Daretozlatan@theking.is,Not scheduled for flight,Nordlenzkt
+Bruce Lee,1909824369,8444218,Bessastadir,Fckchunknorris@pres.is,Not scheduled for flight,Nordlenzkt
+Leo Messi,1405883349,7762299,Asbru 5,Messi@thegoat.is,Not scheduled for flight,Nordlenzkt
