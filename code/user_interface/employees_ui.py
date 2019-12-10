@@ -23,6 +23,58 @@ class EmployeeUI:
         return ComponentUI.run_frame(EmployeeUI.__option_tuple, EmployeeUI.__FRAME_IN_USE_STR, valid_user_inputs, frame_functions)
     
     @staticmethod
+    def __constructor_error_check(user_input, employee_info_already_exists, index, ):
+        #Only accept something that starts with f or p in the input for the job title
+            if index == 0:
+
+                if user_input.lower().startswith('f'):
+                    user_input = "Flight attendant"
+                    user_input_list[6] = ""
+                elif user_input.lower().startswith('p'):
+                    user_input = "Pilot"
+
+                if not user_input.lower().startswith("f") and not user_input.lower().startswith("p"):
+                    employee_info_already_exists = True
+                    user_input = user_input + " " + TextEditor.color_text_background("Please insert 'f' or 'p', another input is required", TextEditor.RED_BACKGROUND)
+                else:
+                    employee_info_already_exists = False
+
+            #Capitalize the first letters of the name the user inputs
+            elif index == 1:
+                name_list = []
+                for name in user_input.split():
+                    name_list.append(name.capitalize())
+                user_input = " ".join(name_list)
+
+            #Remove any '-' and whitespace from the ssn and tell the user if the input is invalid
+            elif index == 2 or index == 3:
+
+                if '-' in user_input:
+                    user_input = user_input.replace('-', '')
+                if '' in user_input:
+                    user_input = user_input.replace(' ', '')
+                
+                if not user_input.isdigit():
+                    user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
+                    employee_info_already_exists = True
+                elif len(user_input) < 10:
+                    user_input = user_input + " " + TextEditor.color_text_background("Must be of length 10, another input is required", TextEditor.RED_BACKGROUND)
+                    employee_info_already_exists = True
+                else:
+                    employee_info_already_exists = False
+
+            #Check if email is at least of length 5 and contains @ and .
+            elif index == 5:
+                if "@" not in user_input and "." not in user_input and len(user_input) < 5:
+                    employee_info_already_exists = True
+                    user_input = user_input + " " + TextEditor.color_text_background("Invalid e-mail, another input is required", TextEditor.RED_BACKGROUND)
+
+            user_input_list[index] = user_input
+            user_input = ""
+
+            return user_input, employee_info_already_exists
+
+    @staticmethod
     def __show_new_employee_constructor():
         input_message_tuple = ("Insert job title(" + TextEditor.format_text('f', TextEditor.BOLD_TEXT) + " for flight attendant, "\
             + TextEditor.format_text('p', TextEditor.BOLD_TEXT)+ " for pilot): ", "Insert Name: ", "Insert Social security number: ",\
@@ -64,50 +116,8 @@ class EmployeeUI:
                 if not user_input:
                     continue
 
-                #Only accept something that starts with f or p in the input for the job title
-                if index == 0:
-
-                    if user_input.lower().startswith('f'):
-                        user_input = "Flight attendant"
-                        user_input_list[6] = ""
-                    elif user_input.lower().startswith('p'):
-                        user_input = "Pilot"
-
-                    if not user_input.lower().startswith("f") and not user_input.lower().startswith("p"):
-                        employee_info_already_exists = True
-                        user_input = user_input + " " + TextEditor.color_text_background("Please insert 'f' or 'p', another input is required", TextEditor.RED_BACKGROUND)
-                    else:
-                        employee_info_already_exists = False
-
-                #Capitalize the first letters of the name the user inputs
-                elif index == 1:
-                    name_list = []
-                    for name in user_input.split():
-                        name_list.append(name.capitalize())
-                    user_input = " ".join(name_list)
-
-                #Remove any '-' and whitespace from the user input and tell the user if the input is invalid
-                elif index == 2 or index == 3:
-
-                    if '-' in user_input:
-                        user_input = user_input.replace('-', '')
-                    if '' in user_input:
-                        user_input = user_input.replace(' ', '')
-                    
-                    if not user_input.isdigit():
-                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
-                        employee_info_already_exists = True
-                    else:
-                        employee_info_already_exists = False
-
-                #Check if email is at least of length 5 and contains @ and .
-                elif index == 5:
-                    if "@" not in user_input and "." not in user_input and len(user_input) < 5:
-                        employee_info_already_exists = True
-                        user_input = user_input + " " + TextEditor.color_text_background("Invalid e-mail, another input is required", TextEditor.RED_BACKGROUND)
-
-                user_input_list[index] = user_input
-                user_input = ""
+                user_input, employee_info_already_exists = EmployeeUI.__constructor_error_check(user_input,\
+                     employee_info_already_exists, index, user_input_list)
 
             elif user_input.startswith('s'):
                 job_title_str = user_input_list[0].lower()

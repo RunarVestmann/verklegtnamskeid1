@@ -24,6 +24,14 @@ class AirplanesUI:
 
         return ComponentUI.run_frame(option_tuple, AirplanesUI.__FRAME_IN_USE_STR, valid_user_inputs, frame_functions)
 
+    @staticmethod
+    def __constructor_error_check():
+        user_input = ""
+        airplane_info_already_exists = False
+
+
+        return user_input , airplane_info_already_exists
+
     
     @staticmethod
     def __show_new_airplane_constructor():
@@ -86,23 +94,16 @@ class AirplanesUI:
                     user_input_list[1] = chosen_table_line.get_plane_type()
                     user_input_list[2] = chosen_table_line.get_model()
                     user_input_list[3] = chosen_table_line.get_capacity()
-                
-
-                #Capitalize the first letter of the Name , Type and Manufacturer 
-                if index == 0:       # or index == 1 or index == 2:
-                    user_input = user_input.capitalize()
 
                 #Check if airplane name already exists
                 if index == 0: 
+                    user_input = user_input.capitalize()
                     if not LogicAPI.is_airplane_name_available(user_input):
                         user_input = user_input + " " + TextEditor.color_text_background("Airplane name already exists, another input is required", TextEditor.RED_BACKGROUND)
                         airplane_info_already_exists = True
                     else:
                         airplane_info_already_exists = False
 
-            
-
-               
                 if index == 0:
                     user_input_list[index] = user_input
                 
@@ -119,10 +120,11 @@ class AirplanesUI:
                         user_input_list[4]
                     )
                     LogicAPI.save_new_airplane(new_airplane)
+                    user_input = "A new airplane has been registered"
 
                     break
 
-        return user_input 
+        return user_input
 
     @staticmethod
     def __show_all_airplanes():
