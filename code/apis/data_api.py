@@ -48,8 +48,8 @@ class DataAPI:
         FlightAttendantData.save_new_flight_attendant(flight_attendant)
 
     @staticmethod
-    def change_saved_flight_attendant(flight_attendant):
-        FlightAttendantData.change_saved_flight_attendant(flight_attendant)
+    def change_saved_flight_attendant(saved_flight_attendant, changed_flight_attendant):
+        FlightAttendantData.change_saved_flight_attendant(saved_flight_attendant, changed_flight_attendant)
 
     ####  Airplanes  ####
 

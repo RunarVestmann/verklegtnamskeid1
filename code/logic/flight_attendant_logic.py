@@ -30,8 +30,8 @@ class FlightAttendantLogic:
         DataAPI.save_new_flight_attendant(flight_attendant)
 
     @staticmethod
-    def change_saved_flight_attendant(flight_attendant):
-        DataAPI.change_saved_flight_attendant(flight_attendant)
+    def change_saved_flight_attendant(saved_flight_attendant, changed_flight_attendant):
+        DataAPI.change_saved_flight_attendant(saved_flight_attendant, changed_flight_attendant)
 
     @staticmethod
     def is_flight_attendant_ssn_avaliable(flight_attendant_ssn):
