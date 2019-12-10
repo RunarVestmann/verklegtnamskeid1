@@ -3,6 +3,7 @@ from user_interface.text_editor import TextEditor
 from user_interface.component_ui import ComponentUI
 from data_models.flight_route import FlightRoute
 from apis.logic_api import LogicAPI
+from data_models.voyage import Voyage
 
 class FlightRouteUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[3]
