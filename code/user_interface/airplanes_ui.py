@@ -9,7 +9,7 @@ class AirplanesUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[2]
     
     navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-    option_tuple = ('Name', 'State', 'Type', 'Manufacturer', "Seats")
+   #option_tuple = ('Name', 'Type', 'Manufacturer', "Seats", 'State') NOT CONSTANT because different in every function
     @staticmethod
     def show():
 
@@ -220,18 +220,18 @@ class AirplanesUI:
             airplane.get_state()
         ]
         valid_user_inputs = ["1"]
-        #ComponentUI.make_valid_menu_options_tuple(len(AirplaneUI.Airplane_OPTION_TUBLE))            
+        option_tuple = ('Name', 'Type', 'Manufacturer', "Seats", 'State')          
        
         airplane_info_already_exists = False
         while user_input not in AirplanesUI.navigation_bar_options:
-            ComponentUI.print_frame_constructor_menu(AirplanesUI.option_tuple,\
+            ComponentUI.print_frame_constructor_menu(option_tuple,\
             ComponentUI.get_main_options()[2], "Airplane name: " + user_input_list[0], user_input_list, True, 1000, [1,2,3,4])
 
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
             if user_input in valid_user_inputs: 
                 index = int(user_input) - 1
-                ComponentUI.print_frame_constructor_menu(AirplanesUI.option_tuple,\
+                ComponentUI.print_frame_constructor_menu(option_tuple,\
                     ComponentUI.get_main_options()[2], "Airplane name: " + user_input_list[0], user_input_list, False, 1000, [1,2,3,4])
 
                 if(index == 0):
