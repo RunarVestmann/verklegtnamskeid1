@@ -59,7 +59,10 @@ class EmployeeUI:
                 if not user_input.isdigit():
                     user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
                     employee_info_already_exists = True
-                elif len(user_input) < 10 and index == 3:
+                elif len(user_input) < 7 and index == 3:
+                    user_input = user_input + " " + TextEditor.color_text_background("Must be of length 7, another input is required", TextEditor.RED_BACKGROUND)
+                    employee_info_already_exists = True
+                elif len(user_input) < 10 and index == 2:
                     user_input = user_input + " " + TextEditor.color_text_background("Must be of length 10, another input is required", TextEditor.RED_BACKGROUND)
                     employee_info_already_exists = True
                 else:
