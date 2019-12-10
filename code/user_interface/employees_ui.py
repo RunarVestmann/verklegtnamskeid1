@@ -376,21 +376,32 @@ class EmployeeUI:
     @staticmethod
     def __show_employee(employee):
         user_input = ''
-        user_input_list = [
-            employee.get_name(),
-            employee.get_ssn(),
-            employee.get_phonenumber(),
-            employee.get_home_address(),
-            employee.get_email(),
-            employee.get_state()
-        ]
+        user_input_list = []
 
-        valid_user_inputs = ["3","4","5","6"]
+        is_pilot = isinstance(employee, Pilot)
+
+        user_input_list.append(employee.get_name())
+        user_input_list.append(employee.get_ssn())
+        user_input_list.append(employee.get_phonenumber())
+        user_input_list.append(employee.get_home_address())
+        user_input_list.append(employee.get_email())
+        user_input_list.append(employee.get_state())
+
+        if is_pilot:
+            user_input_list.append(employee.get_state())
+
+        valid_user_inputs = ["3","4","5"]
+        invalid_user_input_list = [0,1]
+
+        if is_pilot:
+            valid_user_inputs.append("7")
+            invalid_user_input_list.append(6)
+            
        
         employee_info_already_exists = False
         while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
-            ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4])
+            EmployeeUI.__FRAME_IN_USE_STR, "Employee name: " + user_input_list[0], user_input_list, True, 1000, invalid_user_input_list)
             
            
             user_input = ComponentUI.get_user_input()
@@ -398,61 +409,68 @@ class EmployeeUI:
             if user_input in valid_user_inputs: 
                 index = int(user_input) - 1
                 ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
-                    ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, False, index, [0,1,2,3,4])
+            EmployeeUI.__FRAME_IN_USE_STR, "Employee name: " + user_input_list[0], user_input_list, False, 1000, invalid_user_input_list)
 
-                if(index == 5):
-                    user_input = input("Insert new contact name: ").strip()
-                elif(index == 6):
-                    user_input = input("Insert new Emergency phonenumber: ").strip()
+                if index == 2:
+                    user_input = input("Insert new phone number: ").strip()
+                elif index == 3:
+                    user_input = input("Insert new home address: ").strip()
+                elif index == 4:
+                    user_input = input("Insert new e-mail: ").strip()
+                elif index == 6 and is_pilot:
+                    user_input = input("Insert new license: ").strip()
 
+                if not user_input and index == 2 or index == 3 or index == 4:
+                    user_input = user_input_list[index]
+                else:
 
+                    #Remove any spaces or dashes from the phonenumber
+                    if index == 2:
 
-                #Capitalize the first letters in the contacts name
-                if index == 5:
-                    if not user_input: #use existing name in case if user cancels or leaves it blank 
-                        user_input = user_input_list[index]
+                        if '-' in user_input:
+                            user_input = user_input.replace('-', '')
+                        if '' in user_input:
+                            user_input = user_input.replace(' ', '')
 
-                    contact_name_list = []
-                    for name in user_input.split():
-                        contact_name_list.append(name.capitalize())
-                    user_input = " ".join(contact_name_list)
-
-                #Remove any spaces or dashes from the phonenumber
-                elif index == 6:
-                    if not user_input: #use existing phonenumber in case if user cancels or leaves it blank
-                        user_input = user_input_list[index]
-
-                    if '-' in user_input:
-                        user_input = user_input.replace('-', '')
-                    if '' in user_input:
-                        user_input = user_input.replace(' ', '')
-
-                    #Put a message on the screen indicating the phonenumber is invalid
-                    if not user_input.isdigit():
-                        user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
-                        flight_route_info_already_exists = True
-                    else:
-                        flight_route_info_already_exists = False
+                        #Put a message on the screen indicating the phonenumber is invalid
+                        if not user_input.isdigit():
+                            user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
+                            flight_route_info_already_exists = True
+                        else:
+                            flight_route_info_already_exists = False
                 
                 user_input_list[index] = user_input
                 user_input = ""
 
             elif user_input.startswith('s'):
                 if all(user_input_list) and not flight_route_info_already_exists:
+                    
+                    edited_employee = None
 
-                    edited_flight_route = FlightRoute(
-                        user_input_list[0],
-                        user_input_list[1],
-                        user_input_list[2],
-                        user_input_list[3],
-                        user_input_list[4],
-                        user_input_list[5],
-                        user_input_list[6]
-                    )
+                    if is_pilot:
+                        edited_employee = Pilot(
+                            user_input_list[0], #Name
+                            user_input_list[1], #SSN
+                            user_input_list[2], #Phonenumber
+                            user_input_list[3], #Home address
+                            user_input_list[4], #Email
+                            user_input_list[5], #State
+                            user_input_list[6]  #License
+                        )
+                        LogicAPI.change_saved_pilot(employee, edited_employee)
+                    else:
+                        edited_employee = FlightAttendant(
+                            user_input_list[0], #Name
+                            user_input_list[1], #SSN
+                            user_input_list[2], #Phonenumber
+                            user_input_list[3], #Home address
+                            user_input_list[4], #Email
+                            user_input_list[5]  #State
+                        )
+                        LogicAPI.change_saved_flight_attendant(employee, edited_employee)
 
-                    LogicAPI.change_saved_flight_route(flrt, edited_flight_route)
                     #þarfnast skoðunnar(Kannski er þetta ok þar sem breytingar sjást, næ ekki að láta þetta virka heldur)
-                    user_input = "A new flight route contact information has been edited"
+                    user_input = "An employee has been edited"
                     break
 
         return user_input
