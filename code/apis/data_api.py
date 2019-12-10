@@ -30,8 +30,8 @@ class DataAPI:
         PilotData.save_new_pilot(pilot)
 
     @staticmethod
-    def change_saved_pilot(pilot):
-        PilotData.change_saved_pilot(pilot)
+    def change_saved_pilot(saved_pilot, changed_pilot):
+        PilotData.change_saved_pilot(saved_pilot, changed_pilot)
 
     ####  Flight Atttendants  ####
 
