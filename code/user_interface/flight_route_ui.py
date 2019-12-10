@@ -168,14 +168,15 @@ class FlightRouteUI:
     def __show_flight_route(flrt):
         
         user_input = ''
-        user_input_list = []
-        user_input_list.append(flrt.get_country())
-        user_input_list.append(flrt.get_destination())
-        user_input_list.append(flrt.get_airport_id())
-        user_input_list.append(flrt.get_flight_time())
-        user_input_list.append(flrt.get_distance_from_iceland())
-        user_input_list.append(flrt.get_contact_name())
-        user_input_list.append(flrt.get_emergency_phone())
+        user_input_list = [
+            flrt.get_country(),
+            flrt.get_destination(),
+            flrt.get_airport_id(),
+            flrt.get_flight_time(),
+            flrt.get_distance_from_iceland(),
+            flrt.get_contact_name(),
+            flrt.get_emergency_phone()
+        ]
 
         valid_user_inputs = ["6","7","(6)","(7)"]
         #ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))            
@@ -202,7 +203,7 @@ class FlightRouteUI:
 
                 #Capitalize the first letters in the contacts name
                 if index == 5:
-                    if not user_input: #use existing name in case if user cancel or leve blanc 
+                    if not user_input: #use existing name in case if user cancels or leaves it blank 
                         user_input = user_input_list[index]
 
                     contact_name_list = []
@@ -212,7 +213,7 @@ class FlightRouteUI:
 
                 #Remove any spaces or dashes from the phonenumber
                 elif index == 6:
-                    if not user_input: #use existing phonenumber in case if user cancel or leve blanc 
+                    if not user_input: #use existing phonenumber in case if user cancels or leaves it blank
                         user_input = user_input_list[index]
 
                     if '-' in user_input:
@@ -244,7 +245,7 @@ class FlightRouteUI:
                     )
 
                     LogicAPI.change_saved_flight_route(flrt, edited_flight_route)
-                    #þarfnast skoðunnar
+                    #þarfnast skoðunnar(Kannski er þetta ok þar sem breytingar sjást, næ ekki að láta þetta virka heldur)
                     user_input = "A new flight route contact information has been edited"
                     break
 
