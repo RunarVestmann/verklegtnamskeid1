@@ -172,7 +172,7 @@ class ComponentUI:
             print()
         print(message_str.center(window_width))
         print(second_line_str.center(window_width))
-        for _ in range(offsetted_body_height_center):
+        for _ in range(offsetted_body_height_center+1):
             print()
 
         print("_" * window_width)
