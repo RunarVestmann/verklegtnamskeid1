@@ -85,6 +85,33 @@ class EmployeeUI:
             return user_input
 
     @staticmethod
+    def __airplane_type_picker(header="License"):
+    
+            #### PICK AIRPLANE TYPE BY TABLE LIST ###
+        table_header_tuple = ("Type", "Manufacturer", "Seats")
+        
+        airplane_type_list = LogicAPI.get_all_airplane_types()
+        airplanes_type_getfunctions_tuple = ([aircraft_type.get_plane_type() for aircraft_type in airplane_type_list],[aircraft_type.get_manufacturer() for aircraft_type in airplane_type_list],\
+            [aircraft_type.get_seat_count() for aircraft_type in airplane_type_list])
+        table_height = len(airplane_type_list)
+
+
+        ComponentUI.print_frame_table_menu(table_header_tuple, airplanes_type_getfunctions_tuple, table_height,\
+            ComponentUI.get_main_options()[2], header)
+
+        user_input = ComponentUI.get_user_input("Insert number of desired type: ")
+
+        user_input = ComponentUI.remove_brackets(user_input)
+        if not user_input.isdigit() or int(user_input) > table_height or not user_input:
+            return None
+
+        table_index = int(user_input) - 1
+        chosen_table_line = airplane_type_list[table_index]
+        ###                LINE PICKED           ##
+        return chosen_table_line.get_plane_type()
+    
+    
+    @staticmethod
     def __show_new_employee_constructor():
         input_message_tuple = ("Insert job title(" + TextEditor.format_text('f', TextEditor.BOLD_TEXT) + " for flight attendant, "\
             + TextEditor.format_text('p', TextEditor.BOLD_TEXT)+ " for pilot): ", "Insert Name: ", "Insert Social security number: ",\
@@ -121,8 +148,15 @@ class EmployeeUI:
 
                 ComponentUI.print_frame_constructor_menu(option_tuple, EmployeeUI.__FRAME_IN_USE_STR, "New employeee",\
                 user_input_list, False, index)
+                
+                
+                if index == 6:
+                    #display table of airplane types and return the type-name the of chosen one , head above the the table
+                    user_input = EmployeeUI.__airplane_type_picker("New employeee")
+                else:
+                    user_input = input(input_message_tuple[index]).strip()
 
-                user_input = input(input_message_tuple[index]).strip()
+               
                 if not user_input:
                     continue
 
@@ -268,7 +302,7 @@ class EmployeeUI:
             if user_input.isdigit():
                 if '-' in user_input:
                     user_input = user_input.replace('-', '')
-                if '' in user_input:
+                if ' ' in user_input:
                     user_input = user_input.replace(' ', '')
 
                 employees = LogicAPI.get_employee_by_ssn(user_input)
@@ -282,7 +316,9 @@ class EmployeeUI:
                     return ComponentUI.get_user_input()
 
                 else: 
-                    
+                    employee_info_tuple =  (["Pilot" if isinstance(employee, Pilot) else "Flight attendant" for employee in employees], [employee.get_name() for employee in employees],[employee.get_ssn() for employee in employees],\
+                    [employee.get_phonenumber() for employee in employees],[employee.get_home_address() for employee in employees],[employee.get_email() for employee in employees],\
+                    [employee.get_state() for employee in employees])
                     
                     table_height = len(employees)
                     ComponentUI.print_frame_table_menu(info_header_tuple, employee_info_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"Employee")
@@ -343,37 +379,39 @@ class EmployeeUI:
         info_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
 
         while user_input not in navigation_bar_options:
-            ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
-            print(TextEditor.format_text("Find pilots by license", TextEditor.UNDERLINE_TEXT))
+            ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
+            #display table of airplane types and return the type-name the of chosen one , head above the the table
+            user_input = EmployeeUI.__airplane_type_picker("Find pilots by license")
 
-            ComponentUI.fill_window_and_print_action_line(1)
-
-            user_input = input("Insert license: ").strip()
 
             if not user_input:
                 continue
 
-            user_input = user_input.capitalize()
+            user_input = user_input
             
             pilots_list = []
 
             pilots_list = LogicAPI.get_licensed_pilots(user_input)
 
-            ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
-            print(TextEditor.format_text("Find pilots by license", TextEditor.UNDERLINE_TEXT))
+            ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
+            
 
             if not pilots_list:
-                
+                print(TextEditor.format_text("Find pilots by license", TextEditor.UNDERLINE_TEXT))
                 ComponentUI.centered_text_message("Could not find a pilot with a license for {}".format(user_input))
-            
-                return ComponentUI.get_user_input()
+                user_input = ComponentUI.get_user_input()
+                if not user_input:
+                    return EmployeeUI.__show_pilot_by_license_finder()
+                
+                return user_input
 
-            else: 
+            else:
+                #print(TextEditor.format_text("Pilots with license for " + user_input, TextEditor.UNDERLINE_TEXT)) 
                 pilot_info_tuple = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
                 [pilot.get_phonenumber() for pilot in pilots_list],[pilot.get_home_address() for pilot in pilots_list],[pilot.get_email() for pilot in pilots_list],\
                 [pilot.get_state() for pilot in pilots_list])
                 table_height = len(pilots_list)
-                ComponentUI.print_frame_table_menu(info_header_tuple, pilot_info_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"Employee")
+                ComponentUI.print_frame_table_menu(info_header_tuple, pilot_info_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"Pilots with license for " + user_input)
                 user_input = ComponentUI.get_user_input()
                 user_input = ComponentUI.remove_brackets(user_input)
                 if not user_input.isdigit() or int(user_input) > table_height:
@@ -444,6 +482,7 @@ class EmployeeUI:
                 user_input = ComponentUI.get_user_input()
 
             return user_input
+
     @staticmethod
     def __show_employee(employee):
         user_input = ''
@@ -467,11 +506,13 @@ class EmployeeUI:
             valid_user_inputs_bool_list.append(True)
             valid_user_inputs.append("8")
             user_input_list.insert(0, "Pilot")
+            option_tuple = ("Job title", "Name","SSN","Phonenumber","Home address","Email","State","License")  
         else:
             user_input_list.insert(0, "Flight Attendant")
             invalid_user_input_index_list.append(7)
+            option_tuple = ("Job title", "Name","SSN","Phonenumber","Home address","Email","State")  
 
-        option_tuple = ("Job title", "Name","SSN","Phonenumber","Home address","Email","State")            
+                  
        
         # employee_info_already_exists = False
         while user_input not in EmployeeUI.NAVIGATION_BAR_OPTIONS:
@@ -492,12 +533,12 @@ class EmployeeUI:
                     user_input = input("Insert new home address: ").strip()
                 elif index == 5:
                     user_input = input("Insert new e-mail: ").strip()
-                elif index == 8 and is_pilot:
-                    user_input = input("Insert new license: ").strip() #Vantar sub menu
+                elif index == 7 and is_pilot:
+                    user_input = EmployeeUI.__airplane_type_picker("Edit mode - chose license")      # input("Insert new license: ").strip() #Vantar sub menu
 
 
 
-                if not user_input and (index == 2 or index == 3 or index == 4 or index == 8):
+                if not user_input and (index == 2 or index == 3 or index == 4):
                     user_input = user_input_list[index]
                 else:
 

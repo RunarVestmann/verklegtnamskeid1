@@ -68,8 +68,10 @@ class AirplanesUI:
                      "New airplane", user_input_list, False, index)
                     user_input = input(input_message_tuple[index]).strip()
                 elif index == 1:
+
+                    #### PICK AIRPLANE TYPE BY TABLE LIST ###
                     table_header_tuple = ("Type", "Manufacturer", "Seats")
-                    
+                 
                     airplane_type_list = LogicAPI.get_all_airplane_types()
                     airplanes_type_getfunctions_tuple = ([aircraft_type.get_plane_type() for aircraft_type in airplane_type_list],[aircraft_type.get_manufacturer() for aircraft_type in airplane_type_list],\
                         [aircraft_type.get_seat_count() for aircraft_type in airplane_type_list])
@@ -87,6 +89,9 @@ class AirplanesUI:
 
                     table_index = int(user_input) - 1
                     chosen_table_line = airplane_type_list[table_index]
+                    ###                LINE PICKED           ##
+
+
                     user_input_list[1] = chosen_table_line.get_plane_type()
                     user_input_list[2] = chosen_table_line.get_manufacturer()
                     user_input_list[3] = chosen_table_line.get_seat_count()
