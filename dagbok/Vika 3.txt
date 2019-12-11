@@ -1,0 +1,17 @@
+10.12.2019
+Í upphaf dags var planið:
+
+Guðmundur: Gat lítð unnið í þessu í dag vegna veiks barns og vinnuskyldu en veitti góðan andlegan stuðning
+Fannar: Skapaði gögn til að vinna með, uppfærði klasaritið og vann í EmployeeUI error checking
+Hörður: VoyagesUI error checking
+Patrik: Vann í AirplanesUI klasanum og lagfærði virknina
+Rúnar: Aðstoðaði við forritun ásamt því að lagfæra ýmislegt í tengslum við Data klasa
+
+11.12.2019
+Í upphaf dags var planið:
+
+Guðmundur: Vann í FlightRouteUI og AirplanesUI og var að fullkomna virknina þar
+Fannar: Skapaði gögn til að vinna með, uppfærði klasaritið og vann í EmployeeUI error checking
+Hörður: VoyagesUI error checking
+Patrik: Vann í EmplyeesUI klasanum og lagfærði virknina
+Rúnar: Vann við að kóða New Voyage virknina ásamt því að aðstoða við forritun
