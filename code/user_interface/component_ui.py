@@ -271,7 +271,7 @@ class ComponentUI:
         registration_list = ComponentUI.generate_columns_registration_list(heads, getfunctions, between)
 
         if has_numbers:
-            print("{:<4s}".format(""),end="")
+            print("{:<5s}".format(""),end="")
         for i in range(len(heads)):
             reg = "{:<"+str(registration_list[i]+between)+"s}"
             print(reg.format(heads[i]),end="")
@@ -279,7 +279,8 @@ class ComponentUI:
 
         for row in range(len(getfunctions[0])):
             if has_numbers:
-                print("("+str(row+1)+")",end=" ")
+                brc= " (" if row < 9 else "("  #ajust alignment in case of more then 9 lines 
+                print(brc+str(row+1)+")",end=" ")
 
             for i in range(len(heads)):
                 reg = "{:<"+str(registration_list[i]+between)+"s}"
