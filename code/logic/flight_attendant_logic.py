@@ -9,6 +9,51 @@ class FlightAttendantLogic:
         return a_list if not a_list else sorted(a_list, key=lambda value: value.get_name())
 
     @staticmethod
+    def get_available_flight_attendants(schedule_tuple):
+        all_flight_attendants = DataAPI.get_all_flight_attendants()
+
+        available_flight_attendants = []
+
+        for flight_attendant in all_flight_attendants:
+            voyages = FlightAttendantLogic.get_all_flight_attendant_voyages(flight_attendant)
+
+            if not voyages:
+                available_flight_attendants.append(flight_attendant)
+            else:
+
+                for voyage in voyages:
+                    voyage_schedule = voyage.get_schedule()
+                    if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
+                        available_flight_attendants.append(flight_attendant)
+
+        return FlightAttendantLogic.__sort_list_by_name(available_flight_attendants)
+
+
+    @staticmethod
+    def get_all_flight_attendant_voyages(flight_attendant):
+        all_voyages = DataAPI.get_all_voyages()
+
+        flight_attendant_voyages_list = []
+
+        for voyage in all_voyages:
+            if flight_attendant in voyage.get_flight_attendants():
+                flight_attendant_voyages_list.append(voyage)
+
+        return FlightAttendantLogic.__sort_list_by_name(flight_attendant_voyages_list)
+
+    @staticmethod
+    def get_all_flight_attendant_voyages_in_a_week(flight_attendant, week_number):
+        flight_attendant_voyages = FlightAttendantLogic.get_all_flight_attendant_voyages(flight_attendant)
+
+        flight_attendant_voyages_in_week = []
+
+        for voyage in flight_attendant_voyages:
+            if week_number == voyage.get_schedule()[0].date().isocalendar()[1]:
+                flight_attendant_voyages_in_week.append(voyage)
+
+        return FlightAttendantLogic.__sort_list_by_name(flight_attendant_voyages_in_week)
+
+    @staticmethod
     def get_all_flight_attendants():
         return FlightAttendantLogic.__sort_list_by_name(DataAPI.get_all_flight_attendants())
 

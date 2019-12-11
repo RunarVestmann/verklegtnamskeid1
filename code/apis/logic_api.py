@@ -57,6 +57,22 @@ class LogicAPI:
         return PilotLogic.get_all_pilots()
 
     @staticmethod
+    def get_all_pilot_voyages(pilot):
+        return PilotLogic.get_all_pilot_voyages(pilot)
+
+    @staticmethod
+    def get_all_pilot_voyages_in_week(pilot, week_number):
+        return PilotLogic.get_all_pilot_voyages(pilot, week_number)
+
+    @staticmethod
+    def get_available_pilots(schedule_tuple):
+        return PilotLogic.get_available_pilots(schedule_tuple)
+
+    @staticmethod
+    def get_available_licensed_pilots(schedule_tuple, pilot_license):
+        return PilotLogic.get_available_licensed_pilots(schedule_tuple, pilot_license)
+
+    @staticmethod
     def get_licensed_pilots(pilot_license):
         return PilotLogic.get_licensed_pilots(pilot_license)
 
@@ -78,6 +94,11 @@ class LogicAPI:
     @staticmethod
     def get_all_flight_attendants():
         return FlightAttendantLogic.get_all_flight_attendants()
+
+    @staticmethod
+    def get_available_flight_attendants(schedule_tuple):
+        return FlightAttendantLogic.get_available_flight_attendants(schedule_tuple)
+    
     @staticmethod
     def save_new_flight_attendant(flight_attendant):
         FlightAttendantLogic.save_new_flight_attendant(flight_attendant)
@@ -195,6 +216,10 @@ class LogicAPI:
     @staticmethod
     def get_flight(departure_time):
         return FlightLogic.get_flight(departure_time)
+
+    @staticmethod
+    def get_available_flight_number(airport_id, departure_date_and_time, offset=0):
+        return FlightLogic.get_available_flight_number(airport_id, departure_date_and_time, offset)
 
     @staticmethod
     def change_saved_flight(saved_flight, changed_flight):
