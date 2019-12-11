@@ -23,10 +23,6 @@ class FlightRouteUI:
     @staticmethod
     def __show_new_flight_route_constructor():
 
-        #navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-
-        #option_tuple = ("Country", "Destination", "Airport id", "Flight time", "Distance from Iceland",\
-        #     "Contact name", "Emergency phonenumber")
 
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))
 
@@ -34,10 +30,11 @@ class FlightRouteUI:
              "Insert Distance from Iceland in km: ", "Insert Contact name: ", "Insert Emergency phonenumber: ")
 
         user_input_list = [""] * len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE)
+        valid_for_submit_list = [False] * len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE) #tuple that contains bools if all true then ok to submit
 
         user_input = ""
 
-        flight_route_info_already_exists = False
+        #flight_route_info_already_exists = False
 
         while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
 
@@ -63,25 +60,47 @@ class FlightRouteUI:
 
                 #Capitalize the first letter of the Country and Destination
                 if index == 0 or index == 1:
-                    user_input = user_input.capitalize()
+                    user_input = user_input[0].upper() + user_input[1:]
+                    if user_input:
+                        valid_for_submit_list[index] = True
 
                 #Check if the airport id already exists
-                elif index == 3:
+                elif index == 2:
                     if not LogicAPI.is_airport_id_available(user_input):
                         user_input = user_input + " " + TextEditor.color_text_background("Airport id already exists", TextEditor.RED_BACKGROUND)
-                        flight_route_info_already_exists = True
+                        valid_for_submit_list[index] = False
                     else:
-                        flight_route_info_already_exists = False
+                        valid_for_submit_list[index] = True
+
+                #Flight time test if format is right
+                elif index == 3:
+                    test_list = user_input.split(':')
+                    error_msg_str ='Time must be written in format of "hours:minutes"'
+                    
+                    if ':' in user_input and len(test_list)==2:
+                        if all(test_list) and test_list[0].isdigit and len(test_list[0]) <= 2 and test_list[1].isdigit and len(test_list[1]) == 2\
+                             and int(test_list[1])<60 and int(test_list[0])>=0 and int(test_list[1])>=0:
+                            if len(test_list[0]) == 1:
+                                user_input = "0"+user_input
+                            valid_for_submit_list[index] = True
+                        else:
+                            user_input = user_input + " " + TextEditor.color_text_background(error_msg_str, TextEditor.RED_BACKGROUND)
+                            valid_for_submit_list[index] = False
+                    else:
+                        user_input = user_input + " " + TextEditor.color_text_background(error_msg_str, TextEditor.RED_BACKGROUND)
+                        valid_for_submit_list[index] = False
+
 
                 #Distance from Iceland can not contain letters excluding 'km'
                 elif index == 4:
                     if 'km' in user_input:
                         user_input = user_input.replace('km', '')
+                        user_input = user_input.strip()
                     if not user_input.isdigit():
                         user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
-                        flight_route_info_already_exists = True
+                        valid_for_submit_list[index] = False
                     else:
-                        flight_route_info_already_exists = False
+                        valid_for_submit_list[index] = True
 
 
                 #Capitalize the first letters in the contacts name
@@ -90,6 +109,7 @@ class FlightRouteUI:
                     for name in user_input.split():
                         contact_name_list.append(name.capitalize())
                     user_input = " ".join(contact_name_list)
+                    valid_for_submit_list[index] = True
 
                 #Remove any spaces or dashes from the phonenumber
                 elif index == 6:
@@ -101,15 +121,15 @@ class FlightRouteUI:
                     #Put a message on the screen indicating the phonenumber is invalid
                     if not user_input.isdigit():
                         user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
-                        flight_route_info_already_exists = True
+                        valid_for_submit_list[index] = False
                     else:
-                        flight_route_info_already_exists = False
+                        valid_for_submit_list[index] = True
                 
                 user_input_list[index] = user_input
                 user_input = ""
 
             elif user_input.startswith('s'):
-                if all(user_input_list) and not flight_route_info_already_exists:
+                if all(valid_for_submit_list):
 
                     new_flight_route = FlightRoute(
                         user_input_list[0],
@@ -179,9 +199,10 @@ class FlightRouteUI:
         ]
 
         valid_user_inputs = ["6","7","(6)","(7)"]
+        valid_for_submit_list = [True, True, False] #only two input avalable // exeption from rule // last False is for if do nothing
         #ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))            
        
-        flight_route_info_already_exists = False
+       # flight_route_info_already_exists = False
         while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
             ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4])
@@ -191,6 +212,7 @@ class FlightRouteUI:
             user_input = ComponentUI.remove_brackets(user_input)
             if user_input in valid_user_inputs: 
                 index = int(user_input) - 1
+                valid_for_submit_list[2] = [True] # done somthing can submit if ok
                 ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
                     ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, False, index, [0,1,2,3,4])
 
@@ -210,6 +232,7 @@ class FlightRouteUI:
                     for name in user_input.split():
                         contact_name_list.append(name.capitalize())
                     user_input = " ".join(contact_name_list)
+                    valid_for_submit_list[0] = True
 
                 #Remove any spaces or dashes from the phonenumber
                 elif index == 6:
@@ -224,15 +247,15 @@ class FlightRouteUI:
                     #Put a message on the screen indicating the phonenumber is invalid
                     if not user_input.isdigit():
                         user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters", TextEditor.RED_BACKGROUND)
-                        flight_route_info_already_exists = True
+                        valid_for_submit_list[1] = False
                     else:
-                        flight_route_info_already_exists = False
+                        valid_for_submit_list[1] = True
                 
                 user_input_list[index] = user_input
                 user_input = ""
 
             elif user_input.startswith('s'):
-                if all(user_input_list) and not flight_route_info_already_exists:
+                if all(valid_for_submit_list):
 
                     edited_flight_route = FlightRoute(
                         user_input_list[0],
