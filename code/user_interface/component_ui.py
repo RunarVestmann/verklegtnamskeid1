@@ -63,6 +63,57 @@ class ComponentUI:
 
         ComponentUI.fill_window_and_print_action_line(table_height+2, print_submit) 
 
+    # @staticmethod
+    # def run_constructor(option_tuple, underlined_main_option_str, underlined_sub_option_str,\
+    #     input_message_list_str, value_getter_function, user_input_list=None, greyed_out_option_index_list=None):
+
+    #     #Fill the input list with all the string values the user has inputted
+    #     #and whether or not that input value was valid
+    #     if not user_input_list:
+    #         user_input_list = [["", False]] * len(option_tuple)
+
+    #     valid_input_list = []
+
+    #     #Get all the valid inputs(1,2,3,...)
+    #     for i in range(len(option_tuple)):
+    #         if greyed_out_option_index_list:
+    #             if i not in greyed_out_option_index_list:
+    #                 valid_input_list.append(i)
+    #         else:
+    #             valid_input_list.append(i)
+
+    #     user_input = ""
+
+    #     while user_input not in ComponentUI.get_navigation_options_tuple():
+
+    #         ComponentUI.print_frame_constructor_menu(option_tuple, underlined_main_option_str,\
+    #                 underlined_sub_option_str,  user_input_list, True, )
+
+    #         user_input = ComponentUI.get_user_input()
+
+    #         if not user_input:
+    #             continue
+
+    #         user_input = ComponentUI.remove_brackets(user_input)
+
+    #         if user_input in valid_input_list:
+
+    #             selected_index = int(user_input) - 1
+
+    #             ComponentUI.print_frame_constructor_menu(option_tuple, underlined_main_option_str,\
+    #                     underlined_sub_option_str, user_input_list, False, selected_index, greyed_out_option_index_list, True)
+            
+
+
+            
+
+
+    
+    # # @staticmethod
+    # # def run_option_select(option_tuple)
+
+
+
 
     @staticmethod
     def run_frame(option_tuple, underlined_main_option, valid_user_inputs, frame_functions):
@@ -73,6 +124,8 @@ class ComponentUI:
             if user_input:
                 if "A new" in user_input and "has been" in user_input:
                     ComponentUI.print_frame_menu(option_tuple, underlined_main_option, save_message=user_input)
+                else:
+                    ComponentUI.print_frame_menu(option_tuple, underlined_main_option)
             else:
                 ComponentUI.print_frame_menu(option_tuple, underlined_main_option)
 
