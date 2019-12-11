@@ -30,7 +30,7 @@ class FlightRouteUI:
              "Insert Distance from Iceland in km: ", "Insert Contact name: ", "Insert Emergency phonenumber: ")
 
         user_input_list = [""] * len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE)
-        valid_for_submit_list = [False] * len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE) #tuple that contains bools if all true then ok to submit
+        valid_for_submit_list = [False] * len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE) #list that contains bools if all true then ok to submit
 
         user_input = ""
 

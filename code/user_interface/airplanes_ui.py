@@ -25,13 +25,13 @@ class AirplanesUI:
 
         return ComponentUI.run_frame(option_tuple, AirplanesUI.__FRAME_IN_USE_STR, valid_user_inputs, frame_functions)
 
-    @staticmethod
-    def __constructor_error_check():
-        user_input = ""
-        airplane_info_already_exists = False
+    # @staticmethod
+    # def __constructor_error_check():
+    #     user_input = ""
+    #     airplane_info_already_exists = False
 
 
-        return user_input , airplane_info_already_exists
+    #     return user_input , airplane_info_already_exists
 
     
     @staticmethod
@@ -47,10 +47,12 @@ class AirplanesUI:
 
         user_input_list = [""] * len(option_tuple)
         user_input_list.append("Not scheduled") #State default value
+        valid_for_submit_list = [False, False] # only 2 chosse here * len(option_tuple) #list that contains bools if all true then ok to submit
+
 
         user_input = ""
 
-        airplane_info_already_exists = False
+
 
         while user_input not in navigation_bar_options:
 
@@ -95,15 +97,16 @@ class AirplanesUI:
                     user_input_list[1] = chosen_table_line.get_plane_type()
                     user_input_list[2] = chosen_table_line.get_model()
                     user_input_list[3] = chosen_table_line.get_capacity()
+                    valid_for_submit_list[1] = True
 
                 #Check if airplane name already exists
                 if index == 0: 
                     user_input = user_input.capitalize()
                     if not LogicAPI.is_airplane_name_available(user_input):
                         user_input = user_input + " " + TextEditor.color_text_background("Airplane name already exists, another input is required", TextEditor.RED_BACKGROUND)
-                        airplane_info_already_exists = True
+                        valid_for_submit_list[0] = False
                     else:
-                        airplane_info_already_exists = False
+                        valid_for_submit_list[0] = True
 
                 if index == 0:
                     user_input_list[index] = user_input
@@ -111,7 +114,7 @@ class AirplanesUI:
                 user_input = ""
 
             elif user_input.startswith('s'):
-                if all(user_input_list) and not airplane_info_already_exists:
+                if all(valid_for_submit_list):
 
                     new_airplane = Airplane(
                         user_input_list[0],
@@ -221,8 +224,7 @@ class AirplanesUI:
         ]
         valid_user_inputs = ["1"]
         option_tuple = ('Name', 'Type', 'Manufacturer', "Seats", 'State')          
-       
-        airplane_info_already_exists = False
+        valid_for_submit_list = [False] #Can only change the name (one element) in this case (airplane)
         while user_input not in AirplanesUI.navigation_bar_options:
             ComponentUI.print_frame_constructor_menu(option_tuple,\
             ComponentUI.get_main_options()[2], "Airplane name: " + user_input_list[0], user_input_list, True, 1000, [1,2,3,4])
@@ -249,6 +251,7 @@ class AirplanesUI:
                     for name in user_input.split():
                         airplane_name_list.append(name.capitalize())
                     user_input = " ".join(airplane_name_list)
+                    valid_for_submit_list[0] = True
 
               
                 
@@ -256,7 +259,7 @@ class AirplanesUI:
                 user_input = ""
                    
             elif user_input.startswith('s'):
-                if all(user_input_list) and not airplane_info_already_exists:
+                if all(user_input_list):
 
                     edited_airplane = Airplane(
                         user_input_list[0],
