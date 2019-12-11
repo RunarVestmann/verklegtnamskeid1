@@ -1,9 +1,11 @@
 import datetime
+import calendar
 from user_interface.window import Window
 from user_interface.text_editor import TextEditor
 from user_interface.component_ui import ComponentUI
 from apis.logic_api import LogicAPI
 from data_models.voyage import Voyage
+from data_models.flight import Flight
 
 class VoyageUI:
 
@@ -32,19 +34,25 @@ class VoyageUI:
         option_tuple = ('Flight route', 'Voyage schedule', 'Airplane', 'Pilots', 'Flight attendants')
         user_input_list = [""] * len(option_tuple)
 
+        flight1 = None
+        flight2 = None
+        voyage_schedule = None
+
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
+        valid_user_input_bool_list = [True] * len(option_tuple)
 
         navigation_bar_options = ComponentUI.get_navigation_options_tuple()
 
         user_input = ""
+        selected_flight_route = None
         voyage_info_already_exists = False
 
-        input_message_tuple = ("Insert Flight route: ", "Insert Voyage schedule: ", "Insert Airplane: ", "Insert Pilots: ",\
-            "Insert Flight attendants: ")
+        input_message_tuple = ("Insert number of desired flight route: ", "Insert Voyage schedule: ",\
+             "Insert number of desired Airplane ", "Insert Pilots: ", "Insert Flight attendants: ")
 
         while user_input not in navigation_bar_options:
 
-            greyed_out_option_index_list = [] if not user_input_list[2] else [3,4]
+            greyed_out_option_index_list = [] if user_input_list[2] and  selected_flight_route else [3,4]
 
             ComponentUI.print_frame_constructor_menu(option_tuple, VoyageUI.__FRAME_IN_USE_STR,\
                  "New voyage", user_input_list, True, greyed_out_option_index_list=greyed_out_option_index_list)
@@ -58,16 +66,27 @@ class VoyageUI:
 
             if user_input in valid_user_inputs:
                 index = int(user_input) - 1
-                all_flight_routes = LogicAPI.get_all_flight_routes()
-                flight_route_info_tuple = ([flight_route.get_destination() for flight_route in all_flight_routes],\
-                [flight_route.get_airport_id() for flight_route in all_flight_routes])
-                ComponentUI.print_frame_table_menu(("Destination","Airport id"),\
-                    flight_route_info_tuple, [[]]*len(flight_route_info_tuple) if not flight_route_info_tuple else len(flight_route_info_tuple[0]),ComponentUI.get_main_options()[0],"Flight route")
+
+                if index == 0:
+                    all_flight_routes = LogicAPI.get_all_flight_routes()
+                    flight_route_info_tuple = ([flight_route.get_country() for flight_route in all_flight_routes],\
+                    [flight_route.get_destination() for flight_route in all_flight_routes],\
+                    [flight_route.get_airport_id() for flight_route in all_flight_routes])
+                    ComponentUI.print_frame_table_menu(("Country", "Destination", "Airport id"),\
+                        flight_route_info_tuple, [[]]*len(flight_route_info_tuple) if not flight_route_info_tuple else len(flight_route_info_tuple[0]),ComponentUI.get_main_options()[0],"Flight route")
                 
+                    user_input = input(input_message_tuple[index]).strip()
 
-                user_input = input(input_message_tuple[index]).strip()
+                    #Error checks and selection screens need to be added
 
-                #Error checks and selection screens need to be added
+                    if not user_input or not user_input.isdigit() or int(user_input) > len(all_flight_routes):
+                        continue
+
+                    selected_flight_route = all_flight_routes[int(user_input)-1]
+                    user_input = selected_flight_route.get_country() + ", " + selected_flight_route.get_destination()
+
+                elif index == 1 and selected_flight_route:
+                    user_input, flight1, flight2, voyage_schedule = VoyageUI.__schedule_select(selected_flight_route)
 
                 user_input_list[index] = user_input
                 user_input = ""
@@ -88,6 +107,192 @@ class VoyageUI:
                     break
 
         return user_input
+
+    @staticmethod
+    def __schedule_select(selected_flight_route):
+        schedule_option_tuple = ("First flight date", "Time of first flight", "Second flight date", "Time of second flight")
+        
+        user_input_list = [""] * len(schedule_option_tuple)
+        valid_user_input_bool_list = [True] * len(schedule_option_tuple)
+
+        flight1_start_date = None
+        flight1_start_time = None
+        flight2_start_date = None
+        flight2_start_time = None
+
+        user_input = ""
+
+        while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
+
+            ComponentUI.print_frame_constructor_menu(schedule_option_tuple,\
+            VoyageUI.__FRAME_IN_USE_STR, "Voyage schedule", user_input_list, True)
+
+            user_input = ComponentUI.get_user_input()
+
+            if not user_input.startswith('s'):
+
+                if not user_input or not user_input.isdigit() or int(user_input) > len(schedule_option_tuple):
+                    continue
+
+                user_input = ComponentUI.remove_brackets(user_input)
+
+                index = int(user_input) - 1
+
+                ComponentUI.print_frame_constructor_menu(schedule_option_tuple,\
+                VoyageUI.__FRAME_IN_USE_STR, "Voyage schedule", user_input_list, False, index)
+
+                if index == 0:
+                    user_input, flight1_start_date, valid_user_input_bool_list[index] = VoyageUI.__date_select()
+
+                elif index == 1:
+                    user_input, flight1_start_time, valid_user_input_bool_list[index] = VoyageUI.__time_select()
+
+                elif index == 2:
+                    user_input, flight2_start_date, valid_user_input_bool_list[index] = VoyageUI.__date_select()
+                    
+                elif index == 3:
+                    user_input, flight2_start_time, valid_user_input_bool_list[index] = VoyageUI.__time_select()
+
+                user_input_list[index] = user_input
+                user_input = ""
+
+            else:
+                if all(user_input_list) and all(valid_user_input_bool_list):
+
+                    flight1_arrival_time_hour = (flight1_start_time.hour + int(selected_flight_route.get_flight_time().split(":")[0])) % 24
+                    flight1_arrival_time_minute = (flight1_start_time.minute + int(selected_flight_route.get_flight_time().split(":")[1]))
+                    flight1_arrival_time_hour += flight1_arrival_time_minute // 60
+                    flight1_arrival_time_minute %= 60
+
+                    flight1_arrival_date = flight1_start_date
+                    
+                    #If the date is the same as the last date of the month and the time is smaller than the start time, we add +1 to the date
+                    if flight1_start_time > datetime.time(flight1_arrival_time_hour, flight1_arrival_time_minute):
+                        if calendar.monthrange(flight1_start_date.year, flight1_start_date.month)[1] == flight1_start_date.day:
+                            if month < 12:
+                                flight1_arrival_date.month += 1
+                                flight1_arrival_date.day = 1
+                            else:
+                                flight1_arrival_date.month = 1
+
+                        else:
+                            flight1_arrival_date.day += 1
+
+
+                    flight2_arrival_time_hour = (flight2_start_time.hour + int(selected_flight_route.get_flight_time().split(":")[0])) % 24
+                    flight2_arrival_time_minute = (flight2_start_time.minute + int(selected_flight_route.get_flight_time().split(":")[1]))
+                    flight2_arrival_time_hour += flight2_arrival_time_minute // 60
+                    flight2_arrival_time_minute %= 60
+
+                    flight2_arrival_date = flight2_start_date
+                    
+                    #If the date is the same as the last date of the month and the time is smaller than the start time, we add +1 to the date
+                    if flight2_start_time > datetime.time(flight2_arrival_time_hour, flight2_arrival_time_minute):
+                        if calendar.monthrange(flight2_start_date.year, flight2_start_date.month)[1] == flight2_start_date.day:
+                            if month < 12:
+                                flight2_arrival_date.month = flight2_arrival_date.month + 1
+                                flight2_arrival_date.day = 1
+                            else:
+                                flight2_arrival_date.month = 1
+
+                        else:
+                            flight2_arrival_date.day = flight2_arrival_date.day + 1
+
+                    flight1 = Flight(
+                        "Iceland",
+                        datetime.datetime(flight1_start_date.year, flight1_start_date.month, flight1_start_date.day, flight1_start_time.hour, flight1_start_time.minute),
+                        selected_flight_route.get_country(),
+                        datetime.datetime(flight1_arrival_date.year, flight1_arrival_date.month, flight1_arrival_date.day, flight1_arrival_time_hour, flight1_arrival_time_minute),
+                        DataAPI.get_available_flight_number(selected_flight_route.get_airport_id())
+                        )
+
+                    flight2 = Flight(
+                        selected_flight_route.get_country(),
+                        datetime.datetime(flight2_start_date.year, flight2_start_date.month, flight2_start_date.day, flight2_start_time.hour, flight2_start_time.minute),
+                        "Iceland",
+                        datetime.datetime(flight2_start_date.year, flight2_start_date.month, flight2_start_date.day, flight2_arrival_time_hour, flight2_arrival_time_minute),
+                        DataAPI.get_available_flight_number(selected_flight_route.get_airport_id())
+                        )
+
+                    voyage_schedule = (flight1.get_departure_time(), flight2.get_arrival_time())
+
+                    user_input = "Start:{}    End:{}".format(flight1_arrival_date, flight2_arrival_date)
+
+
+        return user_input, flight1, flight2, voyage_schedule
+
+    
+
+    @staticmethod
+    def __time_select():
+
+        user_input = input("Insert time(hh:mm):").strip()
+
+        time = None
+
+        valid_input_bool = True
+
+        user_input = user_input.replace("/", ":").replace("-", ":").replace(" ", ":")
+
+        if not user_input:
+            return user_input, time, valid_input_bool
+
+        user_input = ComponentUI.remove_brackets(user_input)
+
+        split_list = user_input.split(":")
+
+        if not user_input.replace(":", "").isdigit() or len(split_list) != 2:
+            user_input = user_input + " " + TextEditor.color_text_background("Invalid input, another input is required", TextEditor.RED_BACKGROUND)
+            valid_input_bool = False
+        else:
+
+            hour, minute = [int(number) for number in split_list]
+
+            hour = hour % 24
+            hour += minute // 60
+            minute = minute % 60
+
+            time = datetime.time(hour, minute)
+
+        return user_input, time, valid_input_bool
+
+    @staticmethod
+    def __date_select():
+        user_input = input("Insert date(dd-mm-yyyy):").strip()
+        date = None
+        valid_input_bool = True
+
+        user_input = user_input.replace("/", "-").replace(":", "-").replace(" ", "-")
+
+        if not user_input:
+            return user_input, date
+
+        user_input = ComponentUI.remove_brackets(user_input)
+
+        split_list = user_input.split("-")
+
+        if not user_input.replace("-", "").isdigit() or len(split_list) != 3 or len(split_list) < 3 or not (0 < len(split_list[0]) < 3) or not (0 < len(split_list[1]) < 3) or not len(split_list[2]) != 4:
+            user_input = user_input + " " + TextEditor.color_text_background("Invalid input, another input is required", TextEditor.RED_BACKGROUND)
+            valid_input_bool = False
+        else:
+
+            day, month, year = [int(number) for number in split_list]
+
+            date = datetime.date(year, month, day)
+
+            if calendar.monthrange(year, month)[1] < day:
+                day = datetime._days_in_month(year, month)
+
+            if month > 12 or month < 1:
+                user_input = user_input + " " + TextEditor.color_text_background("Month needs to be in range from 1-12, another input is required", TextEditor.RED_BACKGROUND)
+                valid_input_bool = False
+
+            elif datetime.date.today() > date:
+                user_input = user_input + " " + TextEditor.color_text_background("Date has passed, another input is required", TextEditor.RED_BACKGROUND)
+                valid_input_bool = False
+
+        return user_input, date, valid_input_bool
+
 
     @staticmethod
     def __show_ongoing_voyages():

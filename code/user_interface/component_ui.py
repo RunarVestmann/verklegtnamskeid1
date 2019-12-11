@@ -122,7 +122,7 @@ class ComponentUI:
         while user_input not in ComponentUI.get_navigation_options_tuple():
 
             if user_input:
-                if "A new" in user_input and "has been" in user_input:
+                if "has been" in user_input:
                     ComponentUI.print_frame_menu(option_tuple, underlined_main_option, save_message=user_input)
                 else:
                     ComponentUI.print_frame_menu(option_tuple, underlined_main_option)
