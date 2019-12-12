@@ -23,7 +23,7 @@ class PilotLogic:
             if pilot in voyage.get_pilots():
                 pilot_voyages_list.append(voyage)
 
-        return PilotLogic.__sort_list_by_name(pilot_voyages_list)
+        return pilot_voyages_list
 
     @staticmethod
     def get_all_pilot_voyages_in_a_week(pilot, week_number):
@@ -35,7 +35,7 @@ class PilotLogic:
             if week_number == voyage.get_schedule()[0].date().isocalendar()[1]:
                 pilot_voyages_in_week.append(voyage)
 
-        return PilotLogic.__sort_list_by_name(pilot_voyages_in_week)
+        return pilot_voyages_in_week
 
     @staticmethod
     def get_available_pilots(schedule_tuple):

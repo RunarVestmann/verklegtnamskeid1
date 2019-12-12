@@ -144,10 +144,10 @@ class VoyageUI:
 
 
     @staticmethod
-    def __pilot_select(voyage_schedule, pilot_license):
+    def __pilot_select(voyage_schedule, pilot_license, pilot_list_start_val=[]):
         pilot_info_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
         available_pilots = LogicAPI.get_available_licensed_pilots(voyage_schedule, pilot_license)
-        pilot_list = []
+        pilot_list = pilot_list_start_val
         user_input = ""
 
         greyed_out_option_index_list = []
@@ -173,8 +173,9 @@ class VoyageUI:
                 if index in greyed_out_option_index_list:
                     continue
 
-                pilot_list.append(available_pilots[index])
-                greyed_out_option_index_list.append(index) #use this list to see which pilot should be greyed out
+                if not pilot_list:
+                    pilot_list.append(available_pilots[index])
+                    greyed_out_option_index_list.append(index) #use this list to see which pilot should be greyed out
 
                 while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS or user_input.startswith("s"):
 
@@ -548,7 +549,7 @@ class VoyageUI:
     
         user_input = ""
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
-            table_header_tuple = ("Destination", "Airplane name", "Start time", "End time")
+            table_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
             completed_voyages_list = LogicAPI.get_completed_voyages()
             voyage_value_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in completed_voyages_list],
                                 [voyage.get_airplane().get_name() for voyage in completed_voyages_list],
@@ -707,11 +708,11 @@ class VoyageUI:
 
             voyages_list = LogicAPI.get_voyages_by_destination(user_input)
 
-            ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
-            print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
+            
 
             if not voyages_list:
-                
+                ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
+                # print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
                 ComponentUI.centered_text_message("Could not find a voyage going to destination: {}".format(user_input))
             
                 return ComponentUI.get_user_input()
@@ -746,6 +747,7 @@ class VoyageUI:
 
         airplane = voyage.get_airplane()
         schedule = voyage.get_schedule()
+        state = voyage.get_state()
 
 
         user_input = ''
@@ -755,16 +757,19 @@ class VoyageUI:
             str(len(voyage.get_flight_attendants())) + " flight attendants",
             airplane.get_name(),
             "{}-{}-{} - {}-{}-{}".format(schedule[0].day,schedule[0].month, schedule[0].year,schedule[1].day,schedule[1].month, schedule[1].year),
-            voyage.get_state()
+            state
         ]
 
         valid_user_inputs = ["2","3"]
-        #ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))            
-       
-        voyage_info_already_exists = False
+        greyed_out_option_index_list = [0,3,4,5]
+
+        if state == State.get_voyage_states()[4]:
+            greyed_out_option_index_list = [0,1,2,3,4,5]
+            valid_user_inputs = []
+        
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(info_tuple,\
-            ComponentUI.get_main_options()[0], "Edit mode", user_input_list, True, 1000, [0,3,4,5])
+            ComponentUI.get_main_options()[0], "Edit mode", user_input_list, True, 1000, greyed_out_option_index_list)
             
            
             user_input = ComponentUI.get_user_input()
@@ -772,7 +777,7 @@ class VoyageUI:
             if user_input in valid_user_inputs: 
                 index = int(user_input) - 1
                 ComponentUI.print_frame_constructor_menu(VoyageUI.__INFO_TUPLE,\
-            ComponentUI.get_main_options()[0], "Edit mode", user_input_list, False, index, [0,3,4,5])
+            ComponentUI.get_main_options()[0], "Edit mode", user_input_list, False, index, greyed_out_option_index_list)
 
                 if(index == 1):
                     user_input, pilot_list = VoyageUI.__pilot_select(schedule, airplane.get_type())
@@ -784,7 +789,10 @@ class VoyageUI:
                 user_input = ""
 
             elif user_input.startswith('s'):
-                if all(user_input_list) and not voyage_info_already_exists:
+                if all(user_input_list):
+
+                    if pilot_list == voyage.get_pilots() and flight_attendant_list == voyage.get_flight_attendants():
+                        break
 
                     edited_voyage = Voyage(
                         voyage.get_flights(),
@@ -792,7 +800,7 @@ class VoyageUI:
                         flight_attendant_list,
                         airplane,
                         voyage.get_schedule(),
-                        voyage.get_state(),
+                        state,
                     )
 
                     LogicAPI.change_saved_voyage(voyage, edited_voyage)

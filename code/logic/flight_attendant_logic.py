@@ -39,7 +39,7 @@ class FlightAttendantLogic:
             if flight_attendant in voyage.get_flight_attendants():
                 flight_attendant_voyages_list.append(voyage)
 
-        return FlightAttendantLogic.__sort_list_by_name(flight_attendant_voyages_list)
+        return flight_attendant_voyages_list
 
     @staticmethod
     def get_all_flight_attendant_voyages_in_a_week(flight_attendant, week_number):
@@ -51,7 +51,7 @@ class FlightAttendantLogic:
             if week_number == voyage.get_schedule()[0].date().isocalendar()[1]:
                 flight_attendant_voyages_in_week.append(voyage)
 
-        return FlightAttendantLogic.__sort_list_by_name(flight_attendant_voyages_in_week)
+        return flight_attendant_voyages_in_week
 
     @staticmethod
     def get_all_flight_attendants():

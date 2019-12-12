@@ -54,12 +54,12 @@ class ComponentUI:
         ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit)
 
     @staticmethod
-    def print_frame_table_menu(heads, value_tuple, table_height, underlined_main_option, underlined_sub_option, grayout_line=9999, print_submit=False):
+    def print_frame_table_menu(heads, value_tuple, table_height, underlined_main_option, underlined_sub_option, print_submit=False, greyout_line_list=[]):
 
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
 
-        ComponentUI.fill_in_table(heads, value_tuple, True, grayout_line)
+        ComponentUI.fill_in_table(heads, value_tuple, True, greyout_line_list)
 
         ComponentUI.fill_window_and_print_action_line(table_height+2, print_submit) 
 
@@ -265,7 +265,7 @@ class ComponentUI:
         return columns_registration
 
     @staticmethod
-    def fill_in_table(heads, getfunctions, has_numbers=True, greyout_line=9999, between=__DEFAULT_SPACE_BETWEEN_COLUMNS):
+    def fill_in_table(heads, getfunctions, has_numbers=True, greyout_line_list=[], between=__DEFAULT_SPACE_BETWEEN_COLUMNS):
         ''' Fill in and print out table'''
 
         registration_list = ComponentUI.generate_columns_registration_list(heads, getfunctions, between)
@@ -286,7 +286,7 @@ class ComponentUI:
 
             for i in range(len(heads)):
                 reg = "{:<"+str(registration_list[i]+between)+"s}"
-                if row == greyout_line:
+                if row in greyout_line_list:
                     option = reg.format(str(getfunctions[i][row]))
                     print(TextEditor.edit_text(option, TextEditor.DARKGRAY_TEXT), end="")
                     
