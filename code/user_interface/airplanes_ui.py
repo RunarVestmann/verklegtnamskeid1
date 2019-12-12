@@ -8,7 +8,7 @@ from apis.logic_api import LogicAPI
 class AirplanesUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[2]
     
-    navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+    __NAVIGATION_BAR_OPTIONS = ComponentUI.get_navigation_options_tuple()
     #option_tuple = ('Name', 'Type', 'Manufacturer', "Seats", 'State') NOT CONSTANT because different in every function
     @staticmethod
     def show():
@@ -30,8 +30,6 @@ class AirplanesUI:
     @staticmethod
     def __show_new_airplane_constructor():
                
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-
         option_tuple = ("Name", "Type", "Manufacturer", "Seating capacity")
 
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
@@ -47,7 +45,7 @@ class AirplanesUI:
 
 
 
-        while user_input not in navigation_bar_options:
+        while user_input not in AirplanesUI.__NAVIGATION_BAR_OPTIONS:
 
             ComponentUI.print_frame_constructor_menu(option_tuple, ComponentUI.get_main_options()[2],\
                  "New airplane", user_input_list, True, 1000, [2,3], True)
@@ -135,7 +133,7 @@ class AirplanesUI:
     
         user_input = ""
 
-        while user_input not in AirplanesUI.navigation_bar_options:
+        while user_input not in AirplanesUI.__NAVIGATION_BAR_OPTIONS:
             table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
             airplanes_list = LogicAPI.get_all_airplanes()
             airplanes_getfunctions_tuple = ([airplane.get_name() for airplane in airplanes_list],[airplane.get_state() for airplane in airplanes_list],\
@@ -160,7 +158,7 @@ class AirplanesUI:
         ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All airplanes in use", TextEditor.UNDERLINE_TEXT))
         user_input = ""
-        while user_input not in AirplanesUI.navigation_bar_options:
+        while user_input not in AirplanesUI.__NAVIGATION_BAR_OPTIONS:
             table_header_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
             airplanes_list = LogicAPI.get_all_airplanes_in_use()
             if airplanes_list:
@@ -196,7 +194,7 @@ class AirplanesUI:
         valid_user_inputs = ["1"]
         option_tuple = ('Name', 'Type', 'Manufacturer', "Seats", 'State')          
         valid_for_submit_list = [False] #Can only change the name (one element) in this case (airplane)
-        while user_input not in AirplanesUI.navigation_bar_options:
+        while user_input not in AirplanesUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(option_tuple,\
             ComponentUI.get_main_options()[2], "Airplane name: " + user_input_list[0], user_input_list, True, 1000, [1,2,3,4])
 
@@ -268,12 +266,12 @@ class AirplanesUI:
     @staticmethod
     def __show_all_airplane_types():
         ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR)
-        print(TextEditor.format_text("All airplanes types", TextEditor.UNDERLINE_TEXT))
+        print(TextEditor.format_text("All airplane types", TextEditor.UNDERLINE_TEXT))
         user_input = ""
 
         
 
-        while user_input not in AirplanesUI.navigation_bar_options:
+        while user_input not in AirplanesUI.__NAVIGATION_BAR_OPTIONS:
             table_header_tuple = ("Type", "Manufacturer", "Seats")
                   
            

@@ -13,7 +13,7 @@ class EmployeeUI:
   
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[1]
            
-    NAVIGATION_BAR_OPTIONS = ComponentUI.get_navigation_options_tuple()
+    __NAVIGATION_BAR_OPTIONS = ComponentUI.get_navigation_options_tuple()
 
    
     @staticmethod
@@ -117,12 +117,11 @@ class EmployeeUI:
             + TextEditor.format_text('p', TextEditor.BOLD_TEXT)+ " for pilot): ", "Insert Name: ", "Insert Social security number: ",\
             "Insert Phone number: ", "Insert Home address: ", "Insert E-mail: ", "Insert License: ")
         user_input = ""
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
         option_tuple = ("Job title", "Name", "Social security number", "Phone number", "Home address", "E-mail", "License")
         user_input_list = [""] * len(option_tuple)
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(option_tuple))
         valid_user_inputs_bool_list = [True] * len(option_tuple)
-        while user_input not in navigation_bar_options:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
 
             greyed_out_option_index_list = [6] if not user_input_list[0].lower().startswith('p') else []
 
@@ -207,7 +206,7 @@ class EmployeeUI:
     def __show_all_employees():
 
         user_input = ""
-        while user_input not in EmployeeUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             table_header_tuple = ("Job title", "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
             all_employees_list = LogicAPI.get_all_employees()
             employees_getfunctions_tuple = (["Pilot" if isinstance(employee, Pilot) else "Flight attendant" for employee in all_employees_list], [employee.get_name() for employee in all_employees_list],[employee.get_ssn() for employee in all_employees_list],\
@@ -231,7 +230,7 @@ class EmployeeUI:
     def __show_all_pilots():
 
         user_input = ""
-        while user_input not in EmployeeUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State", "License")
             pilots_list = LogicAPI.get_all_pilots()
             pilots_value_tuple = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
@@ -255,7 +254,7 @@ class EmployeeUI:
     def __show_all_flight_attendants():
 
         user_input = ""
-        while user_input not in EmployeeUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
             flight_attendants_list = LogicAPI.get_all_flight_attendants()
             flight_attendants_value_tuple = ([flight_attendant.get_name() for flight_attendant in flight_attendants_list],[flight_attendant.get_ssn() for flight_attendant in flight_attendants_list],\
@@ -281,11 +280,10 @@ class EmployeeUI:
 
 
         user_input = ""
-        NAVIGATION_BAR_OPTIONS = ComponentUI.get_navigation_options_tuple()
 
         info_header_tuple = ("Job title", "Name", "SSN", "Phone number", "Home address", "E-mail", "State")
 
-        while user_input not in NAVIGATION_BAR_OPTIONS:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
             print(TextEditor.format_text("Find employee by name or ssn", TextEditor.UNDERLINE_TEXT))
 
@@ -372,13 +370,11 @@ class EmployeeUI:
     @staticmethod
     def __show_pilot_by_license_finder():
         
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-
         user_input = ""
 
         info_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
 
-        while user_input not in navigation_bar_options:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
             #display table of airplane types and return the type-name the of chosen one , head above the the table
             user_input = EmployeeUI.__airplane_type_picker("Find pilots by license")
@@ -430,7 +426,7 @@ class EmployeeUI:
         ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All employees on duty", TextEditor.UNDERLINE_TEXT))
         user_input = ""
-        while user_input not in EmployeeUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
             employees_on_duty_list = LogicAPI.get_employees_on_duty()
             if employees_on_duty_list:
@@ -458,7 +454,7 @@ class EmployeeUI:
         ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All employees off duty", TextEditor.UNDERLINE_TEXT))
         user_input = ""
-        while user_input not in EmployeeUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             table_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
             employees_off_duty_list = LogicAPI.get_employees_off_duty()
             if employees_off_duty_list:
@@ -515,7 +511,7 @@ class EmployeeUI:
                   
        
         # employee_info_already_exists = False
-        while user_input not in EmployeeUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(option_tuple,\
             ComponentUI.get_main_options()[1], "Edit mode", user_input_list, True, 1000, invalid_user_input_index_list)
             

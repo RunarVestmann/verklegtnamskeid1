@@ -6,7 +6,7 @@ from apis.logic_api import LogicAPI
 
 class FlightRouteUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[3]
-    NAVIGATION_BAR_OPTIONS = ComponentUI.get_navigation_options_tuple()
+    __NAVIGATION_BAR_OPTIONS = ComponentUI.get_navigation_options_tuple()
     FLIGHT_ROUTE_OPTION_TUBLE = ("Country", "Destination", "Airport id", "Flight time", "Distance from Iceland",\
              "Contact name", "Emergency phonenumber") # to use when displaying flight route profile and new flight route
 
@@ -36,7 +36,7 @@ class FlightRouteUI:
 
         #flight_route_info_already_exists = False
 
-        while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in FlightRouteUI.__NAVIGATION_BAR_OPTIONS:
 
             ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE, \
                 ComponentUI.get_main_options()[3], "New flight route", user_input_list, True)
@@ -154,7 +154,7 @@ class FlightRouteUI:
         #ComponentUI.print_header(FlightRouteUI.__FRAME_IN_USE_STR)
         #print(TextEditor.format_text("Show all flight routes", TextEditor.UNDERLINE_TEXT))
         
-        while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in FlightRouteUI.__NAVIGATION_BAR_OPTIONS:
 
             table_header = ("Destination", "Airport", "Country", "Flight-time", "Distance", "Contact", "Emergency phone")
             flrt_list = LogicAPI.get_all_flight_routes()
@@ -203,7 +203,7 @@ class FlightRouteUI:
         #ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))            
        
        # flight_route_info_already_exists = False
-        while user_input not in FlightRouteUI.NAVIGATION_BAR_OPTIONS:
+        while user_input not in FlightRouteUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE,\
             ComponentUI.get_main_options()[3], "Flight route to " + user_input_list[1], user_input_list, True, 1000, [0,1,2,3,4])
             

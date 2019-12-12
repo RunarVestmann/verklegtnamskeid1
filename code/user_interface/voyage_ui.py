@@ -697,7 +697,7 @@ class VoyageUI:
 
         info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
 
-        while user_input not in VoyageUI.____NAVIGATION_BAR_OPTIONS:
+        while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_header(VoyageUI. __FRAME_IN_USE_STR)
             print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
 
