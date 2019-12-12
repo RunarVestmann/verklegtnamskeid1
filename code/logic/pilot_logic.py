@@ -63,7 +63,7 @@ class PilotLogic:
         available_licensed_pilots = []
 
         for pilot in PilotLogic.get_available_pilots(schedule_tuple):
-            if pilot.get_license == pilot_license:
+            if pilot.get_license() == pilot_license:
                 available_licensed_pilots.append(pilot)
 
         return available_licensed_pilots

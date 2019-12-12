@@ -1,5 +1,5 @@
 name,aircraft_type,manufacturer,seat_count,state
-Nabbinn,NABAE146,Boeing,120,Waiting for flight from Iceland
+Nabbinn,NABAE146,Boeing,120,Not scheduled for flight today
 Beta,Q400,Bombardier,146,Not scheduled for flight today
 Elice,NABAE146,Fokker,128,Not scheduled for flight today
 Islander,NABAE146,Fokker,128,Not scheduled for flight today

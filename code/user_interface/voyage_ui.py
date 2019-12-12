@@ -145,7 +145,7 @@ class VoyageUI:
 
     @staticmethod
     def __pilot_select(voyage_schedule, pilot_license, pilot_list_start_val=[]):
-        pilot_info_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
+        pilot_info_tuple = ("Name", "SSN", "Phone number", "Home address", "Email", "State")
         available_pilots = LogicAPI.get_available_licensed_pilots(voyage_schedule, pilot_license)
         pilot_list = pilot_list_start_val
         user_input = ""
@@ -155,12 +155,16 @@ class VoyageUI:
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
 
             if available_pilots:
-                pilot_value_tuple = ([pilot.get_name() for pilot in pilots_list],[pilot.get_ssn() for pilot in pilots_list],\
-                [pilot.get_phonenumber() for pilot in pilots_list], [pilot.get_home_address() for pilot in pilots_list],\
-                [pilot.get_email() for pilot in pilots_list], [pilot.get_state() for pilot in pilots_list])
+                pilot_value_tuple = ([pilot.get_name() for pilot in pilot_list],[pilot.get_ssn() for pilot in pilot_list],\
+                [pilot.get_phonenumber() for pilot in pilot_list], [pilot.get_home_address() for pilot in pilot_list],\
+                [pilot.get_email() for pilot in pilot_list], [pilot.get_state() for pilot in pilot_list])
+
+                for i, pilot in enumerate(pilot_value_tuple):
+                    if pilot in pilot_list_start_val:
+                        greyed_out_option_index_list.append(i)
 
                 ComponentUI.print_frame_table_menu(pilot_info_tuple, pilot_value_tuple, len(available_pilots),
-                    VoyageUI.__FRAME_IN_USE_STR, "All available pilots", True)
+                    VoyageUI.__FRAME_IN_USE_STR, "All available pilots", True, greyed_out_option_index_list)
 
                 user_input = ComponentUI.get_user_input("Insert number of desired captain: ")
                 user_input = ComponentUI.remove_brackets(user_input)
@@ -178,6 +182,9 @@ class VoyageUI:
                     greyed_out_option_index_list.append(index) #use this list to see which pilot should be greyed out
 
                 while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS or user_input.startswith("s"):
+
+                    ComponentUI.print_frame_table_menu(pilot_info_tuple, pilot_value_tuple, len(available_pilots),
+                    VoyageUI.__FRAME_IN_USE_STR, "All available pilots", True, greyed_out_option_index_list)
 
                     user_input = ComponentUI.get_user_input()
                     user_input = ComponentUI.remove_brackets(user_input)
@@ -205,10 +212,10 @@ class VoyageUI:
         return user_input, pilot_list
 
     @staticmethod
-    def __flight_attendant_select(voyage_schedule):
-        flight_attendant_info_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
+    def __flight_attendant_select(voyage_schedule, flight_attendant_list_start_val=[]):
+        flight_attendant_info_tuple = ("Name", "SSN", "Phone number", "Home address", "Email", "State")
         available_flight_attendants = LogicAPI.get_available_flight_attendants(voyage_schedule)
-        flight_attendant_list = []
+        flight_attendant_list = flight_attendant_list_start_val
         user_input = ""
 
         greyed_out_option_index_list = []
@@ -216,14 +223,18 @@ class VoyageUI:
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
 
             if available_flight_attendants:
-                flight_attendant_value_tuple = ([flight_attendant.get_name() for flight_attendant in  flight_attendant_list],[flight_attendant.get_ssn() for flight_attendant in  flight_attendant_list],\
-                [flight_attendant.get_phonenumber() for flight_attendant in  flight_attendant_list], [flight_attendant.get_home_address() for flight_attendant in  flight_attendant_list],\
-                [flight_attendant.get_email() for flight_attendant in  flight_attendant_list], [flight_attendant.get_state() for flight_attendant in  flight_attendant_list])
+                flight_attendant_value_tuple = ([flight_attendant.get_name() for flight_attendant in flight_attendant_list],[flight_attendant.get_ssn() for flight_attendant in flight_attendant_list],\
+                [flight_attendant.get_phonenumber() for flight_attendant in flight_attendant_list], [flight_attendant.get_home_address() for flight_attendant in flight_attendant_list],\
+                [flight_attendant.get_email() for flight_attendant in flight_attendant_list], [flight_attendant.get_state() for flight_attendant in flight_attendant_list])
+
+                for i, flight_attendant in enumerate(flight_attendant_value_tuple):
+                    if flight_attendant in flight_attendant_list_start_val:
+                        greyed_out_option_index_list.append(i)
 
                 ComponentUI.print_frame_table_menu(flight_attendant_info_tuple, flight_attendant_value_tuple, len(available_flight_attendants),
-                    VoyageUI.__FRAME_IN_USE_STR, "All available flight attendants", True)
+                    VoyageUI.__FRAME_IN_USE_STR, "All available flight attendants", True, greyed_out_option_index_list)
 
-                user_input = ComponentUI.get_user_input("Insert number of desired cabin manager: ")
+                user_input = ComponentUI.get_user_input("Insert number of desired cebin manager: ")
                 user_input = ComponentUI.remove_brackets(user_input)
 
                 if not user_input.isdigit() or len(available_flight_attendants) < int(user_input):
@@ -234,10 +245,14 @@ class VoyageUI:
                 if index in greyed_out_option_index_list:
                     continue
 
-                flight_attendant_list.append(available_flight_attendants[index])
-                greyed_out_option_index_list.append(index) #use this list to see which flight_ attendant should be greyed out
+                if not flight_attendant_list:
+                    flight_attendant_list.append(available_flight_attendants[index])
+                    greyed_out_option_index_list.append(index) #use this list to see which flight_attendant should be greyed out
 
                 while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS or user_input.startswith("s"):
+
+                    ComponentUI.print_frame_table_menu(flight_attendant_info_tuple, flight_attendant_value_tuple, len(available_flight_attendants),
+                    VoyageUI.__FRAME_IN_USE_STR, "All available flight attendants", True, greyed_out_option_index_list)
 
                     user_input = ComponentUI.get_user_input()
                     user_input = ComponentUI.remove_brackets(user_input)
@@ -253,17 +268,16 @@ class VoyageUI:
                     flight_attendant_list.append(available_flight_attendants[index])
 
                 if user_input.startswith("s"):
-                    user_input = "{} flight_attendants".format(len(flight_attendant_list))
+                    user_input = "{} flight attendants".format(len(flight_attendant_list))
                     break
 
             else:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
-                ComponentUI.centered_text_message("There are no available flight_attendants".format(voyage_schedule))
+                ComponentUI.centered_text_message("There are no available flight attendants".format(voyage_schedule))
                 user_input = ComponentUI.get_user_input()
                 break
 
         return user_input, flight_attendant_list
-
 
 
     @staticmethod
@@ -781,8 +795,12 @@ class VoyageUI:
 
                 if(index == 1):
                     user_input, pilot_list = VoyageUI.__pilot_select(schedule, airplane.get_type())
+                    if not pilot_list:
+                        user_input = user_input_list[index]
                 elif(index == 2):
                     user_input, flight_attendant_list = VoyageUI.__flight_attendant_select(schedule)
+                    if not flight_attendant_list:
+                        user_input = user_input_list[index]
 
 
                 user_input_list[index] = user_input

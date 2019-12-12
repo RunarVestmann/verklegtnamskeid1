@@ -534,7 +534,7 @@ class EmployeeUI:
                 elif index == 5:
                     user_input = input("Insert new e-mail: ").strip()
                 elif index == 7 and is_pilot:
-                    user_input = EmployeeUI.__airplane_type_picker("Edit mode - chose license")      # input("Insert new license: ").strip() #Vantar sub menu
+                    user_input = EmployeeUI.__airplane_type_picker("Edit mode - choose license")      # input("Insert new license: ").strip() #Vantar sub menu
 
 
 
