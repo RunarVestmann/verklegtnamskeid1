@@ -204,7 +204,8 @@ class VoyageUI:
 
             else:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
-                ComponentUI.centered_text_message("There are no available pilots".format(voyage_schedule))
+                print(TextEditor.format_text("All available pilots", TextEditor.UNDERLINE_TEXT))
+                ComponentUI.centered_text_message("There are no available pilots".format(voyage_schedule),"", 3)
                 user_input = ComponentUI.get_user_input()
                 break
 
@@ -233,6 +234,9 @@ class VoyageUI:
                 ComponentUI.print_frame_table_menu(flight_attendant_info_tuple, flight_attendant_value_tuple, len(available_flight_attendants),
                     VoyageUI.__FRAME_IN_USE_STR, "All available flight attendants", True, greyed_out_option_index_list)
 
+                if not flight_attendant_list:
+                    pass
+
                 user_input = ComponentUI.get_user_input("Insert number of desired cabin manager: ")
                 user_input = ComponentUI.remove_brackets(user_input)
 
@@ -246,7 +250,7 @@ class VoyageUI:
 
                 if not flight_attendant_list:
                     flight_attendant_list.append(available_flight_attendants[index])
-                    greyed_out_option_index_list.append(index) #use this list to see which flight_attendant should be greyed out
+                    greyed_out_option_index_list.append(index)
 
                 while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS or user_input.startswith("s"):
 
@@ -272,7 +276,8 @@ class VoyageUI:
 
             else:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
-                ComponentUI.centered_text_message("There are no available flight attendants".format(voyage_schedule))
+                print(TextEditor.format_text("All available flight attendants", TextEditor.UNDERLINE_TEXT))
+                ComponentUI.centered_text_message("There are no available flight attendants".format(voyage_schedule),"", 3)
                 user_input = ComponentUI.get_user_input()
                 break
 
@@ -313,7 +318,8 @@ class VoyageUI:
 
             else:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
-                ComponentUI.centered_text_message("There are no available airplanes between: {}".format(voyage_schedule))
+                print(TextEditor.format_text("All available airplanes", TextEditor.UNDERLINE_TEXT))
+                ComponentUI.centered_text_message("There are no available airplanes between: {}".format(voyage_schedule),"", 3)
                 user_input = ComponentUI.get_user_input()
                 break
 
@@ -581,7 +587,11 @@ class VoyageUI:
 
                 user_input = VoyageUI.show_voyage(voyage)
             else:
-                ComponentUI.centered_text_message("There are no completed voyages at the moment !","",3)
+                ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
+                print(TextEditor.format_text("All completed voyages", TextEditor.UNDERLINE_TEXT))
+                ComponentUI.centered_text_message("There are no completed voyages at the moment !","", 3)
+                user_input = ComponentUI.get_user_input()
+                break
 
         return user_input
 
@@ -605,6 +615,9 @@ class VoyageUI:
 
             user_input, date, valid_input_bool = VoyageUI.__date_select()
 
+            if not user_input:
+                continue
+
             voyages_list = []
             voyages_list = LogicAPI.get_voyages_by_date(date)
 
@@ -613,7 +626,7 @@ class VoyageUI:
 
             if not voyages_list or not valid_input_bool:
                 
-                ComponentUI.centered_text_message("Could not find a voyage on date: {}".format(user_input))
+                ComponentUI.centered_text_message("Could not find a voyage on date: {}".format(user_input),"", 3)
             
                 return ComponentUI.get_user_input()
 
@@ -664,7 +677,7 @@ class VoyageUI:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
                 print(TextEditor.format_text("Find voyages by week", TextEditor.UNDERLINE_TEXT))
                 
-                ComponentUI.centered_text_message("Could not find a voyage on week: {}".format(user_input))
+                ComponentUI.centered_text_message("Could not find a voyage on week: {}".format(user_input),"", 3)
             
                 return ComponentUI.get_user_input()
 
@@ -718,8 +731,8 @@ class VoyageUI:
 
             if not voyages_list:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
-                # print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
-                ComponentUI.centered_text_message("Could not find a voyage going to destination: {}".format(user_input))
+                print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
+                ComponentUI.centered_text_message("Could not find a voyage going to destination: {}".format(user_input),"", 3)
             
                 return ComponentUI.get_user_input()
 
