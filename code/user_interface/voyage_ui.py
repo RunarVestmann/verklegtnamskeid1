@@ -41,7 +41,6 @@ class VoyageUI:
         pilot_list = []
         flight_attendant_list = []
 
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
 
         user_input = ""
         selected_flight_route = None
@@ -51,7 +50,7 @@ class VoyageUI:
         input_message_tuple = ("Insert number of desired flight route: ", "Insert Voyage schedule: ",\
              "Insert number of desired Airplane ", "Insert Pilots: ", "Insert Flight attendants: ")
 
-        while user_input not in navigation_bar_options:
+        while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
 
             greyed_out_option_index_list = [1, 2, 3, 4]
 
@@ -234,7 +233,7 @@ class VoyageUI:
                 ComponentUI.print_frame_table_menu(flight_attendant_info_tuple, flight_attendant_value_tuple, len(available_flight_attendants),
                     VoyageUI.__FRAME_IN_USE_STR, "All available flight attendants", True, greyed_out_option_index_list)
 
-                user_input = ComponentUI.get_user_input("Insert number of desired cebin manager: ")
+                user_input = ComponentUI.get_user_input("Insert number of desired cabin manager: ")
                 user_input = ComponentUI.remove_brackets(user_input)
 
                 if not user_input.isdigit() or len(available_flight_attendants) < int(user_input):
@@ -588,13 +587,12 @@ class VoyageUI:
 
     @staticmethod    
     def __show_find_voyages_by_date():
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
 
         user_input = ""
 
         info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
 
-        while user_input not in navigation_bar_options:
+        while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_header(VoyageUI. __FRAME_IN_USE_STR)
             print(TextEditor.format_text("Find voyages by date", TextEditor.UNDERLINE_TEXT))
 
@@ -642,13 +640,11 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_week():
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-
         user_input = ""
 
         info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
 
-        while user_input not in navigation_bar_options:
+        while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_header(VoyageUI. __FRAME_IN_USE_STR)
             print(TextEditor.format_text("Find voyages by week", TextEditor.UNDERLINE_TEXT))
 
@@ -697,13 +693,11 @@ class VoyageUI:
     @staticmethod
     def __show_find_voyages_by_destination():
 
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-
         user_input = ""
 
         info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
 
-        while user_input not in navigation_bar_options:
+        while user_input not in VoyageUI.____NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_header(VoyageUI. __FRAME_IN_USE_STR)
             print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
 
