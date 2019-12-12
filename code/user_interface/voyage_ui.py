@@ -518,24 +518,29 @@ class VoyageUI:
     @staticmethod
     def __show_ongoing_voyages():
 
-        table_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
+        user_input = ""
+        while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
+            table_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
 
-        ongoing_voyages_list = LogicAPI.get_ongoing_voyages()
+            ongoing_voyages_list = LogicAPI.get_ongoing_voyages()
 
-        voyage_value_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in ongoing_voyages_list],
-                              [voyage.get_airplane().get_name() for voyage in ongoing_voyages_list],
-                              [voyage.get_schedule()[0] for voyage in ongoing_voyages_list],
-                              [voyage.get_schedule()[1] for voyage in ongoing_voyages_list],
-                              [voyage.get_state() for voyage in ongoing_voyages_list])
+            voyage_value_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in ongoing_voyages_list],
+                                [voyage.get_airplane().get_name() for voyage in ongoing_voyages_list],
+                                [voyage.get_schedule()[0] for voyage in ongoing_voyages_list],
+                                [voyage.get_schedule()[1] for voyage in ongoing_voyages_list],
+                                [voyage.get_state() for voyage in ongoing_voyages_list])
+            table_height = len(ongoing_voyages_list)
+            ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Ongoing voyages")
+            user_input = ComponentUI.get_user_input()
+            user_input = ComponentUI.remove_brackets(user_input)
+            if not user_input.isdigit() or int(user_input) > table_height:
+                    continue
+            table_index = int(user_input)-1
+            ongoing_voyage = ongoing_voyages_list[table_index]        
 
-        ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple,\
-             len(voyage_value_tuple) if not voyage_value_tuple\
-             else len(voyage_value_tuple[0]),\
-            VoyageUI.__FRAME_IN_USE_STR, "Ongoing voyages")
+            user_input = VoyageUI.__show_voyage(ongoing_voyage)
 
-
-
-        return ComponentUI.get_user_input()
+        return user_input
 
     @staticmethod
     def __show_completed_voyages():
@@ -670,13 +675,14 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_destination():
+
+        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
+
         user_input = ""
 
         info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
 
-        navigation_bar_options = ComponentUI.get_navigation_options_tuple()
-
-        while not user_input.startswith(navigation_bar_options):
+        while user_input not in navigation_bar_options:
             ComponentUI.print_header(VoyageUI. __FRAME_IN_USE_STR)
             print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
 
@@ -705,28 +711,44 @@ class VoyageUI:
                 return ComponentUI.get_user_input()
 
             else:
-                voyage_info_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in voyages_list],
-                              [voyage.get_airplane().get_name() for voyage in voyages_list],
-                              [voyage.get_schedule()[0] for voyage in voyages_list],
-                              [voyage.get_schedule()[1] for voyage in voyages_list],
-                              [voyage.get_state() for voyage in voyages_list])
+                voyage_info_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in voyages_list],\
+                [voyage.get_airplane().get_name() for voyage in voyages_list],\
+                [voyage.get_schedule()[0] for voyage in voyages_list],\
+                [voyage.get_schedule()[1] for voyage in voyages_list],\
+                [voyage.get_state() for voyage in voyages_list])
 
-            ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, len(voyage_info_tuple[0]),\
-                 VoyageUI.__FRAME_IN_USE_STR, "Find voyages by destination")
-            
-            break #Needs profile functionality
+                table_height = len(voyages_list)
+                ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Voyages by destination")
+                user_input = ComponentUI.get_user_input()
+                user_input = ComponentUI.remove_brackets(user_input)
+                if not user_input.isdigit() or int(user_input) > table_height:
+                        continue
+                table_index = int(user_input)-1
+                voyage = voyages_list[table_index]        
+                user_input = VoyageUI.__show_voyage(voyage)
 
-        return ComponentUI.get_user_input()
+
+            return user_input
 
     @staticmethod
     def __show_voyage(voyage): #Needs work!!
+
+        info_tuple = ("Destination", "Pilots", "Flight attendants", "Airplane name", "Schedule", "State")
+
+        pilot_list = voyage.get_pilots()
+        flight_attendant_list = voyage.get_flight_attendants()
+
+        airplane = voyage.get_airplane()
+        schedule = voyage.get_schedule()
+
+
         user_input = ''
         user_input_list = [
-            voyage.get_flights(),
-            voyage.get_pilots(),
-            voyage.get_flight_attendants(),
-            voyage.get_airplane(),
-            voyage.get_schedule(),
+            voyage.get_flights()[0].get_arrival_location(),
+            str(len(voyage.get_pilots())) + " pilots",
+            str(len(voyage.get_flight_attendants())) + " flight attendants",
+            airplane.get_name(),
+            "{}-{}-{} - {}-{}-{}".format(schedule[0].day,schedule[0].month, schedule[0].year,schedule[1].day,schedule[1].month, schedule[1].year),
             voyage.get_state()
         ]
 
@@ -735,8 +757,8 @@ class VoyageUI:
        
         voyage_info_already_exists = False
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
-            ComponentUI.print_frame_constructor_menu(VoyageUI.__INFO_TUPLE,\
-            ComponentUI.get_main_options()[0], "Voyage scheduled " + user_input_list[2], user_input_list, True, 1000, [0,3,4,5])
+            ComponentUI.print_frame_constructor_menu(info_tuple,\
+            ComponentUI.get_main_options()[0], "Edit mode", user_input_list, True, 1000, [0,3,4,5])
             
            
             user_input = ComponentUI.get_user_input()
@@ -744,15 +766,12 @@ class VoyageUI:
             if user_input in valid_user_inputs: 
                 index = int(user_input) - 1
                 ComponentUI.print_frame_constructor_menu(VoyageUI.__INFO_TUPLE,\
-            ComponentUI.get_main_options()[0], "Voyage scheduled " + user_input_list[2], user_input_list, False, 1000, [0,3,4,5])
+            ComponentUI.get_main_options()[0], "Edit mode", user_input_list, False, index, [0,3,4,5])
 
                 if(index == 1):
-                    user_input = input("Insert pilot: ").strip()
+                    user_input, pilot_list = VoyageUI.__pilot_select(schedule, airplane.get_type())
                 elif(index == 2):
-                    user_input = input("Insert flight attendant: ").strip()
-
-
-
+                    user_input, flight_attendant_list = VoyageUI.__flight_attendant_select(schedule)
 
 
                 user_input_list[index] = user_input
@@ -762,12 +781,12 @@ class VoyageUI:
                 if all(user_input_list) and not voyage_info_already_exists:
 
                     edited_voyage = Voyage(
-                        user_input_list[0],
-                        user_input_list[1],
-                        user_input_list[2],
-                        user_input_list[3],
-                        user_input_list[4],
-                        user_input_list[5],
+                        voyage.get_flights(),
+                        pilot_list,
+                        flight_attendant_list,
+                        airplane,
+                        voyage.get_schedule(),
+                        voyage.get_state(),
                     )
 
                     LogicAPI.change_saved_voyage(voyage, edited_voyage)
