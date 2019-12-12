@@ -544,7 +544,7 @@ class VoyageUI:
                                 [voyage.get_schedule()[1] for voyage in ongoing_voyages_list],
                                 [voyage.get_state() for voyage in ongoing_voyages_list])
             table_height = len(ongoing_voyages_list)
-            ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Ongoing voyages")
+            ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Ongoing and upcoming voyages")
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
             if not user_input.isdigit() or int(user_input) > table_height:
