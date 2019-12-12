@@ -1,8 +1,6 @@
 name,aircraft_type,manufacturer,seat_count,state
 Nabbinn,NABAE146,Boeing,120,Waiting for flight from Iceland
-Beta,Pack,Wolves,30,Not Scheduled for flight
-Brynja,Nordlenzkt,Ak,5,Waiting for flight from Iceland
-Dora,Embraer,170,78,Not scheduled
+Beta,Q400,Bombardier,146,Not Scheduled for flight
 Elice,NABAE146,Fokker,128,Not scheduled
 Islander,NABAE146,Fokker,128,Not scheduled
 Bomban,CRJ-200,Bombardier,50,Not scheduled

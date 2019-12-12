@@ -54,12 +54,12 @@ class ComponentUI:
         ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit)
 
     @staticmethod
-    def print_frame_table_menu(heads, value_tuple, table_height, underlined_main_option, underlined_sub_option, print_submit=False):
+    def print_frame_table_menu(heads, value_tuple, table_height, underlined_main_option, underlined_sub_option, grayout_line=9999, print_submit=False):
 
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
 
-        ComponentUI.fill_in_table(heads, value_tuple, True)
+        ComponentUI.fill_in_table(heads, value_tuple, True, grayout_line)
 
         ComponentUI.fill_window_and_print_action_line(table_height+2, print_submit) 
 
@@ -232,10 +232,10 @@ class ComponentUI:
         print("_" * window_width)
 
   ############# TABLE RELATED FUNCTIONS #################
-    __DEFAULT_SPACE_BETWEEN_columnS = 2
+    __DEFAULT_SPACE_BETWEEN_COLUMNS = 2
 
     @staticmethod
-    def generate_columns_registration_list(heads, values, between=__DEFAULT_SPACE_BETWEEN_columnS):
+    def generate_columns_registration_list(heads, values, between=__DEFAULT_SPACE_BETWEEN_COLUMNS):
         '''generate list of number that is used for align space in tables'''
         longest_values = []
         for head in heads:
@@ -252,7 +252,7 @@ class ComponentUI:
         return longest_values
 
     @staticmethod
-    def generate_columns_registration_string(heads, getfunctions, between=__DEFAULT_SPACE_BETWEEN_columnS):
+    def generate_columns_registration_string(heads, getfunctions, between=__DEFAULT_SPACE_BETWEEN_COLUMNS):
         ''' generate string that can be used as format info in table row '''
         ''' to use in table that not will use fill in table function '''
         
@@ -265,10 +265,12 @@ class ComponentUI:
         return columns_registration
 
     @staticmethod
-    def fill_in_table(heads, getfunctions, has_numbers=True, between=__DEFAULT_SPACE_BETWEEN_columnS):
+    def fill_in_table(heads, getfunctions, has_numbers=True, greyout_line=9999, between=__DEFAULT_SPACE_BETWEEN_COLUMNS):
         ''' Fill in and print out table'''
 
         registration_list = ComponentUI.generate_columns_registration_list(heads, getfunctions, between)
+
+        
 
         if has_numbers:
             print("{:<5s}".format(""),end="")
@@ -284,7 +286,12 @@ class ComponentUI:
 
             for i in range(len(heads)):
                 reg = "{:<"+str(registration_list[i]+between)+"s}"
-                print(reg.format(str(getfunctions[i][row])),end="")
+                if row == greyout_line:
+                    option = reg.format(str(getfunctions[i][row]))
+                    print(TextEditor.edit_text(option, TextEditor.DARKGRAY_TEXT), end="")
+                    
+                else:    
+                    print(reg.format(str(getfunctions[i][row])),end="")
             print()
 
 
