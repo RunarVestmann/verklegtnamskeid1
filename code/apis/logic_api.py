@@ -61,8 +61,8 @@ class LogicAPI:
         return PilotLogic.get_all_pilot_voyages(pilot)
 
     @staticmethod
-    def get_all_pilot_voyages_in_week(pilot, week_number):
-        return PilotLogic.get_all_pilot_voyages(pilot, week_number)
+    def get_all_pilot_voyages_in_a_week(pilot, week_number):
+        return PilotLogic.get_all_pilot_voyages_in_a_week(pilot, week_number)
 
     @staticmethod
     def get_available_pilots(schedule_tuple):
@@ -94,6 +94,14 @@ class LogicAPI:
     @staticmethod
     def get_all_flight_attendants():
         return FlightAttendantLogic.get_all_flight_attendants()
+
+    @staticmethod
+    def get_all_flight_attendant_voyages(flight_attendant):
+        return FlightAttendantLogic.get_all_flight_attendant_voyages(flight_attendant)
+
+    @staticmethod
+    def get_all_flight_attendant_voyages_in_a_week(flight_attendant, week_number):
+        return FlightAttendantLogic.get_all_flight_attendant_voyages_in_a_week(flight_attendant, week_number)
 
     @staticmethod
     def get_available_flight_attendants(schedule_tuple):

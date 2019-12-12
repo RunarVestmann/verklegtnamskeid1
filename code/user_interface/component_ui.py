@@ -4,7 +4,7 @@ from user_interface.window import Window
 class ComponentUI:
 
     @staticmethod
-    def fill_window_and_print_action_line(menu_line_count, is_submit_available=False, submit_message=""):
+    def fill_window_and_print_action_line(menu_line_count, is_submit_available=False, submit_message="", is_check_voyages_available=False):
         bottom_space_for_user_input = 2
         if is_submit_available:
             bottom_space_for_user_input += 1
@@ -13,7 +13,9 @@ class ComponentUI:
         offset_bottom_window = body_height - menu_line_count - bottom_space_for_user_input
         for _ in range(offset_bottom_window):
             print()
-        if is_submit_available:
+        if is_submit_available and is_check_voyages_available:
+            print('(S)ubmit    (C)heck voyages')
+        elif is_submit_available:
             print('(S)ubmit')
         elif submit_message:
             print(TextEditor.edit_text(submit_message, TextEditor.GREEN_TEXT, text_format=TextEditor.BOLD_TEXT))
@@ -32,7 +34,7 @@ class ComponentUI:
 
     @staticmethod
     def print_frame_constructor_menu(option_tuple, underlined_main_option, underlined_sub_option,\
-         user_input_list, print_submit=False, selected_option_index=1000, greyed_out_option_index_list=[], greyed_with_out_number=False):
+         user_input_list, print_submit=False, selected_option_index=1000, greyed_out_option_index_list=[], greyed_with_out_number=False, print_check_voyages=False):
 
         ComponentUI.print_header(underlined_main_option)
         print(TextEditor.format_text(underlined_sub_option, TextEditor.UNDERLINE_TEXT))
@@ -51,7 +53,7 @@ class ComponentUI:
                 print("- {}: {}".format(option if selected_option_index != i else TextEditor.edit_text(option, TextEditor.BLUE_TEXT, text_format=TextEditor.BOLD_TEXT),\
                      "" if not user_input_list else user_input_list[i]))
 
-        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit)
+        ComponentUI.fill_window_and_print_action_line(len(option_tuple)+1, print_submit, is_check_voyages_available=print_check_voyages)
 
     @staticmethod
     def print_frame_table_menu(heads, value_tuple, table_height, underlined_main_option, underlined_sub_option, print_submit=False, greyout_line_list=[]):

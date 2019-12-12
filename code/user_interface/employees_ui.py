@@ -5,6 +5,7 @@ from data_models.flight_attendant import FlightAttendant
 from apis.logic_api import LogicAPI
 from data_models.pilot import Pilot
 from data_models.employee import Employee
+from user_interface.voyage_ui import VoyageUI
 
 class EmployeeUI:
     #Generate a tuple that holds all the valid user inputs
@@ -513,7 +514,7 @@ class EmployeeUI:
         # employee_info_already_exists = False
         while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(option_tuple,\
-            ComponentUI.get_main_options()[1], "Edit mode", user_input_list, True, 1000, invalid_user_input_index_list)
+            ComponentUI.get_main_options()[1], "Edit mode", user_input_list, True, 1000, invalid_user_input_index_list, print_check_voyages=True)
             
            
             user_input = ComponentUI.get_user_input()
@@ -575,5 +576,60 @@ class EmployeeUI:
                     user_input = "An employee has been edited"
                     break
 
+            elif user_input.startswith('c'):
+                user_input = EmployeeUI.__show_employee_voyages(employee)
+
         return user_input
 
+
+    @staticmethod
+    def __show_employee_voyages(employee):
+        is_pilot = isinstance(employee, Pilot)
+
+        user_input = ""
+
+        info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
+
+        while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
+            ComponentUI.print_header(EmployeeUI. __FRAME_IN_USE_STR)
+            print(TextEditor.format_text("Voyages for {}".format(employee.get_name()), TextEditor.UNDERLINE_TEXT))
+
+            ComponentUI.fill_window_and_print_action_line(1)
+
+            user_input = input("Insert a week number: ").strip()
+
+            if not user_input:
+                continue
+
+            voyages_list = []
+
+            if user_input.isdigit():
+                voyages_list = LogicAPI.get_all_pilot_voyages_in_a_week(employee, int(user_input)) if is_pilot\
+                    else LogicAPI.get_all_flight_attendant_voyages_in_a_week(employee ,int(user_input))
+
+            if not voyages_list:
+                ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
+                # print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
+                ComponentUI.centered_text_message("Could not find a voyage going for {} in week {}".format(employee.get_name(), user_input))
+            
+                return ComponentUI.get_user_input()
+
+            else:
+                voyage_info_tuple = ([voyage.get_flights()[0].get_arrival_location() for voyage in voyages_list],\
+                [voyage.get_airplane().get_name() for voyage in voyages_list],\
+                [voyage.get_schedule()[0] for voyage in voyages_list],\
+                [voyage.get_schedule()[1] for voyage in voyages_list],\
+                [voyage.get_state() for voyage in voyages_list])
+
+                table_height = len(voyages_list)
+                ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, \
+                    table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"Voyages for {}".format(employee.get_name()))
+                user_input = ComponentUI.get_user_input()
+                user_input = ComponentUI.remove_brackets(user_input)
+                if not user_input.isdigit() or int(user_input) > table_height:
+                        continue
+                table_index = int(user_input)-1
+                voyage = voyages_list[table_index]        
+                user_input = VoyageUI.show_voyage(voyage)
+
+            return user_input

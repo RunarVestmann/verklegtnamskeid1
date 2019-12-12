@@ -551,7 +551,7 @@ class VoyageUI:
             table_index = int(user_input)-1
             ongoing_voyage = ongoing_voyages_list[table_index]        
 
-            user_input = VoyageUI.__show_voyage(ongoing_voyage)
+            user_input = VoyageUI.show_voyage(ongoing_voyage)
 
         return user_input
 
@@ -579,7 +579,7 @@ class VoyageUI:
                 table_index = int(user_input)-1
                 voyage = completed_voyages_list[table_index]        
 
-                user_input = VoyageUI.__show_voyage(voyage)
+                user_input = VoyageUI.show_voyage(voyage)
             else:
                 ComponentUI.centered_text_message("There are no completed voyages at the moment !","",3)
 
@@ -633,7 +633,7 @@ class VoyageUI:
                         continue
                 table_index = int(user_input)-1
                 voyage = voyages_list[table_index]        
-                user_input = VoyageUI.__show_voyage(voyage)
+                user_input = VoyageUI.show_voyage(voyage)
 
 
             return user_input
@@ -650,21 +650,19 @@ class VoyageUI:
 
             ComponentUI.fill_window_and_print_action_line(1)
 
-            user_input = input("Insert week: ").strip()
+            user_input = input("Insert a week number: ").strip()
 
             if not user_input:
                 continue
 
-            #Error checks needed
-
             voyages_list = []
-            voyages_list = LogicAPI.get_voyages_by_week(user_input)
 
-            
-            ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
-            print(TextEditor.format_text("Find voyages by week", TextEditor.UNDERLINE_TEXT))
+            if user_input.isdigit():
+                voyages_list = LogicAPI.get_voyages_by_week(int(user_input))
 
-            if not voyages_list or user_input.isdigit():
+            if not voyages_list:
+                ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
+                print(TextEditor.format_text("Find voyages by week", TextEditor.UNDERLINE_TEXT))
                 
                 ComponentUI.centered_text_message("Could not find a voyage on week: {}".format(user_input))
             
@@ -682,10 +680,10 @@ class VoyageUI:
                 user_input = ComponentUI.get_user_input()
                 user_input = ComponentUI.remove_brackets(user_input)
                 if not user_input.isdigit() or int(user_input) > table_height:
-                        continue
+                    continue
                 table_index = int(user_input)-1
                 voyage = voyages_list[table_index]        
-                user_input = VoyageUI.__show_voyage(voyage)
+                user_input = VoyageUI.show_voyage(voyage)
 
 
             return user_input
@@ -740,13 +738,13 @@ class VoyageUI:
                         continue
                 table_index = int(user_input)-1
                 voyage = voyages_list[table_index]        
-                user_input = VoyageUI.__show_voyage(voyage)
+                user_input = VoyageUI.show_voyage(voyage)
 
 
             return user_input
 
     @staticmethod
-    def __show_voyage(voyage): #Needs work!!
+    def show_voyage(voyage): #Needs work!!
 
         info_tuple = ("Destination", "Pilots", "Flight attendants", "Airplane name", "Schedule", "State")
 
