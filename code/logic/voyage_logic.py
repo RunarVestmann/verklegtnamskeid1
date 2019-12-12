@@ -72,7 +72,7 @@ class VoyageLogic:
         desired_voyages = []
 
         for voyage in all_voyages:
-            if voyage.get_flights()[0].get_arrival_location() == destination:
+            if destination in voyage.get_flights()[0].get_arrival_location():
                 desired_voyages.append(voyage)
 
         return desired_voyages
