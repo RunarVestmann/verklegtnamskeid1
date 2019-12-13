@@ -66,4 +66,4 @@ Guðmundur: vann í skýrslunni, state code og UI code
 Fannar: Vann i klasariti og fór yfir kóða og csv files
 Hörður: Testaði kerfið, fór yfir kóða 
 Patrik: Testaði kerfið, vann í UI code og lagaði csv files
-Rúnar: Gerði leið til að skrá starfsmenn í voyages, test-aði kóðann, vann í bugfixes
+Rúnar: test-aði kóðann, vann í bugfixes og gerði myndbandið
