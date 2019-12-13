@@ -5,6 +5,7 @@ from data_models.flight_attendant import FlightAttendant
 from apis.logic_api import LogicAPI
 from data_models.pilot import Pilot
 from data_models.employee import Employee
+from data_models.state import State
 from user_interface.voyage_ui import VoyageUI
 
 class EmployeeUI:
@@ -174,7 +175,7 @@ class EmployeeUI:
                         user_input_list[3],
                         user_input_list[4],
                         user_input_list[5],
-                        "Not scheduled for flight",
+                        State.get_employee_states()[0],
                         user_input_list[6]
                     )
                     LogicAPI.save_new_pilot(pilot)

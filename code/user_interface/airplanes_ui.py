@@ -3,6 +3,7 @@ from user_interface.text_editor import TextEditor
 from user_interface.component_ui import ComponentUI
 from data_models.airplane import Airplane
 from data_models.aircraft_type import AircraftType
+from data_models.state import State
 from apis.logic_api import LogicAPI
 
 class AirplanesUI:
@@ -37,7 +38,7 @@ class AirplanesUI:
         input_message_tuple = ("Insert Name: ", "Insert Type: ", "Insert Manufacturer: ", "Insert Seating capacity: ")
 
         user_input_list = [""] * len(option_tuple)
-        user_input_list.append("Not scheduled") #State default value
+        user_input_list.append(State.get_airplane_states()[0]) #State default value
         valid_for_submit_list = [False, False] # only 2 chosse here * len(option_tuple) #list that contains bools if all true then ok to submit
 
 
