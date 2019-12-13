@@ -57,7 +57,7 @@ Patrik: Testaði kerfið, vann í UI code og lagaði csv files
 Rúnar: Gerði leið til að skrá starfsmenn í voyages, test-aði kóðann, vann í bugfixes
 
 13.12.2019
-í upphaf dags var planið að taka upp myndband fyrir skil, setja saman lokaskýrsluna og frágang og halda svo áfram með 
+í upphaf dags var planið að taka upp myndband fyrir skil, setja saman lokaskýrsluna og frágang og halda svo áfram með að
 fínpússa allt kerfið og bæta við því sem vantar og laga villur.
 
 Í lok dags náðum við að setja sem mest saman og skiluðum þessu rétt fyrir 0:00
