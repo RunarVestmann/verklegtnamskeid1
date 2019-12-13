@@ -204,14 +204,14 @@ class AirplanesUI:
         valid_for_submit_list = [False] #Can only change the name (one element) in this case (airplane)
         while user_input not in AirplanesUI.__NAVIGATION_BAR_OPTIONS:
             ComponentUI.print_frame_constructor_menu(option_tuple,\
-            ComponentUI.get_main_options()[2], "Airplane name: " + user_input_list[0], user_input_list, True, 1000, [1,2,3,4])
+            ComponentUI.get_main_options()[2], "Edit mode", user_input_list, True, 1000, [1,2,3,4])
 
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
             if user_input in valid_user_inputs: 
                 index = int(user_input) - 1
                 ComponentUI.print_frame_constructor_menu(option_tuple,\
-                    ComponentUI.get_main_options()[2], "Airplane name: " + user_input_list[0], user_input_list, False, 1000, [1,2,3,4])
+                    ComponentUI.get_main_options()[2], "Edit mode", user_input_list, False, 1000, [1,2,3,4])
 
                 if(index == 0):
                     user_input = input("Insert name: ").strip()
