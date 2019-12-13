@@ -6,7 +6,7 @@ class ComponentUI:
     @staticmethod
     def fill_window_and_print_action_line(menu_line_count, is_submit_available=False, submit_message="", is_check_voyages_available=False):
         bottom_space_for_user_input = 2
-        if is_submit_available:
+        if is_submit_available or submit_message:
             bottom_space_for_user_input += 1
         window_width, window_height = Window.get_size()
         body_height = window_height - ComponentUI.get_header_height()
