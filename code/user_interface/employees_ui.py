@@ -205,6 +205,8 @@ class EmployeeUI:
 
     @staticmethod
     def __show_all_employees():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
 
         user_input = ""
         while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
@@ -229,6 +231,8 @@ class EmployeeUI:
 
     @staticmethod
     def __show_all_pilots():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
 
         user_input = ""
         while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
@@ -253,6 +257,8 @@ class EmployeeUI:
 
     @staticmethod
     def __show_all_flight_attendants():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
 
         user_input = ""
         while user_input not in EmployeeUI.__NAVIGATION_BAR_OPTIONS:
@@ -278,6 +284,8 @@ class EmployeeUI:
 
     @staticmethod
     def __show_employee_by_name_finder():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
 
 
         user_input = ""
@@ -370,7 +378,9 @@ class EmployeeUI:
 
     @staticmethod
     def __show_pilot_by_license_finder():
-        
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
+
         user_input = ""
 
         info_header_tuple = ("Name", "SSN", "Phone number", "Home address", "E-mail", "State")
@@ -424,6 +434,9 @@ class EmployeeUI:
 
     @staticmethod
     def __show_employees_on_duty():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
+        
         ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All employees on duty", TextEditor.UNDERLINE_TEXT))
         user_input = ""
@@ -452,6 +465,9 @@ class EmployeeUI:
 
     @staticmethod
     def __show_employees_off_duty(): 
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
+        
         ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All employees off duty", TextEditor.UNDERLINE_TEXT))
         user_input = ""
@@ -482,6 +498,9 @@ class EmployeeUI:
 
     @staticmethod
     def __show_employee(employee):
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
+        
         user_input = ''
         user_input_list = []
         valid_user_inputs_bool_list = [True] * 7

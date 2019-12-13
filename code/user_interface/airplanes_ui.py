@@ -128,6 +128,9 @@ class AirplanesUI:
 
     @staticmethod
     def __show_all_airplanes():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
+
         ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All airplanes", TextEditor.UNDERLINE_TEXT))
     
@@ -155,6 +158,9 @@ class AirplanesUI:
 
     @staticmethod
     def __show_airplanes_in_use():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
+
         ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("All airplanes in use", TextEditor.UNDERLINE_TEXT))
         user_input = ""
@@ -182,6 +188,7 @@ class AirplanesUI:
   
     @staticmethod
     def __show_airplane(airplane):
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         user_input = ''
         user_input_list = [

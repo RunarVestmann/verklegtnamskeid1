@@ -590,6 +590,8 @@ class VoyageUI:
 
     @staticmethod
     def __show_ongoing_voyages():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
 
         user_input = ""
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
@@ -617,6 +619,8 @@ class VoyageUI:
 
     @staticmethod
     def __show_completed_voyages():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
         ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
         print(TextEditor.format_text("Completed voyages", TextEditor.UNDERLINE_TEXT))
     
@@ -651,6 +655,7 @@ class VoyageUI:
 
     @staticmethod    
     def __show_find_voyages_by_date():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         user_input = ""
 
@@ -702,6 +707,8 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_week():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
+
         user_input = ""
 
         info_header_tuple = ("Destination", "Airplane name", "Start time", "End time", "State")
@@ -752,6 +759,7 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_destination():
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         user_input = ""
 
@@ -807,6 +815,7 @@ class VoyageUI:
 
     @staticmethod
     def show_voyage(voyage): #Needs work!!
+        LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         info_tuple = ("Destination", "Pilots", "Flight attendants", "Airplane name", "Schedule", "State")
 

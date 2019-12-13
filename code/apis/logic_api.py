@@ -6,6 +6,7 @@ from logic.pilot_logic import PilotLogic, Pilot
 from logic.employee_logic import EmployeeLogic, Employee
 from logic.voyage_logic import VoyageLogic, Voyage
 from logic.flight_logic import FlightLogic, Flight #Má sleppa öllu eftir kommuna þegar alvöru gögnin verða til notkunar
+from logic.state_logic import StateLogic
 
 
 #from data_models.employee import Employee
@@ -222,8 +223,8 @@ class LogicAPI:
         return FlightLogic.get_all_flights() 
 
     @staticmethod
-    def get_flight(departure_time):
-        return FlightLogic.get_flight(departure_time)
+    def get_flight(departure_location, departure_time):
+        return FlightLogic.get_flight(departure_location, departure_time)
 
     @staticmethod
     def get_available_flight_number(airport_id, departure_date_and_time, offset=0):
@@ -240,3 +241,7 @@ class LogicAPI:
     @staticmethod
     def is_airport_id_available(airport_id):
         return FlightRouteLogic.is_airport_id_available(airport_id)
+
+    @staticmethod
+    def update_states():
+        StateLogic.initialize()

@@ -9,8 +9,8 @@ class State:
     __IN_FLIGHT_FROM_ICELAND = "In flight from Iceland"
     __WAITING_FOR_FLIGHT_FROM_ICELAND = "Waiting for flight from Iceland"
 
-    __employee_and_airplane_states = (__NOT_SCHEDULED_FOR_FLIGHT, __WAITING_FOR_FLIGHT_FROM_ICELAND,\
-                                 __IN_FLIGHT_FROM_ICELAND, __LANDED_ABROAD, __IN_FLIGHT_TO_ICELAND)
+    __employee_and_airplane_states = (__WAITING_FOR_FLIGHT_FROM_ICELAND, __IN_FLIGHT_FROM_ICELAND,\
+        __LANDED_ABROAD, __IN_FLIGHT_TO_ICELAND,__NOT_SCHEDULED_FOR_FLIGHT)
 
     ####  States for voyages  ####
 
