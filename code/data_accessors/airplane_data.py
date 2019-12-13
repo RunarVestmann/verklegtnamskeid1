@@ -16,7 +16,7 @@ class AirplaneData:
 
     __airplane_data_filename = os.path.realpath("../data_storage/airplanes.csv")
 
-    __NOT_IN_USE_STATES_TUPLE = ("Not scheduled","Not in use")      #for testing emty,"Waiting for flight from Iceland")
+    __NOT_IN_USE_STATES_TUPLE = ("Not scheduled for flight today", "Not scheduled", "Not in use")      #for testing emty,"Waiting for flight from Iceland")
 
     #A list to cache all the airplanes once they've been fetched
     __all_airplanes_list = []

@@ -1,3 +1,6 @@
 flight1_departure_location,flight1_departure_time,flight2_departure_location,flight2_departure_time,captain,copilot1,copilot2,copilot3,copilot4,copilot5,copilot6,copilot7,copilot8,copilot9,cabin_manager,flight_attendant1,flight_attendant2,flight_attendant3,flight_attendant4,flight_attendant5,flight_attendant6,flight_attendant7,flight_attendant8,flight_attendant9,airplane_name,schedule,state
-Iceland,2019-12-12T13:00:00,Greenland,2019-12-12T17:00:00,2107863319,1405883349,,,,,,,,,2911972299,,,,,,,,,,Beta,2019-12-12T13:00:00_2019-12-12T19:00:00,Waiting for flight from Iceland
-Iceland,2019-11-11T10:00:00,Greenland,2019-11-11T13:00:00,2408714389,1802582279,,,,,,,,,2102952519,,,,,,,,,,Beta,2019-11-11T10:00:00_2019-11-11T15:00:00,Voyage completed
+Iceland,2019-12-12 13:00:00,Greenland,2019-12-12 17:00:00,2107863319,1405883349,,,,,,,,,2911972299,,,,,,,,,,Beta,2019-12-12T13:00:00_2019-12-12T19:00:00,Voyage completed
+Iceland,2019-11-11 10:00:00,Greenland,2019-11-11 13:00:00,2408714389,1802582279,,,,,,,,,2102952519,,,,,,,,,,Beta,2019-11-11T10:00:00_2019-11-11T15:00:00,Voyage completed
+Iceland,2020-10-02 04:40:00,Faroe Islands,2020-10-02 18:30:00,,,,,,,,,,,,,,,,,,,,,Nabbinn,2020-10-02T04:40:00_2020-10-02T20:00:00,Waiting for flight from Iceland
+Iceland,2020-01-02 08:00:00,Faroe Islands,2020-01-02 22:05:00,,,,,,,,,,,,,,,,,,,,,Elice,2020-01-02T08:00:00_2020-01-02T23:35:00,Waiting for flight from Iceland
+Iceland,2019-12-12 05:04:00,Shetland,2019-12-12 22:05:00,,,,,,,,,,,,,,,,,,,,,Bomban,2019-12-12T05:04:00_2019-12-12T00:10:00,Voyage completed
