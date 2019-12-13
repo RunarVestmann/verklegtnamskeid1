@@ -136,7 +136,7 @@ class FlightRouteUI:
                         user_input_list[1],
                         user_input_list[2],
                         user_input_list[3],
-                        user_input_list[4],
+                        str(user_input_list[4]) + "km",
                         user_input_list[5],
                         user_input_list[6]
                     )
