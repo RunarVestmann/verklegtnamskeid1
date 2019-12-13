@@ -41,18 +41,18 @@ class AirplaneLogic:
 
     @staticmethod
     def get_all_available_airplanes(schedule_tuple): # needs testing
-        available_airplanes = []
+        available_airplanes = set()
         for airplane in DataAPI.get_all_airplanes():
             airplanes_voyages = DataAPI.get_airplane_voyages(airplane)
 
             # if there are no voyages for a specific airplane then it is available
             if not airplanes_voyages:
-                available_airplanes.append(airplane)
+                available_airplanes.add(airplane)
 
             else:
                 for voyage in airplanes_voyages:
                     voyage_schedule = voyage.get_schedule()
                     if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
-                        available_airplanes.append(airplane)
+                        available_airplanes.add(airplane)
 
-        return AirplaneLogic.__sort_list_by_name(available_airplanes)
+        return AirplaneLogic.__sort_list_by_name(list(available_airplanes))
