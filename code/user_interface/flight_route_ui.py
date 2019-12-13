@@ -199,7 +199,7 @@ class FlightRouteUI:
         ]
 
         valid_user_inputs = ["6","7","(6)","(7)"]
-        valid_for_submit_list = [True, True, False] #only two input avalable // exeption from rule // last False is for if do nothing
+        valid_for_submit_list = [True, True, True] #only two input avalable // exeption from rule // last False is for if do nothing
         #ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))            
        
        # flight_route_info_already_exists = False
