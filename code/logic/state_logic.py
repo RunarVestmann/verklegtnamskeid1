@@ -74,7 +74,7 @@ class StateLogic:
         entity_states = State.get_employee_states()
 
         state_index = voyage_states.index(state_of_voyage)
-        entity.set_state(entity_states[state_index])
+        entity.set_state(entity_states[(state_index + 1) % 5])
 
         # #Waiting for flight from Iceland
         # if state_of_voyage == voyage_states[0]:
