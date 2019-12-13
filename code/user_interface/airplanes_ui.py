@@ -182,6 +182,8 @@ class AirplanesUI:
 
                 user_input = AirplanesUI.__show_airplane(airplane)
             else:
+                ComponentUI.print_header(AirplanesUI.__FRAME_IN_USE_STR)
+                print(TextEditor.format_text("All airplanes in use", TextEditor.UNDERLINE_TEXT))
                 ComponentUI.centered_text_message("There are no airplanes in use at the moment !","",3)
 
            
@@ -250,7 +252,7 @@ class AirplanesUI:
                     LogicAPI.change_saved_airplane(airplane, edited_airplane)
                     
                     
-                    user_input = "" #"An airplane has been edited"
+                    user_input = "An airplane has been edited"
                     break
         return user_input
 
