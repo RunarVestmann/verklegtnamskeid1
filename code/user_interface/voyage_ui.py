@@ -13,7 +13,7 @@ class VoyageUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[0]
 
     __option_tuple = ('New voyage', 'Show ongoing voyages', 'Show completed voyages', 'Find voyages by date',\
-         'Find voyages by week', 'Find voyages by destination')
+         'Find voyages by week', 'Find voyages by destination') #the menu to display - 1.leve for voyage
 
     __INFO_TUPLE = ("Destination", "Airplane name", "Start time", "End time", "State")
 
@@ -21,6 +21,7 @@ class VoyageUI:
 
     @staticmethod
     def show():
+        ''' Displaying the voyage 1.level menu '''
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(VoyageUI.__option_tuple))
 
         frame_functions = (VoyageUI.__show_new_voyage_constructor, VoyageUI.__show_ongoing_voyages, VoyageUI.__show_completed_voyages,\
@@ -30,9 +31,10 @@ class VoyageUI:
 
     @staticmethod
     def __show_new_voyage_constructor():
+        ''' Displaying the new voyage menu and cather together values to save  '''
         
-        option_tuple = ('Flight route', 'Voyage schedule', 'Airplane', 'Pilots', 'Flight attendants')
-        user_input_list = [""] * len(option_tuple)
+        option_tuple = ('Flight route', 'Voyage schedule', 'Airplane', 'Pilots', 'Flight attendants') #the menu to display
+        user_input_list = [""] * len(option_tuple) # the values to save
 
         flight1 = None
         flight2 = None
@@ -45,14 +47,15 @@ class VoyageUI:
         user_input = ""
         selected_flight_route = None
 
-        # greyed_out_option_index_list = []
-
+        
+        #the message the are in front of the input from the user
         input_message_tuple = ("Insert number of desired flight route: ", "Insert Voyage schedule: ",\
              "Insert number of desired Airplane ", "Insert Pilots: ", "Insert Flight attendants: ")
 
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
 
-            greyed_out_option_index_list = [1, 2, 3, 4]
+            #wizard control options that are not valable are grayed out
+            greyed_out_option_index_list = [1, 2, 3, 4] 
 
             if user_input_list[2]:
                 greyed_out_option_index_list = []
@@ -74,7 +77,7 @@ class VoyageUI:
             user_input = ComponentUI.remove_brackets(user_input)
 
 
-            if user_input.startswith("s"):
+            if user_input.startswith("s"): #save new voyage / send values to API
                 if all(user_input_list[:-2]):
 
                     new_voyage = Voyage(
@@ -102,7 +105,7 @@ class VoyageUI:
             if index in greyed_out_option_index_list:
                 continue
 
-            if index == 0:
+            if index == 0: # flight-rout menu
                 all_flight_routes = LogicAPI.get_all_flight_routes()
                 flight_route_info_tuple = ([flight_route.get_country() for flight_route in all_flight_routes],\
                 [flight_route.get_destination() for flight_route in all_flight_routes],\
@@ -118,18 +121,18 @@ class VoyageUI:
                 selected_flight_route = all_flight_routes[int(user_input)-1]
                 user_input = selected_flight_route.get_country() + ", " + selected_flight_route.get_destination()
 
-            elif index == 1 and selected_flight_route:
+            elif index == 1 and selected_flight_route: # schedule menu - open new selecetion process
                 user_input, flight1, flight2, voyage_schedule = VoyageUI.__schedule_select(selected_flight_route)
                 if not voyage_schedule:
                     continue
 
-            elif index == 2:
+            elif index == 2: # airplane menu
                 user_input, airplane = VoyageUI.__airplane_select(voyage_schedule)
 
-            elif index == 3:
-                user_input, pilot_list = VoyageUI.__pilot_select(voyage_schedule, airplane.get_type())#.get_plane_type())
+            elif index == 3: # avalable pilot menu - multible chose 
+                user_input, pilot_list = VoyageUI.__pilot_select(voyage_schedule, airplane.get_type())
 
-            elif index == 4:
+            elif index == 4: # flight attendant menu -  multible chose
                 user_input, flight_attendant_list = VoyageUI.__flight_attendant_select(voyage_schedule)
 
             if user_input in VoyageUI.__NAVIGATION_BAR_OPTIONS:
@@ -143,6 +146,8 @@ class VoyageUI:
 
     @staticmethod
     def __pilot_select(voyage_schedule, pilot_license, pilot_list_start_val=[]):
+        ''' process to select a pilot captain and other pilots '''
+
         pilot_info_tuple = ("Name", "SSN", "Phone number", "Home address", "Email", "State")
         available_pilots = LogicAPI.get_available_licensed_pilots(voyage_schedule, pilot_license)
         pilot_list = pilot_list_start_val
@@ -217,6 +222,8 @@ class VoyageUI:
 
     @staticmethod
     def __flight_attendant_select(voyage_schedule, flight_attendant_list_start_val=[]):
+        ''' process to select a cabin manager and other flight attendant '''
+
         flight_attendant_info_tuple = ("Name", "SSN", "Phone number", "Home address", "Email", "State")
         available_flight_attendants = LogicAPI.get_available_flight_attendants(voyage_schedule)
         flight_attendant_list = flight_attendant_list_start_val
@@ -289,6 +296,7 @@ class VoyageUI:
 
     @staticmethod
     def __airplane_select(voyage_schedule):
+        ''' display menu for available airplanes '''
 
         airplane_info_tuple = ("Name", "State", "Type", "Manufacturer", "Seats")
         available_airplanes = LogicAPI.get_all_available_airplanes(voyage_schedule)
@@ -332,6 +340,8 @@ class VoyageUI:
 
     @staticmethod
     def __schedule_select(selected_flight_route):
+        ''' process to select schdeule dates and times '''
+        
         schedule_option_tuple = ("First flight date", "Time of first flight", "Second flight date", "Time of second flight")
         
         user_input_list = [""] * len(schedule_option_tuple)
@@ -520,6 +530,7 @@ class VoyageUI:
 
     @staticmethod
     def __time_select():
+        ''' handeling selection of time '''
 
         user_input = input("Insert time(hh:mm):").strip()
 
@@ -552,6 +563,8 @@ class VoyageUI:
 
     @staticmethod
     def __date_select():
+        ''' handeling selection of date '''
+
         user_input = input("Insert date(dd-mm-yyyy):").strip()
         date = None
         valid_input_bool = True
@@ -591,6 +604,7 @@ class VoyageUI:
 
     @staticmethod
     def __show_ongoing_voyages():
+        ''' Displaying table of voyages that are ongoing '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
 
@@ -620,6 +634,7 @@ class VoyageUI:
 
     @staticmethod
     def __show_completed_voyages():
+        ''' Displaying table of voyages that are completed '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
@@ -656,6 +671,7 @@ class VoyageUI:
 
     @staticmethod    
     def __show_find_voyages_by_date():
+        ''' Select date and Displaying table of voyages for selected date '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         user_input = ""
@@ -708,6 +724,7 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_week():
+         ''' Select week number and Displaying table of voyages for selected week '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         user_input = ""
@@ -760,6 +777,7 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_destination():
+         ''' Select destination by typing and Displaying table of voyages for selected destination '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         user_input = ""
@@ -815,7 +833,8 @@ class VoyageUI:
             return user_input
 
     @staticmethod
-    def show_voyage(voyage): #Needs work!!
+    def show_voyage(voyage):
+         ''' Displaying and edit selected voyage  '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         info_tuple = ("Destination", "Pilots", "Flight attendants", "Airplane name", "Schedule", "State")
@@ -891,7 +910,7 @@ class VoyageUI:
                 user_input_list[index] = user_input
                 user_input = ""
 
-            elif user_input.startswith('s'):
+            elif user_input.startswith('s'): # save send to API edited values of voyage
                 if all(user_input_list):
 
                     if pilot_list == voyage.get_pilots() and flight_attendant_list == voyage.get_flight_attendants():
