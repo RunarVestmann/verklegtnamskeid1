@@ -63,7 +63,7 @@ fínpússa allt kerfið og bæta við því sem vantar og laga villur.
 Í lok dags náðum við að setja sem mest saman og skiluðum þessu rétt fyrir 0:00
 
 Guðmundur: vann í skýrslunni, state code og UI code
-Fannar: Vann i klasariti og fór yfir kóða og csv files
+Fannar: Vann i klasariti og fór yfir kóða
 Hörður: Testaði kerfið, fór yfir kóða 
-Patrik: Testaði kerfið, vann í UI code og lagaði csv files
+Patrik: Testaði kerfið, vann í UI code og vann í skýrslunni
 Rúnar: test-aði kóðann, vann í bugfixes og gerði myndbandið
