@@ -408,6 +408,7 @@ class VoyageUI:
                         if flight2_start_date_and_time < flight1_start_date_and_time + datetime.timedelta(hours=flight_time_hours, minutes=flight_time_minutes):
                                 user_input = user_input + " " + TextEditor.color_text_background("The first flight time is {} hours and {} minutes".format(flight_time_hours,\
                                     flight_time_minutes), TextEditor.RED_BACKGROUND)
+                                valid_user_input_bool_list[index] = False
 
                 elif index == 2:
                     user_input, flight2_start_date, valid_user_input_bool_list[index] = VoyageUI.__date_select()
@@ -428,6 +429,7 @@ class VoyageUI:
                         if flight2_start_date_and_time < flight1_start_date_and_time + datetime.timedelta(hours=flight_time_hours, minutes=flight_time_minutes):
                                 user_input = user_input + " " + TextEditor.color_text_background("The first flight time is {} hours and {} minutes".format(flight_time_hours,\
                                     flight_time_minutes), TextEditor.RED_BACKGROUND)
+                                valid_user_input_bool_list[index] = False
 
                 else:
                     continue
@@ -518,7 +520,7 @@ class VoyageUI:
 
         valid_input_bool = True
 
-        user_input = user_input.replace("/", ":").replace("-", ":").replace(" ", ":")
+        user_input = user_input.replace("/", ":").replace("-", ":")
 
         if not user_input:
             return user_input, time, valid_input_bool
@@ -527,11 +529,10 @@ class VoyageUI:
 
         split_list = user_input.split(":")
 
-        if not user_input.replace(":", "").isdigit() or len(split_list) != 2:
+        if not user_input.replace(":", "").isdigit() or len(split_list) != 2 or not split_list[0].isdigit() or not split_list[1].isdigit():
             user_input = user_input + " " + TextEditor.color_text_background("Invalid input, another input is required", TextEditor.RED_BACKGROUND)
             valid_input_bool = False
         else:
-
             hour, minute = [int(number) for number in split_list]
 
             hour = hour % 24

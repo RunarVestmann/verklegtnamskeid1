@@ -114,7 +114,7 @@ class StateLogic:
 
             state_of_voyage = voyage.get_state()
 
-            #Update the airlplanes state
+            #Update the airplanes state
             StateLogic.__update_state_of_entity(airplane, state_of_voyage)
 
             #Update the states of all the employees

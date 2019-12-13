@@ -41,21 +41,21 @@ class PilotLogic:
     def get_available_pilots(schedule_tuple):
         all_pilots = DataAPI.get_all_pilots()
 
-        available_pilots = []
+        available_pilots = set()
 
         for pilot in all_pilots:
             voyages = PilotLogic.get_all_pilot_voyages(pilot)
 
             if not voyages:
-                available_pilots.append(pilot)
+                available_pilots.add(pilot)
             else:
 
                 for voyage in voyages:
                     voyage_schedule = voyage.get_schedule()
                     if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
-                        available_pilots.append(pilot)
+                        available_pilots.add(pilot)
 
-        return PilotLogic.__sort_list_by_name(available_pilots)
+        return PilotLogic.__sort_list_by_name(list(available_pilots))
 
     @staticmethod
     def get_available_licensed_pilots(schedule_tuple, pilot_license):

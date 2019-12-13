@@ -12,21 +12,21 @@ class FlightAttendantLogic:
     def get_available_flight_attendants(schedule_tuple):
         all_flight_attendants = DataAPI.get_all_flight_attendants()
 
-        available_flight_attendants = []
+        available_flight_attendants = set()
 
         for flight_attendant in all_flight_attendants:
             voyages = FlightAttendantLogic.get_all_flight_attendant_voyages(flight_attendant)
 
             if not voyages:
-                available_flight_attendants.append(flight_attendant)
+                available_flight_attendants.add(flight_attendant)
             else:
 
                 for voyage in voyages:
                     voyage_schedule = voyage.get_schedule()
                     if schedule_tuple[0] > voyage_schedule[1] or schedule_tuple[1] < voyage_schedule[0]:
-                        available_flight_attendants.append(flight_attendant)
+                        available_flight_attendants.add(flight_attendant)
 
-        return FlightAttendantLogic.__sort_list_by_name(available_flight_attendants)
+        return FlightAttendantLogic.__sort_list_by_name(list(available_flight_attendants))
 
 
     @staticmethod
