@@ -127,6 +127,10 @@ class LogicAPI:
         VoyageLogic.save_new_voyage(voyage)
 
     @staticmethod
+    def get_all_voyages():
+        return VoyageLogic.get_all_voyages()
+
+    @staticmethod
     def change_saved_voyage(saved_voyage, changed_voyage):
         VoyageLogic.change_saved_voyage(saved_voyage, changed_voyage)
 

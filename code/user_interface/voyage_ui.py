@@ -337,6 +337,8 @@ class VoyageUI:
         user_input_list = [""] * len(schedule_option_tuple)
         valid_user_input_bool_list = [True] * len(schedule_option_tuple)
 
+        all_voyages = LogicAPI.get_all_voyages()
+
         flight1 = None
         flight2 = None
         voyage_schedule = None
@@ -409,7 +411,12 @@ class VoyageUI:
                                 user_input = user_input + " " + TextEditor.color_text_background("The first flight time is {} hours and {} minutes".format(flight_time_hours,\
                                     flight_time_minutes), TextEditor.RED_BACKGROUND)
                                 valid_user_input_bool_list[index] = False
-
+                    if flight1_start_time and flight1_start_date:
+                        for voyage in all_voyages:
+                            f1 = voyage.get_flights()[0]
+                            if f1.get_departure_time().date() == flight1_start_date and f1.get_departure_time().time() == flight1_start_time:
+                                user_input = user_input + " " + TextEditor.color_text_background("Another airplane is departing at that time!", TextEditor.RED_BACKGROUND)
+                                valid_user_input_bool_list[index] = False
                 elif index == 2:
                     user_input, flight2_start_date, valid_user_input_bool_list[index] = VoyageUI.__date_select()
                     if flight1_start_date and flight2_start_date:
@@ -575,13 +582,6 @@ class VoyageUI:
 
 
             date = datetime.date(year, month, day)
-
-            # if previous_date:
-            #     if previous_date > date:
-            #         user_input = user_input + " " + TextEditor.color_text_background("Invalid input, another input is required", TextEditor.RED_BACKGROUND)
-            #         valid_input_bool = False
-            # else:
-
 
             if datetime.date.today() > date:
                 user_input = user_input + " " + TextEditor.color_text_background("Date has passed, another input is required", TextEditor.RED_BACKGROUND)
