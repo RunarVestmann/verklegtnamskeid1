@@ -179,7 +179,7 @@ class VoyageUI:
                 if user_input.startswith("s"):
                     if pilot_list:
                         additional_pilot_count = len(pilot_list)-1
-                        user_input = "Captain {} {} {}".format(pilot_list[0].get_name(),\
+                        user_input = "Captain {} {}{}".format(pilot_list[0].get_name(),\
                         "+ " + str(additional_pilot_count) + " pilot" if additional_pilot_count != 0\
                         else "", "" if additional_pilot_count in [0,1] else "s")
                     else:
@@ -207,7 +207,7 @@ class VoyageUI:
         if "pilot" not in user_input and user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
             if pilot_list:
                 additional_pilot_count = len(pilot_list)-1
-                user_input = "Captain {} {} {}".format(pilot_list[0].get_name(),\
+                user_input = "Captain {} {}{}".format(pilot_list[0].get_name(),\
                 "+ " + str(additional_pilot_count) + " pilot" if additional_pilot_count != 0\
                 else "", "" if additional_pilot_count in [0,1] else "s")
             else:
@@ -251,7 +251,7 @@ class VoyageUI:
                 if user_input.startswith("s"):
                     if flight_attendant_list:
                         additional_flight_attendant_count = len(flight_attendant_list)-1
-                        user_input = "Cabin manager {} {} {}".format(flight_attendant_list[0].get_name(),\
+                        user_input = "Cabin manager {} {}{}".format(flight_attendant_list[0].get_name(),\
                         "+ " + str(additional_flight_attendant_count) + " flight attendant" if additional_flight_attendant_count != 0\
                         else "", "" if additional_flight_attendant_count in [0,1] else "s")
                     else:
@@ -279,7 +279,7 @@ class VoyageUI:
         if "flight attendant" not in user_input and user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
             if flight_attendant_list:
                 additional_flight_attendant_count = len(flight_attendant_list)-1
-                user_input = "Cabin manager {} {} {}".format(flight_attendant_list[0].get_name(),\
+                user_input = "Cabin manager {} {}{}".format(flight_attendant_list[0].get_name(),\
                 "+ " + str(additional_flight_attendant_count) + " flight attendant" if additional_flight_attendant_count != 0\
                 else "", "" if additional_flight_attendant_count in [0,1] else "s")
             else:
