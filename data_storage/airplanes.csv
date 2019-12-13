@@ -1,9 +1,10 @@
 name,aircraft_type,manufacturer,seat_count,state
-Nabbinn,NABAE146,Fokker,128,Waiting for flight from Iceland
+Nabbinn,NABAE146,Fokker,128,Not scheduled for flight today
 Beta,Q400,Bombardier,146,Not scheduled for flight today
-Elice,NABAE146,Fokker,128,In flight from Iceland
+Elice,NABAE146,Fokker,128,Not scheduled for flight today
 Islander,NABAE146,Fokker,128,Not scheduled for flight today
-Bomban,CRJ-200,Bombardier,50,Not scheduled for flight today
+Bomb,CRJ-200,Bombardier,50,In flight to Iceland
 Lina,737-600,Boeing,155,Not scheduled for flight today
 Stina,A220-100,Airbus,116,Not scheduled for flight today
-Fina,A220-300,Airbus,141,Not scheduled for flight today
+Fina,A220-300,Airbus,141,Waiting for flight from Iceland
+Dorothy,A220-100,Airbus,116,Not scheduled for flight today

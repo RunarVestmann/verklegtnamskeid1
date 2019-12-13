@@ -459,7 +459,8 @@ class EmployeeUI:
 
                 user_input = EmployeeUI.__show_employee(employee_on_duty)
             else:
-                                
+                ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
+                print(TextEditor.format_text("Employees off duty", TextEditor.UNDERLINE_TEXT))
                 ComponentUI.centered_text_message("No employee is on duty at the moment","",3)
                 user_input = ComponentUI.get_user_input()
             return user_input
@@ -491,6 +492,8 @@ class EmployeeUI:
                 user_input = EmployeeUI.__show_employee(employee_off_duty)
 
             else:
+                ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
+                print(TextEditor.format_text("Employees off duty", TextEditor.UNDERLINE_TEXT))
 
                 ComponentUI.centered_text_message("No employee is off duty at the moment","",3)
                 user_input = ComponentUI.get_user_input()

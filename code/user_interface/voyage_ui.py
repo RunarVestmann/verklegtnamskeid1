@@ -724,7 +724,7 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_week():
-         ''' Select week number and Displaying table of voyages for selected week '''
+        ''' Select week number and Displaying table of voyages for selected week '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         user_input = ""
@@ -777,7 +777,7 @@ class VoyageUI:
     
     @staticmethod
     def __show_find_voyages_by_destination():
-         ''' Select destination by typing and Displaying table of voyages for selected destination '''
+        ''' Select destination by typing and Displaying table of voyages for selected destination '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         user_input = ""
@@ -834,7 +834,7 @@ class VoyageUI:
 
     @staticmethod
     def show_voyage(voyage):
-         ''' Displaying and edit selected voyage  '''
+        ''' Displaying and edit selected voyage  '''
         LogicAPI.update_states() #UPDATES ALL STATES BEFOR DISPLAYING
 
         info_tuple = ("Destination", "Pilots", "Flight attendants", "Airplane name", "Schedule", "State")
