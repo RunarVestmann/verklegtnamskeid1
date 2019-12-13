@@ -26,7 +26,7 @@ class FlightRouteUI:
 
         valid_user_inputs = ComponentUI.make_valid_menu_options_tuple(len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE))
 
-        input_message_tuple = ("Insert Country: ", "Insert Destination: ", "Insert Airport id: ", "Insert Flight time(hours:minutes): ",\
+        input_message_tuple = ("Insert Country: ", "Insert Destination: ", "Insert Airport id: ", "Insert Flight time(hh:mm): ",\
              "Insert Distance from Iceland in km: ", "Insert Contact name: ", "Insert Emergency phonenumber: ")
 
         user_input_list = [""] * len(FlightRouteUI.FLIGHT_ROUTE_OPTION_TUBLE)
