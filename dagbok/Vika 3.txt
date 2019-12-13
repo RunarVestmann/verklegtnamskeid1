@@ -1,17 +1,45 @@
-10.12.2019
-Í upphaf dags var planið:
+9.12.2019
+Í upphaf dags var planið að klára A kröfu lúkkið varðandi EmployeeUI og 
+AirplaneUI. Í lok dags komumst við vel á leið, við erum komnir með leiðir til 
+að sýna allar, flugleiðir, starfsmenn,  flugleiðir og flugvélar og einnig er 
+hægt að skrá ný tilvik af þeim klösum og þau gögn vistast í skrá.
 
-Guðmundur: Gat lítð unnið í þessu í dag vegna veiks barns og vinnuskyldu en veitti góðan andlegan stuðning
-Fannar: Skapaði gögn til að vinna með, uppfærði klasaritið og vann í EmployeeUI error checking
-Hörður: VoyagesUI error checking
+Fannar, Rúnar, Patrik: Unnu í EmployeeUI og VoyageUI virkninni og tókst að
+ljúka first draft af því
+Guðmundur, Hörður: Unnu í að gera generic föll í ComponentUI sem munu nýtast
+í hinum UI klösunum ásamt því að klára first draft af AirplaneUI virkninni
+
+10.12.2019
+Í upphaf dags var planið að uppfæra klasarit þar sem að sumt er búið að
+breytast frá því að við gerðum það. Svo ætlum við að skapa fleiri gögn
+til að vinna með í kerfinu, vinna og gera UI virkni betri og error checka 
+mikið þar sem að þetta er síðasta vikan sem við höfum til að vinna í þessu og 
+þurfum við að vita hvað virkar ekki og það sem vantar.
+Vegna óveðurs unnum við heima það sem eftir var og töluðum saman í gegnum
+facebook og linkello.
+
+Guðmundur: Gat lítð unnið í þessu í dag vegna veiks barns og vinnuskyldu en
+veitti góðan andlegan stuðning
+Fannar: Skapaði gögn til að vinna með, uppfærði klasaritið og vann í
+EmployeeUI error checking
+Hörður: VoyagesUI error checking og virkni í mismunandi command-line
+interfaces
 Patrik: Vann í AirplanesUI klasanum og lagfærði virknina
 Rúnar: Aðstoðaði við forritun ásamt því að lagfæra ýmislegt í tengslum við Data klasa
 
 11.12.2019
-Í upphaf dags var planið:
+Í upphaf dags var planið í raun að halda áfram með síðasta daginn. Vinna í 
+því að fullkomna UI virkni, klára breytingu á klasariti og error checka
+meira. Ásamt þessu þarf að bæta við nýrri virkni fyrir VoyagesUI.
 
 Guðmundur: Vann í FlightRouteUI og AirplanesUI og var að fullkomna virknina þar
 Fannar: Skapaði gögn til að vinna með, uppfærði klasaritið og vann í EmployeeUI error checking
 Hörður: VoyagesUI error checking
-Patrik: Vann í EmplyeesUI klasanum og lagfærði virknina
+Patrik: Vann í EmployeesUI klasanum og lagfærði virknina
 Rúnar: Vann við að kóða New Voyage virknina ásamt því að aðstoða við forritun
+
+12.12.2019
+Í upphaf dags
+
+13.12.2019
+Í upphaf dags
