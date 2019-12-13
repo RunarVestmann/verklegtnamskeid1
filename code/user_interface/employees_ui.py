@@ -192,7 +192,7 @@ class EmployeeUI:
                         user_input_list[3],
                         user_input_list[4],
                         user_input_list[5],
-                        "Not scheduled for flight to day"
+                        "Not scheduled for flight today"
                     )
                     LogicAPI.save_new_flight_attendant(flight_attendant)
 
