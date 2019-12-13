@@ -1,7 +1,6 @@
 country,destination,airport_id,flight_time,distance_from_iceland,contact_name,emergency_phone
-Iceland,Hell,Styx,14:00,1000km,Hades,8954955
-Iceland,Hell,Styx,14:00,1000km,Björn Blöndal,1234562
-Greenland,Nuuk,123,2:00,10,Runar,5812345
-Iceland,Hell,Styx,14:00,1000km,Aðalheiður Sveinsdóttir,1234561
-Shetland,Tingwall,LWK,02:05,1554,Seath Ohara,789654321
-Faroe Islands,Torshavn,FEA,01:30,771,Sjurdur Johanneser,298354400
+Greenland,Kulusuk,NMP,14:00,740km,Sarah Michaels,8954955
+Greenland,Nuuk,RST,15:00,1400km,Michael Swanson,8667753
+Svalbard,Longyearbyen,UOL,13:00,2000km,Janet Morrisson,6124589
+Shetland,Tingwall,LWK,12:00,1000km,Seath Ohara,7896543
+Faroe Islands,Torshavn,FEA,17:00,800km,John Jackson,7789664
