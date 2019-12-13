@@ -4,6 +4,8 @@ AirplaneUI. Í lok dags komumst við vel á leið, við erum komnir með leiðir
 að sýna allar, flugleiðir, starfsmenn,  flugleiðir og flugvélar og einnig er 
 hægt að skrá ný tilvik af þeim klösum og þau gögn vistast í skrá.
 
+Í lok dags gerðum við það sem við ætluðum okkur.
+
 Fannar, Rúnar, Patrik: Unnu í EmployeeUI og VoyageUI virkninni og tókst að
 ljúka first draft af því
 Guðmundur, Hörður: Unnu í að gera generic föll í ComponentUI sem munu nýtast
@@ -17,6 +19,9 @@ mikið þar sem að þetta er síðasta vikan sem við höfum til að vinna í �
 þurfum við að vita hvað virkar ekki og það sem vantar.
 Vegna óveðurs unnum við heima það sem eftir var og töluðum saman í gegnum
 facebook og linkello.
+
+Í lok dags gerðum við það sem við ætluðum okkur. Þurfum að halda áfram að fín pússa
+þetta allt og gera nýjan klasa fyrir að skrá new voyage.
 
 Guðmundur: Gat lítð unnið í þessu í dag vegna veiks barns og vinnuskyldu en
 veitti góðan andlegan stuðning
@@ -32,6 +37,8 @@ Rúnar: Aðstoðaði við forritun ásamt því að lagfæra ýmislegt í tengsl
 því að fullkomna UI virkni, klára breytingu á klasariti og error checka
 meira. Ásamt þessu þarf að bæta við nýrri virkni fyrir VoyagesUI.
 
+Í lok dags gerðum við það sem við ætluðum okkur.
+
 Guðmundur: Vann í FlightRouteUI og AirplanesUI og var að fullkomna virknina þar
 Fannar: Skapaði gögn til að vinna með, uppfærði klasaritið og vann í EmployeeUI error checking
 Hörður: VoyagesUI error checking
@@ -39,7 +46,24 @@ Patrik: Vann í EmployeesUI klasanum og lagfærði virknina
 Rúnar: Vann við að kóða New Voyage virknina ásamt því að aðstoða við forritun
 
 12.12.2019
-Í upphaf dags
+Í upphaf dags var planið ennþá svipað. Vinna í því að fínpússa og testa allt ásamt því að laga villur sem koma upp. 
+
+Í lok dags gerðum við það sem við ætluðum okkur þó að við höfum nokkur vandamál ennþá eftir. 
+
+Guðmundur: Vann í state code, UI code, testi og debug
+Fannar: Vann i klasariti og fór yfir kóða og csv files
+Hörður: Testaði kerfið, fór yfir kóða 
+Patrik: Testaði kerfið, vann í UI code og lagaði csv files
+Rúnar: Gerði leið til að skrá starfsmenn í voyages, test-aði kóðann, vann í bugfixes
 
 13.12.2019
-Í upphaf dags
+í upphaf dags var planið að taka upp myndband fyrir skil, setja saman lokaskýrsluna og frágang og halda svo áfram með 
+fínpússa allt kerfið og bæta við því sem vantar og laga villur.
+
+Í lok dags náðum við að setja sem mest saman og skiluðum þessu rétt fyrir 0:00
+
+Guðmundur: vann í skýrslunni, state code og UI code
+Fannar: Vann i klasariti og fór yfir kóða og csv files
+Hörður: Testaði kerfið, fór yfir kóða 
+Patrik: Testaði kerfið, vann í UI code og lagaði csv files
+Rúnar: Gerði leið til að skrá starfsmenn í voyages, test-aði kóðann, vann í bugfixes
