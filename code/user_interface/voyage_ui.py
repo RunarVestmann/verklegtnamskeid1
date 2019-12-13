@@ -13,7 +13,7 @@ class VoyageUI:
     __FRAME_IN_USE_STR = ComponentUI.get_main_options()[0]
 
     __option_tuple = ('New voyage', 'Show ongoing voyages', 'Show completed voyages', 'Find voyages by date',\
-         'Find voyages by week', 'Find voyages by destination') #the menu to display - 1.leve for voyage
+         'Find voyages by week', 'Find voyages by destination') #the menu to display - 1.level for voyage
 
     __INFO_TUPLE = ("Destination", "Airplane name", "Start time", "End time", "State")
 
@@ -31,7 +31,7 @@ class VoyageUI:
 
     @staticmethod
     def __show_new_voyage_constructor():
-        ''' Displaying the new voyage menu and cather together values to save  '''
+        ''' Displaying the new voyage menu and gather together values to save  '''
         
         option_tuple = ('Flight route', 'Voyage schedule', 'Airplane', 'Pilots', 'Flight attendants') #the menu to display
         user_input_list = [""] * len(option_tuple) # the values to save
@@ -562,7 +562,7 @@ class VoyageUI:
         return user_input, time, valid_input_bool
 
     @staticmethod
-    def __date_select():
+    def __date_select(futur_only=True):
         ''' handeling selection of date '''
 
         user_input = input("Insert date(dd-mm-yyyy):").strip()
@@ -596,7 +596,7 @@ class VoyageUI:
 
             date = datetime.date(year, month, day)
 
-            if datetime.date.today() > date:
+            if datetime.date.today() > date and futur_only:
                 user_input = user_input + " " + TextEditor.color_text_background("Date has passed, another input is required", TextEditor.RED_BACKGROUND)
                 valid_input_bool = False
 
@@ -684,7 +684,7 @@ class VoyageUI:
 
             ComponentUI.fill_window_and_print_action_line(1)
 
-            user_input, date, valid_input_bool = VoyageUI.__date_select()
+            user_input, date, valid_input_bool = VoyageUI.__date_select(futur_only=False)
 
             if not user_input:
                 continue
