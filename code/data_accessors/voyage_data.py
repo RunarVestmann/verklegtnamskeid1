@@ -108,7 +108,7 @@ class VoyageData:
                  "flight_attendant7": flight_attendants_ssn_list[7],
                  "flight_attendant8": flight_attendants_ssn_list[8],
                  "flight_attendant9": flight_attendants_ssn_list[9],
-                 "airplane_name": voyage.get_airplane().get_name(),
+                 "airplane_name": "No airplane name" if not voyage.get_airplane() else voyage.get_airplane().get_name(),
                  "schedule": voyage.get_schedule()[0].isoformat() + '_' + voyage.get_schedule()[1].isoformat(),
                  "state": voyage.get_state()
                 })

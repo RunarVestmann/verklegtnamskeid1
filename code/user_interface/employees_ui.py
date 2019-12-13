@@ -629,7 +629,7 @@ class EmployeeUI:
 
             if not voyages_list:
                 ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
-                # print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
+                print(TextEditor.format_text("Find employees voyages", TextEditor.UNDERLINE_TEXT))
                 ComponentUI.centered_text_message("Could not find a voyage going for {} in week {}".format(employee.get_name(), user_input),"",3)
             
                 return ComponentUI.get_user_input()
