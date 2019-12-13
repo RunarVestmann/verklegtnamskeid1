@@ -357,9 +357,9 @@ class VoyageUI:
             elif user_input_list[2] and not valid_user_input_bool_list[2]:
                 greyed_out_option_index_list = [0, 1, 3]
             elif user_input_list[1] and not valid_user_input_bool_list[1]:
-                greyed_out_option_index_list = [0,2,3]
+                greyed_out_option_index_list = [0, 2, 3]
             elif user_input_list[3] and not valid_user_input_bool_list[3]:
-                greyed_out_option_index_list = [0,1,2]
+                greyed_out_option_index_list = [0, 1, 2]
             elif user_input_list[2] and valid_user_input_bool_list[2]:
                 greyed_out_option_index_list = []
             elif user_input_list[1] and valid_user_input_bool_list[1]:
@@ -603,7 +603,7 @@ class VoyageUI:
                                 [voyage.get_schedule()[1] for voyage in ongoing_voyages_list],
                                 [voyage.get_state() for voyage in ongoing_voyages_list])
             table_height = len(ongoing_voyages_list)
-            ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Ongoing and upcoming voyages")
+            ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple, table_height, VoyageUI.__FRAME_IN_USE_STR,"Ongoing and upcoming voyages")
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
             if not user_input.isdigit() or int(user_input) > table_height:
@@ -630,7 +630,7 @@ class VoyageUI:
                                 [voyage.get_schedule()[1] for voyage in completed_voyages_list],
                                 [voyage.get_state() for voyage in completed_voyages_list])
             table_height = len(completed_voyages_list)
-            ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Completed voyages")
+            ComponentUI.print_frame_table_menu(table_header_tuple, voyage_value_tuple, table_height, VoyageUI.__FRAME_IN_USE_STR,"Completed voyages")
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
             if not user_input.isdigit() or int(user_input) > table_height:
@@ -688,7 +688,7 @@ class VoyageUI:
                 [voyage.get_state() for voyage in voyages_list])
 
                 table_height = len(voyages_list)
-                ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Voyages by date")
+                ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, table_height, VoyageUI.__FRAME_IN_USE_STR,"Voyages by date")
                 user_input = ComponentUI.get_user_input()
                 user_input = ComponentUI.remove_brackets(user_input)
                 if not user_input.isdigit() or int(user_input) > table_height:
@@ -738,7 +738,7 @@ class VoyageUI:
                 [voyage.get_state() for voyage in voyages_list])
 
                 table_height = len(voyages_list)
-                ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Voyages by week")
+                ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, table_height, VoyageUI.__FRAME_IN_USE_STR,"Voyages by week")
                 user_input = ComponentUI.get_user_input()
                 user_input = ComponentUI.remove_brackets(user_input)
                 if not user_input.isdigit() or int(user_input) > table_height:
@@ -793,7 +793,7 @@ class VoyageUI:
                 [voyage.get_state() for voyage in voyages_list])
 
                 table_height = len(voyages_list)
-                ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, table_height, ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR),"Voyages by destination")
+                ComponentUI.print_frame_table_menu(info_header_tuple, voyage_info_tuple, table_height, VoyageUI.__FRAME_IN_USE_STR,"Voyages by destination")
                 user_input = ComponentUI.get_user_input()
                 user_input = ComponentUI.remove_brackets(user_input)
                 if not user_input.isdigit() or int(user_input) > table_height:

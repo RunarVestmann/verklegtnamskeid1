@@ -214,7 +214,7 @@ class EmployeeUI:
             [employee.get_phonenumber() for employee in all_employees_list],[employee.get_home_address() for employee in all_employees_list],[employee.get_email() for employee in all_employees_list],\
             [employee.get_state() for employee in all_employees_list])
             table_height = len(all_employees_list)
-            ComponentUI.print_frame_table_menu(table_header_tuple, employees_getfunctions_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"All employees")
+            ComponentUI.print_frame_table_menu(table_header_tuple, employees_getfunctions_tuple, table_height, EmployeeUI.__FRAME_IN_USE_STR, "All employees")
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
             if not user_input.isdigit() or int(user_input) > table_height:
@@ -239,7 +239,7 @@ class EmployeeUI:
             [pilot.get_email() for pilot in pilots_list], [pilot.get_state() for pilot in pilots_list], [pilot.get_license() for pilot in pilots_list])
             table_height = len(pilots_list)
 
-            ComponentUI.print_frame_table_menu(table_header_tuple, pilots_value_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"All pilots")
+            ComponentUI.print_frame_table_menu(table_header_tuple, pilots_value_tuple, table_height, EmployeeUI.__FRAME_IN_USE_STR, "All pilots")
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
             if not user_input.isdigit() or int(user_input) > table_height:
@@ -263,7 +263,7 @@ class EmployeeUI:
             [flight_attendant.get_email() for flight_attendant in flight_attendants_list], [flight_attendant.get_state() for flight_attendant in flight_attendants_list])
             table_height = len(flight_attendants_list)
 
-            ComponentUI.print_frame_table_menu(table_header_tuple, flight_attendants_value_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"All flight attendants")
+            ComponentUI.print_frame_table_menu(table_header_tuple, flight_attendants_value_tuple, table_height, EmployeeUI.__FRAME_IN_USE_STR,"All flight attendants")
             user_input = ComponentUI.get_user_input()
             user_input = ComponentUI.remove_brackets(user_input)
             if not user_input.isdigit() or int(user_input) > table_height:
@@ -320,7 +320,7 @@ class EmployeeUI:
                     [employee.get_state() for employee in employees])
                     
                     table_height = len(employees)
-                    ComponentUI.print_frame_table_menu(info_header_tuple, employee_info_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"Employee")
+                    ComponentUI.print_frame_table_menu(info_header_tuple, employee_info_tuple, table_height, EmployeeUI.__FRAME_IN_USE_STR, "Employee")
                     user_input = ComponentUI.get_user_input()
                     user_input = ComponentUI.remove_brackets(user_input)
                     if not user_input.isdigit() or int(user_input) > table_height:
@@ -355,7 +355,7 @@ class EmployeeUI:
                     [employee.get_phonenumber() for employee in employees],[employee.get_home_address() for employee in employees],[employee.get_email() for employee in employees],\
                     [employee.get_state() for employee in employees])
                     table_height = len(employees)
-                    ComponentUI.print_frame_table_menu(info_header_tuple, employee_info_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"Employee")
+                    ComponentUI.print_frame_table_menu(info_header_tuple, employee_info_tuple, table_height, EmployeeUI.__FRAME_IN_USE_STR, "Employee")
                     user_input = ComponentUI.get_user_input()
                     user_input = ComponentUI.remove_brackets(user_input)
                     if not user_input.isdigit() or int(user_input) > table_height:
@@ -408,7 +408,7 @@ class EmployeeUI:
                 [pilot.get_phonenumber() for pilot in pilots_list],[pilot.get_home_address() for pilot in pilots_list],[pilot.get_email() for pilot in pilots_list],\
                 [pilot.get_state() for pilot in pilots_list])
                 table_height = len(pilots_list)
-                ComponentUI.print_frame_table_menu(info_header_tuple, pilot_info_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"Pilots with license for " + user_input)
+                ComponentUI.print_frame_table_menu(info_header_tuple, pilot_info_tuple, table_height, EmployeeUI.__FRAME_IN_USE_STR, "Pilots with license for " + user_input)
                 user_input = ComponentUI.get_user_input()
                 user_input = ComponentUI.remove_brackets(user_input)
                 if not user_input.isdigit() or int(user_input) > table_height:
@@ -435,7 +435,7 @@ class EmployeeUI:
                 [employees_on_duty.get_phonenumber() for employees_on_duty in employees_on_duty_list], [employees_on_duty.get_home_address() for employees_on_duty in employees_on_duty_list],\
                 [employees_on_duty.get_email() for employees_on_duty in employees_on_duty_list], [employees_on_duty.get_state() for employees_on_duty in employees_on_duty_list])
                 table_height = len(employees_on_duty_list)
-                ComponentUI.print_frame_table_menu(table_header_tuple, employees_on_duty_value_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"All employees on duty")
+                ComponentUI.print_frame_table_menu(table_header_tuple, employees_on_duty_value_tuple, table_height, EmployeeUI.__FRAME_IN_USE_STR, "All employees on duty")
                 user_input = ComponentUI.get_user_input()
                 user_input = ComponentUI.remove_brackets(user_input)
                 if not user_input.isdigit() or int(user_input) > table_height:
@@ -463,7 +463,7 @@ class EmployeeUI:
                 [employees_off_duty.get_phonenumber() for employees_off_duty in employees_off_duty_list], [employees_off_duty.get_home_address() for employees_off_duty in employees_off_duty_list],\
                 [employees_off_duty.get_email() for employees_off_duty in employees_off_duty_list], [employees_off_duty.get_state() for employees_off_duty in employees_off_duty_list])
                 table_height = len(employees_off_duty_list)
-                ComponentUI.print_frame_table_menu(table_header_tuple, employees_off_duty_value_tuple, table_height, ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR),"All employees off duty")
+                ComponentUI.print_frame_table_menu(table_header_tuple, employees_off_duty_value_tuple, table_height, EmployeeUI.__FRAME_IN_USE_STR, "All employees off duty")
                 user_input = ComponentUI.get_user_input()
                 user_input = ComponentUI.remove_brackets(user_input)
                 if not user_input.isdigit() or int(user_input) > table_height:

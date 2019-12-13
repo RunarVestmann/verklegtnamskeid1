@@ -164,7 +164,7 @@ class FlightRouteUI:
 
 
             table_height = len(flrt_list)
-            ComponentUI.print_frame_table_menu(table_header, flight_routes_value_tuple, table_height, ComponentUI.print_header(FlightRouteUI.__FRAME_IN_USE_STR),"All flight routes")
+            ComponentUI.print_frame_table_menu(table_header, flight_routes_value_tuple, table_height, FlightRouteUI.__FRAME_IN_USE_STR, "All flight routes")
 
             user_input = ComponentUI.get_user_input()
 
