@@ -31,59 +31,59 @@ class EmployeeUI:
     @staticmethod
     def __constructor_error_check(user_input, valid_user_inputs_bool_list, index, user_input_list):
         #Only accept something that starts with f or p in the input for the job title
-            if index == 0:
+        if index == 0:
 
-                if user_input.lower().startswith('f'):
-                    user_input = "Flight attendant"
-                    user_input_list[6] = ""
-                elif user_input.lower().startswith('p'):
-                    user_input = "Pilot"
+            if user_input.lower().startswith('f'):
+                user_input = "Flight attendant"
+                user_input_list[6] = ""
+            elif user_input.lower().startswith('p'):
+                user_input = "Pilot"
 
-                if not user_input.lower().startswith("f") and not user_input.lower().startswith("p"):
-                    valid_user_inputs_bool_list[index] = False
-                    user_input = user_input + " " + TextEditor.color_text_background("Please insert 'f' or 'p', another input is required", TextEditor.RED_BACKGROUND)
-                else:
-                    valid_user_inputs_bool_list[index] = True
+            if not user_input.lower().startswith("f") and not user_input.lower().startswith("p"):
+                valid_user_inputs_bool_list[index] = False
+                user_input = user_input + " " + TextEditor.color_text_background("Please insert 'f' or 'p', another input is required", TextEditor.RED_BACKGROUND)
+            else:
+                valid_user_inputs_bool_list[index] = True
 
-            #Capitalize the first letters of the name the user inputs
-            elif index == 1:
-                name_list = []
-                for name in user_input.split():
-                    name_list.append(name.capitalize())
-                user_input = " ".join(name_list)
+        #Capitalize the first letters of the name the user inputs
+        elif index == 1:
+            name_list = []
+            for name in user_input.split():
+                name_list.append(name.capitalize())
+            user_input = " ".join(name_list)
 
-            #Remove any '-' and whitespace from the ssn and tell the user if the input is invalid
-            elif index == 2 or index == 3:
+        #Remove any '-' and whitespace from the ssn and tell the user if the input is invalid
+        elif index == 2 or index == 3:
 
-                if '-' in user_input:
-                    user_input = user_input.replace('-', '')
-                if '' in user_input:
-                    user_input = user_input.replace(' ', '')
-                
-                if not user_input.isdigit():
-                    user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
-                    valid_user_inputs_bool_list[index] = False
-                elif len(user_input) < 7 and index == 3:
-                    user_input = user_input + " " + TextEditor.color_text_background("Must be of length 7, another input is required", TextEditor.RED_BACKGROUND)
-                    valid_user_inputs_bool_list[index] = False
-                elif len(user_input) < 10 and index == 2:
-                    user_input = user_input + " " + TextEditor.color_text_background("Must be of length 10, another input is required", TextEditor.RED_BACKGROUND)
-                    valid_user_inputs_bool_list[index] = False
-                else:
-                    valid_user_inputs_bool_list[index] = True
+            if '-' in user_input:
+                user_input = user_input.replace('-', '')
+            if '' in user_input:
+                user_input = user_input.replace(' ', '')
+            
+            if not user_input.isdigit():
+                user_input = user_input + " " + TextEditor.color_text_background("Can not contain letters, another input is required", TextEditor.RED_BACKGROUND)
+                valid_user_inputs_bool_list[index] = False
+            elif len(user_input) < 7 and index == 3:
+                user_input = user_input + " " + TextEditor.color_text_background("Must be of length 7, another input is required", TextEditor.RED_BACKGROUND)
+                valid_user_inputs_bool_list[index] = False
+            elif len(user_input) < 10 and index == 2:
+                user_input = user_input + " " + TextEditor.color_text_background("Must be of length 10, another input is required", TextEditor.RED_BACKGROUND)
+                valid_user_inputs_bool_list[index] = False
+            else:
+                valid_user_inputs_bool_list[index] = True
 
-            #Check if email is at least of length 5 and contains @ and .
-            elif index == 5:
-                if "@" not in user_input and "." not in user_input or len(user_input) < 5:
-                    valid_user_inputs_bool_list[index] = False
-                    user_input = user_input + " " + TextEditor.color_text_background("Invalid e-mail, another input is required", TextEditor.RED_BACKGROUND)
-                else:
-                    valid_user_inputs_bool_list[index] = True
+        #Check if email is at least of length 5 and contains @ and .
+        elif index == 5:
+            if "@" not in user_input and "." not in user_input or len(user_input) < 5:
+                valid_user_inputs_bool_list[index] = False
+                user_input = user_input + " " + TextEditor.color_text_background("Invalid e-mail, another input is required", TextEditor.RED_BACKGROUND)
+            else:
+                valid_user_inputs_bool_list[index] = True
 
-            user_input_list[index] = user_input
-            user_input = ""
+        user_input_list[index] = user_input
+        user_input = ""
 
-            return user_input
+        return user_input
 
     @staticmethod
     def __airplane_type_picker(header="License"):
@@ -310,7 +310,7 @@ class EmployeeUI:
                 print(TextEditor.format_text("Find employee by name or ssn", TextEditor.UNDERLINE_TEXT))
 
                 if not employees:
-                    ComponentUI.centered_text_message("No employee found with the ssn: {}".format(user_input))
+                    ComponentUI.centered_text_message("No employee found with the ssn: {}".format(user_input),"", 3)
 
                     return ComponentUI.get_user_input()
 
@@ -346,7 +346,7 @@ class EmployeeUI:
 
                 if not employees:
                     
-                    ComponentUI.centered_text_message("Could not find an employee named {}".format(user_input))
+                    ComponentUI.centered_text_message("Could not find an employee named {}".format(user_input),"",3)
                 
                     return ComponentUI.get_user_input()
 
@@ -395,7 +395,7 @@ class EmployeeUI:
 
             if not pilots_list:
                 print(TextEditor.format_text("Find pilots by license", TextEditor.UNDERLINE_TEXT))
-                ComponentUI.centered_text_message("Could not find a pilot with a license for {}".format(user_input))
+                ComponentUI.centered_text_message("Could not find a pilot with a license for {}".format(user_input),"",3)
                 user_input = ComponentUI.get_user_input()
                 if not user_input:
                     return EmployeeUI.__show_pilot_by_license_finder()
@@ -446,7 +446,7 @@ class EmployeeUI:
                 user_input = EmployeeUI.__show_employee(employee_on_duty)
             else:
                                 
-                ComponentUI.centered_text_message("No employee is on duty at the moment")
+                ComponentUI.centered_text_message("No employee is on duty at the moment","",3)
                 user_input = ComponentUI.get_user_input()
             return user_input
 
@@ -475,7 +475,7 @@ class EmployeeUI:
 
             else:
 
-                ComponentUI.centered_text_message("No employee is off duty at the moment")
+                ComponentUI.centered_text_message("No employee is off duty at the moment","",3)
                 user_input = ComponentUI.get_user_input()
 
             return user_input
@@ -610,7 +610,7 @@ class EmployeeUI:
             if not voyages_list:
                 ComponentUI.print_header(EmployeeUI.__FRAME_IN_USE_STR)
                 # print(TextEditor.format_text("Find voyages by destination", TextEditor.UNDERLINE_TEXT))
-                ComponentUI.centered_text_message("Could not find a voyage going for {} in week {}".format(employee.get_name(), user_input))
+                ComponentUI.centered_text_message("Could not find a voyage going for {} in week {}".format(employee.get_name(), user_input),"",3)
             
                 return ComponentUI.get_user_input()
 

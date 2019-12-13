@@ -112,8 +112,6 @@ class VoyageUI:
             
                 user_input = input(input_message_tuple[index]).strip()
 
-                #Error checks need to be added for the date inputs...
-
                 if not user_input or not user_input.isdigit() or int(user_input) > len(all_flight_routes):
                     continue
 
@@ -134,10 +132,11 @@ class VoyageUI:
             elif index == 4:
                 user_input, flight_attendant_list = VoyageUI.__flight_attendant_select(voyage_schedule)
 
+            if user_input in VoyageUI.__NAVIGATION_BAR_OPTIONS:
+                continue
+
             user_input_list[index] = user_input
             user_input = ""
-
-            
 
         return user_input
 
@@ -151,22 +150,41 @@ class VoyageUI:
 
         greyed_out_option_index_list = []
 
+        for pilot in pilot_list:
+            available_pilots.append(pilot)
+
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
 
             if available_pilots:
-                pilot_value_tuple = ([pilot.get_name() for pilot in pilot_list],[pilot.get_ssn() for pilot in pilot_list],\
-                [pilot.get_phonenumber() for pilot in pilot_list], [pilot.get_home_address() for pilot in pilot_list],\
-                [pilot.get_email() for pilot in pilot_list], [pilot.get_state() for pilot in pilot_list])
+                pilot_value_tuple = ([pilot.get_name() for pilot in available_pilots],[pilot.get_ssn() for pilot in available_pilots],\
+                [pilot.get_phonenumber() for pilot in available_pilots], [pilot.get_home_address() for pilot in available_pilots],\
+                [pilot.get_email() for pilot in available_pilots], [pilot.get_state() for pilot in available_pilots])
 
-                for i, pilot in enumerate(pilot_value_tuple):
+                for i, pilot in enumerate(available_pilots):
                     if pilot in pilot_list_start_val:
                         greyed_out_option_index_list.append(i)
 
                 ComponentUI.print_frame_table_menu(pilot_info_tuple, pilot_value_tuple, len(available_pilots),
                     VoyageUI.__FRAME_IN_USE_STR, "All available pilots", True, greyed_out_option_index_list)
 
-                user_input = ComponentUI.get_user_input("Insert number of desired captain: ")
+                if len(greyed_out_option_index_list) >= 10:
+                    user_input = ComponentUI.get_user_input()
+                elif not pilot_list:
+                    user_input = ComponentUI.get_user_input("Insert number of desired captain: ")
+                else:
+                    user_input = ComponentUI.get_user_input("Insert number of desired pilot: ")
+
                 user_input = ComponentUI.remove_brackets(user_input)
+
+                if user_input.startswith("s"):
+                    if pilot_list:
+                        additional_pilot_count = len(pilot_list)-1
+                        user_input = "Captain {} {} {}".format(pilot_list[0].get_name(),\
+                        "+ " + str(additional_pilot_count) + " pilot" if additional_pilot_count != 0\
+                        else "", "" if additional_pilot_count in [0,1] else "s")
+                    else:
+                        user_input = "No pilots registered"
+                    break
 
                 if not user_input.isdigit() or len(available_pilots) < int(user_input):
                     continue
@@ -176,38 +194,24 @@ class VoyageUI:
                 if index in greyed_out_option_index_list:
                     continue
 
-                if not pilot_list:
-                    pilot_list.append(available_pilots[index])
-                    greyed_out_option_index_list.append(index) #use this list to see which pilot should be greyed out
-
-                while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS or user_input.startswith("s"):
-
-                    ComponentUI.print_frame_table_menu(pilot_info_tuple, pilot_value_tuple, len(available_pilots),
-                    VoyageUI.__FRAME_IN_USE_STR, "All available pilots", True, greyed_out_option_index_list)
-
-                    user_input = ComponentUI.get_user_input()
-                    user_input = ComponentUI.remove_brackets(user_input)
-
-                    if not user_input.isdigit() or len(available_pilots) < int(user_input):
-                        continue
-
-                    index = int(user_input) - 1
-
-                    if index in greyed_out_option_index_list:
-                        continue
-
-                    pilot_list.append(available_pilots[index])
-
-                if user_input.startswith("s"):
-                    user_input = "{} pilots".format(len(pilot_list))
-                    break
+                pilot_list.append(available_pilots[index])
+                greyed_out_option_index_list.append(index)
 
             else:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
                 print(TextEditor.format_text("All available pilots", TextEditor.UNDERLINE_TEXT))
-                ComponentUI.centered_text_message("There are no available pilots".format(voyage_schedule),"", 3)
+                ComponentUI.centered_text_message("There are no available pilots", "", 3)
                 user_input = ComponentUI.get_user_input()
                 break
+
+        if "pilot" not in user_input and user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
+            if pilot_list:
+                additional_pilot_count = len(pilot_list)-1
+                user_input = "Captain {} {} {}".format(pilot_list[0].get_name(),\
+                "+ " + str(additional_pilot_count) + " pilot" if additional_pilot_count != 0\
+                else "", "" if additional_pilot_count in [0,1] else "s")
+            else:
+                user_input = "No pilots registered"
 
         return user_input, pilot_list
 
@@ -220,14 +224,17 @@ class VoyageUI:
 
         greyed_out_option_index_list = []
 
+        for flight_attendant in flight_attendant_list:
+            available_flight_attendants.append(flight_attendant)
+
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
 
             if available_flight_attendants:
-                flight_attendant_value_tuple = ([flight_attendant.get_name() for flight_attendant in flight_attendant_list],[flight_attendant.get_ssn() for flight_attendant in flight_attendant_list],\
-                [flight_attendant.get_phonenumber() for flight_attendant in flight_attendant_list], [flight_attendant.get_home_address() for flight_attendant in flight_attendant_list],\
-                [flight_attendant.get_email() for flight_attendant in flight_attendant_list], [flight_attendant.get_state() for flight_attendant in flight_attendant_list])
+                flight_attendant_value_tuple = ([flight_attendant.get_name() for flight_attendant in available_flight_attendants],[flight_attendant.get_ssn() for flight_attendant in available_flight_attendants],\
+                [flight_attendant.get_phonenumber() for flight_attendant in available_flight_attendants], [flight_attendant.get_home_address() for flight_attendant in available_flight_attendants],\
+                [flight_attendant.get_email() for flight_attendant in available_flight_attendants], [flight_attendant.get_state() for flight_attendant in available_flight_attendants])
 
-                for i, flight_attendant in enumerate(flight_attendant_value_tuple):
+                for i, flight_attendant in enumerate(available_flight_attendants):
                     if flight_attendant in flight_attendant_list_start_val:
                         greyed_out_option_index_list.append(i)
 
@@ -235,10 +242,21 @@ class VoyageUI:
                     VoyageUI.__FRAME_IN_USE_STR, "All available flight attendants", True, greyed_out_option_index_list)
 
                 if not flight_attendant_list:
-                    pass
+                    user_input = ComponentUI.get_user_input("Insert number of desired cabin manager: ")
+                else:
+                    user_input = ComponentUI.get_user_input("Insert number of desired flight attendant: ")
 
-                user_input = ComponentUI.get_user_input("Insert number of desired cabin manager: ")
                 user_input = ComponentUI.remove_brackets(user_input)
+
+                if user_input.startswith("s"):
+                    if flight_attendant_list:
+                        additional_flight_attendant_count = len(flight_attendant_list)-1
+                        user_input = "Cabin manager {} {} {}".format(flight_attendant_list[0].get_name(),\
+                        "+ " + str(additional_flight_attendant_count) + " flight attendant" if additional_flight_attendant_count != 0\
+                        else "", "" if additional_flight_attendant_count in [0,1] else "s")
+                    else:
+                        user_input = "No flight attendants registered"
+                    break
 
                 if not user_input.isdigit() or len(available_flight_attendants) < int(user_input):
                     continue
@@ -248,41 +266,26 @@ class VoyageUI:
                 if index in greyed_out_option_index_list:
                     continue
 
-                if not flight_attendant_list:
-                    flight_attendant_list.append(available_flight_attendants[index])
-                    greyed_out_option_index_list.append(index)
-
-                while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS or user_input.startswith("s"):
-
-                    ComponentUI.print_frame_table_menu(flight_attendant_info_tuple, flight_attendant_value_tuple, len(available_flight_attendants),
-                    VoyageUI.__FRAME_IN_USE_STR, "All available flight attendants", True, greyed_out_option_index_list)
-
-                    user_input = ComponentUI.get_user_input()
-                    user_input = ComponentUI.remove_brackets(user_input)
-
-                    if not user_input.isdigit() or len(available_flight_attendants) < int(user_input):
-                        continue
-
-                    index = int(user_input) - 1
-
-                    if index in greyed_out_option_index_list:
-                        continue
-
-                    flight_attendant_list.append(available_flight_attendants[index])
-
-                if user_input.startswith("s"):
-                    user_input = "{} flight attendants".format(len(flight_attendant_list))
-                    break
+                flight_attendant_list.append(available_flight_attendants[index])
+                greyed_out_option_index_list.append(index)
 
             else:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
                 print(TextEditor.format_text("All available flight attendants", TextEditor.UNDERLINE_TEXT))
-                ComponentUI.centered_text_message("There are no available flight attendants".format(voyage_schedule),"", 3)
+                ComponentUI.centered_text_message("There are no available flight attendants","", 3)
                 user_input = ComponentUI.get_user_input()
                 break
 
-        return user_input, flight_attendant_list
+        if "flight attendant" not in user_input and user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
+            if flight_attendant_list:
+                additional_flight_attendant_count = len(flight_attendant_list)-1
+                user_input = "Cabin manager {} {} {}".format(flight_attendant_list[0].get_name(),\
+                "+ " + str(additional_flight_attendant_count) + " flight attendant" if additional_flight_attendant_count != 0\
+                else "", "" if additional_flight_attendant_count in [0,1] else "s")
+            else:
+                user_input = "No flight attendants registered"
 
+        return user_input, flight_attendant_list
 
     @staticmethod
     def __airplane_select(voyage_schedule):
@@ -319,12 +322,13 @@ class VoyageUI:
             else:
                 ComponentUI.print_header(VoyageUI.__FRAME_IN_USE_STR)
                 print(TextEditor.format_text("All available airplanes", TextEditor.UNDERLINE_TEXT))
-                ComponentUI.centered_text_message("There are no available airplanes between: {}".format(voyage_schedule),"", 3)
+                start_date_and_time = str(voyage_schedule[0].day) + "-" + str(voyage_schedule[0].month) + "-" + str(voyage_schedule[0].year)\
+                     + " - " + str(voyage_schedule[1].day) + "-" + str(voyage_schedule[1].month) + "-" + str(voyage_schedule[1].year)
+                ComponentUI.centered_text_message("There are no available airplanes between: {}".format(start_date_and_time),"", 3)
                 user_input = ComponentUI.get_user_input()
                 break
 
         return user_input, airplane
-
 
     @staticmethod
     def __schedule_select(selected_flight_route):
@@ -342,14 +346,30 @@ class VoyageUI:
 
         flight2_start_date = None
         flight2_start_time = None
-
-
         user_input = ""
 
         while user_input not in VoyageUI.__NAVIGATION_BAR_OPTIONS:
 
+            greyed_out_option_index_list = [1, 2, 3]
+
+            if user_input_list[0] and not valid_user_input_bool_list[0]:
+                greyed_out_option_index_list = [1, 2, 3]
+            elif user_input_list[2] and not valid_user_input_bool_list[2]:
+                greyed_out_option_index_list = [0, 1, 3]
+            elif user_input_list[1] and not valid_user_input_bool_list[1]:
+                greyed_out_option_index_list = [0,2,3]
+            elif user_input_list[3] and not valid_user_input_bool_list[3]:
+                greyed_out_option_index_list = [0,1,2]
+            elif user_input_list[2] and valid_user_input_bool_list[2]:
+                greyed_out_option_index_list = []
+            elif user_input_list[1] and valid_user_input_bool_list[1]:
+                greyed_out_option_index_list = [3]
+            elif user_input_list[0] and valid_user_input_bool_list[0]:
+                greyed_out_option_index_list = [2, 3]
+            
+
             ComponentUI.print_frame_constructor_menu(schedule_option_tuple,\
-            VoyageUI.__FRAME_IN_USE_STR, "Voyage schedule", user_input_list, True)
+            VoyageUI.__FRAME_IN_USE_STR, "Voyage schedule", user_input_list, True, greyed_out_option_index_list=greyed_out_option_index_list)
 
             user_input = ComponentUI.get_user_input()
 
@@ -364,22 +384,56 @@ class VoyageUI:
 
                 index = int(user_input) - 1
 
+                if index in greyed_out_option_index_list:
+                    continue
+
                 ComponentUI.print_frame_constructor_menu(schedule_option_tuple,\
                 VoyageUI.__FRAME_IN_USE_STR, "Voyage schedule", user_input_list, False, index)
 
                 if index == 0:
                     user_input, flight1_start_date, valid_user_input_bool_list[index] = VoyageUI.__date_select()
-
+                    if flight1_start_date and flight2_start_date:
+                        if flight1_start_date > flight2_start_date:
+                            user_input = user_input + " " + TextEditor.color_text_background("The second flight can not start before the first one", TextEditor.RED_BACKGROUND)
+                            valid_user_input_bool_list[index] = False
+                
                 elif index == 1:
                     user_input, flight1_start_time, valid_user_input_bool_list[index] = VoyageUI.__time_select()
+                    if flight1_start_time and flight2_start_time and flight2_start_date and flight1_start_date:
+                        flight_time_hours, flight_time_minutes = [int(time) for time in selected_flight_route.get_flight_time().split(':')]
+                        flight1_start_date_and_time = datetime.datetime(flight1_start_date.year, flight1_start_date.month, flight1_start_date.day,\
+                            flight1_start_time.hour, flight1_start_time.minute)
+                        flight2_start_date_and_time = datetime.datetime(flight2_start_date.year, flight2_start_date.month, flight2_start_date.day,\
+                            flight2_start_time.hour, flight2_start_time.minute)
+                        if flight2_start_date_and_time < flight1_start_date_and_time + datetime.timedelta(hours=flight_time_hours, minutes=flight_time_minutes):
+                                user_input = user_input + " " + TextEditor.color_text_background("The first flight time is {} hours and {} minutes".format(flight_time_hours,\
+                                    flight_time_minutes), TextEditor.RED_BACKGROUND)
 
                 elif index == 2:
                     user_input, flight2_start_date, valid_user_input_bool_list[index] = VoyageUI.__date_select()
+                    if flight1_start_date and flight2_start_date:
+                        if flight1_start_date > flight2_start_date:
+                            user_input = user_input + " " + TextEditor.color_text_background("The second flight can not start before the first one", TextEditor.RED_BACKGROUND)
+                            valid_user_input_bool_list[index] = False
                     
                 elif index == 3:
                     user_input, flight2_start_time, valid_user_input_bool_list[index] = VoyageUI.__time_select()
+                    #Error check
+                    if flight1_start_time and flight2_start_time and flight2_start_date and flight1_start_date:
+                        flight_time_hours, flight_time_minutes = [int(time) for time in selected_flight_route.get_flight_time().split(':')]
+                        flight1_start_date_and_time = datetime.datetime(flight1_start_date.year, flight1_start_date.month, flight1_start_date.day,\
+                            flight1_start_time.hour, flight1_start_time.minute)
+                        flight2_start_date_and_time = datetime.datetime(flight2_start_date.year, flight2_start_date.month, flight2_start_date.day,\
+                            flight2_start_time.hour, flight2_start_time.minute)
+                        if flight2_start_date_and_time < flight1_start_date_and_time + datetime.timedelta(hours=flight_time_hours, minutes=flight_time_minutes):
+                                user_input = user_input + " " + TextEditor.color_text_background("The first flight time is {} hours and {} minutes".format(flight_time_hours,\
+                                    flight_time_minutes), TextEditor.RED_BACKGROUND)
+
                 else:
                     continue
+
+                if not user_input:
+                    user_input = user_input_list[index]
 
                 user_input_list[index] = user_input
                 user_input = ""
@@ -456,7 +510,7 @@ class VoyageUI:
         return user_input, flight1, flight2, voyage_schedule
 
     @staticmethod
-    def __time_select(previous_time=None, latter_time=None):
+    def __time_select():
 
         user_input = input("Insert time(hh:mm):").strip()
 
@@ -484,7 +538,7 @@ class VoyageUI:
             hour += minute // 60
             minute = minute % 60
 
-            time = datetime.time(hour, minute)
+            time = datetime.time(hour, minute) 
 
         return user_input, time, valid_input_bool
 
@@ -607,11 +661,6 @@ class VoyageUI:
             print(TextEditor.format_text("Find voyages by date", TextEditor.UNDERLINE_TEXT))
 
             ComponentUI.fill_window_and_print_action_line(1)
-
-
-            
-
-            #Error checks needed
 
             user_input, date, valid_input_bool = VoyageUI.__date_select()
 
@@ -768,12 +817,31 @@ class VoyageUI:
         schedule = voyage.get_schedule()
         state = voyage.get_state()
 
+        pilots_str = ""
+
+        if pilot_list:
+            additional_pilot_count = len(pilot_list)-1
+            pilots_str = "Captain {} {} {}".format(pilot_list[0].get_name(),\
+            "+ " + str(additional_pilot_count) + " pilot" if additional_pilot_count != 0\
+            else "", "" if additional_pilot_count in [0,1] else "s")
+        else:
+            pilots_str = "No pilots registered"
+
+        flight_attendants_str = "" 
+
+        if flight_attendant_list:
+            additional_flight_attendant_count = len(flight_attendant_list)-1
+            flight_attendants_str = "Cabin manager {} {} {}".format(flight_attendant_list[0].get_name(),\
+            "+ " + str(additional_flight_attendant_count) + " flight attendant" if additional_flight_attendant_count != 0\
+            else "", "" if additional_flight_attendant_count in [0,1] else "s")
+        else:
+            flight_attendants_str = "No flight attendants registered"
 
         user_input = ''
         user_input_list = [
             voyage.get_flights()[0].get_arrival_location(),
-            str(len(voyage.get_pilots())) + " pilots",
-            str(len(voyage.get_flight_attendants())) + " flight attendants",
+            pilots_str,
+            flight_attendants_str,
             airplane.get_name(),
             "{}-{}-{} - {}-{}-{}".format(schedule[0].day,schedule[0].month, schedule[0].year,schedule[1].day,schedule[1].month, schedule[1].year),
             state
@@ -799,14 +867,16 @@ class VoyageUI:
             ComponentUI.get_main_options()[0], "Edit mode", user_input_list, False, index, greyed_out_option_index_list)
 
                 if(index == 1):
-                    user_input, pilot_list = VoyageUI.__pilot_select(schedule, airplane.get_type())
+                    user_input, pilot_list = VoyageUI.__pilot_select(schedule, airplane.get_type(), pilot_list)
                     if not pilot_list:
                         user_input = user_input_list[index]
                 elif(index == 2):
-                    user_input, flight_attendant_list = VoyageUI.__flight_attendant_select(schedule)
+                    user_input, flight_attendant_list = VoyageUI.__flight_attendant_select(schedule, flight_attendant_list)
                     if not flight_attendant_list:
                         user_input = user_input_list[index]
 
+                if user_input in VoyageUI.__NAVIGATION_BAR_OPTIONS:
+                    continue
 
                 user_input_list[index] = user_input
                 user_input = ""
@@ -827,7 +897,6 @@ class VoyageUI:
                     )
 
                     LogicAPI.change_saved_voyage(voyage, edited_voyage)
-                    #þarfnast skoðunnar(Kannski er þetta ok þar sem breytingar sjást, næ ekki að láta þetta virka heldur)
                     user_input = "A voyage has been edited"
                     break
 
