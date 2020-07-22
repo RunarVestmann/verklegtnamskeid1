@@ -15,7 +15,7 @@ class FlightRouteData:
     def get_all_flight_routes():
         if not FlightRouteData.__all_flight_routes_list:
             all_flight_routes_list = []
-            with open(FlightRouteData.__flight_route_data_filename, 'r') as file_stream:
+            with open(FlightRouteData.__flight_route_data_filename, 'r', encoding="utf8") as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     all_flight_routes_list.append(FlightRoute(row["country"], row["destination"],\
@@ -42,7 +42,7 @@ class FlightRouteData:
     def __overwrite_all_flight_routes(flight_routes):
         field_names = ["country", "destination", "airport_id", "flight_time", "distance_from_iceland", "contact_name", "emergency_phone"]
         FlightRouteData.__all_flight_routes_list = []
-        with open(FlightRouteData.__flight_route_data_filename, 'w') as file_stream:
+        with open(FlightRouteData.__flight_route_data_filename, 'w', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
             writer.writeheader()
             for flight_route in flight_routes:
@@ -59,7 +59,7 @@ class FlightRouteData:
     @staticmethod
     def save_new_flight_route(flight_route):
         field_names = ["country", "destination", "airport_id", "flight_time", "distance_from_iceland", "contact_name", "emergency_phone"]
-        with open(FlightRouteData.__flight_route_data_filename, 'a') as file_stream:
+        with open(FlightRouteData.__flight_route_data_filename, 'a', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({"country": flight_route.get_country(),

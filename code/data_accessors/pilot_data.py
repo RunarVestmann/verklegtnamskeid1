@@ -16,7 +16,7 @@ class PilotData:
     def get_all_pilots():
         if not PilotData.__all_pilots_list:
             all_pilots_list = []
-            with open(PilotData.__pilot_data_filename, 'r') as file_stream:
+            with open(PilotData.__pilot_data_filename, 'r', encoding="utf8") as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     all_pilots_list.append(Pilot(row["name"], row["ssn"], row["phonenumber"],\
@@ -35,7 +35,7 @@ class PilotData:
     @staticmethod
     def save_new_pilot(pilot):
         field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state", "license"]
-        with open(PilotData.__pilot_data_filename, 'a') as file_stream:
+        with open(PilotData.__pilot_data_filename, 'a', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({"name": pilot.get_name(),
@@ -66,7 +66,7 @@ class PilotData:
     @staticmethod
     def __overwrite_all_pilots(pilots):
         field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state", "license"]
-        with open(PilotData.__pilot_data_filename, 'w') as file_stream:
+        with open(PilotData.__pilot_data_filename, 'w', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writeheader()

@@ -26,7 +26,7 @@ class AirplaneData:
         all_airplanes_list = []
 
         if not AirplaneData.__all_airplanes_list:
-            with open(AirplaneData.__airplane_data_filename, 'r') as file_stream:
+            with open(AirplaneData.__airplane_data_filename, 'r', encoding="utf8") as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     all_airplanes_list.append(Airplane(row["name"], row["aircraft_type"],\
@@ -52,7 +52,7 @@ class AirplaneData:
     @staticmethod
     def __overwrite_all_airplanes(airplanes):
         field_names = ["name", "aircraft_type", "manufacturer", "seat_count", "state"]
-        with open(AirplaneData.__airplane_data_filename, 'w') as file_stream:
+        with open(AirplaneData.__airplane_data_filename, 'w', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
             writer.writeheader()
             AirplaneData.__all_airplanes_list = []
@@ -90,7 +90,7 @@ class AirplaneData:
     @staticmethod
     def save_new_airplane(airplane):
         field_names = ["name", "aircraft_type", "manufacturer", "seat_count", "state"]
-        with open(AirplaneData.__airplane_data_filename, 'a') as file_stream:
+        with open(AirplaneData.__airplane_data_filename, 'a', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({

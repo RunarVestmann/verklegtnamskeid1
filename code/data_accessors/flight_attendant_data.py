@@ -15,7 +15,7 @@ class FlightAttendantData:
     def get_all_flight_attendants():
         if not FlightAttendantData.__all_flight_attendants_list:
             all_flight_attendants_list = []
-            with open(FlightAttendantData.__flight_attendant_data_filename, 'r') as file_stream:
+            with open(FlightAttendantData.__flight_attendant_data_filename, 'r', encoding="utf8") as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     all_flight_attendants_list.append(FlightAttendant(
@@ -41,7 +41,7 @@ class FlightAttendantData:
     @staticmethod
     def save_new_flight_attendant(flight_attendant):
         field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state"]
-        with open(FlightAttendantData.__flight_attendant_data_filename, 'a') as file_stream:
+        with open(FlightAttendantData.__flight_attendant_data_filename, 'a', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({
@@ -73,7 +73,7 @@ class FlightAttendantData:
     def __overwrite_all_flight_attendants(flight_attendants):
         field_names = ["name", "ssn", "phonenumber", "home_address", "email", "state"]
         FlightAttendantData.__all_flight_attendants_list = []
-        with open(FlightAttendantData.__flight_attendant_data_filename, 'w') as file_stream:
+        with open(FlightAttendantData.__flight_attendant_data_filename, 'w', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
             writer.writeheader()
             for flight_attendant in flight_attendants:

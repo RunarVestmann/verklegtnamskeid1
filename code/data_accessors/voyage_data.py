@@ -71,7 +71,7 @@ class VoyageData:
              "cabin_manager", "flight_attendant1", "flight_attendant2", "flight_attendant3", "flight_attendant4", "flight_attendant5",\
              "flight_attendant6", "flight_attendant7", "flight_attendant8", "flight_attendant9", "airplane_name", "schedule", "state"]
 
-        with open(VoyageData.__voyage_data_filename, 'w') as file_stream:
+        with open(VoyageData.__voyage_data_filename, 'w', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
             writer.writeheader()
             VoyageData.__all_voyages_list = []
@@ -123,7 +123,7 @@ class VoyageData:
             #A list to temporarily store all the voyages
             all_voyages_list = []
 
-            with open(VoyageData.__voyage_data_filename, 'r') as file_stream:
+            with open(VoyageData.__voyage_data_filename, 'r', encoding="utf8") as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
 
@@ -173,7 +173,7 @@ class VoyageData:
              "cabin_manager", "flight_attendant1", "flight_attendant2", "flight_attendant3", "flight_attendant4", "flight_attendant5",\
              "flight_attendant6", "flight_attendant7", "flight_attendant8", "flight_attendant9", "airplane_name", "schedule", "state"]
 
-        with open(VoyageData.__voyage_data_filename, 'a') as file_stream:
+        with open(VoyageData.__voyage_data_filename, 'a', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             flight1, flight2 = voyage.get_flights()

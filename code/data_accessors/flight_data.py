@@ -16,7 +16,7 @@ class FlightData:
     def get_all_flights():
         if not FlightData.__all_flights_list:
             all_flights_list = []
-            with open(FlightData.__flight_data_filename, 'r') as file_stream:
+            with open(FlightData.__flight_data_filename, 'r', encoding="utf8") as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     #Append to the list and change the times to be of type datetime with util.parse()
@@ -55,7 +55,7 @@ class FlightData:
     def __overwrite_all_flights(flights):
         field_names = ["departure_location", "departure_time", "arrival_location", "arrival_time", "number"]
         FlightData.__all_flights_list = []
-        with open(FlightData.__flight_data_filename, 'w') as file_stream:
+        with open(FlightData.__flight_data_filename, 'w', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
             writer.writeheader()
             for flight in flights:
@@ -72,7 +72,7 @@ class FlightData:
     @staticmethod
     def save_new_flight(flight):
         field_names = ["departure_location", "departure_time", "arrival_location", "arrival_time", "number"]
-        with open(FlightData.__flight_data_filename, 'a') as file_stream:
+        with open(FlightData.__flight_data_filename, 'a', encoding="utf8") as file_stream:
             writer = csv.DictWriter(file_stream, fieldnames=field_names, lineterminator='\n')
 
             writer.writerow({"departure_location": flight.get_departure_location(),

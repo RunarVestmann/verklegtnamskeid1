@@ -17,7 +17,7 @@ class AircraftTypeData:
         all_aircrafts_list = []
 
         if not AircraftTypeData.__all_aircrafts_list:
-            with open(AircraftTypeData.__aircraft_data_filename, 'r') as file_stream:
+            with open(AircraftTypeData.__aircraft_data_filename, 'r', encoding="utf8") as file_stream:
                 reader = csv.DictReader(file_stream)
                 for row in reader:
                     all_aircrafts_list.append(AircraftType(row["plane_type"], row["manufacturer"],\
